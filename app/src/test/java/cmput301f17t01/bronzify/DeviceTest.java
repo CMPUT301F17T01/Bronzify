@@ -21,14 +21,15 @@ public class DeviceTest extends TestCase {
 
 
     @Test
-    public void testAddUserNewUser() throws UserExistsException {
+    public void testAddUserNewUser() throws UserException {
         User user = new User("TESTUSER", "PASSWORD");
         device.addUser(user);
         assertTrue(device.getUsers().contains(user));
+        user.unRegister();
     }
 
     @Test // Java does not attempt to detect duplicates, so this is valuable
-    public void testAddNewUserAlreadyExists() throws UserExistsException {
+    public void testAddNewUserAlreadyExists() throws UserException {
         User user = new User("TESTUSER", "PASSWORD");
         device.addUser(user);
         try {
@@ -37,24 +38,27 @@ public class DeviceTest extends TestCase {
         } catch (UserExistsException e){
             assertEquals(e.getMessage(), "User already exists");
         }
+        user.unRegister();
     }
 
     @Test
-    public void testLogInCorrectPassword() throws UserDoesNotExistException {
+    public void testLogInCorrectPassword() throws UserException {
         User user = new User("TESTUSER", "PASSWORD");
         device.logIn(user, "PASSWORD");
         assertEquals(user, device.getLoggedInUser());
         device.logOut();
+        user.unRegister();
     }
 
     @Test
-    public void testLogInIncorrectPassword() throws UserDoesNotExistException {
+    public void testLogInIncorrectPassword() throws UserException {
         User user = new User("TESTUSER", "PASSWORD");
         device.logIn(user, "NOTPASSWORD");
         if (user.equals(device.getLoggedInUser())) {
             assertTrue(Boolean.FALSE);
         }
         device.logOut();
+        user.unRegister();
     }
 
     @Test
@@ -69,11 +73,12 @@ public class DeviceTest extends TestCase {
     }
 
     @Test
-    public void testLogOut() throws UserDoesNotExistException {
+    public void testLogOut() throws UserException {
         User user = new User("TESTUSER", "PASSWORD");
         device.logIn(user, "PASSWORD");
         device.logOut();
         assertNull(device.getLoggedInUser());
+        user.unRegister();
     }
 
 

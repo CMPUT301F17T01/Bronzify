@@ -15,29 +15,22 @@ public class UserTest extends TestCase {
     private User user;
 
     @Test
-    public void testSetUp() {
+    public void testSetUp() throws UserExistsException {
         user = new User("USERID", "PASSWORD");
         assertEquals(user.getUserID(), "USERID");
         assertEquals(user.getPasswordHash(), user.hashPassword("USERID"));
+        //TODO: elasticsearch get user to confirm existence
     }
 
-    @Test
-    public void testRegisterUserNewUser() throws UserExistsException {
-        user.register();
-        //TODO: elasticsearch get user to confirm existence
-        //TODO: unregister user
-    }
 
     @Test
     public void testRegisterUserAlreadyExists() throws UserExistsException {
-        user.register();
         try {
-            user.register();
+            User duplicateUser = new User("USERID", "NOTPASSWORD");
             assertTrue(Boolean.FALSE);
         } catch (UserExistsException e) {
             assertEquals(e.getMessage(), "User already exists");
         }
-        //TODO: unregister user
     }
 
     /* //not sure whether to implement this
@@ -66,7 +59,7 @@ public class UserTest extends TestCase {
 
     @Test
     public void testUpdate() {
-        //assert that user is registered
+
 
     }
 
