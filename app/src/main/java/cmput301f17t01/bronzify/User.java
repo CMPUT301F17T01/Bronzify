@@ -1,7 +1,6 @@
 package cmput301f17t01.bronzify;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -36,6 +35,10 @@ public class User {
             return password; //TODO: this is really bad
         }
 
+    }
+
+    public void register() throws UserExistsException {
+        //TODO: elasticsearch registration
     }
 
 
