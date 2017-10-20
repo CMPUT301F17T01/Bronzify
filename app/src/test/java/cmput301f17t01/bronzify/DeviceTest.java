@@ -25,7 +25,7 @@ public class DeviceTest extends TestCase{
         User user = new User("TESTUSER", "PASSWORD");
         device.registerUser(user);
         //TODO: elasticsearch get user to confirm existence
-        user.delete();
+        //TODO: unregister user
     }
 
     @Test
@@ -38,44 +38,64 @@ public class DeviceTest extends TestCase{
         } catch (UserExistsException e) {
             assertEquals(e.getMessage(), "User already exists");
         }
-        user.delete();
     }
 
     @Test
-    public void testAddUserNewUser() {
+    public void testAddUserNewUser() throws UserExistsException {
         User user = new User("TESTUSER", "PASSWORD");
         device.addUser(user);
         assertTrue(device.getUsers().contains(user));
-        user.delete();
     }
 
-    @Test
-    public void testAddNewUserAlreadyExists() {
+    @Test // Java does not attempt to detect duplicates, so this is valuable
+    public void testAddNewUserAlreadyExists() throws UserExistsException {
         User user = new User("TESTUSER", "PASSWORD");
         device.addUser(user);
         try {
             device.addUser(user);
             assertTrue(Boolean.FALSE);
-        } catch (Exception e){
-            assertEquals(e.getMessage(), "User in list");
+        } catch (UserExistsException e){
+            assertEquals(e.getMessage(), "User already exists");
         }
-        user.delete();
     }
 
     @Test
-    public void testLogInCorrectPassword() {
-
+    public void testLogInCorrectPassword() throws UserDoesNotExistException {
+        User user = new User("TESTUSER", "PASSWORD");
+        device.logIn(user, "PASSWORD");
+        assertEquals(user, device.getLoggedInUser());
+        device.logOut();
     }
 
     @Test
-    public void testLogInIncorrectPassword() {
-
+    public void testLogInIncorrectPassword() throws UserDoesNotExistException {
+        User user = new User("TESTUSER", "PASSWORD");
+        device.logIn(user, "NOTPASSWORD");
+        if (user.equals(device.getLoggedInUser())) {
+            assertTrue(Boolean.FALSE);
+        }
+        device.logOut();
     }
 
     @Test
     public void testLogInNonExistentAccount() {
-
+        User user = null;
+        try {
+            device.logIn(user, "PASSWORD");
+            assertTrue(Boolean.FALSE);
+        } catch (UserDoesNotExistException e) {
+            assertEquals(e.getMessage(), "User does not exist");
+        }
     }
+
+    @Test
+    public void testLogOut() throws UserDoesNotExistException {
+        User user = new User("TESTUSER", "PASSWORD");
+        device.logIn(user, "PASSWORD");
+        device.logOut();
+        assertNull(device.getLoggedInUser());
+    }
+
 
     @Test
     public void testTearDown() {

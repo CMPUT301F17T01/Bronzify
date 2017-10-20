@@ -19,12 +19,28 @@ public class Device {
         this.loggedInUser = null;
     }
 
-    public void registerUser(User u) throws UserExistsException {
+    public void registerUser(User user) throws UserExistsException {
         //TODO: elasticsearch user creation
     }
 
-    public void addUser(User u) {
-        this.users.add(u);
+    public void addUser(User user) throws UserExistsException {
+        if (this.users.contains(user)) {
+            throw new UserExistsException();
+        }
+        this.users.add(user);
+    }
+
+    public void logIn(User user, String password) throws UserDoesNotExistException {
+        if (user.getPasswordHash().equals(user.hashPassword(password))) {
+            this.lastUser = user;
+            this.loggedInUser = user;
+        } else {
+            //TODO: incorrect password handling
+        }
+    }
+
+    public void logOut() {
+        this.loggedInUser = null;
     }
 
 

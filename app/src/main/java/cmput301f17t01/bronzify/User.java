@@ -38,12 +38,6 @@ public class User {
 
     }
 
-    public void delete() {
-        for (HabitType h: habitTypes) {
-            h.delete();
-        }
-        //TODO: elasticsearch deletion
-    }
 
     // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
 
