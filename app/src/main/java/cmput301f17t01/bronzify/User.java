@@ -19,9 +19,10 @@ public class User {
     private ArrayList<User> following;
     private ArrayList<User> pendingFollowRequests;
 
-    public User(String userID, String password) {
+    public User(String userID, String password) throws UserExistsException {
         this.userID = userID;
         this.passwordHash = hashPassword(password);
+        this.register();
     }
 
     public String hashPassword(String password) {
@@ -41,6 +42,9 @@ public class User {
         //TODO: elasticsearch registration
     }
 
+    public void unRegister() throws UserDoesNotExistException {
+        //TODO: elasticsearch unregistration
+    }
 
     // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
 
