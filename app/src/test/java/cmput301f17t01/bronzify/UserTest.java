@@ -7,8 +7,12 @@ import org.junit.Test;
  */
 
 public class UserTest {
-    @Test
-    public void test() {
 
+    private User user;
+
+    @Test
+    public void testSetUp() {
+        user = new User();
+        //TODO: check construction values
     }
 }
