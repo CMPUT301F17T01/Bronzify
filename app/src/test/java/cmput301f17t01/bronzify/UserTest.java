@@ -24,7 +24,7 @@ public class UserTest extends TestCase {
 
 
     @Test
-    public void testRegisterUserAlreadyExists() throws UserExistsException {
+    public void testRegisterUserAlreadyExists() {
         try {
             User duplicateUser = new User("USERID", "NOTPASSWORD");
             assertTrue(Boolean.FALSE);
@@ -48,12 +48,25 @@ public class UserTest extends TestCase {
     }
     */
     @Test
-    public void testRequestFollower() {
-
+    public void testRequestFollow() throws UserException {
+        User otherUser = new User("OTHERUSER", "PASSWORD");
+        user.requestFollow(otherUser);
+        //Probably need to wait for elasticsearch to update
+        assertTrue(otherUser.getPendingFollowRequests().contains(user));
+        otherUser.unRegister();
     }
 
     @Test
-    public void testAcceptFollower() {
+    public void testAcceptFollower() throws UserException {
+        User otherUser = new User("OTHERUSER", "PASSWORD");
+        otherUser.requestFollow(user);
+        //Probably need to wait for elasticsearch to update
+        assertTrue(user.getPendingFollowRequests().contains(otherUser));
+        user.acceptFollower(otherUser);
+        //Wait for elasticsearch
+        assertTrue(otherUser.getFollowing().contains(user));
+
+        otherUser.unRegister();
 
     }
 
@@ -69,8 +82,8 @@ public class UserTest extends TestCase {
     }
 
     @Test
-    public void testTearDown() {
-
+    public void testTearDown() throws UserDoesNotExistException {
+        user.unRegister();
     }
 
 }

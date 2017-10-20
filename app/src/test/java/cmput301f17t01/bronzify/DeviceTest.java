@@ -20,6 +20,7 @@ public class DeviceTest extends TestCase {
     }
 
 
+    /*
     @Test
     public void testAddUserNewUser() throws UserException {
         User user = new User("TESTUSER", "PASSWORD");
@@ -40,6 +41,7 @@ public class DeviceTest extends TestCase {
         }
         user.unRegister();
     }
+    */
 
     @Test
     public void testLogInCorrectPassword() throws UserException {

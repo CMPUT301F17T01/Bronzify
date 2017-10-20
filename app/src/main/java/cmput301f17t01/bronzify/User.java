@@ -38,6 +38,14 @@ public class User {
 
     }
 
+    public void requestFollow(User otherUser) throws UserDoesNotExistException {
+        //TODO: elasticsearch request follow
+    }
+
+    public void acceptFollower(User otherUser) throws UserDoesNotExistException {
+        //TODO: elasticsearch accept follow
+    }
+
     public void register() throws UserExistsException {
         //TODO: elasticsearch registration
     }

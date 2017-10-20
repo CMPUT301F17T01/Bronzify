@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class Device {
     private Date dateAdded;
-    private ArrayList<User> users;
+    //private ArrayList<User> users;
     private User lastUser;
     private User loggedInUser;
 
@@ -19,12 +19,18 @@ public class Device {
         this.loggedInUser = null;
     }
 
+    /*
     public void addUser(User user) throws UserExistsException {
         if (this.users.contains(user)) {
             throw new UserExistsException();
         }
         this.users.add(user);
     }
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+    }
+    */
 
     public void logIn(User user, String password) throws UserDoesNotExistException {
         if (user.getPasswordHash().equals(user.hashPassword(password))) {
@@ -39,6 +45,9 @@ public class Device {
         this.loggedInUser = null;
     }
 
+    public User getUser(String userID) throws UserDoesNotExistException {
+        //TODO: elasticsearch return user by ID
+    }
 
 
     // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
@@ -48,14 +57,14 @@ public class Device {
         return dateAdded;
     }
 
-
+    /*
     public ArrayList<User> getUsers() {
         return users;
     }
 
     public void setUsers(ArrayList<User> users) {
         this.users = users;
-    }
+    } */
 
     public User getLastUser() {
         return lastUser;
