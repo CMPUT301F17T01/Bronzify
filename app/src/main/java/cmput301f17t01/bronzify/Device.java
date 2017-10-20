@@ -19,10 +19,6 @@ public class Device {
         this.loggedInUser = null;
     }
 
-    public void registerUser(User user) throws UserExistsException {
-        //TODO: elasticsearch user creation
-    }
-
     public void addUser(User user) throws UserExistsException {
         if (this.users.contains(user)) {
             throw new UserExistsException();
