@@ -62,4 +62,12 @@ public class HabitTypeTest extends TestCase {
         assertFalse(type.getHabitEvents().contains(event));
     }
 
+    @Test
+    public void testRecurrence() {
+         /* We don't currently have a robust date/time implementation so this
+          * test is being postponed until we have a better idea of how the scheduling
+          * will work
+          */
+    }
+
 }

@@ -1,6 +1,5 @@
 package cmput301f17t01.bronzify;
 
-import android.app.Notification;
 
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
