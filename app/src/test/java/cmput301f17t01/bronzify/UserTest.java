@@ -60,7 +60,7 @@ public class UserTest extends TestCase {
     }
 
     public void testAddHabitType() {
-        HabitType habitType = new HabitType();
+        HabitType habitType = new HabitType("Test habit");
         user.setHabitTypes(null);
         assertNull(user.getHabitTypes());
         user.addHabitType(habitType);
@@ -69,7 +69,7 @@ public class UserTest extends TestCase {
 
     @Test
     public void testUpdate() throws UserException {
-        HabitType habitType = new HabitType();
+        HabitType habitType = new HabitType("Test habit");
         user.setHabitTypes(null);
         user.update();
         User remote = user.getRemote();

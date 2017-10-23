@@ -1,5 +1,6 @@
 package cmput301f17t01.bronzify;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -17,6 +18,36 @@ public class HabitEvent {
     private Boolean priority;
     private Boolean occured;
     private Boolean completed;
+
+    public HabitEvent(HabitType type, Date date) {
+        this.habitType = type;
+        this.time = date;
+        this.checkPriority();
+    }
+
+    private void checkPriority() {
+        Date tomorrow = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(tomorrow);
+        c.add(Calendar.DATE, 1);
+        tomorrow = c.getTime();
+        if (time.before(tomorrow) & time.after(new Date())) {
+            priority = Boolean.TRUE;
+        } else {
+            priority = Boolean.FALSE;
+        }
+    }
+
+    private void checkComplete() {
+        Date now = new Date();
+        if (time.before(now)) {
+            occured = Boolean.TRUE;
+        } else {
+            occured = Boolean.FALSE;
+        }
+    }
+
+    // Getters and Setters below
 
     public User getUser() {
         return user;
