@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -33,24 +36,10 @@ public class UserTest extends TestCase {
         }
     }
 
-    /* //not sure whether to implement this
-    @Test
-    public void testHashPassword() {
-        String randChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder builder = new StringBuilder();
-        Random rnd = new Random();
-        while (builder.length() < 18) { // arbitrary string length
-            int index = (int) (rnd.nextFloat() * randChars.length());
-            builder.append(randChars.charAt(index));
-        }
-        String testPassword = builder.toString();
-
-    }
-    */
     @Test
     public void testRequestFollow() throws UserException {
         User otherUser = new User("OTHERUSER", "PASSWORD");
-        user.requestFollow(otherUser);
+        user.requestFollow(otherUser.getUserID());
         //Probably need to wait for elasticsearch to update
         assertTrue(otherUser.getPendingFollowRequests().contains(user));
         otherUser.unRegister();
@@ -59,10 +48,10 @@ public class UserTest extends TestCase {
     @Test
     public void testAcceptFollower() throws UserException {
         User otherUser = new User("OTHERUSER", "PASSWORD");
-        otherUser.requestFollow(user);
+        otherUser.requestFollow(user.getUserID());
         //Probably need to wait for elasticsearch to update
         assertTrue(user.getPendingFollowRequests().contains(otherUser));
-        user.acceptFollower(otherUser);
+        user.acceptFollower(otherUser.getUserID());
         //Wait for elasticsearch
         assertTrue(otherUser.getFollowing().contains(user));
 
@@ -70,15 +59,24 @@ public class UserTest extends TestCase {
 
     }
 
-    @Test
-    public void testUpdate() {
-
-
+    public void testAddHabitType() {
+        HabitType habitType = new HabitType();
+        user.setHabitTypes(null);
+        assertNull(user.getHabitTypes());
+        user.addHabitType(habitType);
+        assertTrue(user.getHabitTypes().contains(habitType));
     }
 
     @Test
-    public void testDisplayMessage() {
-
+    public void testUpdate() throws UserException {
+        HabitType habitType = new HabitType();
+        user.setHabitTypes(null);
+        user.update();
+        User remote = user.getRemote();
+        assertNull(remote.getHabitTypes());
+        user.addHabitType(habitType);
+        remote = user.getRemote();
+        assertTrue(remote.getHabitTypes().contains(habitType));
     }
 
     @Test

@@ -1,5 +1,7 @@
 package cmput301f17t01.bronzify;
 
+import android.app.Notification;
+
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,11 +40,11 @@ public class User {
 
     }
 
-    public void requestFollow(User otherUser) throws UserDoesNotExistException {
+    public void requestFollow(String otherUserID) throws UserDoesNotExistException {
         //TODO: elasticsearch request follow
     }
 
-    public void acceptFollower(User otherUser) throws UserDoesNotExistException {
+    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
         //TODO: elasticsearch accept follow
     }
 
@@ -53,6 +55,46 @@ public class User {
     public void unRegister() throws UserDoesNotExistException {
         //TODO: elasticsearch unregistration
     }
+
+    public User getRemote() throws UserException {
+        //TODO: elastic search get user object based on ID
+        return new TestUser("REMOTE", "PASSWORD");
+    }
+
+    public void setRemote() {
+        //TODO: elasticsearch set remote user object
+    }
+
+    public void update() throws UserException {
+        //TODO: elasticsearch get remote timestamp
+        User remote = getRemote();
+        if (this.lastUpdated.after(remote.getLastUpdated())) {
+            this.lastUpdated = new Date();
+            this.setRemote();
+        } else {
+            this.copyRemote(remote);
+        }
+        //TODO: remote last updated = new Date()
+    }
+
+    public void copyRemote(User remote) {
+        //TODO: copy remote user object
+        this.lastUpdated = remote.getLastUpdated();
+        this.following = remote.getFollowing();
+        this.pendingFollowRequests = remote.getPendingFollowRequests();
+        this.habitTypes = remote.getHabitTypes();
+
+    }
+
+    public void addHabitType(HabitType habitType) {
+        if (habitTypes.contains(habitType)) {
+        } else {
+            habitTypes.add(habitType);
+            this.lastUpdated = new Date();
+        }
+    }
+
+
 
     // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
 
@@ -90,6 +132,7 @@ public class User {
 
     public void setHabitTypes(ArrayList<HabitType> habitTypes) {
         this.habitTypes = habitTypes;
+        this.lastUpdated = new Date();
     }
 
     public ArrayList<User> getFollowing() {
@@ -98,6 +141,7 @@ public class User {
 
     public void setFollowing(ArrayList<User> following) {
         this.following = following;
+        this.lastUpdated = new Date();
     }
 
     public ArrayList<User> getPendingFollowRequests() {
@@ -106,5 +150,6 @@ public class User {
 
     public void setPendingFollowRequests(ArrayList<User> pendingFollowRequests) {
         this.pendingFollowRequests = pendingFollowRequests;
+        this.lastUpdated = new Date();
     }
 }
