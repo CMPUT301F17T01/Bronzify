@@ -19,13 +19,6 @@ public class HabitType {
         this.dateCreated = new Date();
     }
 
-    public void createHabitEvents(String cronString) {
-
-    }
-
-    public void updateHabitEvents(String cronString) {
-
-    }
 
     public void addHabitEvent(HabitEvent event) {
         if (habitEvents.contains(event)) {
@@ -58,5 +51,17 @@ public class HabitType {
 
     public User getUser() {
         return user;
+    }
+
+    public ArrayList<HabitEvent> getHabitEvents() {
+        return habitEvents;
+    }
+
+    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
+        this.habitEvents = habitEvents;
+    }
+
+    public String getRecurrence() {
+        return recurrence;
     }
 }

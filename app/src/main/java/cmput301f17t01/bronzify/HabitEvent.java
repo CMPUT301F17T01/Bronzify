@@ -25,7 +25,7 @@ public class HabitEvent {
         this.checkPriority();
     }
 
-    private void checkPriority() {
+    public void checkPriority() {
         Date tomorrow = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(tomorrow);
@@ -38,13 +38,17 @@ public class HabitEvent {
         }
     }
 
-    private void checkComplete() {
+    public void checkComplete() {
         Date now = new Date();
         if (time.before(now)) {
             occured = Boolean.TRUE;
         } else {
             occured = Boolean.FALSE;
         }
+    }
+
+    protected void onTrigger() {
+
     }
 
     // Getters and Setters below
@@ -71,5 +75,41 @@ public class HabitEvent {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public HabitType getHabitType() {
+        return habitType;
+    }
+
+    public void setHabitType(HabitType habitType) {
+        this.habitType = habitType;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public Boolean getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Boolean priority) {
+        this.priority = priority;
+    }
+
+    public Boolean getOccured() {
+        return occured;
+    }
+
+    public void setOccured(Boolean occured) {
+        this.occured = occured;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

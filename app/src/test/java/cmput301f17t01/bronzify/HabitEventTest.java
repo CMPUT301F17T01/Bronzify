@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,6 +14,7 @@ import java.util.Date;
 public class HabitEventTest extends TestCase {
 
     private HabitType type = new HabitType("Test Type");
+    private Date today;
     private Date tomorrow;
     private Date nextWeek;
     private Date yesterday;
@@ -23,6 +23,8 @@ public class HabitEventTest extends TestCase {
     public void testSetUp() {
 
         Calendar c = Calendar.getInstance();
+
+        today = new Date();
 
         tomorrow = new Date();
         c.setTime(tomorrow);
@@ -43,7 +45,22 @@ public class HabitEventTest extends TestCase {
 
     @Test
     public void testCheckPriority() {
+        HabitEvent event = new HabitEvent(type, nextWeek);
+        event.checkPriority();
+        assertFalse(event.getPriority());
+        event.setTime(tomorrow);
+        assertTrue(event.getPriority());
+        event.setTime(yesterday);
+        assertFalse(event.getPriority());
+    }
 
+    @Test
+    public void testCheckComplete() {
+        HabitEvent event = new HabitEvent(type, nextWeek);
+        event.checkComplete();
+        assertFalse(event.getCompleted());
+        event.setTime(yesterday);
+        assertTrue(event.getCompleted());
     }
 
 

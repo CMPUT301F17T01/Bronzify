@@ -4,10 +4,6 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
 
 /**
  * Created by kdehaan on 19/10/17.
@@ -36,6 +32,8 @@ public class UserTest extends TestCase {
         }
     }
 
+
+    /* possibly better as a controller method */
     @Test
     public void testRequestFollow() throws UserException {
         User otherUser = new User("OTHERUSER", "PASSWORD");
@@ -59,6 +57,7 @@ public class UserTest extends TestCase {
 
     }
 
+
     public void testAddHabitType() {
         HabitType habitType = new HabitType("Test habit");
         user.setHabitTypes(null);
@@ -67,6 +66,7 @@ public class UserTest extends TestCase {
         assertTrue(user.getHabitTypes().contains(habitType));
     }
 
+    /* possibly better as a controller method */
     @Test
     public void testUpdate() throws UserException {
         HabitType habitType = new HabitType("Test habit");
@@ -78,6 +78,7 @@ public class UserTest extends TestCase {
         remote = user.getRemote();
         assertTrue(remote.getHabitTypes().contains(habitType));
     }
+
 
     @Test
     public void testTearDown() throws UserDoesNotExistException {

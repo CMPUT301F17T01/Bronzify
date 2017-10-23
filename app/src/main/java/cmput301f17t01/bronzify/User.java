@@ -40,6 +40,7 @@ public class User {
 
     }
 
+
     public void requestFollow(String otherUserID) throws UserDoesNotExistException {
         //TODO: elasticsearch request follow
     }
@@ -47,6 +48,7 @@ public class User {
     public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
         //TODO: elasticsearch accept follow
     }
+
 
     public void register() throws UserExistsException {
         //TODO: elasticsearch registration
@@ -56,6 +58,7 @@ public class User {
         //TODO: elasticsearch unregistration
     }
 
+
     public User getRemote() throws UserException {
         //TODO: elastic search get user object based on ID
         return new TestUser("REMOTE", "PASSWORD");
@@ -64,6 +67,7 @@ public class User {
     public void setRemote() {
         //TODO: elasticsearch set remote user object
     }
+
 
     public void update() throws UserException {
         //TODO: elasticsearch get remote timestamp
@@ -85,6 +89,7 @@ public class User {
         this.habitTypes = remote.getHabitTypes();
 
     }
+
 
     public void addHabitType(HabitType habitType) {
         if (habitTypes.contains(habitType)) {
