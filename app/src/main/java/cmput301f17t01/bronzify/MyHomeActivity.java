@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 public class MyHomeActivity extends Activity {
 
+    //Just testing git
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
