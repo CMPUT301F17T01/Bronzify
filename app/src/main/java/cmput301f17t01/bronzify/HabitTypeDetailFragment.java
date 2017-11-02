@@ -26,7 +26,7 @@ public class HabitTypeDetailFragment {
         this.time = time;
     }
 
-    public void deleteHabit(Habit habit){
+    public void deleteHabit(HabitType habit){
         return;
     }
 }
