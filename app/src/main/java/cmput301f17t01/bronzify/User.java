@@ -100,7 +100,7 @@ public class User {
 
 
 
-    // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
+    // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
 
     public String getUserID() {
         return userID;
