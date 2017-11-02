@@ -1,5 +1,6 @@
 package cmput301f17t01.bronzify;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.widget.Button;
@@ -12,7 +13,7 @@ import java.util.Date;
  * Created by owenm_000 on 11/1/2017.
  */
 
-public class MyHabitsActivity {
+public class MyHabitsActivity extends Activity {
     private Intent intent;
     private ArrayList<HabitType> eventList;
     private ArrayList<DayOfWeek> schedule;
