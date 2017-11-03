@@ -1,4 +1,7 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.models;
+
+import cmput301f17t01.bronzify.exceptions.UserExistsException;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Allows for unit testing without server responses

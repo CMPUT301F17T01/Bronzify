@@ -1,13 +1,17 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.activities;
 
 import android.media.Image;
+import android.os.Bundle;
+import android.app.Activity;
 import android.widget.Button;
+
+import cmput301f17t01.bronzify.R;
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
+public class MyProfileActivity extends Activity {
 
-public class MyProfileActivity {
 
     private String name;
     private String userID;
@@ -39,12 +43,18 @@ public class MyProfileActivity {
         this.picture = picture;
     }
 
-    public void displayUserInfo(){
+    public void displayUserInfo() {
         return;
     }
 
-    public void editProfile(){
+    public void editProfile() {
         return;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_profile);
     }
 
 }

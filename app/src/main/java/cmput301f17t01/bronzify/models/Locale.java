@@ -1,7 +1,9 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.models;
 
-import java.util.ArrayList;
 import java.util.Date;
+
+import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
+import cmput301f17t01.bronzify.exceptions.UserException;
 
 /**
  * Created by kdehaan on 19/10/17.

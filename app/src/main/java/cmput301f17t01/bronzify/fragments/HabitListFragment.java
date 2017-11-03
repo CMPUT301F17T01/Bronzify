@@ -1,10 +1,12 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.fragments;
 
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import cmput301f17t01.bronzify.HabitEvent;
 
 /**
  * Created by jblazusi on 2017-11-01.
