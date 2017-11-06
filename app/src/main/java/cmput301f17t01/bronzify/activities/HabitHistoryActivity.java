@@ -9,7 +9,7 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
-import cmput301f17t01.bronzify.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 
 /**

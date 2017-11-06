@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import cmput301f17t01.bronzify.HabitType;
 import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
 import cmput301f17t01.bronzify.exceptions.UserException;
 import cmput301f17t01.bronzify.exceptions.UserExistsException;

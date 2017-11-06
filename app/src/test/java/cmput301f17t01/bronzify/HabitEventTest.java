@@ -7,6 +7,9 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.models.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitType;
+
 /**
  * Created by kdehaan on 19/10/17.
  */
