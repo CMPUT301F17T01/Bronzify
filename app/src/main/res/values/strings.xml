@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bronzify</string>
+    <string name="title_activity_habit_due">HabitDueActivity</string>
+    <string name="title_activity_habit_history">HabitHistoryActivity</string>
+    <string name="title_activity_habit_type">HabitTypeActivity</string>
+    <string name="title_activity_my_habits">MyHabitsActivity</string>
+    <string name="title_activity_my_map">MyMapActivity</string>
+    <string name="title_activity_my_profile">MyProfileActivity</string>
 </resources>

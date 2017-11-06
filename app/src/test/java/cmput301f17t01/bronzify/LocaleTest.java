@@ -4,6 +4,11 @@ package cmput301f17t01.bronzify;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
+import cmput301f17t01.bronzify.exceptions.UserException;
+import cmput301f17t01.bronzify.models.Locale;
+import cmput301f17t01.bronzify.models.TestUser;
+
 
 /**
  * Created by kdehaan on 19/10/17.

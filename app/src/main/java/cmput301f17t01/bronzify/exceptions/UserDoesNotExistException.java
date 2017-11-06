@@ -1,4 +1,4 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.exceptions;
 
 
 /**

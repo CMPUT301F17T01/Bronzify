@@ -1,4 +1,4 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.models;
 
 
 import java.nio.charset.Charset;
@@ -6,6 +6,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import cmput301f17t01.bronzify.HabitType;
+import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
+import cmput301f17t01.bronzify.exceptions.UserException;
+import cmput301f17t01.bronzify.exceptions.UserExistsException;
 
 /**
  * Created by kdehaan on 19/10/17.
@@ -100,7 +105,7 @@ public class User {
 
 
 
-    // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
+    // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
 
     public String getUserID() {
         return userID;

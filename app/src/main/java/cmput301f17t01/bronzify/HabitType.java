@@ -3,6 +3,8 @@ package cmput301f17t01.bronzify;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.models.User;
+
 /**
  * Created by noahkryzanowski on 2017-10-20.
  */

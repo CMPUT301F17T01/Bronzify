@@ -9,13 +9,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyHomeActivity">
+        <activity android:name=".activities.MyHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FollowUserActivit" />
+        <activity android:name=".activities.FollowUserActivity" />
+        <activity
+            android:name=".activities.HabitDueActivity"
+            android:label="@string/title_activity_habit_due" />
+        <activity android:name=".activities.HabitEventActivity" />
+        <activity
+            android:name=".activities.HabitHistoryActivity"
+            android:label="@string/title_activity_habit_history" />
+        <activity
+            android:name=".activities.HabitTypeActivity"
+            android:label="@string/title_activity_habit_type" />
+        <activity
+            android:name=".activities.MyHabitsActivity"
+            android:label="@string/title_activity_my_habits" />
+        <activity
+            android:name=".activities.MyMapActivity"
+            android:label="@string/title_activity_my_map" />
+        <activity
+            android:name=".activities.MyProfileActivity"
+            android:label="@string/title_activity_my_profile"></activity>
     </application>
 
 </manifest>
