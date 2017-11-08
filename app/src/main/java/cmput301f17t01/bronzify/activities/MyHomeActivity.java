@@ -19,6 +19,12 @@ import cmput301f17t01.bronzify.R;
 
 /**
  * Created by owenm_000 on 11/1/2017.
+ *
+ * Landing page for the user when they open the app.
+ * Also contains Firebase Auth, to validate user login.
+ *
+ * TO-DO: Develop front-end for this
+ *
  */
 public class MyHomeActivity extends Activity {
     private FirebaseAuth mAuth;
@@ -42,9 +48,13 @@ public class MyHomeActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-         currUser = mAuth.getCurrentUser();
+        currUser = mAuth.getCurrentUser();
+
         if(currUser == null){
-            startActivity(new Intent());
+            createAccount(emailText.getText().toString(),passwordText.getText().toString());
+        }
+        else{
+            signInAccount(emailText.getText().toString(),passwordText.getText().toString());
         }
     }
 
@@ -74,7 +84,7 @@ public class MyHomeActivity extends Activity {
 
     }
 
-    private void signInAccount(String email, String password){
+    private void signInAccount(final String email, String password){
         Log.d(TAG,"account: " + email);
 
         if(!validateForm()){
