@@ -1,5 +1,6 @@
 package cmput301f17t01.bronzify.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.NavigationController;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -62,20 +64,12 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.MyHabits) {
-            Intent searchIntent = new Intent(MyHomeActivity.this, MyHabitsActivity.class);
-            startActivity(searchIntent);
-            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-        }
-//        } else if (id == R.id.fileimport) {
-//            Intent searchIntent = new Intent(MainActivity.this, fileimport.class);
-//            startActivity(searchIntent);
-//            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-//        } else if (id == R.id.slideshow) {
-//            Intent searchIntent = new Intent(MainActivity.this, fileimport.class);
-//            startActivity(searchIntent);
-//            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-//        }
+        Activity currentActivity = MyHomeActivity.this;
+        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+        startActivity(newActivity);
+        finish();
+        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

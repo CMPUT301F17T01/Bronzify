@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/nav_bar_main"
+        layout="@layout/nav_bar_my_home"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
 
@@ -19,8 +19,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemTextColor="@color/colorNavText"
-        app:itemIconTint="@color/colorNavText"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemIconTint="@color/colorPrimaryDark"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         android:background="@color/colorNavText"/>

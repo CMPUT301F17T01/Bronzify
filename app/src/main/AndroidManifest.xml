@@ -35,7 +35,8 @@
             android:label="@string/title_activity_my_map" />
         <activity
             android:name=".activities.MyProfileActivity"
-            android:label="@string/title_activity_my_profile"></activity>
+            android:label="@string/title_activity_my_profile" />
+        <activity android:name=".activities.LoginActivity"></activity>
     </application>
 
 </manifest>
