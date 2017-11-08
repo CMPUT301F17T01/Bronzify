@@ -45,35 +45,35 @@ public class User {
 
 
     public void requestFollow(String otherUserID) throws UserDoesNotExistException {
-        //TODO: elasticsearch request follow
+        //TODO: Firebase request follow
     }
 
     public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
-        //TODO: elasticsearch accept follow
+        //TODO: Firebase accept follow
     }
 
 
     public void register() throws UserExistsException {
-        //TODO: elasticsearch registration
+        //TODO: Firebase registration
     }
 
     public void unRegister() throws UserDoesNotExistException {
-        //TODO: elasticsearch unregistration
+        //TODO: Firebase unregistration
     }
 
 
     public User getRemote() throws UserException {
-        //TODO: elastic search get user object based on ID
+        //TODO: Firebase get user object based on ID
         return new TestUser("REMOTE", "PASSWORD");
     }
 
     public void setRemote() {
-        //TODO: elasticsearch set remote user object
+        //TODO: Firebase set remote user object
     }
 
 
     public void update() throws UserException {
-        //TODO: elasticsearch get remote timestamp
+        //TODO: Firebase get remote timestamp
         User remote = getRemote();
         if (this.lastUpdated.after(remote.getLastUpdated())) {
             this.lastUpdated = new Date();
