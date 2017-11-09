@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Bronzify</string>
 
+    <string name="element_text">Element</string>
+
     <string name="title_activity_habit_due">Habit Due Activity</string>
     <string name="title_activity_habit_history">Habit History Activity</string>
     <string name="title_activity_habit_type">Habit Type Activity</string>
