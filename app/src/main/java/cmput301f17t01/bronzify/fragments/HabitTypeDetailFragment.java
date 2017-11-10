@@ -5,7 +5,7 @@ import android.widget.EditText;
 
 import java.util.Date;
 
-import cmput301f17t01.bronzify.HabitType;
+import cmput301f17t01.bronzify.models.HabitType;
 
 /**
  * Created by jblazusi on 2017-11-01.

@@ -18,7 +18,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Date;
 
-import cmput301f17t01.bronzify.HabitType;
+import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 
