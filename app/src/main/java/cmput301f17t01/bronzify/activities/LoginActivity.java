@@ -12,6 +12,7 @@ import android.widget.EditText;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.LoginController;
 import cmput301f17t01.bronzify.models.Locale;
+import cmput301f17t01.bronzify.models.User;
 
 public class LoginActivity extends AppCompatActivity {
     LoginController controller = new LoginController();
@@ -24,24 +25,21 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginButton = (Button) findViewById(R.id.login_button);
         Button registerButton = (Button) findViewById(R.id.register_button);
-        final EditText enterId = (EditText) findViewById(R.id.enter_id);
+        EditText enterId = (EditText) findViewById(R.id.enter_id);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Boolean result = controller.checkLogin(enterId.getText().toString());
-                if (result) {
+                EditText enterId = (EditText) findViewById(R.id.enter_id);
+                String input = enterId.getText().toString();
+                User result = controller.checkLogin(input);
+                if (result != null) {
                     Log.i("User", "Found");
+                    controller.loginUser(result);
                     Log.i("User is", locale.getUser().toString());
                 } else {
                     AlertDialog.Builder adBuilder = new AlertDialog.Builder(LoginActivity.this);
                     adBuilder.setMessage(R.string.login_fail_message);
                     adBuilder.setNegativeButton(R.string.dialog_return, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-                    adBuilder.setPositiveButton(R.string.register_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -55,7 +53,24 @@ public class LoginActivity extends AppCompatActivity {
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                EditText enterId = (EditText) findViewById(R.id.enter_id);
+                String input = enterId.getText().toString();
+                User result = controller.checkLogin(input);
+                if (result == null) { //opposite of login
+                    Log.i("User", "Not Found");
+                    controller.registerUser(input);
+                } else {
+                    AlertDialog.Builder adBuilder = new AlertDialog.Builder(LoginActivity.this);
+                    adBuilder.setMessage(R.string.register_fail_message);
+                    adBuilder.setNegativeButton(R.string.dialog_return, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                        }
+                    });
+                    AlertDialog alertDialog = adBuilder.create();
+                    alertDialog.show();
+                }
             }
         });
 

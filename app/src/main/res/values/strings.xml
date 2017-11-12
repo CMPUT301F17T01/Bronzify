@@ -28,4 +28,5 @@
     <string name="login_fail_message">Invalid User ID</string>
     <string name="dialog_confirm">OK</string>
     <string name="dialog_return">Return</string>
+    <string name="register_fail_message">User ID already exists</string>
 </resources>

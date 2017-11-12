@@ -12,13 +12,16 @@ public class LoginController {
     Locale locale = Locale.getInstance();
     ElasticSearch elastic = new ElasticSearch();
 
-    public Boolean checkLogin(String userID) {
+    public User checkLogin(String userID) {
         User user = elastic.getUser(userID);
-        if (user == null) {
-            return Boolean.FALSE;
-        } else {
-            locale.setUser(user);
-            return Boolean.TRUE;
-        }
+        return user;
+    }
+
+    public void loginUser(User user) {
+        locale.setUser(user);
+    }
+
+    public void registerUser(String userID) {
+
     }
 }
