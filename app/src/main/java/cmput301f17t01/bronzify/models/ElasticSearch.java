@@ -10,7 +10,9 @@ import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
 
+import io.searchbox.client.JestResult;
 import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
@@ -21,6 +23,7 @@ import io.searchbox.core.SearchResult;
 
 public class ElasticSearch {
     private static JestDroidClient client;
+    private static String indexString = "cmput301f17t01_bronzify";
 
     public static class PostUser extends AsyncTask<User, Void, Void> {
         @Override
@@ -28,9 +31,10 @@ public class ElasticSearch {
             verifySettings();
             for (User user : users) {
                 Index index = new Index.Builder(user)
-                        .index("testing")
-                        .type("user")
-                        .build();
+                        .index(indexString)
+                        .type("testing") // actually type
+                        .id(user.getUserID()) // actually id
+                        .build(); // true index is "cmput301f17t01_bronzify"
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
@@ -51,13 +55,14 @@ public class ElasticSearch {
         protected ArrayList<User> doInBackground(String... strings) {
             verifySettings();
             ArrayList<User> users = new ArrayList<User>();
-            Log.i("Search Params", strings[0]);
-            Search search = new Search.Builder(strings[0])
-                    .addIndex("testing")
-                    .addType("user")
+
+            Get get = new Get.Builder(indexString, strings[0]) //index, id
+                    .type("testing")
                     .build();
+
+            Log.i("Get", get.toString());
             try {
-                SearchResult result = client.execute(search);
+                JestResult result = client.execute(get);
                 if (result.isSucceeded()) {
                     User foundUser = result.getSourceAsObject(User.class);
                     users.add(foundUser);
@@ -74,7 +79,7 @@ public class ElasticSearch {
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig
-                    .Builder("http://cmput301.softwareprocess.es:8080/cmput301f17t01_bronzify");
+                    .Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();
