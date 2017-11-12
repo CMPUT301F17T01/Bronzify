@@ -17,72 +17,79 @@ import cmput301f17t01.bronzify.exceptions.UserExistsException;
 
 public class User {
     private String userID;
-    private String passwordHash;
+//    private String passwordHash;
     private Date dateCreated;
     private Date lastUpdated;
     private ArrayList<HabitType> habitTypes;
     private ArrayList<User> following;
     private ArrayList<User> pendingFollowRequests;
 
-    public User(String userID, String password) throws UserExistsException {
+    public User(String userID) /* throws UserExistsException */{
         this.userID = userID;
-        this.passwordHash = hashPassword(password);
-        this.register();
-    }
-
-    public String hashPassword(String password) {
-        try {
-
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(Charset.forName("UTF-8")));
-            String hashedPassword = new String(hash, Charset.forName("UTF-8"));
-            return hashedPassword;
-        } catch (NoSuchAlgorithmException e) {
-            return password; //TODO: this is really bad
-        }
-
+        this.dateCreated = new Date();
+//        this.passwordHash = hashPassword(password);
+//        this.register();
     }
 
 
-    public void requestFollow(String otherUserID) throws UserDoesNotExistException {
-        //TODO: elasticsearch request follow
-    }
-
-    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
-        //TODO: elasticsearch accept follow
+    public String toString() {
+        return userID + dateCreated.toString();
     }
 
 
-    public void register() throws UserExistsException {
-        //TODO: elasticsearch registration
-    }
-
-    public void unRegister() throws UserDoesNotExistException {
-        //TODO: elasticsearch unregistration
-    }
-
-
-    public User getRemote() throws UserException {
-        //TODO: elastic search get user object based on ID
-        return new TestUser("REMOTE", "PASSWORD");
-    }
-
-    public void setRemote() {
-        //TODO: elasticsearch set remote user object
-    }
+//    public String hashPassword(String password) {
+//        try {
+//
+//            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+//            byte[] hash = digest.digest(password.getBytes(Charset.forName("UTF-8")));
+//            String hashedPassword = new String(hash, Charset.forName("UTF-8"));
+//            return hashedPassword;
+//        } catch (NoSuchAlgorithmException e) {
+//            return password; //TODO: this is really bad
+//        }
+//
+//    }
 
 
-    public void update() throws UserException {
-        //TODO: elasticsearch get remote timestamp
-        User remote = getRemote();
-        if (this.lastUpdated.after(remote.getLastUpdated())) {
-            this.lastUpdated = new Date();
-            this.setRemote();
-        } else {
-            this.copyRemote(remote);
-        }
-        //TODO: remote last updated = new Date()
-    }
+//    public void requestFollow(String otherUserID) throws UserDoesNotExistException {
+//        //TODO: elasticsearch request follow
+//    }
+//
+//    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
+//        //TODO: elasticsearch accept follow
+//    }
+//
+//
+////    public void register() throws UserExistsException {
+////        //TODO: elasticsearch registration
+////    }
+//
+//    public void unRegister() throws UserDoesNotExistException {
+//        //TODO: elasticsearch unregistration
+//    }
+//
+//
+//    public User getRemote() throws UserException {
+//        //TODO: elastic search get user object based on ID
+//        return new TestUser("REMOTE", "PASSWORD");
+//    }
+//
+//    public void setRemote() {
+//        //TODO: elasticsearch set remote user object
+//    }
+
+
+//    public void update() throws UserException {
+//        //TODO: elasticsearch get remote timestamp
+//        User remote = getRemote();
+//        if (this.lastUpdated.after(remote.getLastUpdated())) {
+//            this.lastUpdated = new Date();
+//            this.setRemote();
+//        } else {
+//            this.copyRemote(remote);
+//        }
+//        //TODO: remote last updated = new Date()
+//    }
 
     public void copyRemote(User remote) {
         //TODO: copy remote user object
@@ -114,13 +121,13 @@ public class User {
         this.userID = userID;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
+//    public String getPasswordHash() {
+//        return passwordHash;
+//    }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+//    public void setPasswordHash(String passwordHash) {
+//        this.passwordHash = passwordHash;
+//    }
 
     public Date getDateCreated() {
         return dateCreated;
