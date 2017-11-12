@@ -4,10 +4,7 @@ package cmput301f17t01.bronzify;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
-import cmput301f17t01.bronzify.exceptions.UserException;
 import cmput301f17t01.bronzify.models.Locale;
-import cmput301f17t01.bronzify.models.TestUser;
 
 
 /**
@@ -19,7 +16,7 @@ public class LocaleTest extends TestCase {
 
     @Test
     public void testSetUp() {
-        locale = new Locale();
+        locale = Locale.getInstance();
         assertNull(locale.getLastUser());
         assertNull(locale.getLoggedInUser());
     }
