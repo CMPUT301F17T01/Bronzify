@@ -49,23 +49,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //TESTING ELASTICSEARCH BELOW
-        Log.i("Notice", "Setting user");
-        User testUser = new User("TESTUSER");
 
-        ElasticSearch.PostUser addUserTask
-                = new ElasticSearch.PostUser();
-        addUserTask.execute(testUser);
-        Log.i("Notice", "Getting User");
-        ElasticSearch.GetUser getUserTask
-                = new ElasticSearch.GetUser();
-        getUserTask.execute("TESTUSER");
-        try {
-            User foundUser = getUserTask.get();
-            Log.i("Success", foundUser.toString());
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the user from the async object");
-        }
 
 
 

@@ -21,6 +21,24 @@ import io.searchbox.core.SearchResult;
  * Created by kdehaan on 10/11/17.
  */
 
+//// sample elasticsearch code
+//                Log.i("Notice", "Setting user");
+//                User testUser = new User("TESTUSER");
+//                ElasticSearch.PostUser addUserTask
+//                = new ElasticSearch.PostUser();
+//                addUserTask.execute(testUser);
+
+//                Log.i("Notice", "Getting User");
+//                ElasticSearch.GetUser getUserTask
+//                = new ElasticSearch.GetUser();
+//                getUserTask.execute("TESTUSER");
+//                try {
+//                User foundUser = getUserTask.get();
+//                Log.i("Success", foundUser.toString());
+//                } catch (Exception e) {
+//                Log.i("Error", "Failed to get the user from the async object");
+//                }
+
 public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
@@ -81,6 +99,7 @@ public class ElasticSearch {
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig
+                    //.Builder("localhost:9200");
                     .Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
 
