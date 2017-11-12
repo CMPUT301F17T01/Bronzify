@@ -35,9 +35,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String input = enterId.getText().toString();
-                if (input == "") {
+                if (input.trim().length() == 0) {
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Please enter a user ID");
+                    return;
                 }
                 User result = controller.checkLogin(input);
                 if (result != null) {
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String input = enterId.getText().toString();
-                if (input == "") {
+                if (input.trim().length() == 0) {
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Please enter a user ID");
                     return;
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 }
