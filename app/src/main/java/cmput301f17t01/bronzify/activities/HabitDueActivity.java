@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.widget.Button;
 
-import cmput301f17t01.bronzify.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 
 /**

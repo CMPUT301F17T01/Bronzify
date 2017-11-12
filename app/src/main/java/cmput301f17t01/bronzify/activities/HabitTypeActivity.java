@@ -7,7 +7,7 @@ import android.widget.Button;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
-import cmput301f17t01.bronzify.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 
 /**

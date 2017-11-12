@@ -1,9 +1,7 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.models;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by noahkryzanowski on 2017-10-20.

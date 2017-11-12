@@ -1,8 +1,9 @@
-package cmput301f17t01.bronzify;
+package cmput301f17t01.bronzify.models;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.User;
 
 /**
