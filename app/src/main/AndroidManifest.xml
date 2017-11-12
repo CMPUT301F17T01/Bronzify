@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activities.MyHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FollowUserActivit" />
         <activity android:name=".activities.FollowUserActivity" />
         <activity
             android:name=".activities.HabitDueActivity"
@@ -36,7 +35,8 @@
             android:label="@string/title_activity_my_map" />
         <activity
             android:name=".activities.MyProfileActivity"
-            android:label="@string/title_activity_my_profile"></activity>
+            android:label="@string/title_activity_my_profile" />
+        <activity android:name=".activities.LoginActivity"></activity>
     </application>
 
 </manifest>
