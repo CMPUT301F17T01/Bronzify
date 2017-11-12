@@ -22,6 +22,7 @@ public class LoginController {
     }
 
     public void registerUser(String userID) {
-
+        User user = new User(userID);
+        elastic.postUser(user);
     }
 }
