@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -44,20 +45,13 @@ public class LoginActivity extends AppCompatActivity {
                     controller.loginUser(result);
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Login Successful");
+                    Intent intent = new Intent(LoginActivity.this, MyHomeActivity.class);
+                    startActivity(intent);
 
                 } else {
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Invalid User ID");
-//                    AlertDialog.Builder adBuilder = new AlertDialog.Builder(LoginActivity.this);
-//                    adBuilder.setMessage(R.string.login_fail_message);
-//                    adBuilder.setNegativeButton(R.string.dialog_return, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                        }
-//                    });
-//                    AlertDialog alertDialog = adBuilder.create();
-//                    alertDialog.show();
+
                 }
             }
         });
@@ -76,16 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("User ID already exists");
 
-//                    AlertDialog.Builder adBuilder = new AlertDialog.Builder(LoginActivity.this);
-//                    adBuilder.setMessage(R.string.register_fail_message);
-//                    adBuilder.setNegativeButton(R.string.dialog_return, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                        }
-//                    });
-//                    AlertDialog alertDialog = adBuilder.create();
-//                    alertDialog.show();
                 }
             }
         });
