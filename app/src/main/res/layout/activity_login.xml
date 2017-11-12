@@ -12,10 +12,11 @@
         android:layout_height="wrap_content"
         android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.287"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581" />
+        app:layout_constraintVertical_bias="0.689" />
 
     <EditText
         android:id="@+id/enter_id"
@@ -35,11 +36,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBaseline_toBaselineOf="@+id/login_button"
+        app:layout_constraintHorizontal_bias="0.716"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
         android:id="@+id/logo"

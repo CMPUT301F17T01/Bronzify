@@ -21,7 +21,7 @@ public class Locale {
     }
 
 
-    public User getLoggedInUser() {
+    public User getUser() {
         return loggedInUser;
     }
 

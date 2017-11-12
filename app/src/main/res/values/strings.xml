@@ -25,4 +25,7 @@
     <string name="login_button">Log In</string>
     <string name="register_button">Register</string>
     <string name="login_user_id">User ID</string>
+    <string name="login_fail_message">Invalid User ID</string>
+    <string name="dialog_confirm">OK</string>
+    <string name="dialog_return">Return</string>
 </resources>
