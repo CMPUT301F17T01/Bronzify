@@ -10,16 +10,16 @@ import cmput301f17t01.bronzify.models.User;
  */
 public class TestUser extends User {
 
-    TestUser(String userID, String password) throws UserExistsException {
-        super(userID, password);
+    TestUser(String userID) {
+        super(userID);
     }
 
-    @Override
-    public void register() {}
+//    @Override
+//    public void register() {}
 
-    @Override
-    public void unRegister() {}
-
-    @Override
-    public void update() {}
+//    @Override
+//    public void unRegister() {}
+//
+//    @Override
+//    public void update() {}
 }

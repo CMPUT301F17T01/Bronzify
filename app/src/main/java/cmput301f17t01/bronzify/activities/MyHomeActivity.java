@@ -9,13 +9,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 
+import java.util.ArrayList;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.HabitListFragment;
+import cmput301f17t01.bronzify.models.ElasticSearch;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -43,6 +48,31 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //TESTING ELASTICSEARCH BELOW
+        Log.i("Notice", "Setting user");
+        User testUser = new User("TESTUSER");
+
+        ElasticSearch.PostUser addUserTask
+                = new ElasticSearch.PostUser();
+        addUserTask.execute(testUser);
+        ArrayList<User> userList = new ArrayList<User>();
+        Log.i("Notice", "Getting User");
+        ElasticSearch.GetUser getUserTask
+                = new ElasticSearch.GetUser();
+        getUserTask.execute("TESTUSER");
+        try {
+            userList = getUserTask.get();
+        } catch (Exception e) {
+            Log.i("Error", "Failed to get the user from the async object");
+        }
+        if (userList.isEmpty()) {
+            Log.i("Error", "Empty list");
+        } else {
+            Log.i("Success", userList.get(0).toString());
+        }
+
+
 
     }
 

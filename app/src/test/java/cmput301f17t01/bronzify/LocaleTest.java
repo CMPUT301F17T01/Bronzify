@@ -25,49 +25,49 @@ public class LocaleTest extends TestCase {
     }
 
 
-    @Test
-    public void testLogInCorrectPassword() throws UserException {
-        locale.logOut();
-        TestUser user = new TestUser("TESTUSER", "PASSWORD");
-        locale.logIn(user, "PASSWORD");
-        assertEquals(user, locale.getLoggedInUser());
-        locale.logOut();
-        user.unRegister();
-    }
-
-    @Test
-    public void testLogInIncorrectPassword() throws UserException {
-        locale.logOut();
-        TestUser user = new TestUser("TESTUSER", "PASSWORD");
-        locale.logIn(user, "NOTPASSWORD");
-        if (user.equals(locale.getLoggedInUser())) {
-            assertTrue(Boolean.FALSE);
-        }
-        locale.logOut();
-        user.unRegister();
-    }
-
-    @Test
-    public void testLogInNonExistentAccount() {
-        TestUser user = null;
-        try {
-            locale.logIn(user, "PASSWORD");
-            assertTrue(Boolean.FALSE);
-        } catch (UserDoesNotExistException e) {
-            assertEquals(e.getMessage(), "User does not exist");
-        }
-        locale.logOut();
-    }
-
-    @Test
-    public void testLogOut() throws UserException {
-        locale.logOut();
-        TestUser user = new TestUser("TESTUSER", "PASSWORD");
-        locale.logIn(user, "PASSWORD");
-        locale.logOut();
-        assertNull(locale.getLoggedInUser());
-        user.unRegister();
-    }
+//    @Test
+//    public void testLogInCorrectPassword() throws UserException {
+//        locale.logOut();
+//        TestUser user = new TestUser("TESTUSER", "PASSWORD");
+//        locale.logIn(user, "PASSWORD");
+//        assertEquals(user, locale.getLoggedInUser());
+//        locale.logOut();
+//        user.unRegister();
+//    }
+//
+//    @Test
+//    public void testLogInIncorrectPassword() throws UserException {
+//        locale.logOut();
+//        TestUser user = new TestUser("TESTUSER", "PASSWORD");
+//        locale.logIn(user, "NOTPASSWORD");
+//        if (user.equals(locale.getLoggedInUser())) {
+//            assertTrue(Boolean.FALSE);
+//        }
+//        locale.logOut();
+//        user.unRegister();
+//    }
+//
+//    @Test
+//    public void testLogInNonExistentAccount() {
+//        TestUser user = null;
+//        try {
+//            locale.logIn(user, "PASSWORD");
+//            assertTrue(Boolean.FALSE);
+//        } catch (UserDoesNotExistException e) {
+//            assertEquals(e.getMessage(), "User does not exist");
+//        }
+//        locale.logOut();
+//    }
+//
+//    @Test
+//    public void testLogOut() throws UserException {
+//        locale.logOut();
+//        TestUser user = new TestUser("TESTUSER", "PASSWORD");
+//        locale.logIn(user, "PASSWORD");
+//        locale.logOut();
+//        assertNull(locale.getLoggedInUser());
+//        user.unRegister();
+//    }
 
 
     @Test

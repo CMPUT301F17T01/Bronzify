@@ -8,8 +8,12 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.util.ArrayList;
+
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 /**
  * Created by kdehaan on 10/11/17.
@@ -24,7 +28,7 @@ public class ElasticSearch {
             verifySettings();
             for (User user : users) {
                 Index index = new Index.Builder(user)
-                        .index("Testing")
+                        .index("testing")
                         .type("user")
                         .build();
                 try {
@@ -39,6 +43,31 @@ public class ElasticSearch {
                 }
             }
             return null;
+        }
+    }
+
+    public static class GetUser extends AsyncTask<String, Void, ArrayList<User>> {
+        @Override
+        protected ArrayList<User> doInBackground(String... strings) {
+            verifySettings();
+            ArrayList<User> users = new ArrayList<User>();
+            Log.i("Search Params", strings[0]);
+            Search search = new Search.Builder(strings[0])
+                    .addIndex("testing")
+                    .addType("user")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    User foundUser = result.getSourceAsObject(User.class);
+                    users.add(foundUser);
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when communicating with the server");
+            }
+            return users;
         }
     }
 

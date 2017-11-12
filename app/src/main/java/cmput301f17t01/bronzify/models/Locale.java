@@ -20,24 +20,24 @@ public class Locale {
         this.loggedInUser = null;
     }
 
-
-    public void logIn(User user, String password) throws UserDoesNotExistException {
-        if (user.getPasswordHash().equals(user.hashPassword(password))) {
-            this.lastUser = user;
-            this.loggedInUser = user;
-        } else {
-            //TODO: incorrect password handling
-        }
-    }
-
-    public void logOut() {
-        this.loggedInUser = null;
-    }
-
-    public User getUser(String userID) throws UserException {
-        //TODO: elasticsearch return user by ID
-        return new TestUser(userID, "PASSWORD");
-    }
+//
+//    public void logIn(User user, String password) throws UserDoesNotExistException {
+//        if (user.getPasswordHash().equals(user.hashPassword(password))) {
+//            this.lastUser = user;
+//            this.loggedInUser = user;
+//        } else {
+//            //TODO: incorrect password handling
+//        }
+//    }
+//
+//    public void logOut() {
+//        this.loggedInUser = null;
+//    }
+//
+//    public User getUser(String userID) throws UserException {
+//        //TODO: elasticsearch return user by ID
+//        return new TestUser(userID, "PASSWORD");
+//    }
 
 
     // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
