@@ -8,14 +8,11 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import java.util.ArrayList;
 
 import io.searchbox.client.JestResult;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 
 /**
  * Created by kdehaan on 10/11/17.
@@ -42,6 +39,27 @@ import io.searchbox.core.SearchResult;
 public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
+
+
+    public void postUser(User user) {
+        ElasticSearch.PostUser addUserTask
+                = new ElasticSearch.PostUser();
+        addUserTask.execute(user);
+    }
+
+    public User getUser(String userID) {
+        User foundUser = null;
+        ElasticSearch.GetUser getUserTask
+                = new ElasticSearch.GetUser();
+        getUserTask.execute(userID);
+        try {
+            foundUser = getUserTask.get();
+        } catch (Exception e) {
+            foundUser = null;
+        }
+        return foundUser;
+    }
+
 
     public static class PostUser extends AsyncTask<User, Void, Void> {
         @Override
