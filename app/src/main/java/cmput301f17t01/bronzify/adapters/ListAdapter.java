@@ -12,8 +12,8 @@ import cmput301f17t01.bronzify.R;
  * Created by kdehaan on 08/11/17.
  */
 
-public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.ViewHolder> {
-    private static final String TAG = "HabitListAdapter";
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+    private static final String TAG = "ListAdapter";
 
     private String[] mDataSet;
 
@@ -47,7 +47,7 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.View
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public HabitListAdapter(String[] dataSet) {
+    public ListAdapter(String[] dataSet) {
         mDataSet = dataSet;
     }
 

@@ -17,7 +17,7 @@ import android.widget.Button;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
-import cmput301f17t01.bronzify.fragments.HabitListFragment;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 
 /**
  * Created by jblazusi on 2017-11-01.
@@ -76,8 +76,12 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
 
         if (savedInstanceState == null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("params", "My String Data");
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            HabitListFragment fragment = new HabitListFragment();
+            ListFragment fragment = new ListFragment();
+            fragment.setArguments(bundle);
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }

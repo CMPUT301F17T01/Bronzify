@@ -7,20 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.HabitListAdapter;
+import cmput301f17t01.bronzify.adapters.ListAdapter;
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
 
-public class HabitListFragment extends Fragment {
+public class ListFragment extends Fragment {
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
@@ -34,9 +31,10 @@ public class HabitListFragment extends Fragment {
     protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    protected HabitListAdapter mAdapter;
+    protected ListAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
+    protected ArrayList<?> oDataset;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,13 @@ public class HabitListFragment extends Fragment {
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initDataset();
+        if (getArguments() == null) {
+            initDataset();
+        } else {
+            initDataset();
+            mDataset[0] = getArguments().getString("params");
+        }
+
     }
 
     @Override
@@ -72,7 +76,7 @@ public class HabitListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
 
-        mAdapter = new HabitListAdapter(mDataset);
+        mAdapter = new ListAdapter(mDataset);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
