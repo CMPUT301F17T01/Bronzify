@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- We currently have 6 items and 2 groups -->
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/MyHome"
+            android:title="@string/menu_my_home"/>
+        <item
+            android:id="@+id/MyHabits"
+            android:title="@string/menu_my_habits"/>
+        <item
+            android:id="@+id/MyFeed"
+            android:title="@string/menu_my_feed"/>
+        <item
+            android:id="@+id/MyHistory"
+            android:title="@string/menu_my_history"/>
+        <item
+            android:id="@+id/MyMap"
+            android:title="@string/menu_my_map"/>
+
+    </group>
+
+</menu>
