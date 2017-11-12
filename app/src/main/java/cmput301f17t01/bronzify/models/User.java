@@ -36,6 +36,7 @@ public class User {
         return userID + dateCreated.toString();
     }
 
+
 //    public String hashPassword(String password) {
 //        try {
 //

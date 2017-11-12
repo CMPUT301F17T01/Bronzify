@@ -56,20 +56,15 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         ElasticSearch.PostUser addUserTask
                 = new ElasticSearch.PostUser();
         addUserTask.execute(testUser);
-        ArrayList<User> userList = new ArrayList<User>();
         Log.i("Notice", "Getting User");
         ElasticSearch.GetUser getUserTask
                 = new ElasticSearch.GetUser();
         getUserTask.execute("TESTUSER");
         try {
-            userList = getUserTask.get();
+            User foundUser = getUserTask.get();
+            Log.i("Success", foundUser.toString());
         } catch (Exception e) {
             Log.i("Error", "Failed to get the user from the async object");
-        }
-        if (userList.isEmpty()) {
-            Log.i("Error", "Empty list");
-        } else {
-            Log.i("Success", userList.get(0).toString());
         }
 
 

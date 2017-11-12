@@ -32,9 +32,9 @@ public class ElasticSearch {
             for (User user : users) {
                 Index index = new Index.Builder(user)
                         .index(indexString)
-                        .type("testing") // actually type
-                        .id(user.getUserID()) // actually id
-                        .build(); // true index is "cmput301f17t01_bronzify"
+                        .type("users")
+                        .id(user.getUserID())
+                        .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
@@ -50,29 +50,31 @@ public class ElasticSearch {
         }
     }
 
-    public static class GetUser extends AsyncTask<String, Void, ArrayList<User>> {
+    public static class GetUser extends AsyncTask<String, Void, User> {
         @Override
-        protected ArrayList<User> doInBackground(String... strings) {
+        protected User doInBackground(String... strings) {
             verifySettings();
-            ArrayList<User> users = new ArrayList<User>();
+            User foundUser;
 
             Get get = new Get.Builder(indexString, strings[0]) //index, id
-                    .type("testing")
+                    .type("users")
                     .build();
 
             Log.i("Get", get.toString());
             try {
                 JestResult result = client.execute(get);
                 if (result.isSucceeded()) {
-                    User foundUser = result.getSourceAsObject(User.class);
-                    users.add(foundUser);
+                    foundUser = result.getSourceAsObject(User.class);
+
                 } else {
                     Log.i("Error", "The search query failed");
+                    foundUser = null;
                 }
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when communicating with the server");
+                foundUser = null;
             }
-            return users;
+            return foundUser;
         }
     }
 
