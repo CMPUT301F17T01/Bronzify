@@ -17,7 +17,7 @@ import android.view.MenuItem;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
-import cmput301f17t01.bronzify.fragments.HabitListFragment;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 
 /**
  * Created by jblazusi on 2017-11-01.
@@ -37,7 +37,7 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            HabitListFragment fragment = new HabitListFragment();
+            ListFragment fragment = new ListFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
