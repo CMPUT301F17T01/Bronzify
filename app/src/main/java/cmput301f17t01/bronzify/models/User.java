@@ -34,15 +34,12 @@ public class User {
         this.dateCreated = new Date();
         this.lastInfluenced = new Date();
         this.lastUpdated = new Date();
-
     }
 
 
     public String toString() {
         return userID + dateCreated.toString();
     }
-
-
 
     public void requestFollow(String otherUserID) {
         ElasticSearch elastic = new ElasticSearch();
@@ -108,20 +105,12 @@ public class User {
 //        //TODO: remote last updated = new Date()
 //    }
 
-
-
     public void addHabitType(HabitType habitType) {
-        if (habitTypes.contains(habitType)) {
-        } else {
-            habitTypes.add(habitType);
-            this.lastUpdated = new Date();
-        }
+        habitTypes.add(habitType);
+        this.lastUpdated = new Date();
     }
 
-
-
     // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
-
 
     public Date getLastInfluenced() {
         return lastInfluenced;
