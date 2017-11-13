@@ -32,6 +32,13 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
 
     private int[] daysOfWeek = {0, 0, 0, 0, 0, 0, 0};
 
+    /**
+     * Called on the creation of Create New Habit Type Activity
+     *
+     * TODO: Rename to "..Activity"?
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -231,6 +238,10 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         });
     }
 
+    /**
+     * Called when the back button is pressed on the phone
+     *
+     */
     @Override
     public void onBackPressed(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -241,12 +252,24 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         }
     }
 
+    /**
+     * Creates the navigation drawer
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
 
+    /**
+     * Creates the settings bar in the top corner
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -256,6 +279,12 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Opens up the navigation bar
+     *
+     * @param item
+     * @return
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Activity currentActivity = CreateNewHabitType.this;

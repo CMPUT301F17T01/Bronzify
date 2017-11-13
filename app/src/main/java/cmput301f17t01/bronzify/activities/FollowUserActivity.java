@@ -28,39 +28,11 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
     private Button searchID;
     private Button searchName;
 
-    // getters and setters
-    public ListView getUserList() {
-        return userList;
-    }
-
-    public void setUserList(ListView userList) {
-        this.userList = userList;
-    }
-
-    public EditText getSearchBar() {
-        return searchBar;
-    }
-
-    public void setSearchBar(EditText searchBar) {
-        this.searchBar = searchBar;
-    }
-
-    public Button getSearchID() {
-        return searchID;
-    }
-
-    public void setSearchID(Button searchID) {
-        this.searchID = searchID;
-    }
-
-    public Button getSearchName() {
-        return searchName;
-    }
-
-    public void setSearchName(Button searchName) {
-        this.searchName = searchName;
-    }
-
+    /**
+     * On creation of the FollowUserActivity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +50,10 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
 
     }
 
+    /**
+     * Called when the back button is pressed
+     *
+     */
     @Override
     public void onBackPressed(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -88,12 +64,24 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
         }
     }
 
+    /**
+     * Creates the navigation drawer
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
 
+    /**
+     * Creates the settings bar in the top corner
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -103,6 +91,12 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Opens up the navigation bar
+     *
+     * @param item
+     * @return
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Activity currentActivity = FollowUserActivity.this;

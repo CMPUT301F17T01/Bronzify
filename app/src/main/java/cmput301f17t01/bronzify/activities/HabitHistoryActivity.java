@@ -51,6 +51,11 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
 
     //protected void onClickMap() {}
 
+    /**
+     * Called on the creation of the Habit History Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +93,11 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
 
         //change ViewPager page when tab selected
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            /**
+             * Changes the viewPager when the tab is selected.
+             *
+             * @param tab
+             */
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());

@@ -17,12 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp"
-        android:orientation="vertical">
         <FrameLayout
             android:id="@+id/sample_content_fragment"
             android:layout_weight="2"
@@ -30,6 +24,5 @@
             android:layout_height="0px" >
 
         </FrameLayout>
-    </LinearLayout>
 
 </LinearLayout>
