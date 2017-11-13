@@ -16,6 +16,11 @@ public class HabitDueActivity extends Activity {
     private Button eventCompleted;
     private Button eventMissed;
 
+    /**
+     * Used on the creation of the Habit Due Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

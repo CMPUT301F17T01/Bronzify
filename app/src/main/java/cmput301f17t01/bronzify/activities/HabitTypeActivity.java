@@ -19,6 +19,7 @@ import android.widget.Button;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.HabitEvent;

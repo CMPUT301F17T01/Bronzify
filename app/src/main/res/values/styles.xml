@@ -19,7 +19,6 @@
     <style name="Bronzify" parent="AppTheme.NoActionBar" >
         <item name="colorPrimary">@color/Amber</item>
         <item name="colorPrimaryDark">@color/darkerAmber</item>
-        <item name="colorAccent">@color/Amber</item>
         <item name="android:colorForeground">@color/Amber</item>
     </style>
 

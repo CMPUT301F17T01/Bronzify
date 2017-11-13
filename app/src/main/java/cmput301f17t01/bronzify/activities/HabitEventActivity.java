@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 
@@ -30,6 +31,11 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
     private TabLayout tabLayout;
     private String[] pageTitle = {"Details", "Map", "Picture"};
 
+    /**
+     * Called on the creation of Habit Event Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,18 +48,18 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
             transaction.commit();
         }
 
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        viewPager = findViewById(R.id.view_pager);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
 
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         //Create number of tabs
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = findViewById(R.id.tab_layout);
         for (int i = 0; i < 3; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
         }
@@ -61,7 +67,7 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
 //        //set gravity for tab bar
 //        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -75,16 +81,31 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
 
         //change ViewPager page when tab selected
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            /**
+             * Changes the viewPager when the tab is selected.
+             *
+             * @param tab
+             */
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
+            /**
+             * Called when the tab is unselected
+             *
+             * @param tab
+             */
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
             }
 
+            /**
+             * Called when the tab is reselected
+             *
+             * @param tab
+             */
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
@@ -92,9 +113,13 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
         });
     }
 
+    /**
+     * Called when the back button is pressed
+     *
+     */
     @Override
     public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -102,12 +127,24 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
         }
     }
 
+    /**
+     * Creates the navigation drawer
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
 
+    /**
+     * Creates the settings bar in the top corner
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -117,6 +154,12 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Opens up the navigation bar
+     *
+     * @param item
+     * @return
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Activity currentActivity = HabitEventActivity.this;
@@ -125,7 +168,7 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
         finish();
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

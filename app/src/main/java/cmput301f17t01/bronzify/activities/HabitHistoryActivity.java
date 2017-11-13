@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,9 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.fragments.ListFragment;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -29,62 +35,84 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
 
     // private TabItem feedTab;
     // private TabItem mapTab;
+    private String name;
     private ToggleButton toggleFilter;
     private ArrayList<HabitEvent> habitEvents;
     private EditText searchBar;
     private Button sideBar;
+    private AppLocale appLocale = AppLocale.getInstance();
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private DrawerLayout drawer;
+    private String[] pageTitle = {"Feed", "Map"};
 
     //protected void onClickFeed() {}
 
     //protected void onClickMap() {}
 
-    // getters and setters
-    public ToggleButton getToggleFilter() {
-        return toggleFilter;
-    }
-
-    public void setToggleFilter(ToggleButton toggleFilter) {
-        this.toggleFilter = toggleFilter;
-    }
-
-    public ArrayList<HabitEvent> getHabitEvents() {
-        return habitEvents;
-    }
-
-    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
-        this.habitEvents = habitEvents;
-    }
-
-    public EditText getSearchBar() {
-        return searchBar;
-    }
-
-    public void setSearchBar(EditText searchBar) {
-        this.searchBar = searchBar;
-    }
-
-    public Button getSideBar() {
-        return sideBar;
-    }
-
-    public void setSideBar(Button sideBar) {
-        this.sideBar = sideBar;
-    }
-
+    /**
+     * Called on the creation of the Habit History Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_history);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        name = appLocale.getUser().getUserID();
+        
+
+        viewPager = findViewById(R.id.view_pager);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //Create 2 tabs - FEED and MAP
+        tabLayout = findViewById(R.id.tab_layout);
+        for (int i = 0; i < 2; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
+        }
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //set viewpager adapter
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+
+        //change Tab selection when swipe ViewPager
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //change ViewPager page when tab selected
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            /**
+             * Changes the viewPager when the tab is selected.
+             *
+             * @param tab
+             */
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 
@@ -121,8 +149,42 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         finish();
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    // getters and setters
+    public ToggleButton getToggleFilter() {
+        return toggleFilter;
+    }
+
+    public void setToggleFilter(ToggleButton toggleFilter) {
+        this.toggleFilter = toggleFilter;
+    }
+
+    public ArrayList<HabitEvent> getHabitEvents() {
+        return habitEvents;
+    }
+
+    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
+        this.habitEvents = habitEvents;
+    }
+
+    public EditText getSearchBar() {
+        return searchBar;
+    }
+
+    public void setSearchBar(EditText searchBar) {
+        this.searchBar = searchBar;
+    }
+
+    public Button getSideBar() {
+        return sideBar;
+    }
+
+    public void setSideBar(Button sideBar) {
+        this.sideBar = sideBar;
+    }
+
 }

@@ -29,56 +29,11 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
  */
 public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Intent intent;
-    private ArrayList<HabitType> eventList;
-    private ArrayList<DayOfWeek> schedule;
-    private Date time;
-    private Button sideBar;
-
-    public Fragment detailsFragment;
-    public Fragment eventsFragment;
-
-    // getters and setters
-    public Intent getIntent() {
-        return intent;
-    }
-
-    public void setIntent(Intent intent) {
-        this.intent = intent;
-    }
-
-    public ArrayList<HabitType> getEventList() {
-        return eventList;
-    }
-
-    public void setEventList(ArrayList<HabitType> eventList) {
-        this.eventList = eventList;
-    }
-
-    public ArrayList<DayOfWeek> getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(ArrayList<DayOfWeek> schedule) {
-        this.schedule = schedule;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public Button getSideBar() {
-        return sideBar;
-    }
-
-    public void setSideBar(Button sideBar) {
-        this.sideBar = sideBar;
-    }
-
+    /**
+     * Called on the creation of the My Habits Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +58,10 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
+    /**
+     *
+     *
+     */
     @Override
     public void onBackPressed(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

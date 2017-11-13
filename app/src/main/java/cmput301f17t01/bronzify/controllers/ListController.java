@@ -29,6 +29,8 @@ public class ListController implements Controller {
 
         } else if (type.equals("HabitTypes")) { //TODO: this
             return appLocale.getUser().getHabitTypes();
+        } else if (type.equals("HabitHistory")) { //TODO: Change to habit events
+            return appLocale.getUser().getHabitTypes();
         }
         return new ArrayList<>();
     }
