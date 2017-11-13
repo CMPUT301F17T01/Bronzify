@@ -17,6 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activities.HabitEventActivity"
             android:noHistory="true">
@@ -45,6 +46,11 @@
         <activity
             android:name=".activities.MyProfileActivity"
             android:label="@string/title_activity_my_profile" />
+
+        <activity
+            android:name=".activities.CreateNewHabitType"
+            android:label="Create New Habit"/>
+
 
         <activity android:name=".activities.LoginActivity"
             android:noHistory="true"/>

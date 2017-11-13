@@ -11,11 +11,11 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class HabitType {
+    private User user;
     private String name;
     private Date dateCreated;
     private ArrayList<HabitEvent> habitEvents;
-    private User user;
-    private String recurrence;
+    private int[] dateOfWeek;
 
     public HabitType(String name) {
         this.name = name;
@@ -43,10 +43,6 @@ public class HabitType {
         this.name = name;
     }
 
-    public void setRecurrence(String recurrence) {
-        this.recurrence = recurrence;
-    }
-
     public String getName() {
 
         return name;
@@ -62,9 +58,5 @@ public class HabitType {
 
     public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
         this.habitEvents = habitEvents;
-    }
-
-    public String getRecurrence() {
-        return recurrence;
     }
 }

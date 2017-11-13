@@ -10,6 +10,8 @@
     <string name="title_activity_my_map">My Map Activity</string>
     <string name="title_activity_my_profile">My Profile Activity</string>
 
+    <string name="title_activity_create_new_habit">Create New Habit</string>
+
     <string name="menu_my_home">My Home</string>
     <string name="menu_my_habits">My Habits</string>
     <string name="menu_my_feed">My Feed</string>
