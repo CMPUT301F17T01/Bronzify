@@ -43,6 +43,7 @@ import io.searchbox.core.Index;
 public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
+    private static String typeString = "test_user";
 
 
     public User update(User user) {
@@ -89,7 +90,7 @@ public class ElasticSearch {
             for (User user : users) {
                 Index index = new Index.Builder(user)
                         .index(indexString)
-                        .type("users")
+                        .type(typeString)
                         .id(user.getUserID())
                         .build();
                 try {
@@ -114,7 +115,7 @@ public class ElasticSearch {
             User foundUser;
 
             Get get = new Get.Builder(indexString, strings[0]) //index, id
-                    .type("users")
+                    .type(typeString)
                     .build();
 
             Log.i("Get", get.toString());
@@ -140,7 +141,7 @@ public class ElasticSearch {
         protected Void doInBackground(String... strings) {
             verifySettings();
             Delete delete = new Delete.Builder(indexString)
-                    .type("users")
+                    .type(typeString)
                     .id(strings[0])
                     .build();
             try {
