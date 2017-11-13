@@ -45,9 +45,12 @@ public class HabitType {
         for (int i = 0; i < MAX_DAYS_AHEAD; ++i) {
             calendar.setTime(date);
 
+            // Get day of week for each date
             int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
             dayOfWeek -= 1;
 
+            // If day of week is a repeat day of week
+            // Create a new habit event
             if(daysOfWeek[dayOfWeek] == 1){
                 HabitEvent newHabitEvent = new HabitEvent(date);
                 habitEvents.add(newHabitEvent);
