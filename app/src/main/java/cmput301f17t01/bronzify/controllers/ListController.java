@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.Controller;
 import cmput301f17t01.bronzify.models.User;
 
 /**
@@ -46,7 +45,7 @@ public class ListController implements Controller {
     public void onClick(Object clicked) {
         if (type.equals("pendingFollows")) {
             User user = AppLocale.getInstance().getUser();
-            user.acceptFollow(clicked.toString());
+            new ElasticSearch().acceptFollow(user, clicked.toString());
             Log.i("User", "Accepted");
         }
 

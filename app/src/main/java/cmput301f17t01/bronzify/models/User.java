@@ -37,11 +37,10 @@ public class User {
         this.dateCreated = new Date();
         this.lastInfluenced = new Date();
         this.lastUpdated = new Date();
-
     }
 
     /**
-     * Converting a date to a string
+     * Convert to a string
      *
      * @return
      */
@@ -49,96 +48,19 @@ public class User {
         return userID + dateCreated.toString();
     }
 
-    /**
-     * Creation of a request to follow
-     *
-     * @param otherUserID
-     */
-    public void requestFollow(String otherUserID) {
-        ElasticSearch elastic = new ElasticSearch();
-        User remoteUser = elastic.getUser(otherUserID);
-        remoteUser.addPendingFollowRequest(this.userID);
-        remoteUser.setLastInfluenced(new Date());
-        elastic.postUser(remoteUser);
-    }
+
 
     /**
-     * Method for accepting a follow request
-     *
-     * @param otherUserID
-     */
-    public void acceptFollow(String otherUserID) {
-        ElasticSearch elastic = new ElasticSearch();
-        User remoteUser = elastic.getUser(otherUserID);
-        remoteUser.addFollowing(this.userID);
-        remoteUser.setLastInfluenced(new Date());
-        elastic.postUser(remoteUser);
-        this.removePendingFollowRequest(otherUserID);
-        update();
-    }
-
-    /**
-     * Method to update the elastic search data
-     *
-     */
-    public void update() {
-        ElasticSearch elastic = new ElasticSearch();
-        User newestUser = elastic.update(this);
-
-        this.setLastUpdated(newestUser.getLastUpdated());
-        this.following = newestUser.getFollowing();
-        this.pendingFollowRequests = newestUser.getPendingFollowRequests();
-        this.habitTypes = newestUser.getHabitTypes();
-    }
-//
-//    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
-//        //TODO: elasticsearch accept follow
-//    }
-//
-//
-////    public void register() throws UserExistsException {
-////        //TODO: elasticsearch registration
-////    }
-//
-//    public void unRegister() throws UserDoesNotExistException {
-//        //TODO: elasticsearch unregistration
-//    }
-//
-//
-//    public User getRemote() throws UserException {
-//        //TODO: elastic search get user object based on ID
-//        return new TestUser("REMOTE", "PASSWORD");
-//    }
-//
-//    public void setRemote() {
-//        //TODO: elasticsearch set remote user object
-//    }
-
-
-//    public void update() throws UserException {
-//        //TODO: elasticsearch get remote timestamp
-//        User remote = getRemote();
-//        if (this.lastUpdated.after(remote.getLastUpdated())) {
-//            this.lastUpdated = new Date();
-//            this.setRemote();
-//        } else {
-//            this.copyRemote(remote);
-//        }
-//        //TODO: remote last updated = new Date()
-//    }
-
-    /**
-     * Method for adding a new habit type
-     *
+     * Add a habit type
+     * 
      * @param habitType
+     * @return
      */
     public void addHabitType(HabitType habitType) {
-        if (habitTypes.contains(habitType)) {
-        } else {
-            habitTypes.add(habitType);
-            this.lastUpdated = new Date();
-        }
+        habitTypes.add(habitType);
+        this.lastUpdated = new Date();
     }
+
 
     /**
      * Method returning the last influence piece of data while you are offline. To be used
@@ -146,6 +68,26 @@ public class User {
      *
      * @return
      */
+    public void setHabitTypes(ArrayList<HabitType> habitTypes) {
+
+        this.habitTypes = habitTypes;
+        this.lastUpdated = new Date();
+    }
+
+    public void setFollowing(ArrayList<String> following) {
+        this.following = following;
+        this.lastInfluenced = new Date();
+    }
+
+    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
+        this.pendingFollowRequests = pendingFollowRequests;
+        this.lastInfluenced = new Date();
+    }
+
+    public ArrayList<HabitType> getHabitTypes() {
+        return habitTypes;
+    }
+
     public Date getLastInfluenced() {
         return lastInfluenced;
     }
@@ -193,6 +135,8 @@ public class User {
      */
     public void setFollowing(ArrayList<String> following) {
         this.following = following;
+        this.lastInfluenced = new Date();
+
     }
 
     /**
@@ -211,6 +155,7 @@ public class User {
      */
     public void removePendingFollowRequest(String userID) {
         pendingFollowRequests.remove(userID); //might not work
+        this.lastInfluenced = new Date();
     }
 
     /**
@@ -220,6 +165,7 @@ public class User {
      */
     public void addPendingFollowRequest(String userID) {
         pendingFollowRequests.add(userID);
+        this.lastInfluenced = new Date();
     }
 
     /**
@@ -230,6 +176,7 @@ public class User {
     public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
         this.pendingFollowRequests = pendingFollowRequests;
     }
+
 
     /**
      * Method that returns the userID of the logged in user
@@ -275,6 +222,7 @@ public class User {
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
+
 
     /**
      * Method that returns a list of HabitTypes

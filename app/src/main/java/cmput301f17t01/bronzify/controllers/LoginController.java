@@ -1,8 +1,6 @@
 package cmput301f17t01.bronzify.controllers;
 
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.Controller;
-import cmput301f17t01.bronzify.models.ElasticSearch;
 import cmput301f17t01.bronzify.models.User;
 
 /**
@@ -21,6 +19,9 @@ public class LoginController implements Controller {
      */
     public User checkLogin(String userID) {
         User user = elastic.getUser(userID);
+        if (user != null) {
+            appLocale.saveUser(user);
+        }
         return user;
     }
 

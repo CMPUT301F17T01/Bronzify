@@ -2,18 +2,16 @@ package cmput301f17t01.bronzify.controllers;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.view.MenuItem;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.FollowUserActivity;
 import cmput301f17t01.bronzify.activities.HabitHistoryActivity;
+import cmput301f17t01.bronzify.activities.LoginActivity;
 import cmput301f17t01.bronzify.activities.MyHabitsActivity;
 import cmput301f17t01.bronzify.activities.MyHomeActivity;
 import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.activities.MyProfileActivity;
-import cmput301f17t01.bronzify.models.Controller;
+import cmput301f17t01.bronzify.models.AppLocale;
 
 /**
  * Created by jblazusi on 2017-11-07.
@@ -51,6 +49,10 @@ public class NavigationController implements Controller {
             return navIntent;
         } else if (id == R.id.MyProfile) {
             Intent navIntent = new Intent(currentActivity, MyProfileActivity.class);
+            return navIntent;
+        } else if (id == R.id.LogOut) {
+            Intent navIntent = new Intent(currentActivity, LoginActivity.class);
+            AppLocale.getInstance().logoutUser();
             return navIntent;
         }
         //EXCEPTION HANDLING HERE, FOR WHEN ID IS NULL OR INCORRECT!

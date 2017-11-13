@@ -19,6 +19,7 @@
         android:supportsRtl="true"
 
         android:theme="@style/Bronzify">
+
         <activity android:name=".activities.LoginActivity"
             android:noHistory="true">
             <intent-filter>
@@ -27,32 +28,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FollowUserActivity" />
+
         <activity
-            android:name=".activities.HabitDueActivity"
-            android:label="@string/title_activity_habit_due" />
+            android:name=".activities.MyHomeActivity"
+            android:label="@string/title_activity_home" />
+        <activity
+            android:name=".activities.MyHabitsActivity"
+            android:label="@string/title_activity_my_habits" />
+        <activity
+            android:name=".activities.CreateNewHabitTypeActivity"
+            android:label="Create New Habit"/>
+        <!-- Missing My Feed -->
         <activity
             android:name=".activities.HabitHistoryActivity"
             android:label="@string/title_activity_habit_history" />
         <activity
-            android:name=".activities.MyHomeActivity"
-            android:label="@string/title_activity_habit_type" />
+            android:name=".activities.FollowUserActivity"
+            android:label="@string/title_activity_follow_user"/>
         <activity
-            android:name=".activities.MyHabitsActivity"
-            android:label="@string/title_activity_my_habits" />
+            android:name=".activities.HabitDueActivity"
+            android:label="@string/title_activity_habit_due" />
         <activity
             android:name=".activities.MyMapActivity"
             android:label="@string/title_activity_my_map" />
         <activity
             android:name=".activities.MyProfileActivity"
             android:label="@string/title_activity_my_profile" />
-
         <activity
-            android:name=".activities.CreateNewHabitType"
-            android:label="Create New Habit"/>
-
-
-        <activity android:name=".activities.HabitEventActivity" />
+            android:name=".activities.HabitEventActivity" />
 
         <!--Maps Android Key-->
         <meta-data
