@@ -1,7 +1,9 @@
 package cmput301f17t01.bronzify.controllers;
 
+import android.app.AlertDialog;
 import android.util.Log;
 
+import cmput301f17t01.bronzify.activities.MyProfileActivity;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.ElasticSearch;
 
@@ -17,8 +19,9 @@ public class ProfileController {
         elastic.deleteUser(appLocale.getUser().getUserID());
     }
 
-    public void requestFollow() {
+    public void requestFollow(String userID) {
         Log.i("Follow", "Requested");
+        appLocale.getUser().requestFollow(userID);
     }
 
 }

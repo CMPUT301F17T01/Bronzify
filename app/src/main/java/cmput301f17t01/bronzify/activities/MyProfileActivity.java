@@ -1,5 +1,7 @@
 package cmput301f17t01.bronzify.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
@@ -110,16 +114,52 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         followButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                controller.requestFollow();
+                Log.i("Follow","clicked");
+                AlertDialog.Builder adBuilder = new AlertDialog.Builder(MyProfileActivity.this);
+                adBuilder.setMessage("Please enter a user ID");
+                final EditText input = new EditText(MyProfileActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                adBuilder.setView(input);
+
+                adBuilder.setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        controller.requestFollow(input.getText().toString());
+                    }
+                });
+                adBuilder.setNegativeButton(R.string.dialog_return, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+                adBuilder.create().show();
             }
         });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                controller.deleteAccount();
-                Intent intent = new Intent(MyProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                Log.i("Delete","clicked");
+                AlertDialog.Builder adBuilder = new AlertDialog.Builder(MyProfileActivity.this);
+                adBuilder.setMessage("Are you sure you want to delete your account?");
+
+                adBuilder.setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        controller.deleteAccount();
+                        Intent intent = new Intent(MyProfileActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                adBuilder.setNegativeButton(R.string.dialog_return, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+                adBuilder.create().show();
+
+
             }
         });
 

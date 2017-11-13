@@ -31,4 +31,6 @@
     <string name="register_fail_message">User ID already exists</string>
     <string name="followButton">+ Follow</string>
     <string name="account_delete">Delete Account</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
 </resources>

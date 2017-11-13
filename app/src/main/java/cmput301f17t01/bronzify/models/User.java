@@ -42,9 +42,9 @@ public class User {
 
 
 
-//    public void requestFollow(String otherUserID) throws UserDoesNotExistException {
-//        //TODO: elasticsearch request follow
-//    }
+    public void requestFollow(String otherUserID) {
+
+    }
 //
 //    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
 //        //TODO: elasticsearch accept follow
