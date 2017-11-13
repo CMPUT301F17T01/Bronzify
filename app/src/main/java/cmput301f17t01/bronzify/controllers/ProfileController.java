@@ -22,7 +22,7 @@ public class ProfileController implements Controller {
 
     public void requestFollow(String userID) {
         Log.i("Follow", "Requested");
-        appLocale.getUser().requestFollow(userID);
+        elastic.requestFollow(appLocale.getUser(), userID);
     }
 
 }

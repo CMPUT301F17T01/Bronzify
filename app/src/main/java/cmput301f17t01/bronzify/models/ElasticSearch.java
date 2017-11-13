@@ -62,6 +62,33 @@ public class ElasticSearch {
         }
     }
 
+    public void requestFollow(User user, String otherUserID) {
+        User remoteUser = getUser(otherUserID);
+        remoteUser.addPendingFollowRequest(user.getUserID());
+        remoteUser.setLastInfluenced(new Date());
+        postUser(remoteUser);
+    }
+
+    public void acceptFollow(User user, String otherUserID) {
+        User remoteUser = getUser(otherUserID);
+        remoteUser.addFollowing(user.getUserID());
+        remoteUser.setLastInfluenced(new Date());
+        postUser(remoteUser);
+        user.removePendingFollowRequest(otherUserID);
+        userUpdate(user);
+    }
+
+    public void userUpdate(User user) {
+        ElasticSearch elastic = new ElasticSearch();
+        User newestUser = elastic.update(user);
+
+        user.setLastUpdated(newestUser.getLastUpdated());
+        user.setFollowing(newestUser.getFollowing());
+        user.setPendingFollowRequests(newestUser.getPendingFollowRequests());
+        user.setHabitTypes(newestUser.getHabitTypes());
+        AppLocale.getInstance().setUser(user);
+    }
+
     public void postUser(User user) {
         ElasticSearch.PostUser addUserTask
                 = new ElasticSearch.PostUser();

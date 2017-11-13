@@ -41,70 +41,7 @@ public class User {
         return userID + dateCreated.toString();
     }
 
-    public void requestFollow(String otherUserID) {
-        ElasticSearch elastic = new ElasticSearch();
-        User remoteUser = elastic.getUser(otherUserID);
-        remoteUser.addPendingFollowRequest(this.userID);
-        remoteUser.setLastInfluenced(new Date());
-        elastic.postUser(remoteUser);
-    }
 
-    public void acceptFollow(String otherUserID) {
-        ElasticSearch elastic = new ElasticSearch();
-        User remoteUser = elastic.getUser(otherUserID);
-        remoteUser.addFollowing(this.userID);
-        remoteUser.setLastInfluenced(new Date());
-        elastic.postUser(remoteUser);
-        this.removePendingFollowRequest(otherUserID);
-        update();
-    }
-
-    public void update() {
-        ElasticSearch elastic = new ElasticSearch();
-        User newestUser = elastic.update(this);
-
-        this.setLastUpdated(newestUser.getLastUpdated());
-        this.following = newestUser.getFollowing();
-        this.pendingFollowRequests = newestUser.getPendingFollowRequests();
-        this.habitTypes = newestUser.getHabitTypes();
-        AppLocale.getInstance().setUser(this);
-    }
-//
-//    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
-//        //TODO: elasticsearch accept follow
-//    }
-//
-//
-////    public void register() throws UserExistsException {
-////        //TODO: elasticsearch registration
-////    }
-//
-//    public void unRegister() throws UserDoesNotExistException {
-//        //TODO: elasticsearch unregistration
-//    }
-//
-//
-//    public User getRemote() throws UserException {
-//        //TODO: elastic search get user object based on ID
-//        return new TestUser("REMOTE", "PASSWORD");
-//    }
-//
-//    public void setRemote() {
-//        //TODO: elasticsearch set remote user object
-//    }
-
-
-//    public void update() throws UserException {
-//        //TODO: elasticsearch get remote timestamp
-//        User remote = getRemote();
-//        if (this.lastUpdated.after(remote.getLastUpdated())) {
-//            this.lastUpdated = new Date();
-//            this.setRemote();
-//        } else {
-//            this.copyRemote(remote);
-//        }
-//        //TODO: remote last updated = new Date()
-//    }
 
     // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
 
@@ -113,6 +50,19 @@ public class User {
         habitTypes.add(habitType);
         this.lastUpdated = new Date();
     }
+
+    public void setHabitTypes(ArrayList<HabitType> habitTypes) {
+        this.habitTypes = habitTypes;
+    }
+
+    public void setFollowing(ArrayList<String> following) {
+        this.following = following;
+    }
+
+    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
+        this.pendingFollowRequests = pendingFollowRequests;
+    }
+
     public ArrayList<HabitType> getHabitTypes() {
         return habitTypes;
     }
@@ -133,14 +83,6 @@ public class User {
         following.add(userID);
     }
 
-    public void removeFollowing(String userID) {
-        following.remove(userID); // might not work
-    }
-
-    public void setFollowing(ArrayList<String> following) {
-        this.following = following;
-    }
-
     public ArrayList<String> getPendingFollowRequests() {
         return pendingFollowRequests;
     }
@@ -153,9 +95,6 @@ public class User {
         pendingFollowRequests.add(userID);
     }
 
-    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
-        this.pendingFollowRequests = pendingFollowRequests;
-    }
 
     public String getUserID() {
         return userID;
