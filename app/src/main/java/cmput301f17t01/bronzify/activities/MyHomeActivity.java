@@ -15,7 +15,7 @@ import android.support.v7.widget.Toolbar;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
-import cmput301f17t01.bronzify.fragments.HabitListFragment;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -29,7 +29,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            HabitListFragment fragment = new HabitListFragment();
+            ListFragment fragment = new ListFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
@@ -43,6 +43,10 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
 
     }
 

@@ -1,21 +1,28 @@
 package cmput301f17t01.bronzify.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ListController;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.Controller;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by kdehaan on 08/11/17.
  */
 
-public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.ViewHolder> {
-    private static final String TAG = "HabitListAdapter";
-
-    private String[] mDataSet;
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+    private static final String TAG = "ListAdapter";
+    private static ListController controller;
+    static private ArrayList<?> entries;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -30,7 +37,8 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.View
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Object clicked = entries.get(getAdapterPosition());
+                    controller.onClick(clicked);
                 }
             });
             textView = (TextView) v.findViewById(R.id.textView);
@@ -47,8 +55,9 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.View
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public HabitListAdapter(String[] dataSet) {
-        mDataSet = dataSet;
+    public ListAdapter(ArrayList<?> dataSet, ListController controller) {
+        entries = dataSet;
+        this.controller = controller;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -71,13 +80,13 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.View
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTextView().setText(mDataSet[position]);
+        viewHolder.getTextView().setText(entries.get(position).toString());
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return entries.size();
     }
 }

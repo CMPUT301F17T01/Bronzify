@@ -1,26 +1,29 @@
 package cmput301f17t01.bronzify.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.HabitListAdapter;
+import cmput301f17t01.bronzify.adapters.ListAdapter;
+import cmput301f17t01.bronzify.controllers.ListController;
+import cmput301f17t01.bronzify.models.HabitType;
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
 
-public class HabitListFragment extends Fragment {
+public class HabitTypeEventFragment extends Fragment {
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
@@ -34,9 +37,28 @@ public class HabitListFragment extends Fragment {
     protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    protected HabitListAdapter mAdapter;
+    protected ListAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset;
+    protected ArrayList<String> mDataset;
+
+    private Button editHabitType;
+    private Button deleteHabitType;
+    private EditText reason;
+    private Date time;
+
+    //- statistics: Graphs
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public void deleteHabit(HabitType habit){
+        return;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +69,10 @@ public class HabitListFragment extends Fragment {
         initDataset();
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //return inflater.inflate(R.layout.habit_type_tab_event, container, false);
         View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
         rootView.setTag(TAG);
 
@@ -72,13 +95,19 @@ public class HabitListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
 
-        mAdapter = new HabitListAdapter(mDataset);
+        mAdapter = new ListAdapter(mDataset, new ListController("none"));
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
 
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -93,9 +122,9 @@ public class HabitListFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
+        mDataset = new ArrayList<>();
         for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset[i] = "This is element #" + i;
+            mDataset.add("This is element #" + i);
         }
     }
 }

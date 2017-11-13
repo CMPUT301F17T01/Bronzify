@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorNavText">#FFFFFF</color>
+
     <color name="lighterAmber">#FFECB3</color>
     <color name="Amber">#FFC107</color>
     <color name="darkerAmber">#FF8F00</color>
+
 </resources>

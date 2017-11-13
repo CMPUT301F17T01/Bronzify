@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cmput301f17t01.bronzify">
-
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Bronzify">
-        <activity android:name=".activities.MyHomeActivity">
+
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activities.HabitEventActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,12 +31,11 @@
         <activity
             android:name=".activities.HabitDueActivity"
             android:label="@string/title_activity_habit_due" />
-        <activity android:name=".activities.HabitEventActivity" />
         <activity
             android:name=".activities.HabitHistoryActivity"
             android:label="@string/title_activity_habit_history" />
         <activity
-            android:name=".activities.HabitTypeActivity"
+            android:name=".activities.MyHomeActivity"
             android:label="@string/title_activity_habit_type" />
         <activity
             android:name=".activities.MyHabitsActivity"
@@ -36,11 +46,28 @@
         <activity
             android:name=".activities.MyProfileActivity"
             android:label="@string/title_activity_my_profile" />
-        <activity
-            android:name=".activities.LoginActivity" />
+
         <activity
             android:name=".activities.CreateNewHabitType"
             android:label="Create New Habit"/>
+
+
+        <activity android:name=".activities.LoginActivity"
+            android:noHistory="true"/>
+
+        <!--Maps Android Key-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDMe6Km07NAN3axMKauXyo4whAbHRJ0Fb4">
+        </meta-data>
+
+        <!--Maps-->
+
+
     </application>
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
 </manifest>

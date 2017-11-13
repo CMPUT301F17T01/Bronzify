@@ -13,12 +13,13 @@ import cmput301f17t01.bronzify.activities.MyHabitsActivity;
 import cmput301f17t01.bronzify.activities.MyHomeActivity;
 import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.activities.MyProfileActivity;
+import cmput301f17t01.bronzify.models.Controller;
 
 /**
  * Created by jblazusi on 2017-11-07.
  */
 
-public class NavigationController {
+public class NavigationController implements Controller {
 
     static public Intent navigationSelect(int id, Activity currentActivity) {
         if (id == R.id.MyHome) {
