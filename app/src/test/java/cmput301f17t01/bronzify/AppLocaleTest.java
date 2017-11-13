@@ -1,12 +1,10 @@
 package cmput301f17t01.bronzify;
 
-import com.google.gson.reflect.TypeToken;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.models.AppLocale;
