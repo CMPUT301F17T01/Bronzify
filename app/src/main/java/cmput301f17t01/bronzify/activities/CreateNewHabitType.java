@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +30,8 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
 
 public class CreateNewHabitType extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    private int[] daysOfWeek = {0, 0, 0, 0, 0, 0, 0};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +50,12 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         // Buttons in Activity
         final Button selectDate = findViewById(R.id.buttonSelectDate);
         final Button btnMonday = findViewById(R.id.buttonMonday);
-        Button btnTuesday = findViewById(R.id.buttonTuesday);
-        Button btnWednesday = findViewById(R.id.buttonWednesday);
-        Button btnThursday = findViewById(R.id.buttonThursday);
-        Button btnFriday = findViewById(R.id.buttonFriday);
-        Button btnSaturday = findViewById(R.id.buttonSaturday);
-        Button btnSunday = findViewById(R.id.buttonSunday);
+        final Button btnTuesday = findViewById(R.id.buttonTuesday);
+        final Button btnWednesday = findViewById(R.id.buttonWednesday);
+        final Button btnThursday = findViewById(R.id.buttonThursday);
+        final Button btnFriday = findViewById(R.id.buttonFriday);
+        final Button btnSaturday = findViewById(R.id.buttonSaturday);
+        final Button btnSunday = findViewById(R.id.buttonSunday);
 
         /**
          * Set date dialog listener
@@ -105,7 +108,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnMonday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[0] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnMonday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[0] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnMonday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[0] = 1;
+                }
             }
         });
 
@@ -113,7 +126,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnTuesday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[1] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnTuesday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[1] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnTuesday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[1] = 1;
+                }
             }
         });
 
@@ -121,7 +144,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnWednesday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[2] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnWednesday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[2] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnWednesday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[2] = 1;
+                }
             }
         });
 
@@ -129,7 +162,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnThursday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[3] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnThursday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[3] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnThursday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[3] = 1;
+                }
             }
         });
 
@@ -137,7 +180,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnFriday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[4] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnFriday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[4] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnFriday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[4] = 1;
+                }
             }
         });
 
@@ -145,7 +198,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnSaturday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[5] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnSaturday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[5] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnSaturday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[5] = 1;
+                }
             }
         });
 
@@ -153,7 +216,17 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
         btnSunday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(daysOfWeek[6] == 1){
+                    // Active
+                    // Deactivate Button
+                    btnSunday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    daysOfWeek[6] = 0;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnSunday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    daysOfWeek[6] = 1;
+                }
             }
         });
     }

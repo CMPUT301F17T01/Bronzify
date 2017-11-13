@@ -75,6 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="Sun"
                 android:textSize="10sp" />
 
@@ -83,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="MON"
                 android:textSize="10sp" />
 
@@ -91,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="TUES"
                 android:textSize="10sp" />
 
@@ -99,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="WED"
                 android:textSize="10sp" />
 
@@ -107,6 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="THUR"
                 android:textSize="10sp" />
 
@@ -115,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="FRI"
                 android:textSize="10sp" />
 
@@ -123,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/lighterAmber"
                 android:text="SAT"
                 android:textSize="10sp" />
 
