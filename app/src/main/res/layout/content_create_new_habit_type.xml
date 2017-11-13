@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="Sun"
+                android:text="SUN"
                 android:textSize="10sp" />
 
             <Button

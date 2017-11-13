@@ -20,7 +20,7 @@
 
         android:theme="@style/Bronzify">
 
-        <activity android:name=".activities.LoginActivity"
+        <activity android:name=".activities.HabitTypeActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

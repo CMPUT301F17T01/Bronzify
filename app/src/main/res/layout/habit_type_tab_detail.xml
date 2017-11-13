@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
             android:maxLength="20" />
 
@@ -43,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
             android:maxLength="30" />
 
@@ -56,6 +58,7 @@
             android:id="@+id/buttonSelectDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="Select a Date" />
 
         <TextView
@@ -75,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="Sun"
+                android:enabled="false"
+                android:text="SUN"
                 android:textSize="10sp" />
 
             <Button
@@ -84,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
+                android:enabled="false"
                 android:text="MON"
                 android:textSize="10sp" />
 
@@ -93,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
+                android:enabled="false"
                 android:text="TUES"
                 android:textSize="10sp" />
 
@@ -102,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
+                android:enabled="false"
                 android:text="WED"
                 android:textSize="10sp" />
 
@@ -111,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
+                android:enabled="false"
                 android:text="THUR"
                 android:textSize="10sp" />
 
@@ -120,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
+                android:enabled="false"
                 android:text="FRI"
                 android:textSize="10sp" />
 
@@ -129,36 +138,61 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
+                android:enabled="false"
                 android:text="SAT"
                 android:textSize="10sp" />
 
+        </LinearLayout><![CDATA[
+
+        "
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+
+
+
+
+
+        ]]>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="Edit"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="477dp" />
+
+            <Button
+                android:id="@+id/buttonUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="Update"
+                tools:layout_editor_absoluteX="131dp"
+                tools:layout_editor_absoluteY="595dp" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="Delete"
+                tools:layout_editor_absoluteX="285dp"
+                tools:layout_editor_absoluteY="595dp" />
         </LinearLayout>
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/buttonCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Create" />
-
-        <Button
-            android:id="@+id/buttonClear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Clear" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
