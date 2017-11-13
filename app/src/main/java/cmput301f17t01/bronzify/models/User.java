@@ -16,19 +16,25 @@ import cmput301f17t01.bronzify.exceptions.UserExistsException;
  */
 
 public class User {
+
     private String userID;
-//    private String passwordHash;
+
     private Date dateCreated;
     private Date lastUpdated;
-    private ArrayList<HabitType> habitTypes;
-    private ArrayList<User> following;
-    private ArrayList<User> pendingFollowRequests;
+    private Date lastInfluenced;
 
-    public User(String userID) /* throws UserExistsException */{
+    private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
+
+    private ArrayList<String> following = new ArrayList<String>();
+    private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
+
+
+    public User(String userID) {
         this.userID = userID;
         this.dateCreated = new Date();
-//        this.passwordHash = hashPassword(password);
-//        this.register();
+        this.lastInfluenced = new Date();
+        this.lastUpdated = new Date();
+
     }
 
 
@@ -37,23 +43,34 @@ public class User {
     }
 
 
-//    public String hashPassword(String password) {
-//        try {
-//
-//            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//            byte[] hash = digest.digest(password.getBytes(Charset.forName("UTF-8")));
-//            String hashedPassword = new String(hash, Charset.forName("UTF-8"));
-//            return hashedPassword;
-//        } catch (NoSuchAlgorithmException e) {
-//            return password; //TODO: this is really bad
-//        }
-//
-//    }
 
+    public void requestFollow(String otherUserID) {
+        ElasticSearch elastic = new ElasticSearch();
+        User remoteUser = elastic.getUser(otherUserID);
+        remoteUser.addPendingFollowRequest(this.userID);
+        remoteUser.setLastInfluenced(new Date());
+        elastic.postUser(remoteUser);
+    }
 
-//    public void requestFollow(String otherUserID) throws UserDoesNotExistException {
-//        //TODO: elasticsearch request follow
-//    }
+    public void acceptFollow(String otherUserID) {
+        ElasticSearch elastic = new ElasticSearch();
+        User remoteUser = elastic.getUser(otherUserID);
+        remoteUser.addFollowing(this.userID);
+        remoteUser.setLastInfluenced(new Date());
+        elastic.postUser(remoteUser);
+        this.removePendingFollowRequest(otherUserID);
+        update();
+    }
+
+    public void update() {
+        ElasticSearch elastic = new ElasticSearch();
+        User newestUser = elastic.update(this);
+
+        this.setLastUpdated(newestUser.getLastUpdated());
+        this.following = newestUser.getFollowing();
+        this.pendingFollowRequests = newestUser.getPendingFollowRequests();
+        this.habitTypes = newestUser.getHabitTypes();
+    }
 //
 //    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
 //        //TODO: elasticsearch accept follow
@@ -91,14 +108,6 @@ public class User {
 //        //TODO: remote last updated = new Date()
 //    }
 
-    public void copyRemote(User remote) {
-        //TODO: copy remote user object
-        this.lastUpdated = remote.getLastUpdated();
-        this.following = remote.getFollowing();
-        this.pendingFollowRequests = remote.getPendingFollowRequests();
-        this.habitTypes = remote.getHabitTypes();
-
-    }
 
 
     public void addHabitType(HabitType habitType) {
@@ -113,6 +122,47 @@ public class User {
 
     // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
 
+
+    public Date getLastInfluenced() {
+        return lastInfluenced;
+    }
+
+    public void setLastInfluenced(Date lastInfluenced) {
+        this.lastInfluenced = lastInfluenced;
+    }
+
+    public ArrayList<String> getFollowing() {
+        return following;
+    }
+
+    public void addFollowing(String userID) {
+        following.add(userID);
+    }
+
+    public void removeFollowing(String userID) {
+        following.remove(userID); // might not work
+    }
+
+    public void setFollowing(ArrayList<String> following) {
+        this.following = following;
+    }
+
+    public ArrayList<String> getPendingFollowRequests() {
+        return pendingFollowRequests;
+    }
+
+    public void removePendingFollowRequest(String userID) {
+        pendingFollowRequests.remove(userID); //might not work
+    }
+
+    public void addPendingFollowRequest(String userID) {
+        pendingFollowRequests.add(userID);
+    }
+
+    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
+        this.pendingFollowRequests = pendingFollowRequests;
+    }
+
     public String getUserID() {
         return userID;
     }
@@ -120,14 +170,6 @@ public class User {
     public void setUserID(String userID) {
         this.userID = userID;
     }
-
-//    public String getPasswordHash() {
-//        return passwordHash;
-//    }
-
-//    public void setPasswordHash(String passwordHash) {
-//        this.passwordHash = passwordHash;
-//    }
 
     public Date getDateCreated() {
         return dateCreated;
@@ -150,21 +192,4 @@ public class User {
         this.lastUpdated = new Date();
     }
 
-    public ArrayList<User> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(ArrayList<User> following) {
-        this.following = following;
-        this.lastUpdated = new Date();
-    }
-
-    public ArrayList<User> getPendingFollowRequests() {
-        return pendingFollowRequests;
-    }
-
-    public void setPendingFollowRequests(ArrayList<User> pendingFollowRequests) {
-        this.pendingFollowRequests = pendingFollowRequests;
-        this.lastUpdated = new Date();
-    }
 }

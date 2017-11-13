@@ -20,7 +20,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.controllers.NavigationController;
-import cmput301f17t01.bronzify.fragments.HabitListFragment;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 
@@ -73,7 +73,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            HabitListFragment fragment = new HabitListFragment();
+            ListFragment fragment = new ListFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }

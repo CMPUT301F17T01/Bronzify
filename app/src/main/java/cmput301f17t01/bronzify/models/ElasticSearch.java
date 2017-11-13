@@ -9,7 +9,11 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
@@ -39,7 +43,19 @@ import io.searchbox.core.Index;
 public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
+    private static String typeString = "test_user";
 
+
+    public User update(User user) {
+        User remoteUser = getUser(user.getUserID());
+        if (remoteUser.getLastUpdated().after(user.getLastUpdated())) {
+            return remoteUser;
+        } else {
+            user.setLastUpdated(new Date());
+            postUser(user);
+            return user;
+        }
+    }
 
     public void postUser(User user) {
         ElasticSearch.PostUser addUserTask
@@ -60,6 +76,12 @@ public class ElasticSearch {
         return foundUser;
     }
 
+    public void deleteUser(String userID) {
+        ElasticSearch.DeleteUser deleteUserTask
+                = new ElasticSearch.DeleteUser();
+        deleteUserTask.execute(userID);
+    }
+
 
     public static class PostUser extends AsyncTask<User, Void, Void> {
         @Override
@@ -68,7 +90,7 @@ public class ElasticSearch {
             for (User user : users) {
                 Index index = new Index.Builder(user)
                         .index(indexString)
-                        .type("users")
+                        .type(typeString)
                         .id(user.getUserID())
                         .build();
                 try {
@@ -93,7 +115,7 @@ public class ElasticSearch {
             User foundUser;
 
             Get get = new Get.Builder(indexString, strings[0]) //index, id
-                    .type("users")
+                    .type(typeString)
                     .build();
 
             Log.i("Get", get.toString());
@@ -111,6 +133,28 @@ public class ElasticSearch {
                 foundUser = null;
             }
             return foundUser;
+        }
+    }
+
+    public static class DeleteUser extends  AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... strings) {
+            verifySettings();
+            Delete delete = new Delete.Builder(indexString)
+                    .type(typeString)
+                    .id(strings[0])
+                    .build();
+            try {
+                JestResult result = client.execute(delete);
+                if (result.isSucceeded()) {
+                    Log.i("User", "deleted");
+                } else {
+                    Log.i("Error", "The delete failed");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong");
+            }
+            return null;
         }
     }
 
