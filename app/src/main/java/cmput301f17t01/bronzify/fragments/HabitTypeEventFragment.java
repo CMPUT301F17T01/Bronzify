@@ -18,7 +18,7 @@ import cmput301f17t01.bronzify.models.HabitType;
  * Created by jblazusi on 2017-11-01.
  */
 
-public class HabitTypeDetailFragment extends Fragment {
+public class HabitTypeEventFragment extends Fragment {
 
     private Button editHabitType;
     private Button deleteHabitType;
@@ -42,7 +42,7 @@ public class HabitTypeDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.habit_type_tab_detail, container, false);
+        return inflater.inflate(R.layout.habit_type_tab_event, container, false);
     }
 
     @Override

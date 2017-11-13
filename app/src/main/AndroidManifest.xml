@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.MyHomeActivity">
+        <activity android:name=".activities.HabitTypeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             android:name=".activities.HabitHistoryActivity"
             android:label="@string/title_activity_habit_history" />
         <activity
-            android:name=".activities.HabitTypeActivity"
+            android:name=".activities.MyHomeActivity"
             android:label="@string/title_activity_habit_type" />
         <activity
             android:name=".activities.MyHabitsActivity"
