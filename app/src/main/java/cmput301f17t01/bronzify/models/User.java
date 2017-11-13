@@ -1,15 +1,9 @@
 package cmput301f17t01.bronzify.models;
 
 
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
-import cmput301f17t01.bronzify.exceptions.UserException;
-import cmput301f17t01.bronzify.exceptions.UserExistsException;
 
 /**
  * Created by kdehaan on 19/10/17.
@@ -45,7 +39,7 @@ public class User {
      * @return
      */
     public String toString() {
-        return userID + dateCreated.toString();
+        return userID;
     }
 
 
@@ -68,26 +62,6 @@ public class User {
      *
      * @return
      */
-    public void setHabitTypes(ArrayList<HabitType> habitTypes) {
-
-        this.habitTypes = habitTypes;
-        this.lastUpdated = new Date();
-    }
-
-    public void setFollowing(ArrayList<String> following) {
-        this.following = following;
-        this.lastInfluenced = new Date();
-    }
-
-    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
-        this.pendingFollowRequests = pendingFollowRequests;
-        this.lastInfluenced = new Date();
-    }
-
-    public ArrayList<HabitType> getHabitTypes() {
-        return habitTypes;
-    }
-
     public Date getLastInfluenced() {
         return lastInfluenced;
     }
@@ -154,7 +128,7 @@ public class User {
      * @param userID
      */
     public void removePendingFollowRequest(String userID) {
-        pendingFollowRequests.remove(userID); //might not work
+        pendingFollowRequests.remove(userID); 
         this.lastInfluenced = new Date();
     }
 

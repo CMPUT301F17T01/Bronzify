@@ -99,6 +99,11 @@ public class AppLocale {
         saveInFile();
     }
 
+    /**
+     * Method that sets a user as the logged in user
+     *
+     * @param newUser
+     */
     public void setUser(User newUser) {
         removeSavedUser(newUser);
         this.user = newUser;
@@ -109,6 +114,7 @@ public class AppLocale {
     public void logoutUser() {
         user = null;
     }
+
 
     private void loadFromFile() { //temporarily unimplemented
 //        try {
@@ -127,15 +133,6 @@ public class AppLocale {
 //        }
     }
 
-
-    /**
-     * Method that sets a user as the logged in user
-     *
-     * @param loggedInUser
-     */
-    public void setUser(User loggedInUser) {
-        this.loggedInUser = loggedInUser;
-        this.lastUser = loggedInUser;
 
     private void saveInFile() { //temporarily unimplemented
 //        try {
