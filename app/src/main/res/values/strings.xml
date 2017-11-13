@@ -19,6 +19,7 @@
     <string name="menu_my_map">My Map</string>
     <string name="menu_my_followers">My Followers</string>
     <string name="menu_my_profile">My Profile</string>
+    <string name="menu_log_out">Log Out</string>
 
     <string name="action_settings">Settings</string>
 
