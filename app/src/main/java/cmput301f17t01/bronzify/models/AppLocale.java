@@ -1,5 +1,8 @@
 package cmput301f17t01.bronzify.models;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -7,13 +10,19 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 
 /**
  * Created by kdehaan on 11/11/17.
@@ -25,15 +34,17 @@ public class AppLocale {
     private User user;
     private static final String FILENAME = "bronzify.sav";
 
-    private ArrayList<User> savedUsers;
+    private ArrayList<User> savedUsers = new ArrayList<>();
 
 
     public static AppLocale getInstance() {
         return ourInstance;
     }
 
+
     private AppLocale() {
     }
+
 
     public User getLastUser() {
         return lastUser;
@@ -84,38 +95,38 @@ public class AppLocale {
         user = null;
     }
 
-    private void loadFromFile() {
-        try {
-
-            Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-            FileReader fstream = new FileReader(FILENAME);
-            BufferedReader in = new BufferedReader(fstream);
-            savedUsers = gson.fromJson(in, listType);
-            Log.i("user0", savedUsers.get(0).toString());
-
-        } catch (FileNotFoundException e) {
-            savedUsers = new ArrayList<User>();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private void loadFromFile() { //temporarily unimplemented
+//        try {
+//            Gson gson = new Gson();
+//            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
+//            FileInputStream fis = openFileInput(FILENAME);
+//            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+//            savedUsers = gson.fromJson(in, listType);
+//            Log.i("user0", savedUsers.get(0).toString());
+//
+//        } catch (FileNotFoundException e) {
+//            savedUsers = new ArrayList<User>();
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
-    private void saveInFile() {
-        try {
-            Gson gson = new Gson();
-            String usersGson = gson.toJson(savedUsers);
-            FileWriter fstream = new FileWriter(FILENAME);
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write(usersGson);
-            out.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void saveInFile() { //temporarily unimplemented
+//        try {
+//            FileOutputStream fos = Context.getApplicationContext.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//            OutputStreamWriter writer = new OutputStreamWriter(fos);
+//            Gson gson = new Gson();
+//            gson.toJson(savedUsers, writer);
+//            writer.flush();
+//            fos.close();
+//            Log.i("Saved", "in file");
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }
