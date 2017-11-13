@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ListController;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.Controller;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by kdehaan on 08/11/17.
@@ -16,8 +21,8 @@ import cmput301f17t01.bronzify.R;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private static final String TAG = "ListAdapter";
-
-    private ArrayList<?> entries;
+    private static ListController controller;
+    static private ArrayList<?> entries;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -32,7 +37,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Object clicked = entries.get(getAdapterPosition());
+                    controller.onClick(clicked);
                 }
             });
             textView = (TextView) v.findViewById(R.id.textView);
@@ -49,7 +55,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public ListAdapter(ArrayList<?> dataSet) {entries = dataSet;}
+    public ListAdapter(ArrayList<?> dataSet, ListController controller) {
+        entries = dataSet;
+        this.controller = controller;
+    }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
     // Create new views (invoked by the layout manager)

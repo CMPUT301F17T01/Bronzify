@@ -45,6 +45,17 @@ public class ElasticSearch {
     private static String indexString = "cmput301f17t01_bronzify";
 
 
+    public User update(User user) {
+        User remoteUser = getUser(user.getUserID());
+        if (remoteUser.getLastUpdated().after(user.getLastUpdated())) {
+            return remoteUser;
+        } else {
+            user.setLastUpdated(new Date());
+            postUser(user);
+            return user;
+        }
+    }
+
     public void postUser(User user) {
         ElasticSearch.PostUser addUserTask
                 = new ElasticSearch.PostUser();

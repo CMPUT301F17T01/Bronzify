@@ -58,6 +58,18 @@ public class User {
         remoteUser.addFollowing(this.userID);
         remoteUser.setLastInfluenced(new Date());
         elastic.postUser(remoteUser);
+        this.removePendingFollowRequest(otherUserID);
+        update();
+    }
+
+    public void update() {
+        ElasticSearch elastic = new ElasticSearch();
+        User newestUser = elastic.update(this);
+
+        this.setLastUpdated(newestUser.getLastUpdated());
+        this.following = newestUser.getFollowing();
+        this.pendingFollowRequests = newestUser.getPendingFollowRequests();
+        this.habitTypes = newestUser.getHabitTypes();
     }
 //
 //    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {

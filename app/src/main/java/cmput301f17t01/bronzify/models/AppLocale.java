@@ -30,4 +30,5 @@ public class AppLocale {
         this.loggedInUser = loggedInUser;
         this.lastUser = loggedInUser;
     }
+
 }

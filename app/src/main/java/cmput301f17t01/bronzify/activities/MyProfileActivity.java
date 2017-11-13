@@ -82,7 +82,6 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         name = appLocale.getUser().getUserID();
 
-
         setContentView(R.layout.activity_my_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

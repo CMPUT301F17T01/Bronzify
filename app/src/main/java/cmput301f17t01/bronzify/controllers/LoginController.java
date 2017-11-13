@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.controllers;
 
 import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.Controller;
 import cmput301f17t01.bronzify.models.ElasticSearch;
 import cmput301f17t01.bronzify.models.User;
 
@@ -8,7 +9,7 @@ import cmput301f17t01.bronzify.models.User;
  * Created by kdehaan on 11/11/17.
  */
 
-public class LoginController {
+public class LoginController implements Controller {
     AppLocale appLocale = AppLocale.getInstance();
     ElasticSearch elastic = new ElasticSearch();
 

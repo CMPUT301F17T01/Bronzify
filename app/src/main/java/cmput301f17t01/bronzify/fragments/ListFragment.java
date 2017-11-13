@@ -24,7 +24,7 @@ public class ListFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 
-    private ListController controller = new ListController();
+    private ListController controller;
 
     private enum LayoutManagerType {
         LINEAR_LAYOUT_MANAGER
@@ -47,7 +47,8 @@ public class ListFragment extends Fragment {
             mDataset = new ArrayList<>();
         } else {
             String entryType = getArguments().getString("type");
-            mDataset = controller.getObjects(entryType);
+            controller = new ListController(entryType);
+            mDataset = controller.getObjects();
         }
 
     }
@@ -77,7 +78,7 @@ public class ListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
 
-        mAdapter = new ListAdapter(mDataset);
+        mAdapter = new ListAdapter(mDataset, controller);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
