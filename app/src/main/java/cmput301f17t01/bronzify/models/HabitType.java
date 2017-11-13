@@ -52,7 +52,7 @@ public class HabitType {
             // If day of week is a repeat day of week
             // Create a new habit event
             if(daysOfWeek[dayOfWeek]){
-                HabitEvent newHabitEvent = new HabitEvent(date);
+                HabitEvent newHabitEvent = new HabitEvent(name, date);
                 habitEvents.add(newHabitEvent);
             }
 

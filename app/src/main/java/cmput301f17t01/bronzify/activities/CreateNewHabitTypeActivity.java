@@ -27,7 +27,9 @@ import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 public class CreateNewHabitTypeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -311,17 +313,27 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                 // Create Habit Type and initial Habit Events (31 Days after starting date)
                 // Only if all fields are filled in
                 if (validName && validReason && validDate && validDaysOfWeek) {
-                    HabitType newHabit = new HabitType(habitName, habitReason, date, daysOfWeek);
-                    newHabit.generateNewEvents(newHabit.getDateToStart());
+                    User currentUser = AppLocale.getInstance().getUser();
+                    for(HabitType habitType: currentUser.getHabitTypes()){
+                        // Check if Habit Type does not exist
+                        if(habitType.getName() != habitName){
+                            // Add habit type
+                            HabitType newHabit = new HabitType(habitName, habitReason, date, daysOfWeek);
+                            newHabit.generateNewEvents(newHabit.getDateToStart());
 
-                    // Add new habit type to logged in user
-//                    User currentUser = AppLocale.getInstance().getUser();
-//                    currentUser.addHabitType(newHabit);
-//                    AppLocale.getInstance().setUser(currentUser);
+                            // Add new habit type to logged in user
+//                            currentUser.addHabitType(newHabit);
+//                            AppLocale.getInstance().setUser(currentUser);
 
-                    // Fill Habit Event List Fragment
-                    // Need to change fillList() Code
-                    newHabit.fillList();
+                            // Fill Habit Event List Fragment
+                            // Need to change fillList() Code
+                            newHabit.fillList();
+                        } else {
+                            // Habit already exist
+                            Toast.makeText(CreateNewHabitTypeActivity.this, "Habit already exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
                 } else {
                     // Missing a field
                     Toast.makeText(CreateNewHabitTypeActivity.this, "Cannot create habit, make sure all fields are filled in.", Toast.LENGTH_SHORT).show();

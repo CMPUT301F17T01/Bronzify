@@ -13,6 +13,7 @@ import java.util.Date;
 
 public class HabitEvent {
     private User user;
+    private String habitType;
     private Date goalDate; // Date for habit event to happen
     private Date completedDate;
     private String comment; // Max 20 Char
@@ -21,8 +22,9 @@ public class HabitEvent {
     private GoogleMap location; // Unsure of location type
 
     // Constructor
-    public HabitEvent(Date goalDate){
+    public HabitEvent(String habitType, Date goalDate){
         this.user = AppLocale.getInstance().getUser();
+        this.habitType = habitType;
         this.goalDate = goalDate;
         this.comment = ""; // Default comment is blank
         this.completed = false;
