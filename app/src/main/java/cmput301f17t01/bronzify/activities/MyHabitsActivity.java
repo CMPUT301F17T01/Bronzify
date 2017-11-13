@@ -98,7 +98,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
         fab.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Toast.makeText(MyHabitsActivity.this, "Test", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MyHabitsActivity.this, CreateNewHabitType.class);
                 startActivity(intent);
             }
