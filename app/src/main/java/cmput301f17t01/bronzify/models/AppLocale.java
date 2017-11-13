@@ -67,7 +67,7 @@ public class AppLocale {
     }
 
 
-    public void removeUser(User deleteUser) {
+    public void removeSavedUser(User deleteUser) {
         Iterator<User> itr = savedUsers.iterator();
         while (itr.hasNext()) {
             User next = itr.next();
@@ -79,13 +79,13 @@ public class AppLocale {
     }
 
     public void saveUser(User newUser) {
-        removeUser(newUser);
+        removeSavedUser(newUser);
         savedUsers.add(newUser);
         saveInFile();
     }
 
     public void setUser(User newUser) {
-        savedUsers.remove(user);
+        removeSavedUser(newUser);
         this.user = newUser;
         this.lastUser = newUser;
         saveUser(user);
@@ -129,4 +129,11 @@ public class AppLocale {
 //        }
     }
 
+    public ArrayList<User> getSavedUsers() {
+        return savedUsers;
+    }
+
+    public void setSavedUsers(ArrayList<User> savedUsers) {
+        this.savedUsers = savedUsers;
+    }
 }

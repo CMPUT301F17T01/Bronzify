@@ -38,7 +38,7 @@ public class User {
 
 
     public String toString() {
-        return userID + dateCreated.toString();
+        return userID;
     }
 
 
@@ -52,15 +52,19 @@ public class User {
     }
 
     public void setHabitTypes(ArrayList<HabitType> habitTypes) {
+
         this.habitTypes = habitTypes;
+        this.lastUpdated = new Date();
     }
 
     public void setFollowing(ArrayList<String> following) {
         this.following = following;
+        this.lastInfluenced = new Date();
     }
 
     public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
         this.pendingFollowRequests = pendingFollowRequests;
+        this.lastInfluenced = new Date();
     }
 
     public ArrayList<HabitType> getHabitTypes() {
@@ -81,6 +85,7 @@ public class User {
 
     public void addFollowing(String userID) {
         following.add(userID);
+        this.lastInfluenced = new Date();
     }
 
     public ArrayList<String> getPendingFollowRequests() {
@@ -89,10 +94,12 @@ public class User {
 
     public void removePendingFollowRequest(String userID) {
         pendingFollowRequests.remove(userID); //might not work
+        this.lastInfluenced = new Date();
     }
 
     public void addPendingFollowRequest(String userID) {
         pendingFollowRequests.add(userID);
+        this.lastInfluenced = new Date();
     }
 
 
@@ -115,4 +122,6 @@ public class User {
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
+
+
 }
