@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.HabitListAdapter;
+import cmput301f17t01.bronzify.adapters.ListAdapter;
+import cmput301f17t01.bronzify.controllers.ListController;
 import cmput301f17t01.bronzify.models.HabitType;
 
 /**
@@ -35,9 +37,9 @@ public class HabitTypeEventFragment extends Fragment {
     protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    protected HabitListAdapter mAdapter;
+    protected ListAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset;
+    protected ArrayList<String> mDataset;
 
     private Button editHabitType;
     private Button deleteHabitType;
@@ -93,7 +95,7 @@ public class HabitTypeEventFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
 
-        mAdapter = new HabitListAdapter(mDataset);
+        mAdapter = new ListAdapter(mDataset, new ListController("none"));
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
@@ -120,9 +122,9 @@ public class HabitTypeEventFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
+        mDataset = new ArrayList<>();
         for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset[i] = "This is element #" + i;
+            mDataset.add("This is element #" + i);
         }
     }
 }
