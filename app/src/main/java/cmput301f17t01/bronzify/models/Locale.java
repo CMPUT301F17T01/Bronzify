@@ -1,74 +1,32 @@
 package cmput301f17t01.bronzify.models;
 
-import java.util.Date;
-
-import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
-import cmput301f17t01.bronzify.exceptions.UserException;
-
 /**
- * Created by kdehaan on 19/10/17.
+ * Created by kdehaan on 11/11/17.
  */
 
 public class Locale {
-    private Date dateAdded;
+    private static final Locale ourInstance = new Locale();
     private User lastUser;
     private User loggedInUser;
 
-    public Locale() {
-        this.dateAdded = new Date();
-        this.lastUser = null;
-        this.loggedInUser = null;
+    public static Locale getInstance() {
+        return ourInstance;
     }
 
-
-    public void logIn(User user, String password) throws UserDoesNotExistException {
-        if (user.getPasswordHash().equals(user.hashPassword(password))) {
-            this.lastUser = user;
-            this.loggedInUser = user;
-        } else {
-            //TODO: incorrect password handling
-        }
+    private Locale() {
     }
-
-    public void logOut() {
-        this.loggedInUser = null;
-    }
-
-    public User getUser(String userID) throws UserException {
-        //TODO: elasticsearch return user by ID
-        return new TestUser(userID, "PASSWORD");
-    }
-
-
-    // Lasciate ogne speranza, voi ch'intrate: Here be getters and setters
-
-
-    public Date getDateAdded() {
-        return dateAdded;
-    }
-
-    /*
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
-    } */
 
     public User getLastUser() {
         return lastUser;
     }
 
-    public void setLastUser(User lastUser) {
-        this.lastUser = lastUser;
-    }
 
-    public User getLoggedInUser() {
+    public User getUser() {
         return loggedInUser;
     }
 
-    public void setLoggedInUser(User loggedInUser) {
+    public void setUser(User loggedInUser) {
         this.loggedInUser = loggedInUser;
+        this.lastUser = loggedInUser;
     }
 }
