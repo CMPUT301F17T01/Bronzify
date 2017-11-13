@@ -15,6 +15,9 @@ public class LoginController implements Controller {
 
     public User checkLogin(String userID) {
         User user = elastic.getUser(userID);
+        if (user != null) {
+            appLocale.saveUser(user);
+        }
         return user;
     }
 

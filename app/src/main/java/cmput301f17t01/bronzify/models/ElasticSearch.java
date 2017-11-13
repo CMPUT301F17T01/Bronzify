@@ -12,6 +12,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.exceptions.ElasticException;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
@@ -46,8 +47,12 @@ public class ElasticSearch {
     private static String typeString = "test_user";
 
 
+
     public User update(User user) {
         User remoteUser = getUser(user.getUserID());
+        if (remoteUser == null) { //elasticsearch error
+            return user;
+        }
         if (remoteUser.getLastUpdated().after(user.getLastUpdated())) {
             return remoteUser;
         } else {
@@ -64,7 +69,7 @@ public class ElasticSearch {
     }
 
     public User getUser(String userID) {
-        User foundUser = null;
+        User foundUser;
         ElasticSearch.GetUser getUserTask
                 = new ElasticSearch.GetUser();
         getUserTask.execute(userID);
@@ -72,6 +77,9 @@ public class ElasticSearch {
             foundUser = getUserTask.get();
         } catch (Exception e) {
             foundUser = null;
+        }
+        if (foundUser == null) {
+            foundUser = AppLocale.getInstance().getSavedUser(userID);
         }
         return foundUser;
     }
@@ -98,10 +106,11 @@ public class ElasticSearch {
                     if (result.isSucceeded()) {
                         user.setUserID(result.getId());
                     } else {
-                        Log.i("Error", "Elasticsearch was not able to add the user");
+                        throw new ElasticException();
                     }
                 } catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the user");
+
                 }
             }
             return null;
@@ -125,8 +134,7 @@ public class ElasticSearch {
                     foundUser = result.getSourceAsObject(User.class);
 
                 } else {
-                    Log.i("Error", "The search query failed");
-                    foundUser = null;
+                    throw new ElasticException();
                 }
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when communicating with the server");
@@ -140,16 +148,16 @@ public class ElasticSearch {
         @Override
         protected Void doInBackground(String... strings) {
             verifySettings();
-            Delete delete = new Delete.Builder(indexString)
+            Delete delete = new Delete.Builder(strings[0])
+                    .index(indexString)
                     .type(typeString)
-                    .id(strings[0])
                     .build();
             try {
                 JestResult result = client.execute(delete);
                 if (result.isSucceeded()) {
                     Log.i("User", "deleted");
                 } else {
-                    Log.i("Error", "The delete failed");
+                    throw new ElasticException();
                 }
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong");

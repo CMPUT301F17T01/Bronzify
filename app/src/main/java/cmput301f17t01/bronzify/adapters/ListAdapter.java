@@ -28,7 +28,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
 
         public ViewHolder(View v) {
@@ -39,6 +39,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 public void onClick(View v) {
                     Object clicked = entries.get(getAdapterPosition());
                     controller.onClick(clicked);
+                    notifyDataSetChanged();
+
                 }
             });
             textView = (TextView) v.findViewById(R.id.textView);

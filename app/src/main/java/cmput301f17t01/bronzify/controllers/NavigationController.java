@@ -9,10 +9,12 @@ import android.view.MenuItem;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.FollowUserActivity;
 import cmput301f17t01.bronzify.activities.HabitHistoryActivity;
+import cmput301f17t01.bronzify.activities.LoginActivity;
 import cmput301f17t01.bronzify.activities.MyHabitsActivity;
 import cmput301f17t01.bronzify.activities.MyHomeActivity;
 import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.activities.MyProfileActivity;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.Controller;
 
 /**
@@ -44,6 +46,10 @@ public class NavigationController implements Controller {
             return navIntent;
         } else if (id == R.id.MyProfile) {
             Intent navIntent = new Intent(currentActivity, MyProfileActivity.class);
+            return navIntent;
+        } else if (id == R.id.LogOut) {
+            Intent navIntent = new Intent(currentActivity, LoginActivity.class);
+            AppLocale.getInstance().logoutUser();
             return navIntent;
         }
         //EXCEPTION HANDLING HERE, FOR WHEN ID IS NULL OR INCORRECT!
