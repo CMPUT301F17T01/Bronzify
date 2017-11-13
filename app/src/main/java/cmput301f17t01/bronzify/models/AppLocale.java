@@ -21,7 +21,6 @@ public class AppLocale {
         return lastUser;
     }
 
-
     public User getUser() {
         return loggedInUser;
     }
@@ -29,6 +28,10 @@ public class AppLocale {
     public void setUser(User loggedInUser) {
         this.loggedInUser = loggedInUser;
         this.lastUser = loggedInUser;
+    }
+
+    public void logoutUser() {
+        loggedInUser = null;
     }
 
 }

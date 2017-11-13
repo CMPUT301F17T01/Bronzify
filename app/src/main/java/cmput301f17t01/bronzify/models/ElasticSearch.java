@@ -142,9 +142,9 @@ public class ElasticSearch {
         @Override
         protected Void doInBackground(String... strings) {
             verifySettings();
-            Delete delete = new Delete.Builder(indexString)
+            Delete delete = new Delete.Builder(strings[0])
+                    .index(indexString)
                     .type(typeString)
-                    .id(strings[0])
                     .build();
             try {
                 JestResult result = client.execute(delete);
