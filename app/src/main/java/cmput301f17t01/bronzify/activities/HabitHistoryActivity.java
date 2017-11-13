@@ -21,6 +21,7 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
@@ -56,17 +57,7 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         setContentView(R.layout.activity_habit_history);
 
         name = appLocale.getUser().getUserID();
-
-        if (savedInstanceState == null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("type", "pendingFollows");
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            ListFragment fragment = new ListFragment();
-            fragment.setArguments(bundle);
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-        }
+        
 
         viewPager = findViewById(R.id.view_pager);
         Toolbar toolbar = findViewById(R.id.toolbar);

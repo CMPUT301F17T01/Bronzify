@@ -35,7 +35,7 @@ public class ListFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected ListAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected ArrayList<?> mDataset;
+    protected ArrayList<?> mDataset = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
