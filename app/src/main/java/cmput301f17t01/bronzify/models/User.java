@@ -70,6 +70,7 @@ public class User {
         this.following = newestUser.getFollowing();
         this.pendingFollowRequests = newestUser.getPendingFollowRequests();
         this.habitTypes = newestUser.getHabitTypes();
+        AppLocale.getInstance().setUser(this);
     }
 //
 //    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {

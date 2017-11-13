@@ -1,6 +1,5 @@
 package cmput301f17t01.bronzify.models;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -8,14 +7,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,7 +22,7 @@ import java.util.Iterator;
 public class AppLocale {
     private static final AppLocale ourInstance = new AppLocale();
     private User lastUser;
-    private User loggedInUser;
+    private User user;
     private static final String FILENAME = "bronzify.sav";
 
     private ArrayList<User> savedUsers;
@@ -45,7 +40,7 @@ public class AppLocale {
     }
 
     public User getUser() {
-        return loggedInUser;
+        return user;
     }
 
     public User getUser(String userID) {
@@ -59,25 +54,31 @@ public class AppLocale {
         return null;
     }
 
-    public void setUser(User loggedInUser) {
-        this.loggedInUser = loggedInUser;
-        this.lastUser = loggedInUser;
+    public void saveUser(User newUser) {
+        savedUsers.add(newUser);
+        saveInFile();
+    }
+
+    public void setUser(User newUser) {
+        savedUsers.remove(user);
+        this.user = newUser;
+        this.lastUser = newUser;
+        saveUser(user);
     }
 
     public void logoutUser() {
-        loggedInUser = null;
+        user = null;
     }
 
     private void loadFromFile() {
         try {
+
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<User>>() {}.getType();
             FileReader fstream = new FileReader(FILENAME);
             BufferedReader in = new BufferedReader(fstream);
-            
-            String usersGson = in.readLine();
-            Log.i("read", usersGson);
-
+            savedUsers = gson.fromJson(in, listType);
+            Log.i("user0", savedUsers.get(0).toString());
 
         } catch (FileNotFoundException e) {
             savedUsers = new ArrayList<User>();
