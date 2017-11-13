@@ -2,9 +2,6 @@ package cmput301f17t01.bronzify.controllers;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.view.MenuItem;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.FollowUserActivity;
@@ -15,7 +12,6 @@ import cmput301f17t01.bronzify.activities.MyHomeActivity;
 import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.activities.MyProfileActivity;
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.Controller;
 
 /**
  * Created by jblazusi on 2017-11-07.

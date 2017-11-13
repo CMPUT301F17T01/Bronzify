@@ -3,7 +3,6 @@ package cmput301f17t01.bronzify.controllers;
 import android.util.Log;
 
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.Controller;
 
 /**
  * Created by kdehaan on 12/11/17.
