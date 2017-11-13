@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/MyHome"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_my_home"/>
+        <item
+            android:id="@+id/MyHabits"
+            android:icon="@drawable/ic_event_available_black_24dp"
+            android:title="@string/menu_my_habits"/>
+        <item
+            android:id="@+id/MyFeed"
+            android:icon="@drawable/ic_rss_feed_black_24dp"
+            android:title="@string/menu_my_feed"/>
+        <item
+            android:id="@+id/MyHistory"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="@string/menu_my_history"/>
+        <item
+            android:id="@+id/MyMap"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="@string/menu_my_map"/>
+        <item
+            android:id="@+id/MyFollowers"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="@string/menu_my_followers"/>
+        <item
+            android:id="@+id/MyProfile"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/menu_my_profile"/>
+        <item
+            android:id="@+id/LogOut"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="@string/menu_log_out"/>
+
+    </group>
+
+</menu>
