@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +20,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.fragments.HabitListFragment;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 
@@ -70,6 +72,13 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_type);
+
+        if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            HabitListFragment fragment = new HabitListFragment();
+            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.commit();
+        }
 
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
