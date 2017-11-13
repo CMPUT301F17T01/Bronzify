@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.Controller;
-import cmput301f17t01.bronzify.models.ElasticSearch;
 import cmput301f17t01.bronzify.models.User;
 
 /**

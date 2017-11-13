@@ -1,4 +1,4 @@
-package cmput301f17t01.bronzify.models;
+package cmput301f17t01.bronzify.controllers;
 
 
 import android.os.AsyncTask;
@@ -9,10 +9,11 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import cmput301f17t01.bronzify.exceptions.ElasticException;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.User;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
@@ -23,23 +24,7 @@ import io.searchbox.core.Index;
  * Created by kdehaan on 10/11/17.
  */
 
-//// sample elasticsearch code
-//                Log.i("Notice", "Setting user");
-//                User testUser = new User("TESTUSER");
-//                ElasticSearch.PostUser addUserTask
-//                = new ElasticSearch.PostUser();
-//                addUserTask.execute(testUser);
 
-//                Log.i("Notice", "Getting User");
-//                ElasticSearch.GetUser getUserTask
-//                = new ElasticSearch.GetUser();
-//                getUserTask.execute("TESTUSER");
-//                try {
-//                User foundUser = getUserTask.get();
-//                Log.i("Success", foundUser.toString());
-//                } catch (Exception e) {
-//                Log.i("Error", "Failed to get the user from the async object");
-//                }
 
 public class ElasticSearch {
     private static JestDroidClient client;
