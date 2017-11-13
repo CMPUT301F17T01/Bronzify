@@ -69,42 +69,6 @@ public class User {
         this.habitTypes = newestUser.getHabitTypes();
         AppLocale.getInstance().setUser(this);
     }
-//
-//    public void acceptFollower(String otherUserID) throws UserDoesNotExistException {
-//        //TODO: elasticsearch accept follow
-//    }
-//
-//
-////    public void register() throws UserExistsException {
-////        //TODO: elasticsearch registration
-////    }
-//
-//    public void unRegister() throws UserDoesNotExistException {
-//        //TODO: elasticsearch unregistration
-//    }
-//
-//
-//    public User getRemote() throws UserException {
-//        //TODO: elastic search get user object based on ID
-//        return new TestUser("REMOTE", "PASSWORD");
-//    }
-//
-//    public void setRemote() {
-//        //TODO: elasticsearch set remote user object
-//    }
-
-
-//    public void update() throws UserException {
-//        //TODO: elasticsearch get remote timestamp
-//        User remote = getRemote();
-//        if (this.lastUpdated.after(remote.getLastUpdated())) {
-//            this.lastUpdated = new Date();
-//            this.setRemote();
-//        } else {
-//            this.copyRemote(remote);
-//        }
-//        //TODO: remote last updated = new Date()
-//    }
 
     // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
 
