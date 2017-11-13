@@ -50,6 +50,9 @@ public class ElasticSearch {
 
     public User update(User user) {
         User remoteUser = getUser(user.getUserID());
+        if (remoteUser == null) { //elasticsearch error
+            return user;
+        }
         if (remoteUser.getLastUpdated().after(user.getLastUpdated())) {
             return remoteUser;
         } else {
@@ -66,7 +69,7 @@ public class ElasticSearch {
     }
 
     public User getUser(String userID) {
-        User foundUser = null;
+        User foundUser;
         ElasticSearch.GetUser getUserTask
                 = new ElasticSearch.GetUser();
         getUserTask.execute(userID);
@@ -74,6 +77,9 @@ public class ElasticSearch {
             foundUser = getUserTask.get();
         } catch (Exception e) {
             foundUser = null;
+        }
+        if (foundUser == null) {
+            foundUser = AppLocale.getInstance().getSavedUser(userID);
         }
         return foundUser;
     }

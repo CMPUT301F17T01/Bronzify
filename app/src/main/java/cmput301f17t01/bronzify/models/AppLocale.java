@@ -43,7 +43,8 @@ public class AppLocale {
         return user;
     }
 
-    public User getUser(String userID) {
+    public User getSavedUser(String userID) {
+        loadFromFile();
         Iterator<User> itr = savedUsers.iterator();
         while (itr.hasNext()) {
             User next = itr.next();
@@ -54,7 +55,20 @@ public class AppLocale {
         return null;
     }
 
+
+    public void removeUser(User deleteUser) {
+        Iterator<User> itr = savedUsers.iterator();
+        while (itr.hasNext()) {
+            User next = itr.next();
+            if (next.getUserID() == deleteUser.getUserID()) {
+                savedUsers.remove(next);
+                return;
+            }
+        }
+    }
+
     public void saveUser(User newUser) {
+        removeUser(newUser);
         savedUsers.add(newUser);
         saveInFile();
     }
