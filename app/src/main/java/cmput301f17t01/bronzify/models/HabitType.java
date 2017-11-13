@@ -21,14 +21,14 @@ public class HabitType {
     private String name;
     private String reason;
     private Date dateToStart;
-    private int[] daysOfWeek; // Sunday = 0, ... , Saturday = 6
+    private Boolean[] daysOfWeek; // Sunday = 0, ... , Saturday = 6
 
-    private ArrayList<HabitEvent> habitEvents;
+    private ArrayList<HabitEvent> habitEvents = new ArrayList<>();
     private int numCompleted;
     private int numUncompleted;
 
     // Constructor
-    public HabitType(String name, String reason, Date dateToStart, int[] daysOfWeek) {
+    public HabitType(String name, String reason, Date dateToStart, Boolean[] daysOfWeek) {
         user = AppLocale.getInstance().getUser();
         this.name = name;
         this.reason = reason;
@@ -51,7 +51,7 @@ public class HabitType {
 
             // If day of week is a repeat day of week
             // Create a new habit event
-            if(daysOfWeek[dayOfWeek] == 1){
+            if(daysOfWeek[dayOfWeek]){
                 HabitEvent newHabitEvent = new HabitEvent(date);
                 habitEvents.add(newHabitEvent);
             }
@@ -62,41 +62,101 @@ public class HabitType {
         }
     }
 
+    // Fill up List Fragment with all Habit Events
+    public void fillList(){
+        for(HabitEvent habitEvent: habitEvents){
+            Log.d("Test", name + " - " + habitEvent.dateToString());
+        }
+    }
+
     // Setters and Getters
     // User
+    /**
+     * Return user that created current habit type
+     *
+     * @return User
+     */
     public User getUser() {
         return user;
     }
 
     // Habit Name
+    /**
+     * Return habit type name
+     *
+     * @return Habit type name
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * Set a new name for habit type
+     *
+     * @param name New name for habit type
+     */
     public void setName(String name) {
         this.name = name;
     }
 
     // Habit Reason
+    /**
+     * Get habit type reason
+     *
+     * @return Habit type reason
+     */
     public String getReason() {
         return reason;
     }
+
+    /**
+     * Set a new reason for habit type
+     *
+     * @param reason New reason for habit type
+     */
     public void setReason(String reason) {
         this.reason = reason;
     }
 
     // Date to Start
+    /**
+     * Get date to start habit events
+     *
+     * @return Date to start habit events
+     */
     public Date getDateToStart() {
         return dateToStart;
     }
+
+    /**
+     * Set new date to start for habit event
+     *
+     * @param dateToStart New date to start
+     */
     public void setDateToStart(Date dateToStart) {
         this.dateToStart = dateToStart;
     }
 
     // Days of Week to Repeat
-    public int[] getDaysOfWeek() {
+    /**
+     * Get days of week to repeat
+     * Represented as an array of integers
+     * Index: 0 = Sunday
+     * Index: 1 = Monday
+     * Index: 2 = Tuesday
+     * Index: 3 = Wednesday
+     * Index: 4 = Thursday
+     * Index: 5 = Friday
+     * Index: 6 = Saturday
+     *
+     * Value: 0 = Don't repeat
+     *
+     * @return Array of integers that represents days of week to repeat
+     */
+    public Boolean[] getDaysOfWeek() {
         return daysOfWeek;
     }
-    public void setDaysOfWeek(int[] daysOfWeek) {
+    public void setDaysOfWeek(Boolean[] daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
     }
 

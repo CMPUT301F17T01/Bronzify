@@ -105,12 +105,16 @@ public class User {
 //        //TODO: remote last updated = new Date()
 //    }
 
+    // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
+
+    // Habit Type
     public void addHabitType(HabitType habitType) {
         habitTypes.add(habitType);
         this.lastUpdated = new Date();
     }
-
-    // Lasciate ogni speranza, voi ch'entrate: Here be getters and setters
+    public ArrayList<HabitType> getHabitTypes() {
+        return habitTypes;
+    }
 
     public Date getLastInfluenced() {
         return lastInfluenced;
@@ -171,14 +175,4 @@ public class User {
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
-
-    public ArrayList<HabitType> getHabitTypes() {
-        return habitTypes;
-    }
-
-    public void setHabitTypes(ArrayList<HabitType> habitTypes) {
-        this.habitTypes = habitTypes;
-        this.lastUpdated = new Date();
-    }
-
 }

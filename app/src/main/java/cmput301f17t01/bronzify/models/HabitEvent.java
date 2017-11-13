@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.google.android.gms.maps.GoogleMap;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,6 +15,7 @@ public class HabitEvent {
     private User user;
 
     private Date goalDate; // Date for habit event to happen
+    private Date completedDate;
     private String comment; // Max 20 Char
     private Boolean completed;
     private Bitmap image; // Change?
@@ -43,6 +45,11 @@ public class HabitEvent {
         this.goalDate = goalDate;
     }
 
+    // Completed Date
+    public Date getCompletedDate(){
+        return completedDate;
+    }
+
     // Comment
     public String getComment() {
         return comment;
@@ -57,6 +64,7 @@ public class HabitEvent {
     }
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+        this.completedDate = new Date();
     }
 
     // Image
@@ -73,5 +81,12 @@ public class HabitEvent {
     }
     public void setLocation(GoogleMap location) {
         this.location = location;
+    }
+
+    // Convert Date to String ("Sun, Jan 01, 2017")
+    public String dateToString(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        String strGoalDate = simpleDateFormat.format(goalDate);
+        return strGoalDate;
     }
 }
