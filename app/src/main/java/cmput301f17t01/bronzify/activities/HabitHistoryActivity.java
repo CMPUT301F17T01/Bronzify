@@ -29,27 +29,17 @@ import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 
 /**
- * Created by owenm_000 on 11/1/2017.
+ * Created by noahkryz on 11/1/2017.
  */
 public class HabitHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    // private TabItem feedTab;
-    // private TabItem mapTab;
     private String name;
-    private ToggleButton toggleFilter;
-    private ArrayList<HabitEvent> habitEvents;
-    private EditText searchBar;
-    private Button sideBar;
     private AppLocale appLocale = AppLocale.getInstance();
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private DrawerLayout drawer;
     private String[] pageTitle = {"Feed", "Map"};
-
-    //protected void onClickFeed() {}
-
-    //protected void onClickMap() {}
 
     /**
      * Called on the creation of the Habit History Activity
@@ -103,11 +93,21 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
+            /**
+             * Called when the tab is unselected
+             *
+             * @param tab
+             */
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
             }
 
+            /**
+             * Called when the tab is reselected
+             *
+             * @param tab
+             */
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
@@ -116,6 +116,10 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
 
     }
 
+    /**
+     * Called when the back button is pressed
+     *
+     */
     @Override
     public void onBackPressed(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -126,12 +130,24 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         }
     }
 
+    /**
+     * Creates the navigation drawer
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
 
+    /**
+     * Creates the settings bar in the top corner
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -141,6 +157,12 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Opens up the navigation bar
+     *
+     * @param item
+     * @return
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Activity currentActivity = HabitHistoryActivity.this;
@@ -153,38 +175,4 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    // getters and setters
-    public ToggleButton getToggleFilter() {
-        return toggleFilter;
-    }
-
-    public void setToggleFilter(ToggleButton toggleFilter) {
-        this.toggleFilter = toggleFilter;
-    }
-
-    public ArrayList<HabitEvent> getHabitEvents() {
-        return habitEvents;
-    }
-
-    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
-        this.habitEvents = habitEvents;
-    }
-
-    public EditText getSearchBar() {
-        return searchBar;
-    }
-
-    public void setSearchBar(EditText searchBar) {
-        this.searchBar = searchBar;
-    }
-
-    public Button getSideBar() {
-        return sideBar;
-    }
-
-    public void setSideBar(Button sideBar) {
-        this.sideBar = sideBar;
-    }
-
 }

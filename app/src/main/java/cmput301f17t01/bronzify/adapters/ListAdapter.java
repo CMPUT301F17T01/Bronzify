@@ -60,8 +60,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         this.controller = controller;
     }
 
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
-    // Create new views (invoked by the layout manager)
+    /**
+     * Creates a new view, to be inflated. Invoked by the layout manager
+     *
+     * @param viewGroup
+     * @param viewType
+     * @return
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -70,10 +75,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         return new ViewHolder(v);
     }
-    // END_INCLUDE(recyclerViewOnCreateViewHolder)
 
-    // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Replace the contents of a view (invoked by the layout manager)
+     *
+     * @param viewHolder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //position set
@@ -84,7 +92,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    // Return the size of your dataset (invoked by the layout manager)
+    /**
+     * Return the size of the dataset (invoked by the layout manager)
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return entries.size();

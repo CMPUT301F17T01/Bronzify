@@ -16,10 +16,19 @@ public class ProfileController implements Controller {
     ElasticSearch elastic = new ElasticSearch();
     AppLocale appLocale = AppLocale.getInstance();
 
+    /**
+     * Deletes the account of a user, when a button is clicked
+     *
+     */
     public void deleteAccount() {
         elastic.deleteUser(appLocale.getUser().getUserID());
     }
 
+    /**
+     * Requests to follow a user based on their ID.
+     *
+     * @param userID
+     */
     public void requestFollow(String userID) {
         Log.i("Follow", "Requested");
         appLocale.getUser().requestFollow(userID);

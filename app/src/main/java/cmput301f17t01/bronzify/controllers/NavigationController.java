@@ -21,6 +21,13 @@ import cmput301f17t01.bronzify.models.Controller;
 
 public class NavigationController implements Controller {
 
+    /**
+     * Allows you to jump to a new activity based on which is selected from the navigation bar
+     *
+     * @param id
+     * @param currentActivity
+     * @return
+     */
     static public Intent navigationSelect(int id, Activity currentActivity) {
         if (id == R.id.MyHome) {
             Intent navIntent = new Intent(currentActivity, MyHomeActivity.class);

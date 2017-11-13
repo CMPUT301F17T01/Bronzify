@@ -21,12 +21,22 @@ import cmput301f17t01.bronzify.fragments.PictureFragment;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;
 
+    /**
+     * Creates the fragment manager
+     *
+     * @param fm
+     */
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
         this.fm = fm;
-
     }
 
+    /**
+     * Gets the item in the list fragment
+     *
+     * @param position
+     * @return
+     */
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
@@ -34,13 +44,17 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             bundle.putString("type", "pendingFollows");
             ListFragment fragment = new ListFragment();
             fragment.setArguments(bundle);
-
             return fragment;
         } else {
             return new MapFragment();
         }
     }
 
+    /**
+     * Gets the count of items in the list fragment
+     *
+     * @return
+     */
     @Override
     public int getCount() {
         return 2;

@@ -37,6 +37,11 @@ public class ListFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected ArrayList<?> mDataset = new ArrayList<>();
 
+    /**
+     * Called on the creation of a new list fragment
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +58,21 @@ public class ListFragment extends Fragment {
 
     }
 
+    /**
+     * Called on the creation of the view
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
         rootView.setTag(TAG);
 
-        // BEGIN_INCLUDE(initializeRecyclerView)
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mRecyclerView = rootView.findViewById(R.id.recyclerView);
 
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
@@ -87,6 +99,12 @@ public class ListFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Saves the instances state. This allows you to press the back button on the android device
+     * without causing errors.
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save currently selected layout manager.

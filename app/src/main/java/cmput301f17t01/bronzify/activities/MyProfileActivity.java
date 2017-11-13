@@ -35,47 +35,15 @@ import cmput301f17t01.bronzify.models.User;
  */
 public class MyProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private String name;
-    private String userID;
-    private Image picture;
-    private Button editProfile;
-    private Button sideBar;
     private AppLocale appLocale = AppLocale.getInstance();
     private ProfileController controller = new ProfileController();
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public Image getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Image picture) {
-        this.picture = picture;
-    }
-
-    public void displayUserInfo() {
-        return;
-    }
-
-    public void editProfile() {
-        return;
-    }
-
+    /**
+     * Called on the creation of My Profile Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +52,9 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         setContentView(R.layout.activity_my_profile);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -102,15 +70,16 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
             transaction.commit();
         }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        TextView profileName = (TextView) findViewById(R.id.profileName);
+        TextView profileName = findViewById(R.id.profileName);
         profileName.setText(name);
 
-        Button followButton = (Button) findViewById(R.id.followButton);
-        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        Button followButton = findViewById(R.id.followButton);
+        Button deleteButton = findViewById(R.id.deleteButton);
 
+        //FOLLOW BUTTON
         followButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.i("Follow","clicked");
@@ -137,6 +106,7 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
+        //DELETE BUTTON
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.i("Delete","clicked");
@@ -164,9 +134,13 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
     }
 
+    /**
+     * Called when the back button is pressed
+     *
+     */
     @Override
     public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -174,12 +148,24 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    /**
+     * Creates the navigation drawer
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
 
+    /**
+     * Creates the settings bar in the top corner
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -189,6 +175,12 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Opens up the navigation bar
+     *
+     * @param item
+     * @return
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Activity currentActivity = MyProfileActivity.this;
@@ -197,7 +189,7 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         finish();
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
