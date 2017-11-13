@@ -23,10 +23,10 @@ public class User {
     private Date lastUpdated;
     private Date lastInteracted;
 
-    private ArrayList<HabitType> habitTypes;
+    private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
 
-    private ArrayList<User> following;
-    private ArrayList<User> pendingFollowRequests;
+    private ArrayList<User> following = new ArrayList<User>();
+    private ArrayList<User> pendingFollowRequests = new ArrayList<User>();
 
     public User(String userID) /* throws UserExistsException */{
         this.userID = userID;

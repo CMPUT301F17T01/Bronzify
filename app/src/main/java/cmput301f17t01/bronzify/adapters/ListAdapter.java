@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cmput301f17t01.bronzify.R;
 
 /**
@@ -15,7 +17,7 @@ import cmput301f17t01.bronzify.R;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private static final String TAG = "ListAdapter";
 
-    private String[] mDataSet;
+    private ArrayList<?> entries;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -47,9 +49,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public ListAdapter(String[] dataSet) {
-        mDataSet = dataSet;
-    }
+    public ListAdapter(ArrayList<?> dataSet) {entries = dataSet;}
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
     // Create new views (invoked by the layout manager)
@@ -71,13 +71,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTextView().setText(mDataSet[position]);
+        viewHolder.getTextView().setText(entries.get(position).toString());
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return entries.size();
     }
 }

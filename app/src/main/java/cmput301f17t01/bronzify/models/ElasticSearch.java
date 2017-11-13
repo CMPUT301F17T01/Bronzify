@@ -10,6 +10,7 @@ import com.searchly.jestdroid.JestDroidClient;
 
 
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
@@ -58,6 +59,12 @@ public class ElasticSearch {
             foundUser = null;
         }
         return foundUser;
+    }
+
+    public void deleteUser(String userID) {
+        ElasticSearch.DeleteUser deleteUserTask
+                = new ElasticSearch.DeleteUser();
+        deleteUserTask.execute(userID);
     }
 
 
@@ -111,6 +118,28 @@ public class ElasticSearch {
                 foundUser = null;
             }
             return foundUser;
+        }
+    }
+
+    public static class DeleteUser extends  AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... strings) {
+            verifySettings();
+            Delete delete = new Delete.Builder(indexString)
+                    .type("users")
+                    .id(strings[0])
+                    .build();
+            try {
+                JestResult result = client.execute(delete);
+                if (result.isSucceeded()) {
+                    Log.i("User", "deleted");
+                } else {
+                    Log.i("Error", "The delete failed");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong");
+            }
+            return null;
         }
     }
 

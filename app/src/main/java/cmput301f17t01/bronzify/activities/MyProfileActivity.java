@@ -11,13 +11,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-11-01.
@@ -30,6 +37,8 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
     private Image picture;
     private Button editProfile;
     private Button sideBar;
+    private AppLocale appLocale = AppLocale.getInstance();
+    private ProfileController controller = new ProfileController();
 
     public String getName() {
         return name;
@@ -66,6 +75,10 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        name = appLocale.getUser().getUserID();
+
+
         setContentView(R.layout.activity_my_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,7 +90,7 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         if (savedInstanceState == null) {
             Bundle bundle = new Bundle();
-            bundle.putString("params", "My String Data");
+            bundle.putString("type", "pendingFollows");
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             ListFragment fragment = new ListFragment();
@@ -88,6 +101,27 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView profileName = (TextView) findViewById(R.id.profileName);
+        profileName.setText(name);
+
+        Button followButton = (Button) findViewById(R.id.followButton);
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+
+        followButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                controller.requestFollow();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                controller.deleteAccount();
+                Intent intent = new Intent(MyProfileActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

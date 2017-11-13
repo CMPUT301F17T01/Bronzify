@@ -4,16 +4,17 @@ package cmput301f17t01.bronzify.models;
  * Created by kdehaan on 11/11/17.
  */
 
-public class Locale {
-    private static final Locale ourInstance = new Locale();
+public class AppLocale {
+    private static final AppLocale ourInstance = new AppLocale();
     private User lastUser;
     private User loggedInUser;
 
-    public static Locale getInstance() {
+
+    public static AppLocale getInstance() {
         return ourInstance;
     }
 
-    private Locale() {
+    private AppLocale() {
     }
 
     public User getLastUser() {
