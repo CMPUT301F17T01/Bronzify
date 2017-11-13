@@ -65,7 +65,8 @@ public class HabitType {
     // Fill up List Fragment with all Habit Events
     public void fillList(){
         for(HabitEvent habitEvent: habitEvents){
-            Log.d("Test", name + " - " + habitEvent.dateToString());
+            // TODO: NEED CODE TO FILL HABIT EVENT LIST FRAGMENT
+            Log.d("Test", name + " - " + habitEvent.goalDateToString());
         }
     }
 
@@ -82,7 +83,7 @@ public class HabitType {
 
     // Habit Name
     /**
-     * Return habit type name
+     * Get habit type name
      *
      * @return Habit type name
      */
@@ -149,38 +150,69 @@ public class HabitType {
      * Index: 5 = Friday
      * Index: 6 = Saturday
      *
-     * Value: 0 = Don't repeat
+     * Value: false = Don't repeat
+     * Value: true = Repeat
      *
      * @return Array of integers that represents days of week to repeat
      */
     public Boolean[] getDaysOfWeek() {
         return daysOfWeek;
     }
+
+    /**
+     * Set new days of week to repeat
+     *
+     * @param daysOfWeek New days of week to repeat
+     */
     public void setDaysOfWeek(Boolean[] daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
     }
 
     // List of Habit Events
+    /**
+     * Get the whole list of habit events
+     *
+     * @return ArrayList of habit events
+     */
     public ArrayList<HabitEvent> getHabitEvents() {
         return habitEvents;
     }
-    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
-        this.habitEvents = habitEvents;
-    }
 
     // Number of Completed Habit Events
+    /**
+     * Get number of completed habit events
+     *
+     * @return Number of completed habit events
+     */
     public int getNumCompleted() {
         return numCompleted;
     }
-    public void setNumCompleted(int numCompleted) {
-        this.numCompleted = numCompleted;
+
+    /**
+     * Increment number of completed habit events by changeValue
+     *
+     * @param changeValue Amount to increment number of completed habit event by
+     */
+    public void incrementNumCompleted(int changeValue) {
+        this.numCompleted += changeValue;
     }
 
     // Number of Uncompleted Habit Events
+    /**
+     * Get number of uncompleted habit events
+     *
+     * @return Number of uncompleted habit events
+     */
     public int getNumUncompleted() {
         return numUncompleted;
     }
-    public void setNumUncompleted(int numUncompleted) {
-        this.numUncompleted = numUncompleted;
+
+    /**
+     * Increment number of uncompleted habit event by changeValue
+     *
+     * @param changeValue Amount to increment number of uncompleted habit events by
+     */
+    public void incrementNumUncompleted(int changeValue) {
+        this.numUncompleted = changeValue;
     }
 }

@@ -7,5 +7,158 @@
     android:orientation="vertical"
     android:id="@+id/linearLayout">
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/labelHabitName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Habit Name:" />
+
+        <EditText
+            android:id="@+id/textHabitName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:maxLength="20" />
+
+        <TextView
+            android:id="@+id/labelHabitReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reason:" />
+
+        <EditText
+            android:id="@+id/textHabitReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:maxLength="30" />
+
+        <TextView
+            android:id="@+id/labelHabitStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Starting Date:" />
+
+        <Button
+            android:id="@+id/buttonSelectDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select a Date" />
+
+        <TextView
+            android:id="@+id/labelDayOfWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Repeat:" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="Sun"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/buttonMonday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="MON"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/buttonTuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="TUES"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/buttonWednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="WED"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/buttonThursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="THUR"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/buttonFriday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="FRI"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/buttonSaturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lighterAmber"
+                android:text="SAT"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Create" />
+
+        <Button
+            android:id="@+id/buttonClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clear" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

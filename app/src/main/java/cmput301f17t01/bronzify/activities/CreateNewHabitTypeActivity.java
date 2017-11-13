@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,11 +27,9 @@ import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
-import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
-import cmput301f17t01.bronzify.models.User;
 
-public class CreateNewHabitType extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CreateNewHabitTypeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Date date;
     private Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
@@ -104,7 +100,7 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        CreateNewHabitType.this,
+                        CreateNewHabitTypeActivity.this,
                         dateSetListener,
                         year, month, day);
 
@@ -328,7 +324,7 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
                     newHabit.fillList();
                 } else {
                     // Missing a field
-                    Toast.makeText(CreateNewHabitType.this, "Cannot create habit, make sure all fields are filled in.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateNewHabitTypeActivity.this, "Cannot create habit, make sure all fields are filled in.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -362,7 +358,7 @@ public class CreateNewHabitType extends AppCompatActivity implements NavigationV
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = CreateNewHabitType.this;
+        Activity currentActivity = CreateNewHabitTypeActivity.this;
         Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
         startActivity(newActivity);
         finish();

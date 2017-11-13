@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -98,7 +97,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
         fab.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(MyHabitsActivity.this, CreateNewHabitType.class);
+                Intent intent = new Intent(MyHabitsActivity.this, CreateNewHabitTypeActivity.class);
                 startActivity(intent);
             }
         });
