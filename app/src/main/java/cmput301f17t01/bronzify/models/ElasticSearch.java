@@ -12,6 +12,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.exceptions.ElasticException;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
@@ -44,6 +45,7 @@ public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
     private static String typeString = "test_user";
+
 
 
     public User update(User user) {
@@ -98,10 +100,11 @@ public class ElasticSearch {
                     if (result.isSucceeded()) {
                         user.setUserID(result.getId());
                     } else {
-                        Log.i("Error", "Elasticsearch was not able to add the user");
+                        throw new ElasticException();
                     }
                 } catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the user");
+
                 }
             }
             return null;
@@ -125,8 +128,7 @@ public class ElasticSearch {
                     foundUser = result.getSourceAsObject(User.class);
 
                 } else {
-                    Log.i("Error", "The search query failed");
-                    foundUser = null;
+                    throw new ElasticException();
                 }
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when communicating with the server");
@@ -149,7 +151,7 @@ public class ElasticSearch {
                 if (result.isSucceeded()) {
                     Log.i("User", "deleted");
                 } else {
-                    Log.i("Error", "The delete failed");
+                    throw new ElasticException();
                 }
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong");
