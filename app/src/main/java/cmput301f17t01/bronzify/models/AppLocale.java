@@ -36,7 +36,11 @@ public class AppLocale {
 
     private ArrayList<User> savedUsers = new ArrayList<>();
 
-
+    /**
+     * Gets the instances of the app locale
+     *
+     * @return
+     */
     public static AppLocale getInstance() {
         return ourInstance;
     }
@@ -46,10 +50,21 @@ public class AppLocale {
     }
 
 
+    /**
+     * Gets the last user that was accessing the app locale
+     *
+     * @return
+     */
     public User getLastUser() {
         return lastUser;
     }
 
+
+    /**
+     * Method that retrieves the logged in user
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
@@ -112,6 +127,16 @@ public class AppLocale {
 //        }
     }
 
+
+    /**
+     * Method that sets a user as the logged in user
+     *
+     * @param loggedInUser
+     */
+    public void setUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+        this.lastUser = loggedInUser;
+
     private void saveInFile() { //temporarily unimplemented
 //        try {
 //            FileOutputStream fos = Context.getApplicationContext.openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -127,6 +152,7 @@ public class AppLocale {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
     }
 
     public ArrayList<User> getSavedUsers() {

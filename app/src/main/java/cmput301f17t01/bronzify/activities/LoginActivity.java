@@ -19,7 +19,11 @@ import cmput301f17t01.bronzify.models.User;
 public class LoginActivity extends AppCompatActivity {
     private LoginController controller = new LoginController();
 
-
+    /**
+     *
+     * Called on the creation of the Login Activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText enterId = (EditText) findViewById(R.id.enter_id);
         final TextView loginInfo = (TextView) findViewById(R.id.login_info);
 
-
+        //LOGIN BUTTON
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
@@ -57,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //REGISTER BUTTON
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 

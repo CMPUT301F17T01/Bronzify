@@ -11,6 +11,12 @@ public class LoginController implements Controller {
     AppLocale appLocale = AppLocale.getInstance();
     ElasticSearch elastic = new ElasticSearch();
 
+    /**
+     * Checks if the user is logged in or not
+     *
+     * @param userID
+     * @return
+     */
     public User checkLogin(String userID) {
         User user = elastic.getUser(userID);
         if (user != null) {
@@ -19,10 +25,22 @@ public class LoginController implements Controller {
         return user;
     }
 
+    /**
+     * If the user is not already logged in, it will log them in based on the button click and
+     * userID provided
+     *
+     * @param user
+     */
     public void loginUser(User user) {
         appLocale.setUser(user);
     }
 
+    /**
+     * If the user is not already logged in, it will register them in based on the button click
+     * and userID provided
+     *
+     * @param userID
+     */
     public void registerUser(String userID) {
         User user = new User(userID);
         elastic.postUser(user);
