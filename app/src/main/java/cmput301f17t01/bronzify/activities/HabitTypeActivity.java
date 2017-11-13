@@ -31,8 +31,6 @@ import cmput301f17t01.bronzify.R;
 public class HabitTypeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-    // private TabItem detailsTab;
-    // private TabItem evenList;
     private ArrayList<HabitEvent> eventList;
     private ArrayList<DayOfWeek> schedule;
     private Button sideBar;
@@ -66,7 +64,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     private ViewPager viewPager;
     private DrawerLayout drawer;
     private TabLayout tabLayout;
-    private String[] pageTitle = {"Fragment 1", "Fragment 2"};
+    private String[] pageTitle = {"Details", "Events"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
