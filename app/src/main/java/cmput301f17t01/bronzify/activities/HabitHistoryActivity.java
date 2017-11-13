@@ -22,6 +22,7 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 
 import cmput301f17t01.bronzify.fragments.ListFragment;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -33,10 +34,12 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
 
     // private TabItem feedTab;
     // private TabItem mapTab;
+    private String name;
     private ToggleButton toggleFilter;
     private ArrayList<HabitEvent> habitEvents;
     private EditText searchBar;
     private Button sideBar;
+    private AppLocale appLocale = AppLocale.getInstance();
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -52,9 +55,15 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_history);
 
+        name = appLocale.getUser().getUserID();
+
         if (savedInstanceState == null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("type", "pendingFollows");
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             ListFragment fragment = new ListFragment();
+            fragment.setArguments(bundle);
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
@@ -77,6 +86,32 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //set viewpager adapter
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+
+        //change Tab selection when swipe ViewPager
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //change ViewPager page when tab selected
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 
@@ -113,7 +148,7 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         finish();
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

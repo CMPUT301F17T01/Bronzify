@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import cmput301f17t01.bronzify.fragments.HabitEventDetailFragment;
 import cmput301f17t01.bronzify.fragments.HabitTypeDetailFragment;
 import cmput301f17t01.bronzify.fragments.HabitTypeEventFragment;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.fragments.MapFragment;
 import cmput301f17t01.bronzify.fragments.PictureFragment;
 
@@ -23,11 +24,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new HabitEventDetailFragment();
-        } else if (position == 1){
-            return new MapFragment();
+            return new ListFragment();
         } else {
-            return new MapFragment(); //Picture
+            return new MapFragment();
         }
     }
 
