@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/Amber"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <TextView

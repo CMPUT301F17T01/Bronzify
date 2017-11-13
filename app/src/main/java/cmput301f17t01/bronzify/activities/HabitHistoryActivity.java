@@ -69,13 +69,13 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //Create 2 tabs
+        //Create 2 tabs - FEED and MAP
         tabLayout = findViewById(R.id.tab_layout);
         for (int i = 0; i < 2; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
         }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
