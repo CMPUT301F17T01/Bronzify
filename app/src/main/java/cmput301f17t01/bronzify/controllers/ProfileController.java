@@ -25,9 +25,9 @@ public class ProfileController implements Controller {
      *
      * @param userID
      */
+
     public void requestFollow(String userID) {
         Log.i("Follow", "Requested");
         elastic.requestFollow(appLocale.getUser(), userID);
     }
-
 }
