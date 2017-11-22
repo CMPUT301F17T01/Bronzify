@@ -48,7 +48,19 @@ public class ElasticSearch {
     }
 
     public void requestFollow(User user, String otherUserID) {
+        if (user.getFollowing().contains(otherUserID)){
+            Log.i("Error", "already following");
+            return;
+        }
         User remoteUser = getUser(otherUserID);
+        if (remoteUser == null) {
+            Log.i("Error", "user not found");
+            return;
+        }
+        if (remoteUser.getPendingFollowRequests().contains(user.getUserID())) {
+            Log.i("Error", "already sent request");
+            return;
+        }
         remoteUser.addPendingFollowRequest(user.getUserID());
         remoteUser.setLastInfluenced(new Date());
         postUser(remoteUser);
