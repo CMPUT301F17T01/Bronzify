@@ -89,6 +89,24 @@ public class UserTest extends TestCase {
     }
 
     @Test
+    public void testGetPendingFollowRequests() { //?
+        Date updated = user.getLastInfluenced();
+
+        ArrayList<String> followRequests = new ArrayList<>();
+        user.setPendingFollowRequests(followRequests);
+        assertFalse(user.getPendingFollowRequests().contains("someone"));
+        followRequests.add("1");
+        followRequests.add("2");
+        followRequests.add("someone");
+        user.setPendingFollowRequests(followRequests);
+        assertTrue(user.getPendingFollowRequests().contains("someone"));
+        assertEquals(3, user.getPendingFollowRequests().size());
+
+        assertTrue(user.getLastInfluenced().after(updated));
+    }
+
+
+    @Test
     public void testGetHabitTypes() {
 
         ArrayList<HabitType> habitTypes = new ArrayList<>();
@@ -126,22 +144,6 @@ public class UserTest extends TestCase {
         assertTrue(user.getFollowing().contains("following"));
     }
 
-    @Test
-    public void testGetPendingFollowRequests() { //?
-        Date updated = user.getLastInfluenced();
-
-        ArrayList<String> followRequests = new ArrayList<>();
-        user.setPendingFollowRequests(followRequests);
-        assertFalse(user.getPendingFollowRequests().contains("someone"));
-        followRequests.add("1");
-        followRequests.add("2");
-        followRequests.add("someone");
-        user.setPendingFollowRequests(followRequests);
-        assertTrue(user.getPendingFollowRequests().contains("someone"));
-        assertEquals(3, user.getPendingFollowRequests().size());
-
-        assertTrue(user.getLastInfluenced().after(updated));
-    }
 
     @Test
     public void removePendingFollowRequest() {
