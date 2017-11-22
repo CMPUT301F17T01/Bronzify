@@ -329,6 +329,9 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                     // Fill Habit Event List Fragment
                     // Need to change fillList() Code
                     newHabit.fillList();
+
+                    // Go back
+                    finish();
                 } else {
                     // Missing a field
                     Toast.makeText(CreateNewHabitTypeActivity.this, "Cannot create habit, make sure all fields are filled in.", Toast.LENGTH_SHORT).show();

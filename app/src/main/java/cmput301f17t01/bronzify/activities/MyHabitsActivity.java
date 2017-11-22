@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -28,6 +31,10 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
  * Created by owenm_000 on 11/1/2017.
  */
 public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String name;
+    private AppLocale appLocale = AppLocale.getInstance();
+    private ViewPager viewPager;
 
     /**
      * Called on the creation of the My Habits Activity
@@ -39,12 +46,19 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_habits);
 
+        name = appLocale.getUser().getUserID();
+        viewPager = findViewById(R.id.view_pager);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        //set viewpager adapter
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
