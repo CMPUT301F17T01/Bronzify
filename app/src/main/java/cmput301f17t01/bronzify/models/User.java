@@ -114,6 +114,16 @@ public class User {
     }
 
     /**
+     * Sets the pending follow requests to a list (for offline capabilities)
+     *
+     * @param pendingFollowRequests
+     */
+    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
+        this.pendingFollowRequests = pendingFollowRequests;
+        this.setLastInfluenced(new Date());
+    }
+
+    /**
      * Method that retrieves all of the pending follow requests
      *
      * @return
@@ -142,14 +152,6 @@ public class User {
         this.lastInfluenced = new Date();
     }
 
-    /**
-     * Sets the pending follow requests to a list (for offline capabilities)
-     *
-     * @param pendingFollowRequests
-     */
-    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
-        this.pendingFollowRequests = pendingFollowRequests;
-    }
 
 
     /**
