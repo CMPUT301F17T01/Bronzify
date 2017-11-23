@@ -52,7 +52,7 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
         setContentView(R.layout.activity_habit_history);
 
         name = appLocale.getUser().getUserID();
-        
+
 
         viewPager = findViewById(R.id.view_pager);
         Toolbar toolbar = findViewById(R.id.toolbar);
