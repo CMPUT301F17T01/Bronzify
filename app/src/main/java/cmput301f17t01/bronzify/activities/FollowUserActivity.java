@@ -55,7 +55,7 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.follow_recycler_view);
         FollowAdapter fa = new FollowAdapter(this,userList);
         rv.setAdapter(fa);
 

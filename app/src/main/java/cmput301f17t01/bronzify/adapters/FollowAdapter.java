@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -50,10 +49,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
                 }
             });*/
-            followReqText = (TextView) v.findViewById(R.id.followRequest);
+            followReqText = (TextView) v.findViewById(R.id.followRequest);  //Gotta add these in your xml, they are absent
             acceptButton = (ImageButton) v.findViewById(R.id.accept);
             rejectButton = (ImageButton) v.findViewById(R.id.reject);
-            followRow = (RelativeLayout) v.findViewById(R.id.followRow);
+            followRow = (RelativeLayout) v.findViewById(R.id.followRow);    //Gotta add these in your xml, they are absent
 
         }
         public TextView getTextView() {
@@ -63,7 +62,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
     @Override
     public FollowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.followRow,parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.follow_row,parent,false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
