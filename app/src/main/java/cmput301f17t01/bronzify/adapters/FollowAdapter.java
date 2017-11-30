@@ -1,13 +1,15 @@
 package cmput301f17t01.bronzify.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import java.util.List;
 
@@ -22,10 +24,11 @@ import cmput301f17t01.bronzify.models.User;
 public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder> {
     private static final String TAG = "ListAdapter";
     private List<User> entries;
+    private Context mContext;
     private static ListController controller;
 
-    public AnimalsAdapter(Context context,List<String> list){
-        mDataSet = list;
+    public FollowAdapter(Context context, List<User> list){
+        entries = list;
         mContext = context;
     }
 
@@ -33,6 +36,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
         public TextView followReqText;
         public ImageButton acceptButton;
         public ImageButton rejectButton;
+        public RelativeLayout followRow;
 
         public ViewHolder(View v) {
             super(v);
@@ -49,6 +53,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
             followReqText = (TextView) v.findViewById(R.id.followRequest);
             acceptButton = (ImageButton) v.findViewById(R.id.accept);
             rejectButton = (ImageButton) v.findViewById(R.id.reject);
+            followRow = (RelativeLayout) v.findViewById(R.id.followRow);
 
         }
         public TextView getTextView() {
@@ -58,9 +63,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     }
 
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FollowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.followRow,parent,false);
-        return new ViewHolder(View v);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
     }
 
     @Override
