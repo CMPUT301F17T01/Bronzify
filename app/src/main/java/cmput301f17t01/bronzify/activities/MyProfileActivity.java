@@ -11,11 +11,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
-=======
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
->>>>>>> 48_UserFollowRecycler
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +31,7 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-11-01.
@@ -204,11 +201,8 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-<<<<<<< HEAD
-        if(!(id == R.id.MyProfile)) {
-=======
+
         if(!(id==R.id.MyProfile)) {
->>>>>>> 48_UserFollowRecycler
             Activity currentActivity = MyProfileActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);

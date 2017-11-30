@@ -20,8 +20,7 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
 /**
  * Created by owenm_000 on 11/1/2017.
  */
-public class
-FollowUserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MyFollowersActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private EditText searchBar;
     private Button searchID;
     private Button searchName;
@@ -98,7 +97,6 @@ FollowUserActivity extends AppCompatActivity implements NavigationView.OnNavigat
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-<<<<<<< HEAD:app/src/main/java/cmput301f17t01/bronzify/activities/MyFollowersActivity.java
         if(!(id == R.id.MyFollowers)) {
             Activity currentActivity = MyFollowersActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
@@ -107,13 +105,6 @@ FollowUserActivity extends AppCompatActivity implements NavigationView.OnNavigat
             overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
         }
 
-=======
-        Activity currentActivity = FollowUserActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
->>>>>>> 48_UserFollowRecycler:app/src/main/java/cmput301f17t01/bronzify/activities/FollowUserActivity.java
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
