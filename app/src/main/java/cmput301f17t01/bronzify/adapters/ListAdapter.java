@@ -20,6 +20,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private static ListController controller;
     static private ArrayList<?> entries;
 
+    public ListAdapter() {
+    }
+
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
