@@ -59,7 +59,6 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
         public TextView getTextView() {
             return followReqText;
         }
-
     }
 
     @Override
@@ -70,8 +69,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
+        User u = entries.get(position);
+        holder.followReqText.setText(u.getUserID());
     }
 
     @Override

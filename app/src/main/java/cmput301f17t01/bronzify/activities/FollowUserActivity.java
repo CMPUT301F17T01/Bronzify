@@ -16,15 +16,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.FollowAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/1/2017.
  */
 public class FollowUserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView userList;
+    private List<User> userList = new ArrayList<>();
     private EditText searchBar;
     private Button searchID;
     private Button searchName;
@@ -49,6 +54,11 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+        FollowAdapter fa = new FollowAdapter(this,userList);
+        rv.setAdapter(fa);
+
 
     }
 
@@ -109,5 +119,13 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void createTestList(){
+        userList.add(new User("Tommy"));
+        userList.add(new User("Sally"));
+        userList.add(new User("Imran"));
+        userList.add(new User("Petr"));
+
     }
 }
