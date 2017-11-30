@@ -40,10 +40,10 @@
             android:label="Create New Habit"/>
         <!-- Missing My Feed -->
         <activity
-            android:name=".activities.HabitHistoryActivity"
+            android:name=".activities.MyHistoryActivity"
             android:label="@string/title_activity_habit_history" />
         <activity
-            android:name=".activities.FollowUserActivity"
+            android:name=".activities.MyFollowersActivity"
             android:label="@string/title_activity_follow_user"/>
         <activity
             android:name=".activities.HabitDueActivity"
@@ -56,6 +56,9 @@
             android:label="@string/title_activity_my_profile" />
         <activity
             android:name=".activities.HabitEventActivity" />
+        <activity
+            android:name=".activities.MyFeedActivity"
+            android:label="My Feed" />
 
         <!--Maps Android Key-->
         <meta-data

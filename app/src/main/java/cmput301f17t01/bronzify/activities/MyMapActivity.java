@@ -91,11 +91,13 @@ public class MyMapActivity extends AppCompatActivity implements NavigationView.O
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = MyMapActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        if(!(id == R.id.MyMap)) {
+            Activity currentActivity = MyMapActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -21,7 +21,7 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
 /**
  * Created by owenm_000 on 11/1/2017.
  */
-public class FollowUserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MyFollowersActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView userList;
     private EditText searchBar;
@@ -29,7 +29,7 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
     private Button searchName;
 
     /**
-     * On creation of the FollowUserActivity
+     * On creation of the MyFollowersActivity
      *
      * @param savedInstanceState
      */
@@ -99,11 +99,13 @@ public class FollowUserActivity extends AppCompatActivity implements NavigationV
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = FollowUserActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        if(!(id == R.id.MyFollowers)) {
+            Activity currentActivity = MyFollowersActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

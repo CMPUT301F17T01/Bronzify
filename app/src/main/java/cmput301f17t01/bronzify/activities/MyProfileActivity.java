@@ -1,18 +1,16 @@
 package cmput301f17t01.bronzify.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,7 +26,6 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-11-01.
@@ -183,12 +180,13 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = MyProfileActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-
+        if(!(id == R.id.MyProfile)) {
+            Activity currentActivity = MyProfileActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

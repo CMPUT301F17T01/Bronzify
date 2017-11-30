@@ -99,11 +99,13 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = MyHomeActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        if(!(id == R.id.MyHome)) {
+            Activity currentActivity = MyHomeActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
