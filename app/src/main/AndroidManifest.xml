@@ -43,7 +43,7 @@
             android:name=".activities.MyHistoryActivity"
             android:label="@string/title_activity_habit_history" />
         <activity
-            android:name=".activities.FollowUserActivity"
+            android:name=".activities.MyFollowersActivity"
             android:label="@string/title_activity_follow_user"/>
         <activity
             android:name=".activities.HabitDueActivity"

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.activities.FollowUserActivity;
+import cmput301f17t01.bronzify.activities.MyFollowersActivity;
 import cmput301f17t01.bronzify.activities.MyFeedActivity;
 import cmput301f17t01.bronzify.activities.MyHistoryActivity;
 import cmput301f17t01.bronzify.activities.LoginActivity;
@@ -45,7 +45,7 @@ public class NavigationController implements Controller {
             Intent navIntent = new Intent(currentActivity, MyMapActivity.class);
             return navIntent;
         } else if (id == R.id.MyFollowers) {
-            Intent navIntent = new Intent(currentActivity, FollowUserActivity.class);
+            Intent navIntent = new Intent(currentActivity, MyFollowersActivity.class);
             return navIntent;
         } else if (id == R.id.MyProfile) {
             Intent navIntent = new Intent(currentActivity, MyProfileActivity.class);
