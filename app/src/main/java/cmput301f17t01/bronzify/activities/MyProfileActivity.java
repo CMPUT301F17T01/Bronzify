@@ -11,6 +11,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
+=======
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+>>>>>>> 48_UserFollowRecycler
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +26,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.FollowAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
@@ -32,9 +41,11 @@ import cmput301f17t01.bronzify.models.AppLocale;
  */
 public class MyProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    RecyclerView rv;
+    private List<User> userList;
     private String name;
-    private AppLocale appLocale = AppLocale.getInstance();
-    private ProfileController controller = new ProfileController();
+    private AppLocale appLocale;
+    private ProfileController controller;
 
     /**
      * Called on the creation of My Profile Activity
@@ -44,9 +55,6 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        name = appLocale.getUser().getUserID();
-
         setContentView(R.layout.activity_my_profile);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,6 +63,22 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView);
+        userList = new ArrayList<>();
+        AppLocale appLocale = AppLocale.getInstance();
+        final ProfileController controller = new ProfileController();
+
+        createTestList();
+
+        rv = (RecyclerView) findViewById(R.id.followReqRecycler);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rv.setLayoutManager(llm);
+        FollowAdapter fa = new FollowAdapter(this,userList);
+        rv.setAdapter(fa);
+
+        name = appLocale.getUser().getUserID();
 
         if (savedInstanceState == null) {
             Bundle bundle = new Bundle();
@@ -180,7 +204,11 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+<<<<<<< HEAD
         if(!(id == R.id.MyProfile)) {
+=======
+        if(!(id==R.id.MyProfile)) {
+>>>>>>> 48_UserFollowRecycler
             Activity currentActivity = MyProfileActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
@@ -191,4 +219,18 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    private void createTestList(){
+
+        // TODO: Substitute this with actually getting the follow req. user list from the DB
+
+
+        userList.add(new User("Tommy"));
+        userList.add(new User("Sally"));
+        userList.add(new User("Imran"));
+        userList.add(new User("Petr"));
+
+    }
+
 }

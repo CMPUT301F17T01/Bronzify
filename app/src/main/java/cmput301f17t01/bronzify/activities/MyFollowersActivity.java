@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -21,9 +20,8 @@ import cmput301f17t01.bronzify.controllers.NavigationController;
 /**
  * Created by owenm_000 on 11/1/2017.
  */
-public class MyFollowersActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private ListView userList;
+public class
+FollowUserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private EditText searchBar;
     private Button searchID;
     private Button searchName;
@@ -47,6 +45,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
     }
 
@@ -99,6 +98,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+<<<<<<< HEAD:app/src/main/java/cmput301f17t01/bronzify/activities/MyFollowersActivity.java
         if(!(id == R.id.MyFollowers)) {
             Activity currentActivity = MyFollowersActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
@@ -107,6 +107,13 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
             overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
         }
 
+=======
+        Activity currentActivity = FollowUserActivity.this;
+        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+        startActivity(newActivity);
+        finish();
+        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+>>>>>>> 48_UserFollowRecycler:app/src/main/java/cmput301f17t01/bronzify/activities/FollowUserActivity.java
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
