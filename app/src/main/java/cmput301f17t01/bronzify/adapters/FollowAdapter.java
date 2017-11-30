@@ -21,7 +21,11 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder> {
-    private static final String TAG = "ListAdapter";
+    private static final String TAG = "FollowAdapter";
+
+    // TODO: SHOULD THIS BE USERS LIST OR JUST STRINGS OF USERID'S?
+    // THOUGHTS?
+
     private List<User> entries;
     private Context mContext;
     private static ListController controller;
@@ -49,10 +53,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
                 }
             });*/
-            followReqText = (TextView) v.findViewById(R.id.followRequest);  //Gotta add these in your xml, they are absent
-            acceptButton = (ImageButton) v.findViewById(R.id.accept);
-            rejectButton = (ImageButton) v.findViewById(R.id.reject);
-            followRow = (RelativeLayout) v.findViewById(R.id.followRow);    //Gotta add these in your xml, they are absent
+            followReqText = (TextView) v.findViewById(R.id.followReqName);  //Gotta add these in your xml, they are absent
+            acceptButton = (ImageButton) v.findViewById(R.id.acceptFollow);
+            rejectButton = (ImageButton) v.findViewById(R.id.rejectFollow);
+            followRow = (RelativeLayout) v.findViewById(R.id.rowFollow);    //Gotta add these in your xml, they are absent
 
         }
         public TextView getTextView() {
@@ -62,7 +66,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
     @Override
     public FollowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.follow_row,parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.row_follow,parent,false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -78,6 +82,5 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     public int getItemCount() {
         Log.d("RV", "Item size ["+entries.size()+"]");
         return entries.size();
-
     }
 }

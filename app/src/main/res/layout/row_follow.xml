@@ -2,22 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/rowFollow">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/requestName"/>
+        android:text="followReqName"
+        android:layout_marginLeft="32dp"
+        android:id="@+id/followReqName"/>
 
     <ImageButton
-        android:id="@+id/accept"
+        android:id="@+id/acceptFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rejectFollow"
+        android:layout_alignBottom="@id/followReqName"
+        android:layout_marginLeft="16dp"
         android:background="@drawable/ic_check_black_24dp" />
 
     <ImageButton
-        android:id="@+id/reject"
+        android:id="@+id/rejectFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/followReqName"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="32dp"
         android:background="@drawable/ic_clear_black_24dp" />
 </RelativeLayout>
