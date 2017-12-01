@@ -30,7 +30,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:26.1.0'
-    compile 'com.google.android.gms:play-services:8.3.0'
+    compile 'com.google.android.gms:play-services:11.6.2'
     implementation files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
     compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
 }
