@@ -13,7 +13,7 @@ import java.util.Date;
  */
 
 public class HabitEvent {
-    private User user;
+    private String userID;
     private Date goalDate; // Date for habit event to happen
     private Date completedDate;
     private String comment; // Max 20 Char
@@ -25,7 +25,7 @@ public class HabitEvent {
 
     // Constructor
     public HabitEvent(Date goalDate, String habitType){
-        this.user = AppLocale.getInstance().getUser();
+        this.userID = AppLocale.getInstance().getUser().getUserID();
         this.goalDate = goalDate;
         this.completedDate = null;
         this.comment = ""; // Default comment is blank
@@ -42,8 +42,8 @@ public class HabitEvent {
      *
      * @return User
      */
-    public User getUser() {
-        return user;
+    public String getUserID() {
+        return userID;
     }
 
     // Goal Date
@@ -180,8 +180,8 @@ public class HabitEvent {
         return strCompDate;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getHabitType() {

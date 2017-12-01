@@ -17,7 +17,7 @@ import cmput301f17t01.bronzify.models.User;
 public class HabitType {
     private static final int MAX_DAYS_AHEAD = 31;
 
-    private User user;
+    private String userID;
     private String name;
     private String reason;
     private Date dateToStart;
@@ -29,7 +29,7 @@ public class HabitType {
 
     // Constructor
     public HabitType(String name, String reason, Date dateToStart, Boolean[] daysOfWeek) {
-        user = AppLocale.getInstance().getUser();
+        userID = AppLocale.getInstance().getUser().getUserID();
         this.name = name;
         this.reason = reason;
         this.dateToStart = dateToStart;
@@ -77,8 +77,8 @@ public class HabitType {
      *
      * @return User
      */
-    public User getUser() {
-        return user;
+    public String getUserID() {
+        return userID;
     }
 
     // Habit Name
@@ -216,8 +216,8 @@ public class HabitType {
         this.numUncompleted = changeValue;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {

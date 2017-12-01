@@ -51,7 +51,7 @@ public class HabitTypeAdapter {
                 fieldname = reader.nextName();
             }
             if ("user".equals(fieldname)) {
-                type.setUser(elasticSearch.getUser(reader.nextName()));
+                type.setUserID(reader.nextName());
             }
             if ("reason".equals(fieldname)) {
                 type.setReason(reader.nextName());
@@ -85,20 +85,7 @@ public class HabitTypeAdapter {
         writer.beginObject();
         writer.name("user");
         writer.value(event.getUser().getUserID());
-        writer.name("goalDate");
-        writer.value(event.getGoalDate().toString());
-        writer.name("completedDate");
-        writer.value(event.getCompletedDate().toString());
-        writer.name("comment");
-        writer.value(event.getComment());
-        writer.name("completed");
-        writer.value(event.getCompleted().toString());
-        writer.name("image");
-        writer.value(event.getImage().toString());
-        writer.name("location");
-        writer.value(event.getLocation().toString());
-        writer.name("habitType");
-        writer.value(event.getHabitType());
+
         writer.endObject();
     }
 
