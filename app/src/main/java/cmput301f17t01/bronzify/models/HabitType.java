@@ -52,7 +52,7 @@ public class HabitType {
             // If day of week is a repeat day of week
             // Create a new habit event
             if(daysOfWeek[dayOfWeek]){
-                HabitEvent newHabitEvent = new HabitEvent(date);
+                HabitEvent newHabitEvent = new HabitEvent(date, name);
                 habitEvents.add(newHabitEvent);
             }
 
@@ -214,5 +214,21 @@ public class HabitType {
      */
     public void incrementNumUncompleted(int changeValue) {
         this.numUncompleted = changeValue;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
+        this.habitEvents = habitEvents;
+    }
+
+    public void setNumCompleted(int numCompleted) {
+        this.numCompleted = numCompleted;
+    }
+
+    public void setNumUncompleted(int numUncompleted) {
+        this.numUncompleted = numUncompleted;
     }
 }
