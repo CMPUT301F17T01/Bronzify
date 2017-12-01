@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -72,10 +73,42 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         User u = entries.get(position);
         holder.followReqText.setText(u.getUserID());
+
+        holder.rejectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the clicked item label
+                String userName = entries.get(position).getUserID();
+
+                entries.remove(position);
+
+
+                notifyItemRemoved(position);
+
+
+                notifyItemRangeChanged(position,entries.size());
+
+                Toast.makeText(mContext,"Rejected : " + userName, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the clicked item label
+                String userName = entries.get(position).getUserID();
+                // TODO: ADD THE USER TO THE FOLLOWERS LIST
+                entries.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,entries.size());
+
+                Toast.makeText(mContext,"Accepted : " + userName, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
