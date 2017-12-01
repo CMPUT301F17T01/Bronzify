@@ -224,6 +224,15 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         userList.add(new User("Sally"));
         userList.add(new User("Imran"));
         userList.add(new User("Petr"));
+        userList.add(new User("1"));
+        userList.add(new User("2"));
+        userList.add(new User("3"));
+        userList.add(new User("4"));
+        userList.add(new User("6"));
+        userList.add(new User("Q"));
+        userList.add(new User("7"));
+        userList.add(new User("8"));
+
 
     }
 
