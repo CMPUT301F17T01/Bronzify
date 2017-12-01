@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.android.gms.maps.GoogleMap;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,14 +21,18 @@ public class HabitEvent {
     private Bitmap image; // Change?
     private GoogleMap location; // Unsure of location type
 
+    private String habitType;
+
     // Constructor
-    public HabitEvent(Date goalDate){
+    public HabitEvent(Date goalDate, String habitType){
         this.user = AppLocale.getInstance().getUser();
         this.goalDate = goalDate;
+        this.completedDate = null;
         this.comment = ""; // Default comment is blank
         this.completed = false;
         this.image = null;
         this.location = null;
+        this.habitType = habitType;
     }
 
     // Getters and Setters
@@ -173,5 +178,21 @@ public class HabitEvent {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
         String strCompDate= simpleDateFormat.format(completedDate);
         return strCompDate;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getHabitType() {
+        return habitType;
+    }
+
+    public void setHabitType(String habitType) {
+        this.habitType = habitType;
+    }
+
+    public void setCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
     }
 }
