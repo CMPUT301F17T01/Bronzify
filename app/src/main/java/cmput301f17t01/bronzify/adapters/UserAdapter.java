@@ -28,6 +28,7 @@ import cmput301f17t01.bronzify.models.User;
 
 
 public class UserAdapter extends TypeAdapter<User> {
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
     private final Gson gsonType = new GsonBuilder().registerTypeAdapter(HabitType.class,
             new HabitTypeAdapter()).create();
 
@@ -54,10 +55,8 @@ public class UserAdapter extends TypeAdapter<User> {
                 continue;
             }
             if ("dateCreated".equals(fieldname)) {
-                DateFormat format =
-                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextString());
+                    Date date = df.parse(reader.nextString());
                     user.setDateCreated(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -65,10 +64,8 @@ public class UserAdapter extends TypeAdapter<User> {
                 continue;
             }
             if ("lastUpdated".equals(fieldname)) {
-                DateFormat format =
-                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextString());
+                    Date date = df.parse(reader.nextString());
                     user.setLastUpdated(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -76,10 +73,8 @@ public class UserAdapter extends TypeAdapter<User> {
                 continue;
             }
             if ("lastInfluenced".equals(fieldname)) {
-                DateFormat format =
-                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextString());
+                    Date date = df.parse(reader.nextString());
                     user.setLastInfluenced(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -122,11 +117,11 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.name("userID");
         writer.value(user.getUserID());
         writer.name("dateCreated");
-        writer.value(user.getDateCreated().toString());
+        writer.value(df.format(user.getDateCreated()));
         writer.name("lastUpdated");
-        writer.value(user.getLastUpdated().toString());
+        writer.value(df.format(user.getLastUpdated()));
         writer.name("lastInfluenced");
-        writer.value(user.getLastInfluenced().toString());
+        writer.value(df.format(user.getLastInfluenced()));
         writer.name("habitTypes");
         writer.value(gsonType.toJson(user.getHabitTypes()));
         writer.name("following");

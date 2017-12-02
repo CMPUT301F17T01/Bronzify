@@ -21,6 +21,7 @@ import cmput301f17t01.bronzify.models.HabitEvent;
 
 
 public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
 
     public HabitEvent read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
@@ -41,10 +42,8 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue;
             }
             if ("goalDate".equals(fieldname)) {
-                DateFormat format =
-                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextString());
+                    Date date = df.parse(reader.nextString());
                     event.setGoalDate(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -54,7 +53,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
             }
             if ("completedDate".equals(fieldname)) {
                 DateFormat format =
-                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
                 try {
                     Date date = format.parse(reader.nextString());
                     event.setCompletedDate(date);
@@ -94,10 +93,10 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.name("user");
         writer.value(event.getUserID());
         writer.name("goalDate");
-        writer.value(event.getGoalDate().toString());
+        writer.value(df.format(event.getGoalDate()));
         writer.name("completedDate");
         try {
-            writer.value(event.getCompletedDate().toString());
+            writer.value(df.format(event.getCompletedDate()));
         } catch (NullPointerException e) {
             writer.nullValue();
         }
