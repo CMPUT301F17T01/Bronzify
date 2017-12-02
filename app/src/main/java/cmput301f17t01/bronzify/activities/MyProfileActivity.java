@@ -38,7 +38,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 public class MyProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView rv;
+    private RecyclerView rv;
     private List<User> userList;
     private String name;
     private AppLocale appLocale;

@@ -1,25 +1,5 @@
 package cmput301f17t01.bronzify.models;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -65,7 +45,7 @@ public class AppLocale {
     }
 
     public User getSavedUser(String userID) {
-        loadFromFile();
+        //loadFromFile();
         Iterator<User> itr = savedUsers.iterator();
         while (itr.hasNext()) {
             User next = itr.next();
@@ -91,7 +71,7 @@ public class AppLocale {
     public void saveUser(User newUser) {
         removeSavedUser(newUser);
         savedUsers.add(newUser);
-        saveInFile();
+        //saveInFile();
     }
 
     /**
@@ -111,7 +91,7 @@ public class AppLocale {
     }
 
 
-    private void loadFromFile() { //temporarily unimplemented
+    /*private void loadFromFile() { //temporarily unimplemented
         try {
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<User>>() {}.getType();
@@ -144,7 +124,7 @@ public class AppLocale {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     public ArrayList<User> getSavedUsers() {
         return savedUsers;

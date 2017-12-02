@@ -2,13 +2,9 @@ package cmput301f17t01.bronzify.models;
 
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
-import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by noahkryzanowski on 2017-10-20.
@@ -214,5 +210,10 @@ public class HabitType {
      */
     public void incrementNumUncompleted(int changeValue) {
         this.numUncompleted = changeValue;
+    }
+
+    public int getCompletionRatio(){
+        if(numUncompleted==0 && numCompleted == 0 ){return 0;}
+        return numCompleted/(numCompleted+numUncompleted);
     }
 }
