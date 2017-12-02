@@ -37,7 +37,7 @@ public class HabitEventTest extends TestCase {
         appLocale.setUser(user);
     }
 
-        @Test
+    @Test
     public void testJson() {
         assertTrue(Boolean.TRUE);
         HabitEvent event = new HabitEvent(new Date(), "typename");

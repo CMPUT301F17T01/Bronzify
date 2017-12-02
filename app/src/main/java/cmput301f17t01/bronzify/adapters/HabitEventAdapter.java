@@ -41,7 +41,6 @@ public HabitEvent(Date goalDate, String habitType){
         }*/
 
 public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
-    private ElasticSearch elasticSearch = new ElasticSearch();
 
     public HabitEvent read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
