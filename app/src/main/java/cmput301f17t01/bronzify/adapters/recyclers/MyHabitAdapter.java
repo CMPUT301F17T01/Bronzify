@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -36,16 +38,17 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         mContext = context;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView habitTypeName;
         private TextView completion;
+        private ImageButton imageButton;
 
         public ViewHolder(View v) {
             super(v);
-            v.setOnClickListener(this);
+
             habitTypeName = (TextView) v.findViewById(R.id.habitTypeRow);
             completion = (TextView) v.findViewById(R.id.typeCompletion);
-
+            imageButton = (ImageButton) v.findViewById(R.id.typeArrow);
         }
 
         public TextView getHabitTypeName() {
@@ -55,15 +58,6 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
             return completion;
         }
 
-
-        @Override
-        public void onClick(View v) {
-            clickListener.onItemClick(getAdapterPosition(), v);
-        }
-
-    }
-    public void setOnItemClickListener(ClickListener clickListener) {
-        MyHabitAdapter.clickListener = clickListener;
     }
 
     @Override
@@ -74,10 +68,16 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        HabitType ht = entries.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final HabitType ht = entries.get(position);
         holder.habitTypeName.setText(ht.getName());
         holder.completion.setText(String.valueOf(ht.getCompletionRatio())+"%");
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,"Accepted : " + ht.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

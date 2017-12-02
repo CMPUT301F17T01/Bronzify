@@ -83,15 +83,9 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
             public void onClick(View view) {
                 // Get the clicked item label
                 String userName = entries.get(position).getUserID();
-
                 entries.remove(position);
-
-
                 notifyItemRemoved(position);
-
-
                 notifyItemRangeChanged(position,entries.size());
-
                 Toast.makeText(mContext,"Rejected : " + userName, Toast.LENGTH_SHORT).show();
             }
         });

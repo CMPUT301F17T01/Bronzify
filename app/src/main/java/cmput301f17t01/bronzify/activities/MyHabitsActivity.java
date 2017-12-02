@@ -45,6 +45,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      *
      * @param savedInstanceState
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +70,13 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
 
         types =(List) new ArrayList<HabitType>();
         createTypesList();
-        rv = (RecyclerView) findViewById(R.id.myHabitRecycler);
+        rv = findViewById(R.id.myHabitRecycler);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
         MyHabitAdapter fa = new MyHabitAdapter(this,types);
         rv.setAdapter(fa);
+
 
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
         fab.setOnClickListener(new View.OnClickListener(){
@@ -117,6 +119,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      * @param item
      * @return
      */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -151,6 +154,42 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
     private void createTypesList(){
         Boolean[] array = new Boolean[7];
         Arrays.fill(array, Boolean.FALSE);
+        types.add(new HabitType("Running","Cuz",new Date(),array ));
+        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
+        types.add(new HabitType("Eating","Cuz",new Date(),array ));
+        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
+        types.add(new HabitType("Crying","Cuz",new Date(),array ));
+        types.add(new HabitType("Singing","Cuz",new Date(),array ));
+        types.add(new HabitType("Running","Cuz",new Date(),array ));
+        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
+        types.add(new HabitType("Eating","Cuz",new Date(),array ));
+        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
+        types.add(new HabitType("Crying","Cuz",new Date(),array ));
+        types.add(new HabitType("Singing","Cuz",new Date(),array ));
+        types.add(new HabitType("Running","Cuz",new Date(),array ));
+        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
+        types.add(new HabitType("Eating","Cuz",new Date(),array ));
+        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
+        types.add(new HabitType("Crying","Cuz",new Date(),array ));
+        types.add(new HabitType("Singing","Cuz",new Date(),array ));
+        types.add(new HabitType("Running","Cuz",new Date(),array ));
+        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
+        types.add(new HabitType("Eating","Cuz",new Date(),array ));
+        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
+        types.add(new HabitType("Crying","Cuz",new Date(),array ));
+        types.add(new HabitType("Singing","Cuz",new Date(),array ));
+        types.add(new HabitType("Running","Cuz",new Date(),array ));
+        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
+        types.add(new HabitType("Eating","Cuz",new Date(),array ));
+        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
+        types.add(new HabitType("Crying","Cuz",new Date(),array ));
+        types.add(new HabitType("Singing","Cuz",new Date(),array ));
+        types.add(new HabitType("Running","Cuz",new Date(),array ));
+        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
+        types.add(new HabitType("Eating","Cuz",new Date(),array ));
+        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
+        types.add(new HabitType("Crying","Cuz",new Date(),array ));
+        types.add(new HabitType("Singing","Cuz",new Date(),array ));
         types.add(new HabitType("Running","Cuz",new Date(),array ));
         types.add(new HabitType("Jogging","Cuz",new Date(),array ));
         types.add(new HabitType("Eating","Cuz",new Date(),array ));
