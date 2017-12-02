@@ -29,7 +29,10 @@ public class HabitType {
 
     // Constructor
     public HabitType(String name, String reason, Date dateToStart, Boolean[] daysOfWeek) {
-        userID = AppLocale.getInstance().getUser().getUserID();
+        try {
+            userID = AppLocale.getInstance().getUser().getUserID();
+        } catch (NullPointerException e) {
+        }
         this.name = name;
         this.reason = reason;
         this.dateToStart = dateToStart;

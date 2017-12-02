@@ -4,13 +4,17 @@ package cmput301f17t01.bronzify.controllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 
+import java.io.IOException;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.adapters.UserAdapter;
 import cmput301f17t01.bronzify.exceptions.ElasticException;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
@@ -30,6 +34,8 @@ public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
     private static String typeString = "test_user_v2";
+    private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
+            new UserAdapter()).create();
 
 
 
@@ -120,7 +126,8 @@ public class ElasticSearch {
         protected Void doInBackground(User... users) {
             verifySettings();
             for (User user : users) {
-                Index index = new Index.Builder(user)
+                String userJson = userGson.toJson(user);
+                Index index = new Index.Builder(userJson)
                         .index(indexString)
                         .type(typeString)
                         .id(user.getUserID())
@@ -145,7 +152,7 @@ public class ElasticSearch {
         @Override
         protected User doInBackground(String... strings) {
             verifySettings();
-            User foundUser;
+            User foundUser = null;
 
             Get get = new Get.Builder(indexString, strings[0]) //index, id
                     .type(typeString)
@@ -155,14 +162,17 @@ public class ElasticSearch {
             try {
                 JestResult result = client.execute(get);
                 if (result.isSucceeded()) {
-                    foundUser = result.getSourceAsObject(User.class);
+                    String foundJson = result.getSourceAsString();
+                    foundUser = userGson.fromJson(foundJson, User.class);
 
                 } else {
                     throw new ElasticException();
                 }
-            } catch (Exception e) {
+            } catch (ElasticException e) {
                 Log.i("Error", "Something went wrong when communicating with the server");
                 foundUser = null;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             return foundUser;
         }
