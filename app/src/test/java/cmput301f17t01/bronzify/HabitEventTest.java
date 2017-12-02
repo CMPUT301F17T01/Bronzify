@@ -39,7 +39,6 @@ public class HabitEventTest extends TestCase {
 
     @Test
     public void testJson() {
-        assertTrue(Boolean.TRUE);
         HabitEvent event = new HabitEvent(new Date(), "typename");
         event.markCompleted();
         event.setComment("nice comment");

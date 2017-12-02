@@ -51,6 +51,9 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
                 type.setUserID(reader.nextString());
                 continue;
             }
+            if ("name".equals(fieldname)) {
+                type.setName(reader.nextString());
+            }
             if ("reason".equals(fieldname)) {
                 type.setReason(reader.nextString());
                 continue;
@@ -97,6 +100,8 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
         writer.beginObject();
         writer.name("user");
         writer.value(type.getUserID());
+        writer.name("name");
+        writer.value(type.getName());
         writer.name("reason");
         writer.value(type.getReason());
         writer.name("dateToStart");
