@@ -17,7 +17,8 @@ public class User {
     private Date lastUpdated;
     private Date lastInfluenced;
 
-    private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
+//    private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
+    private ArrayList<String> habitTypes = new ArrayList<String>();
     private ArrayList<String> following = new ArrayList<String>();
     private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
 
@@ -50,9 +51,13 @@ public class User {
      * @param habitType
      * @return
      */
-    public void addHabitType(HabitType habitType) {
-        habitTypes.add(habitType);
-        this.lastUpdated = new Date();
+    public void addHabitType(HabitType habitType) throws Exception {
+        if (habitTypes.contains(habitType.getName())) {
+            habitTypes.add(habitType.getName());
+            this.lastUpdated = new Date();
+        } else {
+            throw new Exception("Habit type exists");
+        }
     }
 
 
@@ -91,7 +96,7 @@ public class User {
      */
     public void addFollowing(String userID) {
         following.add(userID);
-    }
+    } //TODO: investigate passing the user directly
 
     /**
      * Removes a follower
@@ -205,7 +210,7 @@ public class User {
      *
      * @return
      */
-    public ArrayList<HabitType> getHabitTypes() {
+    public ArrayList<String> getHabitTypes() {
         return habitTypes;
     }
 
@@ -214,9 +219,18 @@ public class User {
      *
      * @param habitTypes
      */
-    public void setHabitTypes(ArrayList<HabitType> habitTypes) {
+    public void setHabitTypes(ArrayList<String> habitTypes) {
         this.habitTypes = habitTypes;
         this.lastUpdated = new Date();
     }
+
+    /**
+     * Removes a habit type
+     */
+    public void removeHabitType(String habitTypeName) {
+        if (habitTypes.contains(habitTypeName)) {
+            habitTypes.remove(habitTypeName);
+        }
+    } //TODO: test
 
 }

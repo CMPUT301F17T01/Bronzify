@@ -29,7 +29,7 @@ import io.searchbox.core.Index;
 public class ElasticSearch {
     private static JestDroidClient client;
     private static String indexString = "cmput301f17t01_bronzify";
-    private static String typeString = "test_user";
+    private static String typeString = "test_user_v2";
 
 
 

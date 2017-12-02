@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.android.gms.maps.GoogleMap;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 
 public class HabitEvent {
-    private User user;
+    private String userID;
     private Date goalDate; // Date for habit event to happen
     private Date completedDate;
     private String comment; // Max 20 Char
@@ -20,14 +21,18 @@ public class HabitEvent {
     private Bitmap image; // Change?
     private GoogleMap location; // Unsure of location type
 
+    private String habitType;
+
     // Constructor
-    public HabitEvent(Date goalDate){
-        this.user = AppLocale.getInstance().getUser();
+    public HabitEvent(Date goalDate, String habitType){
+        this.userID = AppLocale.getInstance().getUser().getUserID();
         this.goalDate = goalDate;
+        this.completedDate = null;
         this.comment = ""; // Default comment is blank
         this.completed = false;
         this.image = null;
         this.location = null;
+        this.habitType = habitType;
     }
 
     // Getters and Setters
@@ -37,8 +42,8 @@ public class HabitEvent {
      *
      * @return User
      */
-    public User getUser() {
-        return user;
+    public String getUserID() {
+        return userID;
     }
 
     // Goal Date
@@ -103,13 +108,12 @@ public class HabitEvent {
     }
 
     /**
-     * Set completion status
+     * Set completion as true
      * Update completion date
      *
-     * @param completed Completion status
      */
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void markCompleted() {
+        this.completed = Boolean.TRUE;
         this.completedDate = new Date();
     }
 
@@ -171,7 +175,27 @@ public class HabitEvent {
      */
     public String completedDateToString(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
-        String strCompDate= simpleDateFormat.format(completedDate);
+        String strCompDate = simpleDateFormat.format(completedDate);
         return strCompDate;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getHabitType() {
+        return habitType;
+    }
+
+    public void setHabitType(String habitType) {
+        this.habitType = habitType;
+    }
+
+    public void setCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }
