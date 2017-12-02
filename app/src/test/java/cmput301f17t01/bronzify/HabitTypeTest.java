@@ -37,8 +37,8 @@ public class HabitTypeTest extends TestCase {
         Gson gsonType = new GsonBuilder().registerTypeAdapter(HabitType.class,
                 new HabitTypeAdapter()).create();
 
-//        String json = gsonType.toJson(type);
-//        HabitType type2 = gsonType.fromJson(json, HabitType.class);
+        String json = gsonType.toJson(type);
+        HabitType type2 = gsonType.fromJson(json, HabitType.class);
 
 
     }

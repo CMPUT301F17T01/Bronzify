@@ -45,12 +45,15 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
             JsonToken token = reader.peek();
             if (token.equals(JsonToken.NAME)) {
                 fieldname = reader.nextName();
+                continue;
             }
             if ("user".equals(fieldname)) {
                 type.setUserID(reader.nextString());
+                continue;
             }
             if ("reason".equals(fieldname)) {
                 type.setReason(reader.nextString());
+                continue;
             }
             if ("dateToStart".equals(fieldname)) {
                 DateFormat format =
@@ -61,17 +64,21 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                continue;
             }
             if ("daysOfWeek".equals(fieldname)) {
                 type.setDaysOfWeek(boolArrayFromString(reader.nextString()));
+                continue;
             }
-//            if ("habitEvents".equals(fieldname)) {
-//                ArrayList<HabitEvent> events = gsonEvent.fromJson(reader.nextString(),
-//                        new TypeToken<ArrayList<HabitEvent>>(){}.getType());
-//                type.setHabitEvents(events);
-//            }
+            if ("habitEvents".equals(fieldname)) {
+                ArrayList<HabitEvent> events = gsonEvent.fromJson(reader.nextString(),
+                        new TypeToken<ArrayList<HabitEvent>>(){}.getType());
+                type.setHabitEvents(events);
+                continue;
+            }
             if ("numCompleted".equals(fieldname)) {
                 type.setNumCompleted(Integer.valueOf(reader.nextString()));
+                continue;
             }
             if ("numUncompleted".equals(fieldname)) {
                 type.setNumUncompleted(Integer.valueOf(reader.nextString()));
@@ -96,8 +103,8 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
         writer.value(type.getDateToStart().toString());
         writer.name("daysOfWeek");
         writer.value(Arrays.toString(type.getDaysOfWeek()));
-//        writer.name("habitEvents");
-//        writer.value(gsonEvent.toJson(type.getHabitEvents()));
+        writer.name("habitEvents");
+        writer.value(gsonEvent.toJson(type.getHabitEvents()));
         writer.name("numCompleted");
         writer.value(type.getNumCompleted());
         writer.name("numUncompleted");

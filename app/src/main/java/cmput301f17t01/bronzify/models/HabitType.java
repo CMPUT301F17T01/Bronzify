@@ -36,6 +36,7 @@ public class HabitType {
         this.daysOfWeek = daysOfWeek;
         this.numCompleted = 0;
         this.numUncompleted = 0;
+        generateNewEvents(dateToStart);
     }
 
     // Generate MAX_DAYS_AHEAD worth of habit events
