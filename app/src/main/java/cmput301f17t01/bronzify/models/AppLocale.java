@@ -45,11 +45,6 @@ public class AppLocale {
         return ourInstance;
     }
 
-
-    private AppLocale() {
-    }
-
-
     /**
      * Gets the last user that was accessing the app locale
      *
@@ -117,38 +112,37 @@ public class AppLocale {
 
 
     private void loadFromFile() { //temporarily unimplemented
-//        try {
-//            Gson gson = new Gson();
-//            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-//            FileInputStream fis = openFileInput(FILENAME);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-//            savedUsers = gson.fromJson(in, listType);
-//            Log.i("user0", savedUsers.get(0).toString());
-//
-//        } catch (FileNotFoundException e) {
-//            savedUsers = new ArrayList<User>();
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            savedUsers = gson.fromJson(in, listType);
+            Log.i("user0", savedUsers.get(0).toString());
+        }
+        catch (FileNotFoundException e) {
+            savedUsers = new ArrayList<User>();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-
     private void saveInFile() { //temporarily unimplemented
-//        try {
-//            FileOutputStream fos = Context.getApplicationContext.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-//            OutputStreamWriter writer = new OutputStreamWriter(fos);
-//            Gson gson = new Gson();
-//            gson.toJson(savedUsers, writer);
-//            writer.flush();
-//            fos.close();
-//            Log.i("Saved", "in file");
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            FileOutputStream fos = Context.getApplicationContext.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(savedUsers, writer);
+            writer.flush();
+            fos.close();
+            Log.i("Saved", "in file");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
