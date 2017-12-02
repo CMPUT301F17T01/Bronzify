@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.FollowAdapter;
+import cmput301f17t01.bronzify.adapters.recyclers.FollowAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;

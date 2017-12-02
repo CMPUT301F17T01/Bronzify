@@ -1,4 +1,4 @@
-package cmput301f17t01.bronzify.adapters;
+package cmput301f17t01.bronzify.adapters.recyclers;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,33 +15,31 @@ import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ListController;
+import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/22/2017.
  */
 
-public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder> {
-    private static final String TAG = "FollowAdapter";
+public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHolder> {
+    private static final String TAG = "MyHabitAdapter";
 
     // TODO: SHOULD THIS BE USERS LIST OR JUST STRINGS OF USERID'S?
     // THOUGHTS?
 
-    private List<User> entries;
+    private List<HabitType> entries;
     private Context mContext;
     private static ListController controller;
+    private TextView habitTypeName;
+    private TextView completion;
 
-    public FollowAdapter(Context context, List<User> list){
+    public MyHabitAdapter(Context context, List<HabitType> list){
         entries = list;
         mContext = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView followReqText;
-        public ImageButton acceptButton;
-        public ImageButton rejectButton;
-        public RelativeLayout followRow;
-
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
@@ -54,19 +52,23 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
                 }
             });*/
-            followReqText = (TextView) v.findViewById(R.id.followReqName);  //Gotta add these in your xml, they are absent
-            acceptButton = (ImageButton) v.findViewById(R.id.acceptFollow);
-            rejectButton = (ImageButton) v.findViewById(R.id.rejectFollow);
-            followRow = (RelativeLayout) v.findViewById(R.id.rowFollow);    //Gotta add these in your xml, they are absent
+            habitTypeName = (TextView) v.findViewById(R.id.typeCompletion);
+            completion = (TextView) v.findViewById(R.id.acceptFollow);
 
         }
-        public TextView getTextView() {
-            return followReqText;
+        public TextView getHabitTypeName() {
+            return habitTypeName;
         }
+
+        public TextView getCompletion() {
+            return completion;
+        }
+
+
     }
 
     @Override
-    public FollowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyHabitAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.row_follow,parent,false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -75,10 +77,9 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        User u = entries.get(position);
-        holder.followReqText.setText(u.getUserID());
+        HabitType u = entries.get(position);
 
-        holder.rejectButton.setOnClickListener(new View.OnClickListener() {
+        /*holder.rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the clicked item label
@@ -94,9 +95,9 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
                 Toast.makeText(mContext,"Rejected : " + userName, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
-        holder.acceptButton.setOnClickListener(new View.OnClickListener() {
+       /* holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the clicked item label
@@ -108,7 +109,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
                 Toast.makeText(mContext,"Accepted : " + userName, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     @Override
