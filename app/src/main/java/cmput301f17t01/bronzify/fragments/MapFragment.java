@@ -19,12 +19,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
-
-import java.util.concurrent.Executor;
 
 import cmput301f17t01.bronzify.R;
 
@@ -73,7 +72,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
                             Location currentLocation = (Location) task.getResult();
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
+                            LatLng LatitudeLongitude = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            moveCamera(LatitudeLongitude, DEFAULT_ZOOM);
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(LatitudeLongitude)
+                                    .title("Retrieve Habit Event Name and Replace")
+                                    .snippet("These are the Habit Event Comments")
+                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))); //Replace with picture?
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                         }
