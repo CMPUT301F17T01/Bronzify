@@ -11,6 +11,7 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 
+import java.io.IOException;
 import java.util.Date;
 
 import cmput301f17t01.bronzify.adapters.UserAdapter;
@@ -151,7 +152,7 @@ public class ElasticSearch {
         @Override
         protected User doInBackground(String... strings) {
             verifySettings();
-            User foundUser;
+            User foundUser = null;
 
             Get get = new Get.Builder(indexString, strings[0]) //index, id
                     .type(typeString)
@@ -167,9 +168,11 @@ public class ElasticSearch {
                 } else {
                     throw new ElasticException();
                 }
-            } catch (Exception e) {
+            } catch (ElasticException e) {
                 Log.i("Error", "Something went wrong when communicating with the server");
                 foundUser = null;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             return foundUser;
         }

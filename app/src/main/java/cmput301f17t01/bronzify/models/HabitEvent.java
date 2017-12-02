@@ -25,7 +25,10 @@ public class HabitEvent {
 
     // Constructor
     public HabitEvent(Date goalDate, String habitType){
-        this.userID = AppLocale.getInstance().getUser().getUserID();
+        try {
+            this.userID = AppLocale.getInstance().getUser().getUserID();
+        } catch (NullPointerException e) {
+        }
         this.goalDate = goalDate;
         this.completedDate = null;
         this.comment = ""; // Default comment is blank

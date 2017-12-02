@@ -96,6 +96,7 @@ public class User {
      */
     public void addFollowing(String userID) {
         following.add(userID);
+        setLastInfluenced(new Date());
     } //TODO: investigate passing the user directly
 
     /**
@@ -114,7 +115,6 @@ public class User {
      */
     public void setFollowing(ArrayList<String> following) {
         this.following = following;
-        this.lastInfluenced = new Date();
 
     }
 
@@ -125,7 +125,6 @@ public class User {
      */
     public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
         this.pendingFollowRequests = pendingFollowRequests;
-        this.setLastInfluenced(new Date());
     }
 
     /**
@@ -221,7 +220,6 @@ public class User {
      */
     public void setHabitTypes(ArrayList<HabitType> habitTypes) {
         this.habitTypes = habitTypes;
-        this.lastUpdated = new Date();
     }
 
     /**
