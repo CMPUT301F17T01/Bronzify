@@ -57,7 +57,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 fieldname = reader.nextName();
             }
             if ("user".equals(fieldname)) {
-                event.setUser(elasticSearch.getUser(reader.nextName()));
+                event.setUserID(reader.nextName());
             }
             if ("goalDate".equals(fieldname)) {
                 DateFormat format =
@@ -106,7 +106,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         }
         writer.beginObject();
         writer.name("user");
-        writer.value(event.getUser().getUserID());
+        writer.value(event.getUserID());
         writer.name("goalDate");
         writer.value(event.getGoalDate().toString());
         writer.name("completedDate");

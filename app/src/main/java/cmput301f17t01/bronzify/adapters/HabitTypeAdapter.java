@@ -1,5 +1,8 @@
 package cmput301f17t01.bronzify.adapters;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
@@ -11,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import cmput301f17t01.bronzify.controllers.ElasticSearch;
@@ -25,6 +29,8 @@ import cmput301f17t01.bronzify.models.User;
 public class HabitTypeAdapter {
     private ElasticSearch elasticSearch = new ElasticSearch();
     private Boolean[] daysOfWeek;
+    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
+            new HabitEventAdapter()).create();
 
     public HabitType read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
@@ -34,16 +40,7 @@ public class HabitTypeAdapter {
         HabitType type = new HabitType("tmp", "tmp", new Date(), daysOfWeek);
         String fieldname = null;
         reader.beginObject();
-
-    /*    private User user;
-        private String name;
-        private String reason;
-        private Date dateToStart;
-        private Boolean[] daysOfWeek; // Sunday = 0, ... , Saturday = 6
-
-        private ArrayList<HabitEvent> habitEvents = new ArrayList<>();
-        private int numCompleted;
-        private int numUncompleted;*/
+        
 
         while (reader.hasNext()) {
             JsonToken token = reader.peek();
@@ -70,22 +67,41 @@ public class HabitTypeAdapter {
                 type.setDaysOfWeek(boolArrayFromString(reader.nextName()));
             }
             if ("habitEvents".equals(fieldname)) {
-
+                ArrayList<HabitEvent> events = gsonEvent.fromJson(reader.nextName(),
+                        new TypeToken<ArrayList<HabitEvent>>(){}.getType());
+                type.setHabitEvents(events);
+            }
+            if ("numCompleted".equals(fieldname)) {
+                type.setNumCompleted(Integer.valueOf(reader.nextName()));
+            }
+            if ("numUncompleted".equals(fieldname)) {
+                type.setNumUncompleted(Integer.valueOf(reader.nextName()));
             }
 
         }
 
         return type;
     }
-    public void write(JsonWriter writer, HabitEvent event) throws IOException {
-        if (event == null) {
+    public void write(JsonWriter writer, HabitType type) throws IOException {
+        if (type == null) {
             writer.nullValue();
             return;
         }
         writer.beginObject();
         writer.name("user");
-        writer.value(event.getUser().getUserID());
-
+        writer.value(type.getUserID());
+        writer.name("reason");
+        writer.value(type.getReason());
+        writer.name("dateToStart");
+        writer.value(type.getDateToStart().toString());
+        writer.name("daysOfWeek");
+        writer.value(Arrays.toString(type.getDaysOfWeek()));
+        writer.name("habitEvents");
+        writer.value(gsonEvent.toJson(type.getHabitEvents()));
+        writer.name("numCompleted");
+        writer.value(type.getNumCompleted());
+        writer.name("numUncompleted");
+        writer.value(type.getNumUncompleted());
         writer.endObject();
     }
 
