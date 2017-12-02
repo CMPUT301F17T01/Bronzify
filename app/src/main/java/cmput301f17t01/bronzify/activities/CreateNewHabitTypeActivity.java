@@ -335,7 +335,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                     ElasticSearch elastic = new ElasticSearch();
                     currentUser = elastic.update(currentUser);
                     AppLocale appLocale = AppLocale.getInstance();
-                    appLocale.setContext(getApplicationContext());
+//                    appLocale.setContext(getApplicationContext());
                     appLocale.setUser(currentUser);
 
                     // Fill Habit Event List Fragment

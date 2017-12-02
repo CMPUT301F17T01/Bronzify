@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.File;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.LoginController;
@@ -26,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Context context = getApplicationContext();
+        File file = context.getFilesDir();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
