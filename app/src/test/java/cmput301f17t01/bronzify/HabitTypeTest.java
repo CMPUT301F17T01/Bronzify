@@ -34,12 +34,8 @@ public class HabitTypeTest extends TestCase {
     public void testJson() {
         assertTrue(Boolean.TRUE);
         HabitType type = new HabitType("name" , "reason", new Date(), daysOfWeek);
-        HabitEventAdapter eventAdapter = new HabitEventAdapter();
-        Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class, eventAdapter).create();
-        HabitTypeAdapter typeAdapter = new HabitTypeAdapter();
-        Gson gsonType = new GsonBuilder().registerTypeAdapter(HabitEvent.class, typeAdapter).create();
-
-
+        Gson gsonType = new GsonBuilder().registerTypeAdapter(HabitType.class,
+                new HabitTypeAdapter()).create();
 
 //        String json = gsonType.toJson(type);
 //        HabitType type2 = gsonType.fromJson(json, HabitType.class);

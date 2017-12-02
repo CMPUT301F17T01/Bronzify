@@ -19,26 +19,6 @@ import cmput301f17t01.bronzify.models.HabitEvent;
  * Created by kdehaan on 30/11/17.
  */
 
-/*private User user;
-private Date goalDate; // Date for habit event to happen
-private Date completedDate;
-private String comment; // Max 20 Char
-private Boolean completed;
-private Bitmap image; // Change?
-private GoogleMap location; // Unsure of location type
-
-private String habitType;
-
-// Constructor
-public HabitEvent(Date goalDate, String habitType){
-        this.user = AppLocale.getInstance().getUser();
-        this.goalDate = goalDate;
-        this.comment = ""; // Default comment is blank
-        this.completed = false;
-        this.image = null;
-        this.location = null;
-        this.habitType = habitType;
-        }*/
 
 public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
 
