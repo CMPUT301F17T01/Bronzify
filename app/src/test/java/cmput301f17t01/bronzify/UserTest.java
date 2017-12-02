@@ -1,12 +1,18 @@
 package cmput301f17t01.bronzify;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
+import cmput301f17t01.bronzify.adapters.HabitTypeAdapter;
+import cmput301f17t01.bronzify.adapters.UserAdapter;
 import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
 import cmput301f17t01.bronzify.exceptions.UserException;
 import cmput301f17t01.bronzify.exceptions.UserExistsException;
@@ -24,7 +30,7 @@ public class UserTest extends TestCase {
     Date created = new Date();
     private User user = new User("userID");
 
-    Boolean[] daysOfWeek = {false, true, false, false, true, false, false,};
+    Boolean[] daysOfWeek = {false, true, false, true, false, false, false,};
     HabitType habitType;
 
     @Test
@@ -32,6 +38,35 @@ public class UserTest extends TestCase {
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.setUser(user);
         habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
+    }
+
+    @Test
+    public void testJson() {
+        User user0 = new User("testID");
+        try {
+            user0.addHabitType(habitType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> followRequests = new ArrayList<>();
+        followRequests.add("someone");
+        user.setPendingFollowRequests(followRequests);
+        ArrayList<String> following = new ArrayList<>();
+        following.add("someone else");
+        user.setFollowing(following);
+
+        Gson gsonUser = new GsonBuilder().registerTypeAdapter(User.class,
+                new UserAdapter()).create();
+
+        String json = gsonUser.toJson(user0);
+        User user2 = gsonUser.fromJson(json, User.class);
+        assertTrue((user0.getDateCreated().getTime() - user2.getDateCreated().getTime()) < 1000);
+        assertTrue((user0.getLastInfluenced().getTime() - user2.getLastInfluenced().getTime()) < 1000);
+        assertTrue((user0.getLastUpdated().getTime() - user2.getLastUpdated().getTime()) < 1000);
+        assertEquals(user0.getHabitTypes().size(), user2.getHabitTypes().size()); // relying on habiteventtest to confirm this
+        assertEquals(user0.getUserID(), user2.getUserID());
+        assertEquals(user0.getFollowing(), user2.getFollowing());
+        assertEquals(user0.getPendingFollowRequests(), user2.getPendingFollowRequests());
     }
 
     @Test
