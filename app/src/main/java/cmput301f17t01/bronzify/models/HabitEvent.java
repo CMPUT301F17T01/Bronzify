@@ -108,13 +108,12 @@ public class HabitEvent {
     }
 
     /**
-     * Set completion status
+     * Set completion as true
      * Update completion date
      *
-     * @param completed Completion status
      */
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void markCompleted() {
+        this.completed = Boolean.TRUE;
         this.completedDate = new Date();
     }
 
@@ -176,7 +175,7 @@ public class HabitEvent {
      */
     public String completedDateToString(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
-        String strCompDate= simpleDateFormat.format(completedDate);
+        String strCompDate = simpleDateFormat.format(completedDate);
         return strCompDate;
     }
 
@@ -194,5 +193,9 @@ public class HabitEvent {
 
     public void setCompletedDate(Date completedDate) {
         this.completedDate = completedDate;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

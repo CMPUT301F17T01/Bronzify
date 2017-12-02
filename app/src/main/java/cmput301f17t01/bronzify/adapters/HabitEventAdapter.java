@@ -55,36 +55,42 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
             JsonToken token = reader.peek();
             if (token.equals(JsonToken.NAME)) {
                 fieldname = reader.nextName();
+                continue;
             }
             if ("user".equals(fieldname)) {
-                event.setUserID(reader.nextName());
+                event.setUserID(reader.nextString());
+                continue;
             }
             if ("goalDate".equals(fieldname)) {
                 DateFormat format =
-                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextName());
+                    Date date = format.parse(reader.nextString());
                     event.setGoalDate(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                continue;
 
             }
             if ("completedDate".equals(fieldname)) {
                 DateFormat format =
-                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextName());
+                    Date date = format.parse(reader.nextString());
                     event.setCompletedDate(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                continue;
             }
             if ("comment".equals(fieldname)) {
-                event.setComment(reader.nextName());
+                event.setComment(reader.nextString());
+                continue;
             }
             if ("completed".equals(fieldname)) {
-                event.setCompleted(Boolean.valueOf(reader.nextName()));
+                event.setCompleted(Boolean.valueOf(reader.nextString()));
+                continue;
             }
             if ("image".equals(fieldname)) {
                 continue; //TODO
@@ -93,9 +99,10 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue; //TODO
             }
             if ("habitType".equals(fieldname)) {
-                event.setHabitType(reader.nextName());
+                event.setHabitType(reader.nextString());
             }
         }
+        reader.endObject();
 
         return event;
     }
@@ -110,15 +117,27 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.name("goalDate");
         writer.value(event.getGoalDate().toString());
         writer.name("completedDate");
-        writer.value(event.getCompletedDate().toString());
+        try {
+            writer.value(event.getCompletedDate().toString());
+        } catch (NullPointerException e) {
+            writer.nullValue();
+        }
         writer.name("comment");
         writer.value(event.getComment());
         writer.name("completed");
         writer.value(event.getCompleted().toString());
         writer.name("image");
-        writer.value(event.getImage().toString());
+        try{
+            writer.value(event.getImage().toString());
+        } catch (NullPointerException e) {
+            writer.nullValue();
+        }
         writer.name("location");
-        writer.value(event.getLocation().toString());
+        try{
+            writer.value(event.getLocation().toString());
+        } catch (NullPointerException e) {
+            writer.nullValue();
+        }
         writer.name("habitType");
         writer.value(event.getHabitType());
         writer.endObject();

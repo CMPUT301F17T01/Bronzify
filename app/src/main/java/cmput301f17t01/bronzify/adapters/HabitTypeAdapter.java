@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import cmput301f17t01.bronzify.controllers.ElasticSearch;
@@ -40,7 +39,7 @@ public class HabitTypeAdapter {
         HabitType type = new HabitType("tmp", "tmp", new Date(), daysOfWeek);
         String fieldname = null;
         reader.beginObject();
-        
+
 
         while (reader.hasNext()) {
             JsonToken token = reader.peek();
