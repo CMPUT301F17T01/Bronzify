@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,6 +86,8 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
     protected void onResume() {
         super.onResume();
         fillTypesList();
+        MyHabitAdapter myHabitAdapter = new MyHabitAdapter(this, types);
+        recyclerView.setAdapter(myHabitAdapter);
     }
 
     /**

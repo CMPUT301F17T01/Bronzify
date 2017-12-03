@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.adapters.recyclers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.activities.CreateNewHabitTypeActivity;
+import cmput301f17t01.bronzify.activities.HabitTypeActivity;
+import cmput301f17t01.bronzify.activities.MyHabitsActivity;
 import cmput301f17t01.bronzify.controllers.ListController;
 import cmput301f17t01.bronzify.models.HabitType;
 
@@ -61,11 +65,12 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int pos = this.getAdapterPosition(); // Position of Habit Type clicked
-            HabitType habitType = entries.get(pos);
-            Toast.makeText(mContext, habitType.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, HabitTypeActivity.class);
+            intent.putExtra("SELECTED_HABIT", pos); // Get should work since position should always be same
+            mContext.startActivity(intent);
         }
-
     }
+
     public void setOnItemClickListener(ClickListener clickListener) {
         MyHabitAdapter.clickListener = clickListener;
     }
@@ -73,15 +78,15 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     @Override
     public MyHabitAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.type_row,parent,false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return (new ViewHolder(v));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HabitType habitType = entries.get(position);
         holder.habitTypeName.setText(habitType.getName());
-        holder.completion.setText(String.valueOf(habitType.getCompletionRatio())+"%");
+        String completionString = Integer.toString(habitType.getCompletionRatio()) + "%";
+        holder.completion.setText(completionString);
     }
 
     @Override
