@@ -16,7 +16,9 @@ import android.widget.TextView;
 import java.io.File;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.LoginController;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Context context = getApplicationContext();
-        File file = context.getFilesDir();
+        AppLocale appLocale = AppLocale.getInstance();
+        appLocale.setLocalUsers(new ContextController(getApplicationContext()).loadFromFile());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
