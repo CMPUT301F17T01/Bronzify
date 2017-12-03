@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/typeRelativeLayout"
-    android:background="#EEEEEE"
-    >
-
+    android:background="#EEEEEE">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="habitType"
-        android:layout_toRightOf="@+id/typeCompletion"
+        android:layout_toEndOf="@+id/typeCompletion"
         android:layout_alignBottom="@id/typeCompletion"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"
         android:id="@+id/habitTypeRow"/>
 
     <TextView
         android:id="@+id/typeCompletion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="55%"
         android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_marginLeft="32dp" />
+        android:textSize="20sp"
+        android:layout_marginStart="32dp" />
 
     <ImageButton
         android:id="@+id/typeArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/habitTypeRow"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:background="@drawable/ic_media_play" />
+
 </RelativeLayout>
