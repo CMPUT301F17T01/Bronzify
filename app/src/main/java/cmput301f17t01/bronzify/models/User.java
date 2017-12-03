@@ -18,6 +18,7 @@ public class User {
     private Date lastInfluenced;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
+//    private ArrayList<String> habitTypes = new ArrayList<String>();
     private ArrayList<String> following = new ArrayList<String>();
     private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
 
@@ -50,9 +51,13 @@ public class User {
      * @param habitType
      * @return
      */
-    public void addHabitType(HabitType habitType) {
-        habitTypes.add(habitType);
-        this.lastUpdated = new Date();
+    public void addHabitType(HabitType habitType) throws Exception {
+        if (!habitTypes.contains(habitType)) {
+            habitTypes.add(habitType);
+            this.lastUpdated = new Date();
+        } else {
+            throw new Exception("Habit type exists");
+        }
     }
 
 
@@ -91,7 +96,8 @@ public class User {
      */
     public void addFollowing(String userID) {
         following.add(userID);
-    }
+        setLastInfluenced(new Date());
+    } //TODO: investigate passing the user directly
 
     /**
      * Removes a follower
@@ -109,7 +115,6 @@ public class User {
      */
     public void setFollowing(ArrayList<String> following) {
         this.following = following;
-        this.lastInfluenced = new Date();
 
     }
 
@@ -120,7 +125,6 @@ public class User {
      */
     public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
         this.pendingFollowRequests = pendingFollowRequests;
-        this.setLastInfluenced(new Date());
     }
 
     /**
@@ -216,7 +220,18 @@ public class User {
      */
     public void setHabitTypes(ArrayList<HabitType> habitTypes) {
         this.habitTypes = habitTypes;
-        this.lastUpdated = new Date();
     }
 
+    /**
+     * Removes a habit type
+     */
+    public void removeHabitType(String habitTypeName) {
+        if (habitTypes.contains(habitTypeName)) {
+            habitTypes.remove(habitTypeName);
+        }
+    } //TODO: test
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 }

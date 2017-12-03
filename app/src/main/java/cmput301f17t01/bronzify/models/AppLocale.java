@@ -15,6 +15,8 @@ public class AppLocale {
     private static final String FILENAME = "bronzify.sav";
 
     private ArrayList<User> savedUsers = new ArrayList<>();
+    private ArrayList<HabitType> savedHabitTypes = new ArrayList<>();
+    private ArrayList<HabitEvent> savedHabitEvents = new ArrayList<>();
 
     /**
      * Gets the instances of the app locale
@@ -125,6 +127,22 @@ public class AppLocale {
         }
 
     }*/
+
+    public ArrayList<HabitType> getSavedHabitTypes() {
+        return savedHabitTypes;
+    }
+
+    public void setSavedHabitTypes(ArrayList<HabitType> savedHabitTypes) {
+        this.savedHabitTypes = savedHabitTypes;
+    }
+
+    public ArrayList<HabitEvent> getSavedHabitEvents() {
+        return savedHabitEvents;
+    }
+
+    public void setSavedHabitEvents(ArrayList<HabitEvent> savedHabitEvents) {
+        this.savedHabitEvents = savedHabitEvents;
+    }
 
     public ArrayList<User> getSavedUsers() {
         return savedUsers;
