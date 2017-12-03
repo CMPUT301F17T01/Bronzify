@@ -322,7 +322,6 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                 // Only if all fields are filled in
                 if (validName && validReason && validDate && validDaysOfWeek) {
                     HabitType newHabit = new HabitType(habitName, habitReason, date, daysOfWeek);
-                    newHabit.generateNewEvents(newHabit.getDateToStart());
 
                     // Add new habit type to logged in user
                     User currentUser = AppLocale.getInstance().getUser();
