@@ -26,8 +26,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 public class CreateNewHabitTypeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -322,9 +325,16 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                     newHabit.generateNewEvents(newHabit.getDateToStart());
 
                     // Add new habit type to logged in user
-//                    User currentUser = AppLocale.getInstance().getUser();
-//                    currentUser.addHabitType(newHabit);
-//                    AppLocale.getInstance().setUser(currentUser);
+                    User currentUser = AppLocale.getInstance().getUser();
+                    try {
+                        currentUser.addHabitType(newHabit);
+                    } catch (Exception e) {
+                        //todo: type already exists
+                        e.printStackTrace();
+                    }
+                    ElasticSearch elastic = new ElasticSearch();
+                    currentUser = elastic.update(currentUser);
+                    AppLocale.getInstance().setUser(currentUser);
 
                     // Fill Habit Event List Fragment
                     // Need to change fillList() Code

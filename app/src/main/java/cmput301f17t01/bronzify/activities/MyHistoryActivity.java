@@ -1,11 +1,10 @@
 package cmput301f17t01.bronzify.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,24 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ToggleButton;
-// import android.support.design.widget.TabItem;
 
-import java.util.ArrayList;
-
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
-import cmput301f17t01.bronzify.fragments.ListFragment;
-import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.models.AppLocale;
+
+// import android.support.design.widget.TabItem;
 
 /**
  * Created by noahkryz on 11/1/2017.
  */
-public class HabitHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MyHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
@@ -165,11 +158,13 @@ public class HabitHistoryActivity extends AppCompatActivity implements Navigatio
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = HabitHistoryActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        if(!(id == R.id.MyHistory)) {
+            Activity currentActivity = MyHistoryActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

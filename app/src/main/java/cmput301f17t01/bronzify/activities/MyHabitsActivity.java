@@ -1,7 +1,6 @@
 package cmput301f17t01.bronzify.activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,17 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.Date;
-
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
-import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.models.AppLocale;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -121,11 +114,13 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = MyHabitsActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        if(!(id == R.id.MyHabits)) {
+            Activity currentActivity = MyHabitsActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
