@@ -233,7 +233,7 @@ public class HabitType {
     }
 
     public int getCompletionRatio(){
-        if(numUncompleted==0 && numCompleted == 0 ){return 0;}
+        if(numUncompleted==0 && numCompleted == 0 ){return 100;}
         return numCompleted/(numCompleted+numUncompleted);
     }
 }

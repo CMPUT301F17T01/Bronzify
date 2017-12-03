@@ -81,6 +81,12 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillTypesList();
+    }
+
     /**
      * Called when the back button is pressed
      *
@@ -147,6 +153,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
     private void fillTypesList(){
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
+        types.clear();
         for(HabitType type: habitTypes){
             types.add(type);
         }

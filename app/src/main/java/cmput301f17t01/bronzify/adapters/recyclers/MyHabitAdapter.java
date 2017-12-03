@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -29,14 +30,16 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     private static ListController controller;
     private static ClickListener clickListener;
 
-
-
     public MyHabitAdapter(Context context, List<HabitType> list){
         entries = list;
         mContext = context;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public List<HabitType> getEntries(){
+        return entries;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitTypeName;
         private TextView completion;
 
@@ -55,10 +58,11 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
             return completion;
         }
 
-
         @Override
         public void onClick(View v) {
-            clickListener.onItemClick(getAdapterPosition(), v);
+            int pos = this.getAdapterPosition(); // Position of Habit Type clicked
+            HabitType habitType = entries.get(pos);
+            Toast.makeText(mContext, habitType.getName(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -75,10 +79,9 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        HabitType ht = entries.get(position);
-        holder.habitTypeName.setText(ht.getName());
-        holder.completion.setText(String.valueOf(ht.getCompletionRatio())+"%");
-
+        HabitType habitType = entries.get(position);
+        holder.habitTypeName.setText(habitType.getName());
+        holder.completion.setText(String.valueOf(habitType.getCompletionRatio())+"%");
     }
 
     @Override
