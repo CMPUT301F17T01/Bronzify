@@ -28,6 +28,7 @@ import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -38,7 +39,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
     private ViewPager viewPager;
-    private List<HabitType> types;
+    private List<HabitType> types = new ArrayList<HabitType>();
 
     /**
      * Called on the creation of the My Habits Activity
@@ -67,8 +68,9 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        types =(List) new ArrayList<HabitType>();
-        createTypesList();
+//        createTypesList();
+        fillTypesList();
+
         rv = (RecyclerView) findViewById(R.id.myHabitRecycler);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -169,7 +171,13 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
         types.add(new HabitType("Crying","Cuz",new Date(),array ));
         types.add(new HabitType("Singing","Cuz",new Date(),array ));
+    }
 
-
+    private void fillTypesList(){
+        User user = AppLocale.getInstance().getUser();
+        ArrayList<HabitType> habitTypes = user.getHabitTypes();
+        for(HabitType type: habitTypes){
+            types.add(type);
+        }
     }
 }
