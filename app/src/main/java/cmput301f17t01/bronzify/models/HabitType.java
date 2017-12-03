@@ -63,14 +63,6 @@ public class HabitType {
         }
     }
 
-    // Fill up List Fragment with all Habit Events
-    public void fillList(){
-        for(HabitEvent habitEvent: habitEvents){
-            // TODO: NEED CODE TO FILL HABIT EVENT LIST FRAGMENT
-            Log.d("Test", name + " - " + habitEvent.goalDateToString());
-        }
-    }
-
     // Setters and Getters
     // User
     /**

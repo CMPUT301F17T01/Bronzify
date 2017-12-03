@@ -35,7 +35,6 @@ import cmput301f17t01.bronzify.models.User;
 public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private String name;
     private AppLocale appLocale = AppLocale.getInstance();
 
     private List<HabitType> types = new ArrayList<HabitType>();
@@ -50,28 +49,22 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_habits);
 
-        name = appLocale.getUser().getUserID();
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        MyHabitAdapter myHabitAdapter = new MyHabitAdapter(this, types);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        fillTypesList();
 
         recyclerView = findViewById(R.id.myHabitRecycler);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myHabitAdapter);
 
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
         fab.setOnClickListener(new View.OnClickListener(){
