@@ -106,11 +106,9 @@ public class ElasticSearch {
         try {
             foundUser = getUserTask.get();
         } catch (Exception e) {
-            foundUser = null;
+            foundUser = AppLocale.getInstance().getLocalUser(userID);
         }
-        if (foundUser == null) {
-            foundUser = AppLocale.getInstance().getSavedUser(userID);
-        }
+
         return foundUser;
     }
 

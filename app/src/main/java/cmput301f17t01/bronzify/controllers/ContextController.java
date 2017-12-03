@@ -50,6 +50,7 @@ public class ContextController {
             Type listType = new TypeToken<ArrayList<User>>() {}.getType();
             FileInputStream fis = context.openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Log.i("Loaded", "from file");
             return userGson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {

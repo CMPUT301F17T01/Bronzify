@@ -80,17 +80,16 @@ public class AppLocale {
         return user;
     }
 
-//    public User getSavedUser(String userID) {
-//        loadFromFile();
-//        Iterator<User> itr = savedUsers.iterator();
-//        while (itr.hasNext()) {
-//            User next = itr.next();
-//            if (next.getUserID().equals(userID)) {
-//                return next;
-//            }
-//        }
-//        return null;
-//    }
+    public User getLocalUser(String userID) {
+        Iterator<User> itr = localUsers.iterator();
+        while (itr.hasNext()) {
+            User next = itr.next();
+            if (next.getUserID().equals(userID)) {
+                return next;
+            }
+        }
+        return null;
+    }
 
 
     public void removeLocalUser(User deleteUser) {
