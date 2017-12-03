@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     controller.loginUser(result);
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Login Successful");
-                    Intent intent = new Intent(LoginActivity.this, MyHomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HabitEventActivity.class);
                     startActivity(intent);
 
                 } else {

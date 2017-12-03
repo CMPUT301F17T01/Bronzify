@@ -46,7 +46,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             fragment.setArguments(bundle);
             return fragment;
         } else {
-            return new MapFragment();
+            return new PictureFragment();
         }
     }
 
