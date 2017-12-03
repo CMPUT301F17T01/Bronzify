@@ -39,7 +39,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
     private RecyclerView rv;
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
-    private ViewPager viewPager;
+
     private List<HabitType> types = new ArrayList<HabitType>();
 
     /**
@@ -53,7 +53,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_my_habits);
 
         name = appLocale.getUser().getUserID();
-        viewPager = findViewById(R.id.view_pager);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,10 +60,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
