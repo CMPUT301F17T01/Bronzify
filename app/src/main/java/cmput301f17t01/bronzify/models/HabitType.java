@@ -13,7 +13,7 @@ import java.util.Date;
 public class HabitType {
     private static final int MAX_DAYS_AHEAD = 31;
 
-    private User user;
+    private String userID;
     private String name;
     private String reason;
     private Date dateToStart;
@@ -25,13 +25,17 @@ public class HabitType {
 
     // Constructor
     public HabitType(String name, String reason, Date dateToStart, Boolean[] daysOfWeek) {
-        user = AppLocale.getInstance().getUser();
+        try {
+            userID = AppLocale.getInstance().getUser().getUserID();
+        } catch (NullPointerException e) {
+        }
         this.name = name;
         this.reason = reason;
         this.dateToStart = dateToStart;
         this.daysOfWeek = daysOfWeek;
         this.numCompleted = 0;
         this.numUncompleted = 0;
+        generateNewEvents(dateToStart);
     }
 
     // Generate MAX_DAYS_AHEAD worth of habit events
@@ -48,7 +52,7 @@ public class HabitType {
             // If day of week is a repeat day of week
             // Create a new habit event
             if(daysOfWeek[dayOfWeek]){
-                HabitEvent newHabitEvent = new HabitEvent(date);
+                HabitEvent newHabitEvent = new HabitEvent(date, name);
                 habitEvents.add(newHabitEvent);
             }
 
@@ -73,8 +77,8 @@ public class HabitType {
      *
      * @return User
      */
-    public User getUser() {
-        return user;
+    public String getUserID() {
+        return userID;
     }
 
     // Habit Name
@@ -210,6 +214,22 @@ public class HabitType {
      */
     public void incrementNumUncompleted(int changeValue) {
         this.numUncompleted = changeValue;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
+        this.habitEvents = habitEvents;
+    }
+
+    public void setNumCompleted(int numCompleted) {
+        this.numCompleted = numCompleted;
+    }
+
+    public void setNumUncompleted(int numUncompleted) {
+        this.numUncompleted = numUncompleted;
     }
 
     public int getCompletionRatio(){
