@@ -332,13 +332,10 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                         //todo: type already exists
                         e.printStackTrace();
                     }
+
                     ElasticSearch elastic = new ElasticSearch();
                     currentUser = elastic.update(currentUser);
                     AppLocale.getInstance().setUser(currentUser);
-
-                    // Fill Habit Event List Fragment
-                    // Need to change fillList() Code
-                    newHabit.fillList();
 
                     // Go back
                     finish();
