@@ -58,8 +58,8 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HabitEvent habitEvent = entries.get(position);
-//        holder.habitEventName.setText(habitEvent.getHabitType());
-//        holder.habitEventDate.setText(habitEvent.goalDateToString());
+        holder.habitEventName.setText(habitEvent.getHabitType());
+        holder.habitEventDate.setText(habitEvent.goalDateToString());
     }
 
     @Override
