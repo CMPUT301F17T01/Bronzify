@@ -322,7 +322,6 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                 // Only if all fields are filled in
                 if (validName && validReason && validDate && validDaysOfWeek) {
                     HabitType newHabit = new HabitType(habitName, habitReason, date, daysOfWeek);
-                    newHabit.generateNewEvents(newHabit.getDateToStart());
 
                     // Add new habit type to logged in user
                     User currentUser = AppLocale.getInstance().getUser();
@@ -332,13 +331,10 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                         //todo: type already exists
                         e.printStackTrace();
                     }
+
                     ElasticSearch elastic = new ElasticSearch();
                     currentUser = elastic.update(currentUser);
                     AppLocale.getInstance().setUser(currentUser);
-
-                    // Fill Habit Event List Fragment
-                    // Need to change fillList() Code
-                    newHabit.fillList();
 
                     // Go back
                     finish();

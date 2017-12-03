@@ -64,7 +64,8 @@
         <activity
             android:name=".activities.MyFeedActivity"
             android:label="My Feed" />
-
+        <activity
+            android:name=".activities.HabitTypeActivity" />
         <!--Maps Android Key-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
