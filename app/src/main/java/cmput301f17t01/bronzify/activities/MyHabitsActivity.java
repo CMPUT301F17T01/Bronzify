@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
@@ -36,7 +33,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView rv;
+    private RecyclerView recyclerView;
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
 
@@ -54,25 +51,26 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
 
         name = appLocale.getUser().getUserID();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        MyHabitAdapter myHabitAdapter = new MyHabitAdapter(this, types);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        createTypesList();
         fillTypesList();
 
-        rv = (RecyclerView) findViewById(R.id.myHabitRecycler);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        rv.setLayoutManager(llm);
-        MyHabitAdapter fa = new MyHabitAdapter(this,types);
-        rv.setAdapter(fa);
+        recyclerView = findViewById(R.id.myHabitRecycler);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(myHabitAdapter);
 
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
         fab.setOnClickListener(new View.OnClickListener(){
@@ -144,29 +142,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void createTypesList(){
-        Boolean[] array = new Boolean[7];
-        Arrays.fill(array, Boolean.FALSE);
-        types.add(new HabitType("Running","Cuz",new Date(),array ));
-        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
-        types.add(new HabitType("Eating","Cuz",new Date(),array ));
-        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
-        types.add(new HabitType("Crying","Cuz",new Date(),array ));
-        types.add(new HabitType("Singing","Cuz",new Date(),array ));
-        types.add(new HabitType("Running","Cuz",new Date(),array ));
-        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
-        types.add(new HabitType("Eating","Cuz",new Date(),array ));
-        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
-        types.add(new HabitType("Crying","Cuz",new Date(),array ));
-        types.add(new HabitType("Singing","Cuz",new Date(),array ));
-        types.add(new HabitType("Running","Cuz",new Date(),array ));
-        types.add(new HabitType("Jogging","Cuz",new Date(),array ));
-        types.add(new HabitType("Eating","Cuz",new Date(),array ));
-        types.add(new HabitType("Sleeping","Cuz",new Date(),array ));
-        types.add(new HabitType("Crying","Cuz",new Date(),array ));
-        types.add(new HabitType("Singing","Cuz",new Date(),array ));
     }
 
     private void fillTypesList(){

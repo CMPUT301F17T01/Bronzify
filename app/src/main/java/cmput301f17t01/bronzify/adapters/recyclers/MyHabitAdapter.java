@@ -43,8 +43,8 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            habitTypeName = (TextView) v.findViewById(R.id.habitTypeRow);
-            completion = (TextView) v.findViewById(R.id.typeCompletion);
+            habitTypeName = v.findViewById(R.id.habitTypeRow);
+            completion = v.findViewById(R.id.typeCompletion);
 
         }
 
