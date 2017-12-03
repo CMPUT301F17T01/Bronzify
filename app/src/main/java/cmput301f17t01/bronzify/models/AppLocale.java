@@ -103,11 +103,11 @@ public class AppLocale {
         }
     }
 
-//    public void saveUser(User newUser) {
-//        removeSavedUser(newUser);
-//        savedUsers.add(newUser);
-//        saveInFile();
-//    }
+    public void addLocalUser(User newUser) {
+        if (!localUsers.contains(newUser)) {
+            localUsers.add(newUser);
+        }
+    }
 
     /**
      * Method that sets a user as the logged in user
@@ -117,6 +117,7 @@ public class AppLocale {
     public void setUser(User newUser) {
         this.user = newUser;
         this.lastUser = newUser;
+        addLocalUser(newUser);
     }
 
     public void logoutUser() {

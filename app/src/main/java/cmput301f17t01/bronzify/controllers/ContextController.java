@@ -44,10 +44,16 @@ public class ContextController {
         saveInFile(appLocale.getLocalUsers());
     }
 
+    public void saveUser(User user) {
+        AppLocale appLocale = AppLocale.getInstance();
+        appLocale.addLocalUser(user);
+        saveInFile(appLocale.getLocalUsers());
+    }
+
 
     public ArrayList<User> loadFromFile() {
         try {
-            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
             FileInputStream fis = context.openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Log.i("Loaded", "from file");

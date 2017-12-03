@@ -98,6 +98,22 @@ public class ElasticSearch {
         addUserTask.execute(user);
     }
 
+    public User getUserLocalFirst(String userID) {
+        User foundUser = AppLocale.getInstance().getLocalUser(userID);
+        if (foundUser == null) {
+            ElasticSearch.GetUser getUserTask
+                    = new ElasticSearch.GetUser();
+            getUserTask.execute(userID);
+            try {
+                foundUser = getUserTask.get();
+            } catch (Exception e) {
+                foundUser = null;
+//            e.printStackTrace();
+            }
+        }
+        return foundUser;
+    }
+
     public User getUser(String userID) {
         User foundUser;
         ElasticSearch.GetUser getUserTask
@@ -106,6 +122,10 @@ public class ElasticSearch {
         try {
             foundUser = getUserTask.get();
         } catch (Exception e) {
+            foundUser = null;
+//            e.printStackTrace();
+        }
+        if (foundUser == null) {
             foundUser = AppLocale.getInstance().getLocalUser(userID);
         }
 
@@ -169,8 +189,11 @@ public class ElasticSearch {
             } catch (ElasticException e) {
                 Log.i("Error", "Something went wrong when communicating with the server");
                 foundUser = null;
+//                foundUser = AppLocale.getInstance().getLocalUser(strings[0]);
             } catch (IOException e) {
-                e.printStackTrace();
+                foundUser = null;
+//                foundUser = AppLocale.getInstance().getLocalUser(strings[0]);
+                Log.i("Error", "Could not connect to the server");
             }
             return foundUser;
         }

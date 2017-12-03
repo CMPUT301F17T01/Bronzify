@@ -22,7 +22,7 @@ public class LoginController implements Controller {
 //        if (user != null) {
 //            appLocale.saveUser(user);
 //        }
-        return elastic.getUser(userID);
+        return elastic.getUserLocalFirst(userID);
     }
 
     /**

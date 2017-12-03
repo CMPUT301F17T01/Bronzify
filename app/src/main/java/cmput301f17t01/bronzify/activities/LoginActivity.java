@@ -31,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final ContextController contextController = new ContextController(getApplicationContext());
         AppLocale appLocale = AppLocale.getInstance();
-        appLocale.setLocalUsers(new ContextController(getApplicationContext()).loadFromFile());
+        appLocale.setLocalUsers(contextController.loadFromFile());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (result != null) {
                     Log.i("User", "Found");
                     controller.loginUser(result);
+                    contextController.saveUser(result);
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Login Successful");
                     Intent intent = new Intent(LoginActivity.this, MyHomeActivity.class);
