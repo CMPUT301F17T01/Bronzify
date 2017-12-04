@@ -5,6 +5,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 
 /**
@@ -244,5 +245,35 @@ public class User {
 
     public void setLocation(GoogleMap location) {
         this.location = location;
+    }
+
+    public void setEvent(HabitEvent event) {
+
+    }
+
+    public void setType(HabitEvent event) {
+
+    }
+
+    public HabitEvent getEvent(Date eventGoal, String typeName) {
+        HabitType type = getType(typeName);
+        Iterator<HabitEvent> itr = type.getHabitEvents().iterator();
+        while (itr.hasNext()) {
+            HabitEvent next = itr.next();
+            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+                return next;
+            }
+        }
+    }
+
+    public HabitType getType(String typeName) {
+        Iterator<HabitType> itr = habitTypes.iterator();
+        while (itr.hasNext()) {
+            HabitType next = itr.next();
+            if (next.getName().equals(typeName)) {
+                return next;
+            }
+        }
+        return null;
     }
 }
