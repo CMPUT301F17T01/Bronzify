@@ -31,7 +31,6 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         entries = list;
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitTypeName;
         private TextView completion;
@@ -67,7 +66,7 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HabitType habitType = entries.get(position);
         if(mContext instanceof LeaderBoardActivity){
-            holder.habitTypeName.setText( Integer.toString(position)+habitType.getName() );
+            holder.habitTypeName.setText( Integer.toString(1+position)+habitType.getName() );
         }
         else{
             holder.habitTypeName.setText(habitType.getName());

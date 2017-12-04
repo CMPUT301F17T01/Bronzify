@@ -41,6 +41,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
     private AppLocale appLocale = AppLocale.getInstance();
     private List<HabitType> types;
     private ElasticSearch es;
+    final User user = AppLocale.getInstance().getUser();
 
 
     @Override
@@ -55,7 +56,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
             transaction.commit();
         }
 
-        types = new ArrayList<HabitType>();
+        getLeaderboard();
         es = new ElasticSearch();
 
 
@@ -72,7 +73,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         MyHabitAdapter habitAdapter = new MyHabitAdapter(this,types);
         recyclerView = findViewById(R.id.myLeaderboardRecycler);
-
+        recyclerView.setAdapter(habitAdapter);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
@@ -142,23 +143,19 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
     private void getLeaderboard(){
 
         ArrayList<User> users = getUsers();
-
+        for(User user : users){
+            types.addAll(user.getHabitTypes());
+        }
         // TODO: FINISH THIS
         // Easiest way would be to just add a completion rate to Users
         // BUT idk if i'm allowed to touch User model soooooooo.....
-
     }
 
     private ArrayList<User> getUsers(){
         // Here we would have a query on ES to return all users
         // currently returning a filler array
-
-        ArrayList<User> replaceMe = new ArrayList<User>();
-        replaceMe.add(es.getUser("s"));
-        replaceMe.add(es.getUser("Owen"));
-        replaceMe.add(es.getUser("Noah"));
-        replaceMe.add(es.getUser("k"));
-
-        return replaceMe;
+        ArrayList<User> allUsers = new ArrayList<User>();
+        allUsers.add(user);
+        return  allUsers;
     }
 }
