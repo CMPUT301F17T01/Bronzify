@@ -9,8 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cmput301f17t01.bronzify.fragments.ListFragment;
-import cmput301f17t01.bronzify.fragments.MapFragment;
+import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
 import cmput301f17t01.bronzify.fragments.PictureFragment;
 
 public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
@@ -37,11 +36,11 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             Bundle bundle = new Bundle();
             bundle.putString("type", "habitTypes");
-            ListFragment fragment = new ListFragment();
+            HabitHistoryTabFeed fragment = new HabitHistoryTabFeed();
             fragment.setArguments(bundle);
             return fragment;
         } else if (position == 1){
-            return new MapFragment();
+            return new PictureFragment();
         } else {
             return null;
         }
@@ -56,4 +55,5 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
 }
