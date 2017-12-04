@@ -48,7 +48,7 @@ public class HabitHistoryTabFeed extends Fragment {
             // Inflate the layout for this fragment
             View rootView = inflater.inflate(R.layout.habit_history_tab_feed, container, false);
 
-            RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.myHistoryRecycler);
+            RecyclerView rv = rootView.findViewById(R.id.myHistoryRecycler);
             rv.setHasFixedSize(true);
             MyEventAdapter adapter = new MyEventAdapter(getContext(),events);
             rv.setAdapter(adapter);

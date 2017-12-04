@@ -1,32 +1,9 @@
 package cmput301f17t01.bronzify.models;
 
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import cmput301f17t01.bronzify.adapters.UserAdapter;
 
 
 /**
@@ -53,7 +30,7 @@ public class AppLocale {
     /**
      * Gets the instances of the app locale
      *
-     * @return
+     * @return ourInstance
      */
     public static AppLocale getInstance() {
         return ourInstance;
@@ -62,7 +39,7 @@ public class AppLocale {
     /**
      * Gets the last user that was accessing the app locale
      *
-     * @return
+     * @return lastUser
      */
     public User getLastUser() {
         return lastUser;
@@ -72,7 +49,7 @@ public class AppLocale {
     /**
      * Method that retrieves the logged in user
      *
-     * @return
+     * @return user
      */
     public User getUser() {
         return user;
@@ -127,7 +104,7 @@ public class AppLocale {
     /**
      * Method that sets a user as the logged in user
      *
-     * @param newUser
+     * newUser @param
      */
     public void setUser(User newUser) {
         this.user = newUser;

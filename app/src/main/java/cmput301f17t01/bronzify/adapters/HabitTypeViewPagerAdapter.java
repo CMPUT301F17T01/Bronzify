@@ -1,6 +1,6 @@
 package cmput301f17t01.bronzify.adapters;
 
-/**
+/*
  * Created by Jacob on 2017-11-12.
  */
 

@@ -15,24 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-
 import cmput301f17t01.bronzify.adapters.HabitTypeViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by owenm_000 on 11/1/2017.
  */
 
