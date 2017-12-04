@@ -99,8 +99,8 @@ public class UserAdapter extends TypeAdapter<User> {
                 user.setPendingFollowRequests(pendingFollows);
                 continue;
             }
-            if ("faithfulness".equals(fieldname)) {
-                //todo: implement
+            if ("score".equals(fieldname)) {
+                user.setScore(Double.valueOf(reader.nextString()));
             }
 
         }
@@ -126,8 +126,8 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.value(gsonType.toJson(user.getHabitTypes()));
         writer.name("following");
         writer.value(gsonType.toJson(user.getFollowing()));
-//        writer.name("location");
-//        writer.value(gsonType.toJson(user.getLocation()));
+        writer.name("score");
+        writer.value(user.getScore().toString());
         writer.name("pendingFollowRequests");
         writer.value(gsonType.toJson(user.getPendingFollowRequests()));
         writer.endObject();

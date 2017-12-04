@@ -20,6 +20,7 @@ public class User {
     private Date lastUpdated;
     private Date lastInfluenced;
     private GoogleMap location;
+    private Double score;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
 //    private ArrayList<String> habitTypes = new ArrayList<String>();
@@ -36,6 +37,7 @@ public class User {
         this.dateCreated = new Date();
         this.lastInfluenced = new Date();
         this.lastUpdated = new Date();
+        this.score = 0.0;
     }
 
     /**
@@ -247,32 +249,32 @@ public class User {
         this.location = location;
     }
 
-    public void updateEvent(HabitEvent event) {
-        HabitType type = getType(event.getHabitType());
-        HabitEvent oldEvent = type.getEvent(event.getGoalDate());
-        type.updateEvent(oldEvent, event);
-        updateType(type);
-    }
+//    public void updateEvent(HabitEvent event) {
+//        HabitType type = getType(event.getHabitType());
+//        HabitEvent oldEvent = type.getEvent(event.getGoalDate());
+//        type.updateEvent(oldEvent, event);
+//        updateType(type);
+//    }
 
-    public void updateType(HabitType type) {
-        HabitType oldType = getType(type.getName());
-        if (habitTypes.contains(oldType)) {
-            habitTypes.remove(oldType);
-            habitTypes.add(type);
-        }
-    }
+//    public void updateType(HabitType type) {
+//        HabitType oldType = getType(type.getName());
+//        if (habitTypes.contains(oldType)) {
+//            habitTypes.remove(oldType);
+//            habitTypes.add(type);
+//        }
+//    }
 
-    public HabitEvent getEvent(Date eventGoal, String typeName) {
-        HabitType type = getType(typeName);
-        Iterator<HabitEvent> itr = type.getHabitEvents().iterator();
-        while (itr.hasNext()) {
-            HabitEvent next = itr.next();
-            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
-                return next;
-            }
-        }
-        return null;
-    }
+//    public HabitEvent getEvent(Date eventGoal, String typeName) {
+//        HabitType type = getType(typeName);
+//        Iterator<HabitEvent> itr = type.getHabitEvents().iterator();
+//        while (itr.hasNext()) {
+//            HabitEvent next = itr.next();
+//            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+//                return next;
+//            }
+//        }
+//        return null;
+//    }
 
     public HabitType getType(String typeName) {
         Iterator<HabitType> itr = habitTypes.iterator();
@@ -292,5 +294,13 @@ public class User {
             }
         }
         return false;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }

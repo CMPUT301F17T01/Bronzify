@@ -106,6 +106,17 @@ public class AppLocale {
         }
     }
 
+    public void removeLocalUser(String userID) {
+        Iterator<User> itr = localUsers.iterator();
+        while (itr.hasNext()) {
+            User next = itr.next();
+            if (next.getUserID().equals(userID)) {
+                localUsers.remove(next);
+                return;
+            }
+        }
+    }
+
     public void addLocalUser(User newUser) {
         if (!localUsers.contains(newUser)) {
             localUsers.add(newUser);
