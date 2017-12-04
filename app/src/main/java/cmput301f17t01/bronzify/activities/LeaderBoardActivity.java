@@ -42,6 +42,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
     private List<HabitType> types;
     private ElasticSearch es;
     final User user = AppLocale.getInstance().getUser();
+    private ArrayList<User> topUsers = new ArrayList<>();
 
 
     @Override
@@ -58,6 +59,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
 
         getLeaderboard();
         es = new ElasticSearch();
+        topUsers = es.findHighScore(); //This is an arraylist of users ordered by score
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
