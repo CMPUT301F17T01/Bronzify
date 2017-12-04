@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="Sun"
+                android:text="@string/sunday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="MON"
+                android:text="@string/monday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="TUES"
+                android:text="@string/tuesday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="WED"
+                android:text="@string/wedndesday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="THUR"
+                android:text="@string/thursday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="FRI"
+                android:text="@string/friday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="SAT"
+                android:text="@string/saturday_abr"
                 android:textSize="10sp" />
 
         </LinearLayout>

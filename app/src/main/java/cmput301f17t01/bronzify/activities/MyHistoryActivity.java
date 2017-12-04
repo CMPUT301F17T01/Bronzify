@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
 import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
+import cmput301f17t01.bronzify.adapters.HabitHistoryViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
@@ -80,7 +80,7 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
 
         //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        HabitHistoryViewPagerAdapter pagerAdapter = new HabitHistoryViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
 
