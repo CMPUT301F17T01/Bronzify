@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitEventActivity;
+import cmput301f17t01.bronzify.activities.MyHistoryActivity;
 import cmput301f17t01.bronzify.models.HabitEvent;
 
 /**
@@ -32,14 +34,18 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitEventName;
         private TextView habitEventDate;
+        private RelativeLayout relativeLayout;
 
-        private ViewHolder(View v) {
+
+        private ViewHolder(View v, Context innerContext) {
             super(v);
             v.setOnClickListener(this);
             habitEventName = v.findViewById(R.id.habitEventRow);
             habitEventDate = v.findViewById(R.id.eventDate);
-        }
 
+
+
+        }
         @Override
         public void onClick(View v) {
             int pos = this.getAdapterPosition(); // Position of Habit Type clicked
@@ -52,7 +58,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     @Override
     public MyEventAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.event_row,parent,false);
-        return (new ViewHolder(v));
+        return (new ViewHolder(v, mContext));
     }
 
     @Override
@@ -60,6 +66,14 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         HabitEvent habitEvent = entries.get(position);
         holder.habitEventName.setText(habitEvent.getHabitType());
         holder.habitEventDate.setText(habitEvent.goalDateToString());
+        if (mContext instanceof MyHistoryActivity ){
+            if(habitEvent.getCompleted()==Boolean.TRUE){
+                holder.relativeLayout.setBackgroundColor(0xFF0000);
+            }
+            else {
+                holder.relativeLayout.setBackgroundColor(0x00FF00);
+            }
+        }
     }
 
     @Override
