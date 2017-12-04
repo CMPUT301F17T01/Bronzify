@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.time.DayOfWeek;
@@ -49,9 +50,6 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_type);
-
-        int pos = getIntent().getExtras().getInt("SELECTED_HABIT");
-        Toast.makeText(this, Integer.toString(pos), Toast.LENGTH_SHORT).show();
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
