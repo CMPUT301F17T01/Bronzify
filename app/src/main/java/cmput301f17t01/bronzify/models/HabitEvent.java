@@ -5,10 +5,9 @@ import android.graphics.Bitmap;
 import com.google.android.gms.maps.GoogleMap;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
-/**
+/*
  * Created by noahkryzanowski on 2017-10-20.
  */
 

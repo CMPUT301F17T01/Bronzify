@@ -9,18 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.List;
-
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitEventActivity;
 import cmput301f17t01.bronzify.activities.MyHistoryActivity;
-import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by owenm_000 on 11/22/2017.
  */
 

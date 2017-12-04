@@ -7,15 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
-
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.ListAdapter;
 import cmput301f17t01.bronzify.controllers.ListController;
-import cmput301f17t01.bronzify.models.AppLocale;
 
-/**
+/*
  * Created by jblazusi on 2017-11-01.
  */
 

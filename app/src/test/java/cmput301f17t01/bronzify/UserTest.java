@@ -2,26 +2,17 @@ package cmput301f17t01.bronzify;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-
-import cmput301f17t01.bronzify.adapters.HabitTypeAdapter;
 import cmput301f17t01.bronzify.adapters.UserAdapter;
-import cmput301f17t01.bronzify.exceptions.UserDoesNotExistException;
-import cmput301f17t01.bronzify.exceptions.UserException;
-import cmput301f17t01.bronzify.exceptions.UserExistsException;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
 
-/**
+/*
  * Created by kdehaan on 19/10/17.
  */
 

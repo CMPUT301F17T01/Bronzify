@@ -1,24 +1,16 @@
 package cmput301f17t01.bronzify;
 
-import android.text.format.DateUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.Date;
-
 import cmput301f17t01.bronzify.adapters.HabitEventAdapter;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by kdehaan on 13/11/17.
  */
 

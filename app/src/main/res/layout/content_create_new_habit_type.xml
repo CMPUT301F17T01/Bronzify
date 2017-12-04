@@ -22,7 +22,7 @@
             android:id="@+id/labelHabitName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Habit Name:" />
+            android:text="@string/habit_name_field" />
 
         <EditText
             android:id="@+id/textHabitName"
@@ -36,7 +36,7 @@
             android:id="@+id/labelHabitReason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reason:" />
+            android:text="@string/reason" />
 
         <EditText
             android:id="@+id/textHabitReason"
@@ -50,19 +50,19 @@
             android:id="@+id/labelHabitStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Starting Date:" />
+            android:text="@string/starting_date" />
 
         <Button
             android:id="@+id/buttonSelectDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select a Date" />
+            android:text="@string/select_a_date" />
 
         <TextView
             android:id="@+id/labelDayOfWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repeat:" />
+            android:text="@string/repeat" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/sunday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonMonday"
@@ -85,7 +85,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/monday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonTuesday"
@@ -94,7 +94,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/tuesday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonWednesday"
@@ -103,7 +103,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/wedndesday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonThursday"
@@ -112,7 +112,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/thursday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonFriday"
@@ -121,7 +121,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/friday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonSaturday"
@@ -130,7 +130,7 @@
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
                 android:text="@string/saturday_abr"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
