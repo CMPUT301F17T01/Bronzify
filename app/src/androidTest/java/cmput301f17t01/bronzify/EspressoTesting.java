@@ -22,8 +22,10 @@ import cmput301f17t01.bronzify.activities.MyHomeActivity;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -49,8 +51,9 @@ public class EspressoTesting {
     public ActivityTestRule<LoginActivity> mActivityRule =
             new ActivityTestRule(LoginActivity.class);
 
-    @Test
+    /*@Test
     public void CreateNewHabitEvent() {
+        //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("test_user_001")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
@@ -60,6 +63,7 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
 
+        //Create a new habit
         onView(withId(R.id.createNewHabit)).perform(click());
 
         onView(withId(R.id.textHabitName)).perform(typeText("Running"));
@@ -77,10 +81,15 @@ public class EspressoTesting {
 
         onView(withId(R.id.buttonCreate)).perform(closeSoftKeyboard());
         onView(withId(R.id.buttonCreate)).perform(click());
+
+        //Logout
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
     }
 
     @Test
     public void EditHabitType() {
+        //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
 
@@ -89,17 +98,48 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
 
+        //Click on the correct habit in the list
         onView(withId(R.id.habitTypeRow)).check(matches(withText(containsString("Running"))));
         onView(withId(R.id.habitTypeRow)).perform(click());
 
+        //Edit the parameters of the habit
         onView(withId(R.id.buttonEdit)).perform(click());
-        onView(withId(R.id.textHabitName)).check(matches(withText("Running")));
-        onView(withId(R.id.textHabitName)).perform(typeText("Skating"));
-        onView(withId(R.id.textHabitName)).check(matches(withText("Skating")));
+
+        onView(allOf(withText("Running"))).perform(click());
+        onView(allOf(withText("Running"))).perform(replaceText("Skating"));
+        onView(withId(R.id.buttonEdit)).perform(closeSoftKeyboard());
 
         onView(withId(R.id.buttonWednesday)).perform(click());
 
         onView(withId(R.id.buttonEdit)).perform(click());
 
+        //Logout
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+
+    }*/
+
+    @Test
+    public void DeleteHabitType() {
+        //Login
+        onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
+        onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.login_button)).perform(click());
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
+
+        //Click on the correct habit in the list
+        onView(withId(R.id.habitTypeRow)).check(matches(withText(containsString("Skating"))));
+        onView(withId(R.id.habitTypeRow)).perform(click());
+
+        //Delete the habit
+        onView(withId(R.id.buttonEdit)).perform(click());
+        onView(withId(R.id.buttonDelete)).perform(click());
+
+        //Logout
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
     }
 }
