@@ -72,8 +72,7 @@ public class HabitTypeDetailFragment extends Fragment {
         final Button btnFriday = rootView.findViewById(R.id.buttonFriday);
         final Button btnSaturday = rootView.findViewById(R.id.buttonSaturday);
         final Button btnSunday = rootView.findViewById(R.id.buttonSunday);
-        final Button btnClear = rootView.findViewById(R.id.buttonClear);
-        final Button btnCreate = rootView.findViewById(R.id.buttonCreate);
+
 
         etHabitName.setText(habitType.getName());
         etHabitName.setEnabled(false);
@@ -96,6 +95,7 @@ public class HabitTypeDetailFragment extends Fragment {
             if(dayOfWeeks[i]){
                 buttonArray[i].setBackgroundColor(getResources().getColor(R.color.Amber));
             }
+            buttonArray[i].setEnabled(false);
         }
 
         return rootView;
