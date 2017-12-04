@@ -53,8 +53,7 @@ public class HabitTypeDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.habit_type_tab_detail,
-                container, false);
+        final View rootView = inflater.inflate(R.layout.habit_type_tab_detail, container, false);
 
         int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
         final User user = AppLocale.getInstance().getUser();
