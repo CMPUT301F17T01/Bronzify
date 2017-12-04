@@ -40,8 +40,8 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
-            new HabitEventAdapter()).create();
+//    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
+//            new HabitEventAdapter()).create();
     private HabitEvent event;
     MapView mMapView;
     View mView;
@@ -59,19 +59,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String eventJson;
-        if (savedInstanceState == null) {
-            Bundle extras = getActivity().getIntent().getExtras();
-            if(extras == null) {
-                eventJson= null;
-            } else {
-                eventJson= extras.getString("SELECTED_HABIT");
-            }
-        } else {
-            eventJson = (String) savedInstanceState.getSerializable("SELECTED_HABIT");
-        }
-        event = gsonEvent.fromJson(eventJson, HabitEvent.class);
         getLocationPermission();
+        event = AppLocale.getInstance().getEvent();
     }
 
     @Override
@@ -98,8 +87,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             moveCamera(LatitudeLongitude, DEFAULT_ZOOM);
                             mMap.addMarker(new MarkerOptions()
                                     .position(LatitudeLongitude)
-                                    .title("Retrieve Habit Event Name and Replace")
-                                    .snippet("These are the Habit Event Comments")
+                                    .title(event.getHabitType())
+                                    .snippet(event.getComment())
                                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))); //Replace with picture?
                             User user = AppLocale.getInstance().getUser();
                             String lString = new Gson().toJson(currentLocation);

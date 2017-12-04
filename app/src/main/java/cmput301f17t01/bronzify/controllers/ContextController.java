@@ -57,7 +57,12 @@ public class ContextController {
             FileInputStream fis = context.openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Log.i("Loaded", "from file");
-            return userGson.fromJson(in, listType);
+            ArrayList<User> usersArray =  userGson.fromJson(in, listType);
+            if (usersArray == null) {
+                return new ArrayList<>();
+            } else {
+                return usersArray;
+            }
 
         } catch (FileNotFoundException e) {
             return new ArrayList<>();

@@ -14,6 +14,7 @@ import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.ListAdapter;
 import cmput301f17t01.bronzify.controllers.ListController;
 import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitEvent;
 
 /**
  * Created by jblazusi on 2017-11-01.
@@ -23,6 +24,8 @@ public class ListFragment extends Fragment {
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+
+    private HabitEvent event;
 
     private ListController controller;
 
@@ -45,6 +48,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        event = AppLocale.getInstance().getEvent();
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.

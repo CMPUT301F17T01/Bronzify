@@ -56,7 +56,7 @@ public class User {
      * @return
      */
     public void addHabitType(HabitType habitType) throws Exception {
-        if (!habitTypes.contains(habitType)) {
+        if (getType(habitType.getName()) == null) {
             habitTypes.add(habitType);
             this.lastUpdated = new Date();
         } else {
@@ -247,12 +247,19 @@ public class User {
         this.location = location;
     }
 
-    public void setEvent(HabitEvent event) {
-
+    public void updateEvent(HabitEvent event) {
+        HabitType type = getType(event.getHabitType());
+        HabitEvent oldEvent = type.getEvent(event.getGoalDate());
+        type.updateEvent(oldEvent, event);
+        updateType(type);
     }
 
-    public void setType(HabitEvent event) {
-
+    public void updateType(HabitType type) {
+        HabitType oldType = getType(type.getName());
+        if (habitTypes.contains(oldType)) {
+            habitTypes.remove(oldType);
+            habitTypes.add(type);
+        }
     }
 
     public HabitEvent getEvent(Date eventGoal, String typeName) {

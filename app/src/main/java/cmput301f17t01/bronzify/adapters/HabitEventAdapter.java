@@ -106,6 +106,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.value(event.getCompleted().toString());
         writer.name("image");
         try{
+            event.getImage().toString();
             writer.value(event.getImage().toString());
         } catch (NullPointerException e) {
             writer.nullValue();

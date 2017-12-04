@@ -17,6 +17,7 @@ import java.util.List;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitEventActivity;
 import cmput301f17t01.bronzify.adapters.HabitEventAdapter;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 
 /**
@@ -48,10 +49,11 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         public void onClick(View v) {
             int pos = this.getAdapterPosition(); // Position of Habit Type clicked
             Intent intent = new Intent(mContext, HabitEventActivity.class);
-            Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
-                    new HabitEventAdapter()).create();
-            String event = gsonEvent.toJson(entries.get(pos));
-            intent.putExtra("SELECTED_HABIT", event); // Get should work since position should always be same
+            AppLocale.getInstance().setEvent(entries.get(pos));
+//            Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
+//                    new HabitEventAdapter()).create();
+//            String event = gsonEvent.toJson(entries.get(pos));
+//            intent.putExtra("SELECTED_HABIT", event); // Get should work since position should always be same
             mContext.startActivity(intent);
         }
     }
