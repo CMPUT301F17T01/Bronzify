@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -46,6 +47,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Context context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_home);
 
