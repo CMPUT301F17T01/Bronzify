@@ -9,8 +9,9 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -34,6 +35,8 @@ dependencies {
     compile 'id.zelory:compressor:2.1.0'
     compile 'com.google.android.gms:play-services:11.6.2'
     implementation files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.0'
     compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
     compile 'de.hdodenhof:circleimageview:1.2.1'
 }
