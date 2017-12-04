@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -79,6 +80,13 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
         recyclerView = findViewById(R.id.myEventRecycler);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);

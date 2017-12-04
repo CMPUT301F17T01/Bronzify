@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -62,6 +63,16 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
+
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        AppLocale appLocale = new AppLocale();
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         recyclerView = findViewById(R.id.myFollowerRecycler);
@@ -74,6 +85,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
         ArrayList<String> followers;
         followers = appLocale.getUser().getFollowedBy();
         
+
 
         MyFollowersAdapter followersAdapter = new MyFollowersAdapter(this,followers);
         recyclerView.setAdapter(followersAdapter);
