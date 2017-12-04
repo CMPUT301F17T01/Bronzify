@@ -41,4 +41,15 @@
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="follow_request">Follow Requests</string>
+    <string name="take_photo">Take Photo</string>
+
+    <!--Days of the week-->
+    <string name="sunday_abr">SUN</string>
+    <string name="monday_abr">MON</string>
+    <string name="tuesday_abr">TUES</string>
+    <string name="wedndesday_abr">WED</string>
+    <string name="thursday_abr">THURS</string>
+    <string name="friday_abr">FRI</string>
+    <string name="saturday_abr">SAT</string>
+
 </resources>

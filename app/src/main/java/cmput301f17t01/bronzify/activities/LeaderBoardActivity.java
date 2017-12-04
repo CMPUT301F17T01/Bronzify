@@ -2,19 +2,30 @@ package cmput301f17t01.bronzify.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-12-02.
@@ -26,6 +37,12 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
      *
      * @param savedInstanceState
      */
+    private RecyclerView recyclerView;
+    private AppLocale appLocale = AppLocale.getInstance();
+    private List<HabitType> types;
+    private ElasticSearch es;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +55,10 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
             transaction.commit();
         }
 
+        types = new ArrayList<HabitType>();
+        es = new ElasticSearch();
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -47,6 +68,13 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        MyHabitAdapter habitAdapter = new MyHabitAdapter(this,types);
+        recyclerView = findViewById(R.id.myLeaderboardRecycler);
+
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     /**
@@ -109,5 +137,28 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void getLeaderboard(){
+
+        ArrayList<User> users = getUsers();
+
+        // TODO: FINISH THIS
+        // Easiest way would be to just add a completion rate to Users
+        // BUT idk if i'm allowed to touch User model soooooooo.....
+
+    }
+
+    private ArrayList<User> getUsers(){
+        // Here we would have a query on ES to return all users
+        // currently returning a filler array
+
+        ArrayList<User> replaceMe = new ArrayList<User>();
+        replaceMe.add(es.getUser("s"));
+        replaceMe.add(es.getUser("Owen"));
+        replaceMe.add(es.getUser("Noah"));
+        replaceMe.add(es.getUser("k"));
+
+        return replaceMe;
     }
 }

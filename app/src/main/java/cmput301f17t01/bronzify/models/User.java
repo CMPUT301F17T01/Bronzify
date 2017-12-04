@@ -17,8 +17,8 @@ public class User {
     private Date lastUpdated;
     private Date lastInfluenced;
 
-//    private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
-    private ArrayList<String> habitTypes = new ArrayList<String>();
+    private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
+//    private ArrayList<String> habitTypes = new ArrayList<String>();
     private ArrayList<String> following = new ArrayList<String>();
     private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
 
@@ -52,8 +52,8 @@ public class User {
      * @return
      */
     public void addHabitType(HabitType habitType) throws Exception {
-        if (habitTypes.contains(habitType.getName())) {
-            habitTypes.add(habitType.getName());
+        if (!habitTypes.contains(habitType)) {
+            habitTypes.add(habitType);
             this.lastUpdated = new Date();
         } else {
             throw new Exception("Habit type exists");
@@ -96,6 +96,7 @@ public class User {
      */
     public void addFollowing(String userID) {
         following.add(userID);
+        setLastInfluenced(new Date());
     } //TODO: investigate passing the user directly
 
     /**
@@ -114,7 +115,6 @@ public class User {
      */
     public void setFollowing(ArrayList<String> following) {
         this.following = following;
-        this.lastInfluenced = new Date();
 
     }
 
@@ -125,7 +125,6 @@ public class User {
      */
     public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
         this.pendingFollowRequests = pendingFollowRequests;
-        this.setLastInfluenced(new Date());
     }
 
     /**
@@ -210,7 +209,7 @@ public class User {
      *
      * @return
      */
-    public ArrayList<String> getHabitTypes() {
+    public ArrayList<HabitType> getHabitTypes() {
         return habitTypes;
     }
 
@@ -219,9 +218,8 @@ public class User {
      *
      * @param habitTypes
      */
-    public void setHabitTypes(ArrayList<String> habitTypes) {
+    public void setHabitTypes(ArrayList<HabitType> habitTypes) {
         this.habitTypes = habitTypes;
-        this.lastUpdated = new Date();
     }
 
     /**
@@ -233,4 +231,7 @@ public class User {
         }
     } //TODO: test
 
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 }

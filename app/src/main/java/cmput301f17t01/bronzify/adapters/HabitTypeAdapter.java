@@ -27,6 +27,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class HabitTypeAdapter extends TypeAdapter<HabitType> {
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
     private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
             new HabitEventAdapter()).create();
 
@@ -59,10 +60,8 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
                 continue;
             }
             if ("dateToStart".equals(fieldname)) {
-                DateFormat format =
-                        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 try {
-                    Date date = format.parse(reader.nextString());
+                    Date date = df.parse(reader.nextString());
                     type.setDateToStart(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -105,7 +104,7 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
         writer.name("reason");
         writer.value(type.getReason());
         writer.name("dateToStart");
-        writer.value(type.getDateToStart().toString());
+        writer.value(df.format(type.getDateToStart()));
         writer.name("daysOfWeek");
         writer.value(Arrays.toString(type.getDaysOfWeek()));
         writer.name("habitEvents");

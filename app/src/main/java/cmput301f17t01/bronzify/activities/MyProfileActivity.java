@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.FollowAdapter;
+import cmput301f17t01.bronzify.adapters.recyclers.FollowAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
@@ -38,7 +38,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 public class MyProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView rv;
+    private RecyclerView rv;
     private List<User> userList;
     private String name;
     private AppLocale appLocale;
@@ -224,6 +224,14 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         userList.add(new User("Sally"));
         userList.add(new User("Imran"));
         userList.add(new User("Petr"));
+        userList.add(new User("1"));
+        userList.add(new User("2"));
+        userList.add(new User("3"));
+        userList.add(new User("4"));
+        userList.add(new User("6"));
+        userList.add(new User("Q"));
+        userList.add(new User("7"));
+        userList.add(new User("8"));
         userList.add(new User("1"));
         userList.add(new User("2"));
         userList.add(new User("3"));

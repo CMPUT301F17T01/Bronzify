@@ -1,4 +1,4 @@
-package cmput301f17t01.bronzify.adapters;
+package cmput301f17t01.bronzify.adapters.recyclers;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -83,15 +83,9 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
             public void onClick(View view) {
                 // Get the clicked item label
                 String userName = entries.get(position).getUserID();
-
                 entries.remove(position);
-
-
                 notifyItemRemoved(position);
-
-
                 notifyItemRangeChanged(position,entries.size());
-
                 Toast.makeText(mContext,"Rejected : " + userName, Toast.LENGTH_SHORT).show();
             }
         });

@@ -2,18 +2,18 @@ package cmput301f17t01.bronzify.activities;
 
 
 import android.content.Intent;
-
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.LoginController;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -26,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final ContextController contextController = new ContextController(getApplicationContext());
+        AppLocale appLocale = AppLocale.getInstance();
+        appLocale.setLocalUsers(contextController.loadFromFile());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -48,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (result != null) {
                     Log.i("User", "Found");
                     controller.loginUser(result);
+                    contextController.saveUser(result);
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Login Successful");
                     Intent intent = new Intent(LoginActivity.this, MyHomeActivity.class);

@@ -6,55 +6,70 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/1/2017.
  */
 public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String name;
+    private RecyclerView recyclerView;
     private AppLocale appLocale = AppLocale.getInstance();
-    private ViewPager viewPager;
+
+    private List<HabitType> types = new ArrayList<HabitType>();
 
     /**
      * Called on the creation of the My Habits Activity
      *
      * @param savedInstanceState
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_habits);
 
-        name = appLocale.getUser().getUserID();
-        viewPager = findViewById(R.id.view_pager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        types =(List) new ArrayList<HabitType>();
+        recyclerView = findViewById(R.id.myHabitRecycler);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        final MyHabitAdapter fa = new MyHabitAdapter(this,types);
+        recyclerView.setAdapter(fa);
+
+        /*TextView test = (TextView) findViewById(R.id.habitTypeRow);
+        test.setText("TESTING"); */
 
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
         fab.setOnClickListener(new View.OnClickListener(){
@@ -63,6 +78,14 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillTypesList();
+        MyHabitAdapter myHabitAdapter = new MyHabitAdapter(this, types);
+        recyclerView.setAdapter(myHabitAdapter);
     }
 
     /**
@@ -97,6 +120,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      * @param item
      * @return
      */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -125,5 +149,15 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private void fillTypesList(){
+        User user = AppLocale.getInstance().getUser();
+        ArrayList<HabitType> habitTypes = user.getHabitTypes();
+        types.clear();
+        for(HabitType type: habitTypes){
+            types.add(type);
+        }
     }
 }

@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.adapters.HabitEventViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 
@@ -72,7 +72,7 @@ public class HabitEventActivity extends AppCompatActivity implements NavigationV
         navigationView.setNavigationItemSelectedListener(this);
 
         //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        HabitEventViewPagerAdapter pagerAdapter = new HabitEventViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
 

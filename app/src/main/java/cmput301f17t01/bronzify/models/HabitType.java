@@ -1,14 +1,8 @@
 package cmput301f17t01.bronzify.models;
 
-import android.util.Log;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
-import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by noahkryzanowski on 2017-10-20.
@@ -29,7 +23,10 @@ public class HabitType {
 
     // Constructor
     public HabitType(String name, String reason, Date dateToStart, Boolean[] daysOfWeek) {
-        userID = AppLocale.getInstance().getUser().getUserID();
+        try {
+            userID = AppLocale.getInstance().getUser().getUserID();
+        } catch (NullPointerException e) {
+        }
         this.name = name;
         this.reason = reason;
         this.dateToStart = dateToStart;
@@ -60,14 +57,6 @@ public class HabitType {
             // Increment Date
             calendar.add(Calendar.DATE, 1);
             date = calendar.getTime();
-        }
-    }
-
-    // Fill up List Fragment with all Habit Events
-    public void fillList(){
-        for(HabitEvent habitEvent: habitEvents){
-            // TODO: NEED CODE TO FILL HABIT EVENT LIST FRAGMENT
-            Log.d("Test", name + " - " + habitEvent.goalDateToString());
         }
     }
 
@@ -231,5 +220,10 @@ public class HabitType {
 
     public void setNumUncompleted(int numUncompleted) {
         this.numUncompleted = numUncompleted;
+    }
+
+    public int getCompletionRatio(){
+        if(numUncompleted==0 && numCompleted == 0 ){return 100;}
+        return numCompleted/(numCompleted+numUncompleted);
     }
 }
