@@ -46,51 +46,6 @@ public class HabitTypeDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.habit_event_tab_picture, container, false);
-
-        // EditText in Activity
-        final EditText etHabitName = rootView.findViewById(R.id.textHabitName);
-        final EditText etHabitReason = rootView.findViewById(R.id.textHabitReason);
-
-        // Buttons in Activity
-        final Button btnSelectDate = rootView.findViewById(R.id.buttonSelectDate);
-        final Button btnMonday = rootView.findViewById(R.id.buttonMonday);
-        final Button btnTuesday = rootView.findViewById(R.id.buttonTuesday);
-        final Button btnWednesday = rootView.findViewById(R.id.buttonWednesday);
-        final Button btnThursday = rootView.findViewById(R.id.buttonThursday);
-        final Button btnFriday = rootView.findViewById(R.id.buttonFriday);
-        final Button btnSaturday = rootView.findViewById(R.id.buttonSaturday);
-        final Button btnSunday = rootView.findViewById(R.id.buttonSunday);
-        final Button btnClear = rootView.findViewById(R.id.buttonClear);
-        final Button btnCreate = rootView.findViewById(R.id.buttonCreate);
-
-        // Clear days of week array
-        for (int i = 0; i < 7; ++i) {
-            daysOfWeek[i] = false;
-        }
-
-        // Clear starting date
-        date = null;
-
-        // Reset button colours
-        btnMonday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-        btnTuesday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-        btnWednesday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-        btnThursday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-        btnFriday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-        btnSaturday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-        btnSunday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
-
-        // Reset select date button text
-        btnSelectDate.setText("SELECT A DATE");
-
-        // Clear edit texts
-        etHabitName.setText("");
-        etHabitReason.setText("");
-
-        // Focus on habit name
-        etHabitName.requestFocus();
-
         return inflater.inflate(R.layout.habit_type_tab_detail, container, false);
     }
 
