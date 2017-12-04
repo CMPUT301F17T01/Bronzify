@@ -31,7 +31,24 @@ public class HabitEventDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.habit_type_tab_detail, container, false);
+
+        final View rootView = inflater.inflate(R.layout.habit_event_tab_detail, container, false);
+
+        // EditText in Activity
+        final EditText eHabitName = rootView.findViewById(R.id.textHabitName);
+        final EditText eHabitComment = rootView.findViewById(R.id.textHabitComment);
+
+        // Buttons in Activity
+        final Button btnSelectDate = rootView.findViewById(R.id.buttonGoalDate);
+        final Button btnClear = rootView.findViewById(R.id.buttonClear);
+        final Button btnCreate = rootView.findViewById(R.id.buttonCreate);
+
+        eHabitName.setText("");          //Retrieve data
+        eHabitComment.setText("");   //Retrieve data
+        btnSelectDate.setText(""); //Retrieve data
+        btnSelectDate.setEnabled(false);
+
+        return rootView;
     }
 
     @Override
