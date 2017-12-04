@@ -20,7 +20,7 @@ import android.widget.Toast;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.adapters.HabitTypeViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.HabitEvent;
@@ -81,7 +81,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
 
         //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        HabitTypeViewPagerAdapter pagerAdapter = new HabitTypeViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
         //change Tab selection when swipe ViewPager
