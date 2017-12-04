@@ -1,10 +1,16 @@
 package cmput301f17t01.bronzify.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,6 +28,7 @@ import cmput301f17t01.bronzify.models.HabitEvent;
 
 public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+    Gson gson = new Gson();
 
     public HabitEvent read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
@@ -71,7 +78,8 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue;
             }
             if ("image".equals(fieldname)) {
-                continue; //TODO
+                event.setImage(getBitmapFromString(reader.nextString()));
+                continue;
             }
             if ("location".equals(fieldname)) {
                 continue; //TODO
@@ -106,8 +114,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.value(event.getCompleted().toString());
         writer.name("image");
         try{
-            event.getImage().toString();
-            writer.value(event.getImage().toString());
+            writer.value(getStringFromBitmap(event.getImage()));
         } catch (NullPointerException e) {
             writer.nullValue();
         }
@@ -120,5 +127,21 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.name("habitType");
         writer.value(event.getHabitType());
         writer.endObject();
+    }
+
+    private String getStringFromBitmap(Bitmap bitmapPicture) {
+        final int COMPRESSION_QUALITY = 100;
+        String encodedImage;
+        ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
+        bitmapPicture.compress(Bitmap.CompressFormat.PNG, COMPRESSION_QUALITY,
+                byteArrayBitmapStream);
+        byte[] b = byteArrayBitmapStream.toByteArray();
+        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    private Bitmap getBitmapFromString(String stringPicture) {
+        byte[] decodedString = Base64.decode(stringPicture, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

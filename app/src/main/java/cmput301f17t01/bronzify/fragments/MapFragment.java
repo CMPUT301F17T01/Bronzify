@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -85,11 +87,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             Location currentLocation = (Location) task.getResult();
                             LatLng LatitudeLongitude = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                             moveCamera(LatitudeLongitude, DEFAULT_ZOOM);
+                            BitmapDescriptor mapBitmap;
+                            if (event.getImage() != null) {
+                                 mapBitmap = BitmapDescriptorFactory.fromBitmap(event.getImage());
+                            } else {
+                                mapBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
+                            }
+
                             mMap.addMarker(new MarkerOptions()
                                     .position(LatitudeLongitude)
                                     .title(event.getHabitType())
                                     .snippet(event.getComment())
-                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))); //Replace with picture?
+                                    .icon(mapBitmap)); //Replace with picture?
                             User user = AppLocale.getInstance().getUser();
                             String lString = new Gson().toJson(currentLocation);
                             user.setLocation(mMap);

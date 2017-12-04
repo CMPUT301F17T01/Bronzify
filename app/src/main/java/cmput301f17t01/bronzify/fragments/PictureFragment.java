@@ -53,6 +53,10 @@ public class PictureFragment extends Fragment {
         imageView = (ImageView) rootView.findViewById(R.id.testing_pic);
         circularImageView = (ImageView) rootView.findViewById(R.id.circleView);
 
+        if (event.getImage() != null) {
+            circularImageView.setImageBitmap(event.getImage());
+        }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
