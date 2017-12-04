@@ -289,7 +289,6 @@ public class User {
         }
         return null;
     }
-
     public Boolean isHabitUsed(String newHabit){
         for(HabitType habit: habitTypes){
             if(habit.getName().equals(newHabit)){
@@ -298,7 +297,6 @@ public class User {
         }
         return false;
     }
-
     public Double getScore() {
         return score;
     }

@@ -73,9 +73,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
          AppLocale appLocale = AppLocale.getInstance();
         ArrayList<String> followers;
         followers = appLocale.getUser().getFollowedBy();
-        Log.d("MyFollowersActivity","got followedBy");
-        Log.d("MyFollowersActivity",appLocale.getUser().getUserID());
-        Log.d("MyFollowersActivity",followers.toString());
+        
 
         MyFollowersAdapter followersAdapter = new MyFollowersAdapter(this,followers);
         recyclerView.setAdapter(followersAdapter);
