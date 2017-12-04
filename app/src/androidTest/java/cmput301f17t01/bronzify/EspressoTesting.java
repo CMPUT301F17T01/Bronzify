@@ -12,10 +12,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.widget.DatePicker;
 
+import com.google.firebase.database.ThrowOnExtraProperties;
+
 import org.hamcrest.Matchers;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import cmput301f17t01.bronzify.activities.LoginActivity;
 import cmput301f17t01.bronzify.activities.MyHomeActivity;
@@ -44,6 +48,7 @@ import static org.hamcrest.core.StringStartsWith.startsWith;
  */
 
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @LargeTest
 public class EspressoTesting {
 
@@ -51,8 +56,8 @@ public class EspressoTesting {
     public ActivityTestRule<LoginActivity> mActivityRule =
             new ActivityTestRule(LoginActivity.class);
 
-    /*@Test
-    public void CreateNewHabitEvent() {
+    @Test
+    public void test1CreateNewHabitEvent() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("test_user_001")));
@@ -88,11 +93,11 @@ public class EspressoTesting {
     }
 
     @Test
-    public void EditHabitType() {
+    public void test2EditHabitType() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
+        onView(withId(R.id.enter_id)).check(matches(withText("test_user_001")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
-
         onView(withId(R.id.login_button)).perform(click());
 
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
@@ -117,14 +122,14 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
 
-    }*/
+    }
 
     @Test
-    public void DeleteHabitType() {
+    public void test3DeleteHabitType() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
+        onView(withId(R.id.enter_id)).check(matches(withText("test_user_001")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
-
         onView(withId(R.id.login_button)).perform(click());
 
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
@@ -141,5 +146,16 @@ public class EspressoTesting {
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+    }
+
+    @Test
+    public void test4followUser() {
+        //Login
+        onView(withId(R.id.enter_id)).perform(typeText("follow_user_001"));
+        onView(withId(R.id.enter_id)).check(matches(withText("follow_user_001")));
+        onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+
+        //Set
     }
 }
