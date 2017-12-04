@@ -42,8 +42,8 @@
             android:label="@string/title_activity_my_habits" />
         <activity
             android:name=".activities.CreateNewHabitTypeActivity"
-            android:label="Create New Habit"/>
-        <!-- Missing My Feed -->
+            android:label="Create New Habit"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activities.MyHistoryActivity"
             android:label="@string/title_activity_habit_history" />
@@ -60,12 +60,14 @@
             android:name=".activities.MyProfileActivity"
             android:label="@string/title_activity_my_profile" />
         <activity
-            android:name=".activities.HabitEventActivity" />
+            android:name=".activities.HabitEventActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activities.MyFeedActivity"
             android:label="My Feed" />
         <activity
-            android:name=".activities.HabitTypeActivity" />
+            android:name=".activities.HabitTypeActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <!--Maps Android Key-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
