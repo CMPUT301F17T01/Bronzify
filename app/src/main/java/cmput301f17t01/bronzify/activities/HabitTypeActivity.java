@@ -14,7 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.time.DayOfWeek;
@@ -23,9 +26,11 @@ import java.util.ArrayList;
 import cmput301f17t01.bronzify.adapters.HabitTypeViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -49,9 +54,6 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_type);
-
-        int pos = getIntent().getExtras().getInt("SELECTED_HABIT");
-        Toast.makeText(this, Integer.toString(pos), Toast.LENGTH_SHORT).show();
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -79,6 +81,12 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.nav_view);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView =  navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
 
         //set viewpager adapter
         HabitTypeViewPagerAdapter pagerAdapter = new HabitTypeViewPagerAdapter(getSupportFragmentManager());

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import cmput301f17t01.bronzify.fragments.HabitEventDetailFragment;
 import cmput301f17t01.bronzify.fragments.HabitTypeDetailFragment;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.fragments.MapFragment;
@@ -39,11 +40,12 @@ public class HabitTypeViewPagerAdapter extends FragmentPagerAdapter {
             return new HabitTypeDetailFragment();
         }
         if (position == 1){
-            Bundle bundle = new Bundle();
-            bundle.putString("type", "habitTypes");
-            ListFragment fragment = new ListFragment();
-            fragment.setArguments(bundle);
-            return fragment;
+//            Bundle bundle = new Bundle();
+//            bundle.putString("type", "habitTypes");
+//            ListFragment fragment = new ListFragment();
+//            fragment.setArguments(bundle);
+//            return fragment;
+            return new HabitEventDetailFragment();
         }
         else {
             return null;

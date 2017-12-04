@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -59,6 +60,12 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView =  navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
 
         // EditText in Activity
         final EditText etHabitName = findViewById(R.id.textHabitName);

@@ -42,9 +42,9 @@ public class PictureFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.habit_event_tab_picture,
                 container, false);
 
-        button = (Button) rootView.findViewById(R.id.buttonpic);
-        imageView = (ImageView) rootView.findViewById(R.id.testing_pic);
-        circularImageView = (ImageView) rootView.findViewById(R.id.circleView);
+        button = rootView.findViewById(R.id.buttonpic);
+        imageView = rootView.findViewById(R.id.testing_pic);
+        circularImageView = rootView.findViewById(R.id.circleView);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

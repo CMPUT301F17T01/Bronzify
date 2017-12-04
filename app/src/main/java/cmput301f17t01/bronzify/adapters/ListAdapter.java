@@ -42,7 +42,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
                 }
             });
-            textView = (TextView) v.findViewById(R.id.textView);
+            textView = v.findViewById(R.id.textView);
         }
 
         public TextView getTextView() {

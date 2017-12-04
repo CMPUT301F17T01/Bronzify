@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -70,6 +72,12 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView =  navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
 
         recyclerView = findViewById(R.id.myEventRecycler);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -151,6 +159,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
         events.clear();
         for(HabitType type: habitTypes){
+            type.checkEventEmpty();
             ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
             for(HabitEvent event: habitEvents){
                 Date eventDate = getZeroTimeDate(event.getGoalDate());
