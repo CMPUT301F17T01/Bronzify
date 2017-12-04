@@ -30,7 +30,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
@@ -46,7 +49,7 @@ public class EspressoTesting {
     public ActivityTestRule<LoginActivity> mActivityRule =
             new ActivityTestRule(LoginActivity.class);
 
-    /*@Test
+    @Test
     public void CreateNewHabitEvent() {
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("test_user_001")));
@@ -74,7 +77,7 @@ public class EspressoTesting {
 
         onView(withId(R.id.buttonCreate)).perform(closeSoftKeyboard());
         onView(withId(R.id.buttonCreate)).perform(click());
-    }*/
+    }
 
     @Test
     public void EditHabitType() {
@@ -86,11 +89,17 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
 
-        /*onData(hasToString(startsWith("Running")))
-                .inAdapterView(withId(R.id.)).atPosition(0)
-                .perform(click());*/
+        onView(withId(R.id.habitTypeRow)).check(matches(withText(containsString("Running"))));
+        onView(withId(R.id.habitTypeRow)).perform(click());
 
-        onView(withId(R.id.habitTypeRow))
-                .check(matches(withText(containsString("Running"))));
+        onView(withId(R.id.buttonEdit)).perform(click());
+        onView(withId(R.id.textHabitName)).check(matches(withText("Running")));
+        onView(withId(R.id.textHabitName)).perform(typeText("Skating"));
+        onView(withId(R.id.textHabitName)).check(matches(withText("Skating")));
+
+        onView(withId(R.id.buttonWednesday)).perform(click());
+
+        onView(withId(R.id.buttonEdit)).perform(click());
+
     }
 }
