@@ -18,6 +18,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import cmput301f17t01.bronzify.R;
@@ -79,11 +80,25 @@ public class HabitEventDetailFragment extends Fragment {
         final Button btnDelete = rootView.findViewById(R.id.buttonDelete);
         final Button btnReset = rootView.findViewById(R.id.buttonReset);
 
+        final Button btnDone = rootView.findViewById(R.id.buttonCompleted);
+        final Button btnNotDone = rootView.findViewById(R.id.buttonFailed);
+
         etHabitName.setText(habitEvent.getHabitType());
         etHabitComment.setText(habitEvent.getComment());
         btnGoalDate.setText(habitEvent.goalDateToString());
 
         btnEdit.setText("Edit");
+
+        Date currentDate = getZeroTimeDate(new Date());
+        if(goalDate.compareTo(currentDate) == 0){
+            btnDone.setVisibility(View.VISIBLE);
+            btnNotDone.setVisibility(View.VISIBLE);
+        } else if (goalDate.compareTo(currentDate) < 0){
+            habitType.incrementNumUncompleted(1);
+            Toast.makeText(getActivity(), "Event has passed. Automatically setting as incomplete.", Toast.LENGTH_SHORT).show();
+            habitEvent.setCompleted(false);
+            getActivity().finish();
+        }
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +159,22 @@ public class HabitEventDetailFragment extends Fragment {
             }
         });
 
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habitEvent.setCompleted(true);
+                habitType.incrementNumCompleted(1);
+            }
+        });
+
+        btnNotDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habitEvent.setCompleted(false);
+                habitType.incrementNumUncompleted(1);
+            }
+        });
+
         return rootView;
     }
 
@@ -153,4 +184,17 @@ public class HabitEventDetailFragment extends Fragment {
 
     }
 
+    // Set time to 00:00:00
+    public static Date getZeroTimeDate(Date date) {
+        Date res = date;
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
+    }
 }

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -157,6 +158,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
         events.clear();
+        int totalIncompleted = 0;
         for (HabitType type : habitTypes) {
             type.checkEventEmpty();
             ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
@@ -166,8 +168,16 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
                 int dateDiff = eventDate.compareTo(currentDate);
                 if (dateDiff == 0) {
                     events.add(event);
+                } else if (dateDiff < 0) {
+                    event.setCompleted(false);
+                    type.incrementNumUncompleted(1);
+                    ++totalIncompleted;
                 }
             }
+        }
+        if (totalIncompleted > 0) {
+            String toastString = Integer.toString(totalIncompleted) + " events have been automatically set as incomplete.";
+            Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show();
         }
     }
 

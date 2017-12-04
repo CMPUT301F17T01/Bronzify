@@ -15,7 +15,7 @@ import java.util.Date;
 public class HabitEvent {
     private String userID;
     private Date goalDate; // Date for habit event to happen
-    private Date completedDate;
+    private Date completedDate; // Why?
     private String comment; // Max 20 Char
     private Boolean completed;
     private Bitmap image; // Change?
