@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Created by noahkryzanowski on 2017-10-20.
@@ -228,5 +229,23 @@ public class HabitType {
     public int getCompletionRatio(){
         if(numUncompleted==0 && numCompleted == 0 ){return 100;}
         return numCompleted/(numCompleted+numUncompleted);
+    }
+
+    public HabitEvent getEvent(Date eventGoal) {
+        Iterator<HabitEvent> itr = habitEvents.iterator();
+        while (itr.hasNext()) {
+            HabitEvent next = itr.next();
+            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+                return next;
+            }
+        }
+        return null;
+    }
+
+    public void updateEvent(HabitEvent oldEvent, HabitEvent newEvent) {
+        if (habitEvents.contains(oldEvent)) {
+            habitEvents.remove(oldEvent);
+            habitEvents.add(newEvent);
+        }
     }
 }

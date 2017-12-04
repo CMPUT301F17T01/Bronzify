@@ -264,6 +264,7 @@ public class User {
                 return next;
             }
         }
+        return null;
     }
 
     public HabitType getType(String typeName) {
