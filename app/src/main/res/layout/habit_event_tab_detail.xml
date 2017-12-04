@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
             android:maxLength="20" />
 
@@ -120,14 +121,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete" />
+                android:enabled="false"
+                android:text="Delete"
+                android:visibility="gone" />
 
             <Button
-                android:id="@+id/buttonClear"
+                android:id="@+id/buttonReset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Clear" />
+                android:enabled="false"
+                android:text="Reset"
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

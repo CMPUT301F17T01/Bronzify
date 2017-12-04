@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -50,8 +51,11 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int pos = this.getAdapterPosition();
+            HabitEvent habitEvent = entries.get(pos);
+
             Intent intent = new Intent(mContext, HabitEventActivity.class);
-            
+            intent.putExtra("HABIT_TYPE", habitEvent.getHabitType());
+            intent.putExtra("GOAL_DATE", habitEvent.getGoalDate().getTime());
             mContext.startActivity(intent);
         }
     }

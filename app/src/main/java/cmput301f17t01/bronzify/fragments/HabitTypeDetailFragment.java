@@ -179,6 +179,8 @@ public class HabitTypeDetailFragment extends Fragment {
                         }
                         btnDelete.setEnabled(false);
                         btnReset.setEnabled(false);
+                        btnDelete.setVisibility(View.GONE);
+                        btnReset.setVisibility(View.GONE);
 
                     } else if (user.isHabitUsed(newHabitName)) {
                         Toast.makeText(getActivity(), "Habit name already in use.", Toast.LENGTH_SHORT).show();
@@ -198,6 +200,8 @@ public class HabitTypeDetailFragment extends Fragment {
                     }
                     btnDelete.setEnabled(true);
                     btnReset.setEnabled(true);
+                    btnDelete.setVisibility(View.VISIBLE);
+                    btnReset.setVisibility(View.VISIBLE);
                 }
             }
         });
