@@ -86,6 +86,7 @@ public class ElasticSearch {
         remoteUser.setLastInfluenced(new Date());
         postUser(remoteUser);
         user.removePendingFollowRequest(otherUserID);
+        user.addFollowedBy(otherUserID);
         userUpdate(user);
     }
 
