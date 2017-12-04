@@ -50,9 +50,9 @@ public class HabitTypeDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.habit_type_tab_detail, container, false);
 
-        int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
+//        int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
         final User user = AppLocale.getInstance().getUser();
-        final HabitType habitType = user.getHabitTypes().get(pos);
+        final HabitType habitType = AppLocale.getInstance().getType();
 
         final EditText etHabitName = rootView.findViewById(R.id.textHabitName);
         final EditText etHabitReason = rootView.findViewById(R.id.textHabitReason);

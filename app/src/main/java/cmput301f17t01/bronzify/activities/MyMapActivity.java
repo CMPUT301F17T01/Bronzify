@@ -16,14 +16,18 @@ import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+
+import cmput301f17t01.bronzify.models.HabitEvent;
+
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
+
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
 public class MyMapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    private HabitEvent event;
     /**
      * Called on the creation of the My Map Activity
      *

@@ -15,6 +15,7 @@ import java.util.List;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitTypeActivity;
 import cmput301f17t01.bronzify.activities.LeaderBoardActivity;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
 
 /**
@@ -50,6 +51,7 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int pos = this.getAdapterPosition(); // Position of Habit Type clicked
+            AppLocale.getInstance().setType(entries.get(pos));
             Intent intent = new Intent(mContext, HabitTypeActivity.class);
             intent.putExtra("SELECTED_HABIT", pos); // Get should work since position should always be same
             mContext.startActivity(intent);

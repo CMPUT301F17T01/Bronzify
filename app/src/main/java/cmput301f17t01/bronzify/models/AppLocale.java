@@ -14,6 +14,8 @@ public class AppLocale {
     private static final AppLocale ourInstance = new AppLocale();
     private User lastUser;
     private User user;
+    private HabitEvent event;
+    private HabitType type;
 //    String path = Environment.getFiles().getAbsolutePath();
 //    private Context context = null;
 //    private static final String FILENAME = "bronzify.sav";
@@ -55,6 +57,9 @@ public class AppLocale {
 
 
     public User getLocalUser(String userID) {
+        if (localUsers == null) {
+            return null;
+        }
         Iterator<User> itr = localUsers.iterator();
 
         while (itr.hasNext()) {
@@ -72,6 +77,17 @@ public class AppLocale {
         while (itr.hasNext()) {
             User next = itr.next();
             if (next.getUserID().equals(deleteUser.getUserID())) {
+                localUsers.remove(next);
+                return;
+            }
+        }
+    }
+
+    public void removeLocalUser(String userID) {
+        Iterator<User> itr = localUsers.iterator();
+        while (itr.hasNext()) {
+            User next = itr.next();
+            if (next.getUserID().equals(userID)) {
                 localUsers.remove(next);
                 return;
             }
@@ -169,4 +185,20 @@ public class AppLocale {
 //    public void setContext(Context context) {
 //        this.context = context;
 //    }
+
+    public HabitEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(HabitEvent event) {
+        this.event = event;
+    }
+
+    public HabitType getType() {
+        return type;
+    }
+
+    public void setType(HabitType type) {
+        this.type = type;
+    }
 }

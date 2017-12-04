@@ -35,33 +35,14 @@ public class HabitEventDetailFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.habit_event_tab_detail, container, false);
 
         Intent intent = getActivity().getIntent();
-        String habitName = intent.getExtras().getString("HABIT_TYPE");
-        Date goalDate = new Date();
-        goalDate.setTime(intent.getLongExtra("GOAL_DATE", -1));
 
         final User user = AppLocale.getInstance().getUser();
         final ArrayList<HabitType> habitTypes = user.getHabitTypes();
+        habitEvent = AppLocale.getInstance().getEvent();
 
 
-        // Find better way to pass in habit event
-        Boolean found = false;
-        for (HabitType type : habitTypes) {
-            if (!type.getName().equals(habitName)) {
-                continue;
-            } else {
-                habitType = type;
-                for (HabitEvent event : type.getHabitEvents()) {
-                    if (event.getGoalDate().compareTo(goalDate) == 0) {
-                        habitEvent = event;
-                        found = true;
-                        break;
-                    }
-                }
-            }
-            if (found) {
-                break;
-            }
-        }
+//        Date goalDate = new Date();
+//        goalDate.setTime(intent.getLongExtra("GOAL_DATE", -1));
 
         final EditText etHabitName = rootView.findViewById(R.id.textHabitName);
         final EditText etHabitComment = rootView.findViewById(R.id.textHabitComment);

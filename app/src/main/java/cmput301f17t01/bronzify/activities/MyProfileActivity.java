@@ -27,6 +27,7 @@ import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.recyclers.FollowAdapter;
+import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
@@ -140,6 +141,8 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
                 adBuilder.setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         controller.deleteAccount();
+                        ContextController contextController = new ContextController(getApplicationContext());
+                        contextController.saveInFile(AppLocale.getInstance().getLocalUsers());
                         Intent intent = new Intent(MyProfileActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();

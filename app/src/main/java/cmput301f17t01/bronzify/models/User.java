@@ -1,8 +1,11 @@
 package cmput301f17t01.bronzify.models;
 
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 
 /**
@@ -16,6 +19,8 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
+    private GoogleMap location;
+    private Double score;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
 //    private ArrayList<String> habitTypes = new ArrayList<String>();
@@ -32,6 +37,7 @@ public class User {
         this.dateCreated = new Date();
         this.lastInfluenced = new Date();
         this.lastUpdated = new Date();
+        this.score = 0.0;
     }
 
     /**
@@ -52,7 +58,7 @@ public class User {
      * @return
      */
     public void addHabitType(HabitType habitType) throws Exception {
-        if (!habitTypes.contains(habitType)) {
+        if (getType(habitType.getName()) == null) {
             habitTypes.add(habitType);
             this.lastUpdated = new Date();
         } else {
@@ -235,6 +241,52 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
+    public GoogleMap getLocation() {
+        return location;
+    }
+
+    public void setLocation(GoogleMap location) {
+        this.location = location;
+    }
+
+//    public void updateEvent(HabitEvent event) {
+//        HabitType type = getType(event.getHabitType());
+//        HabitEvent oldEvent = type.getEvent(event.getGoalDate());
+//        type.updateEvent(oldEvent, event);
+//        updateType(type);
+//    }
+
+//    public void updateType(HabitType type) {
+//        HabitType oldType = getType(type.getName());
+//        if (habitTypes.contains(oldType)) {
+//            habitTypes.remove(oldType);
+//            habitTypes.add(type);
+//        }
+//    }
+
+//    public HabitEvent getEvent(Date eventGoal, String typeName) {
+//        HabitType type = getType(typeName);
+//        Iterator<HabitEvent> itr = type.getHabitEvents().iterator();
+//        while (itr.hasNext()) {
+//            HabitEvent next = itr.next();
+//            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+//                return next;
+//            }
+//        }
+//        return null;
+//    }
+
+    public HabitType getType(String typeName) {
+        Iterator<HabitType> itr = habitTypes.iterator();
+        while (itr.hasNext()) {
+            HabitType next = itr.next();
+            if (next.getName().equals(typeName)) {
+                return next;
+            }
+        }
+        return null;
+    }
+
     public Boolean isHabitUsed(String newHabit){
         for(HabitType habit: habitTypes){
             if(habit.getName().equals(newHabit)){
@@ -242,5 +294,13 @@ public class User {
             }
         }
         return false;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }
