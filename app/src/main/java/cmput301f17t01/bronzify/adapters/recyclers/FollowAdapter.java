@@ -54,10 +54,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
                 }
             });*/
-            followReqText = (TextView) v.findViewById(R.id.followReqName);  //Gotta add these in your xml, they are absent
-            acceptButton = (ImageButton) v.findViewById(R.id.acceptFollow);
-            rejectButton = (ImageButton) v.findViewById(R.id.rejectFollow);
-            followRow = (RelativeLayout) v.findViewById(R.id.rowFollow);    //Gotta add these in your xml, they are absent
+            followReqText = v.findViewById(R.id.followReqName);  //Gotta add these in your xml, they are absent
+            acceptButton = v.findViewById(R.id.acceptFollow);
+            rejectButton = v.findViewById(R.id.rejectFollow);
+            followRow = v.findViewById(R.id.rowFollow);    //Gotta add these in your xml, they are absent
 
         }
         public TextView getTextView() {

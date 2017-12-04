@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,7 +38,7 @@ public class HabitType {
     }
 
     // Generate MAX_DAYS_AHEAD worth of habit events
-    public void generateNewEvents(Date date) {
+    private void generateNewEvents(Date date) {
         Calendar calendar = Calendar.getInstance();
 
         for (int i = 0; i < MAX_DAYS_AHEAD; ++i) {
@@ -155,7 +156,7 @@ public class HabitType {
      * @param daysOfWeek New days of week to repeat
      */
     public void setDaysOfWeek(Boolean[] daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
+        this.daysOfWeek = Arrays.copyOf(daysOfWeek, daysOfWeek.length) ;
     }
 
     // List of Habit Events
@@ -197,6 +198,10 @@ public class HabitType {
         return numUncompleted;
     }
 
+    public int getTotalEvents(){
+        return (numCompleted + numUncompleted);
+    }
+
     /**
      * Increment number of uncompleted habit event by changeValue
      *
@@ -225,5 +230,16 @@ public class HabitType {
     public int getCompletionRatio(){
         if(numUncompleted==0 && numCompleted == 0 ){return 100;}
         return numCompleted/(numCompleted+numUncompleted);
+    }
+
+    public void updateEvents(){
+        habitEvents.clear();
+        generateNewEvents(this.dateToStart);
+    }
+
+    public void checkEventEmpty(){
+        if(habitEvents.isEmpty()){
+            generateNewEvents(new Date());
+        }
     }
 }

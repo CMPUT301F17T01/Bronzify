@@ -32,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginButton = (Button) findViewById(R.id.login_button);
-        Button registerButton = (Button) findViewById(R.id.register_button);
-        final EditText enterId = (EditText) findViewById(R.id.enter_id);
-        final TextView loginInfo = (TextView) findViewById(R.id.login_info);
+        Button loginButton = findViewById(R.id.login_button);
+        Button registerButton = findViewById(R.id.register_button);
+        final EditText enterId = findViewById(R.id.enter_id);
+        final TextView loginInfo = findViewById(R.id.login_info);
 
         //LOGIN BUTTON
         loginButton.setOnClickListener(new View.OnClickListener() {
