@@ -121,9 +121,14 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        assert(linearLayoutManager,null);
+        /*if (linearLayoutManager.equals(null)) {
+            Log.d("MyHistoryActivity","llm is null after init");
+        }*/
         recyclerView = findViewById(R.id.myHistoryRecycler);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+      /*  if (linearLayoutManager.equals(null)) {
+            Log.d("MyHistoryActivity","llm is null after setOrientation");
+        }*/
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
