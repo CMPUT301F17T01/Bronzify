@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -158,7 +159,7 @@ public class HabitType {
      * @param daysOfWeek New days of week to repeat
      */
     public void setDaysOfWeek(Boolean[] daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
+        this.daysOfWeek = Arrays.copyOf(daysOfWeek, daysOfWeek.length) ;
     }
 
     // List of Habit Events

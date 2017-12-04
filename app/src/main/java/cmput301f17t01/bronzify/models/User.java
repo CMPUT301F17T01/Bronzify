@@ -234,4 +234,13 @@ public class User {
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
+
+    public Boolean isHabitUsed(String newHabit){
+        for(HabitType habit: habitTypes){
+            if(habit.getName().equals(newHabit)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

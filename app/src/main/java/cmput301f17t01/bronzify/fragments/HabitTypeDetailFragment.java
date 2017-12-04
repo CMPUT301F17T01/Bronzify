@@ -15,8 +15,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -25,6 +27,7 @@ import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.CreateNewHabitTypeActivity;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
@@ -33,21 +36,6 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class HabitTypeDetailFragment extends Fragment {
-
-    private Date time;
-    //- statistics: Graphs
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public void deleteHabit(HabitType habit) {
-        return;
-    }
 
     private Date dateToStart;
     private Boolean[] daysOfWeek;
@@ -100,7 +88,7 @@ public class HabitTypeDetailFragment extends Fragment {
         final Button[] buttonArray = {btnSunday, btnMonday, btnTuesday, btnWednesday
                 , btnThursday, btnFriday, btnSaturday};
 
-        daysOfWeek = habitType.getDaysOfWeek();
+        daysOfWeek = Arrays.copyOf(habitType.getDaysOfWeek(), habitType.getDaysOfWeek().length);
 
         for (int i = 0; i < 7; ++i) {
             if (daysOfWeek[i]) {
@@ -116,18 +104,18 @@ public class HabitTypeDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (btnEdit.getText() == "Save") {
-                    String habitName = etHabitName.getText().toString();
-                    String habitReason = etHabitReason.getText().toString();
+                    String newHabitName = etHabitName.getText().toString();
+                    String newHabitReason = etHabitReason.getText().toString();
 
                     Boolean validName = true;
                     Boolean validReason = true;
                     Boolean validDaysOfWeek = false;
 
                     // Check if all fields are valid
-                    if (habitName.equals("")) {
+                    if (newHabitName.equals("") || user.isHabitUsed(newHabitName)) {
                         validName = false;
                     }
-                    if (habitReason.equals("")) {
+                    if (newHabitReason.equals("")) {
                         validReason = false;
                     }
                     // Check if user has selected at least one day of the week
@@ -139,13 +127,27 @@ public class HabitTypeDetailFragment extends Fragment {
                     }
 
                     if (validName && validReason && validDaysOfWeek) {
-                        habitType.setName(habitName); // Update name, even if same
-                        habitType.setReason(habitReason); // Update reason, even if same
-                        habitType.setDateToStart(dateToStart); // Update date, even if same
-                        habitType.setDaysOfWeek(daysOfWeek); // Update days of week, even if same
+                        habitType.setName(newHabitName);
+
+                        if (!newHabitReason.equals(habitType.getName())) {
+                            habitType.setReason(newHabitReason);
+                        }
+
+                        Boolean[] oldDaysOfWeek = Arrays.copyOf(habitType.getDaysOfWeek(), habitType.getDaysOfWeek().length);
+                        for (int i = 0; i < 7; ++i) {
+                            if (oldDaysOfWeek[i] != daysOfWeek[i]) {
+                                habitType.setDaysOfWeek(daysOfWeek);
+                            }
+                        }
+
+                        Date oldDate = habitType.getDateToStart();
+                        if (dateToStart.compareTo(oldDate) != 0) {
+                            habitType.setDateToStart(dateToStart);
+                        }
+
                         // TODO: NEED TO UPDATE LIST OF EVENTS, NEED TO CHECK DUPLICATE HABIT NAME
 
-                        // Update user
+                        // Update ES
                         ContextController contextController = new ContextController(getActivity().getApplicationContext());
                         contextController.updateUser(user);
 
@@ -153,11 +155,14 @@ public class HabitTypeDetailFragment extends Fragment {
                         etHabitName.setEnabled(false);
                         etHabitReason.setEnabled(false);
                         btnSelectDate.setEnabled(false);
-                        for(Button button: buttonArray){
+                        for (Button button : buttonArray) {
                             button.setEnabled(false);
                         }
                         btnDelete.setEnabled(false);
                         btnReset.setEnabled(false);
+
+                    } else if (user.isHabitUsed(newHabitName)) {
+                        Toast.makeText(getActivity(), "Habit name already in use.", Toast.LENGTH_SHORT).show();
 
                     } else {
                         // Missing a field
@@ -169,11 +174,73 @@ public class HabitTypeDetailFragment extends Fragment {
                     etHabitName.setEnabled(true);
                     etHabitReason.setEnabled(true);
                     btnSelectDate.setEnabled(true);
-                    for(Button button: buttonArray){
+                    for (Button button : buttonArray) {
                         button.setEnabled(true);
                     }
                     btnDelete.setEnabled(true);
                     btnReset.setEnabled(true);
+                }
+            }
+        });
+
+        final DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+                cal.set(Calendar.MONTH, month);
+
+                String strMonth = month_date.format(cal.getTime());
+
+                String strDate = strMonth + "/" + day + "/" + year;
+                btnSelectDate.setText(strDate);
+
+                dateToStart = new GregorianCalendar(year, month, day).getTime();
+            }
+        };
+
+        btnSelectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        getActivity(),
+                        dateSetListener,
+                        year, month, day);
+
+                Date today = new Date();
+                cal.setTime(today);
+                long minDate = cal.getTime().getTime();
+
+                dialog.getDatePicker().setMinDate(minDate);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                dialog.show();
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etHabitName.setText(habitType.getName());
+                etHabitReason.setText(habitType.getReason());
+
+                dateToStart = habitType.getDateToStart();
+                Format formatter = new SimpleDateFormat("MMMM/dd/yyyy");
+                String strDate = formatter.format(dateToStart);
+                btnSelectDate.setText(strDate);
+
+                daysOfWeek = Arrays.copyOf(habitType.getDaysOfWeek(), habitType.getDaysOfWeek().length);
+
+                for (int i = 0; i < 7; ++i) {
+                    if (daysOfWeek[i]) {
+                        buttonArray[i].setBackgroundColor(getResources().getColor(R.color.Amber));
+                    } else {
+                        buttonArray[i].setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    }
                 }
             }
         });
@@ -301,63 +368,6 @@ public class HabitTypeDetailFragment extends Fragment {
                     // Activate Button
                     btnSaturday.setBackgroundColor(getResources().getColor(R.color.Amber));
                     daysOfWeek[6] = true;
-                }
-            }
-        });
-
-        final DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                Calendar cal = Calendar.getInstance();
-                SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
-                cal.set(Calendar.MONTH, month);
-
-                String strMonth = month_date.format(cal.getTime());
-
-                String strDate = strMonth + "/" + day + "/" + year;
-                btnSelectDate.setText(strDate);
-
-                dateToStart = new GregorianCalendar(year, month, day).getTime();
-            }
-        };
-
-        btnSelectDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        getActivity(),
-                        dateSetListener,
-                        year, month, day);
-
-                Date today = new Date();
-                cal.setTime(today);
-                long minDate = cal.getTime().getTime();
-
-                dialog.getDatePicker().setMinDate(minDate);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-                dialog.show();
-            }
-        });
-
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                etHabitName.setText(habitType.getName());
-                etHabitReason.setText(habitType.getReason());
-
-                Date dateToStart = habitType.getDateToStart();
-                Format formatter = new SimpleDateFormat("MMMM/dd/yyyy");
-                String strDate = formatter.format(dateToStart);
-                btnSelectDate.setText(strDate);
-
-                Boolean daysOfWeek = habitType.getDaysOfWeek();
-                for(int i = 0; i < 7; ++i){
-
                 }
             }
         });
