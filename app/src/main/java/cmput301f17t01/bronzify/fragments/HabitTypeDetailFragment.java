@@ -53,8 +53,7 @@ public class HabitTypeDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.habit_type_tab_detail,
-                container, false);
+        final View rootView = inflater.inflate(R.layout.habit_type_tab_detail, container, false);
 
         int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
         final User user = AppLocale.getInstance().getUser();
@@ -180,6 +179,8 @@ public class HabitTypeDetailFragment extends Fragment {
                         }
                         btnDelete.setEnabled(false);
                         btnReset.setEnabled(false);
+                        btnDelete.setVisibility(View.GONE);
+                        btnReset.setVisibility(View.GONE);
 
                     } else if (user.isHabitUsed(newHabitName)) {
                         Toast.makeText(getActivity(), "Habit name already in use.", Toast.LENGTH_SHORT).show();
@@ -199,6 +200,8 @@ public class HabitTypeDetailFragment extends Fragment {
                     }
                     btnDelete.setEnabled(true);
                     btnReset.setEnabled(true);
+                    btnDelete.setVisibility(View.VISIBLE);
+                    btnReset.setVisibility(View.VISIBLE);
                 }
             }
         });

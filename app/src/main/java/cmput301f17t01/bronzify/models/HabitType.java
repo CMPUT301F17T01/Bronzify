@@ -50,7 +50,7 @@ public class HabitType {
 
             // If day of week is a repeat day of week
             // Create a new habit event
-            if(daysOfWeek[dayOfWeek]){
+            if (daysOfWeek[dayOfWeek]) {
                 HabitEvent newHabitEvent = new HabitEvent(date, name);
                 habitEvents.add(newHabitEvent);
             }
@@ -63,6 +63,7 @@ public class HabitType {
 
     // Setters and Getters
     // User
+
     /**
      * Return user that created current habit type
      *
@@ -73,6 +74,7 @@ public class HabitType {
     }
 
     // Habit Name
+
     /**
      * Get habit type name
      *
@@ -92,6 +94,7 @@ public class HabitType {
     }
 
     // Habit Reason
+
     /**
      * Get habit type reason
      *
@@ -111,6 +114,7 @@ public class HabitType {
     }
 
     // Date to Start
+
     /**
      * Get date to start habit events
      *
@@ -130,6 +134,7 @@ public class HabitType {
     }
 
     // Days of Week to Repeat
+
     /**
      * Get days of week to repeat
      * Represented as an array of integers
@@ -140,7 +145,7 @@ public class HabitType {
      * Index: 4 = Thursday
      * Index: 5 = Friday
      * Index: 6 = Saturday
-     *
+     * <p>
      * Value: false = Don't repeat
      * Value: true = Repeat
      *
@@ -156,10 +161,11 @@ public class HabitType {
      * @param daysOfWeek New days of week to repeat
      */
     public void setDaysOfWeek(Boolean[] daysOfWeek) {
-        this.daysOfWeek = Arrays.copyOf(daysOfWeek, daysOfWeek.length) ;
+        this.daysOfWeek = Arrays.copyOf(daysOfWeek, daysOfWeek.length);
     }
 
     // List of Habit Events
+
     /**
      * Get the whole list of habit events
      *
@@ -170,6 +176,7 @@ public class HabitType {
     }
 
     // Number of Completed Habit Events
+
     /**
      * Get number of completed habit events
      *
@@ -189,6 +196,7 @@ public class HabitType {
     }
 
     // Number of Uncompleted Habit Events
+
     /**
      * Get number of uncompleted habit events
      *
@@ -198,7 +206,7 @@ public class HabitType {
         return numUncompleted;
     }
 
-    public int getTotalEvents(){
+    public int getTotalEvents() {
         return (numCompleted + numUncompleted);
     }
 
@@ -227,19 +235,27 @@ public class HabitType {
         this.numUncompleted = numUncompleted;
     }
 
-    public int getCompletionRatio(){
-        if(numUncompleted==0 && numCompleted == 0 ){return 100;}
-        return numCompleted/(numCompleted+numUncompleted);
+    public int getCompletionRatio() {
+        if (numUncompleted == 0 && numCompleted == 0) {
+            return 100;
+        }
+        return numCompleted / (numCompleted + numUncompleted);
     }
 
-    public void updateEvents(){
+    public void updateEvents() {
         habitEvents.clear();
         generateNewEvents(this.dateToStart);
     }
 
-    public void checkEventEmpty(){
-        if(habitEvents.isEmpty()){
+    public void checkEventEmpty() {
+        if (habitEvents.isEmpty()) {
             generateNewEvents(new Date());
+        }
+    }
+
+    public void removeEvent(HabitEvent removedEvent) {
+        if (habitEvents.contains(removedEvent)) {
+            habitEvents.remove(removedEvent);
         }
     }
 }
