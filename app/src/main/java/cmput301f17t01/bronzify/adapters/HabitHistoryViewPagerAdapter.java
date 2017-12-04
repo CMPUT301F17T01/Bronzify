@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
-import cmput301f17t01.bronzify.fragments.PictureFragment;
+import cmput301f17t01.bronzify.fragments.MapFragment;
 
 public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;
@@ -40,7 +40,7 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
             fragment.setArguments(bundle);
             return fragment;
         } else if (position == 1){
-            return new PictureFragment();
+            return new MapFragment();
         } else {
             return null;
         }
