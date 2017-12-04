@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -20,12 +22,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.ImageAdapter;
 import cmput301f17t01.bronzify.adapters.recyclers.FollowAdapter;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -44,6 +50,9 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
     private String name;
     private AppLocale appLocale;
     private ProfileController controller;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int PIXELS = 100;
+    private ImageView profilePic;
 
     /**
      * Called on the creation of My Profile Activity
@@ -100,9 +109,23 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         TextView profileName = findViewById(R.id.profileName);
         profileName.setText(name);
-
+        Button picButton = findViewById(R.id.buttonpic);
         Button followButton = findViewById(R.id.followButton);
         Button deleteButton = findViewById(R.id.deleteButton);
+        profilePic = findViewById(R.id.profileImage);
+        if (appLocale.getUser().getImage() != null) {
+            profilePic.setImageBitmap(appLocale.getUser().getImage());
+        }
+
+        picButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+
+            }
+        });
 
         //FOLLOW BUTTON
         followButton.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +244,34 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                Bitmap bmp = (Bitmap) data.getExtras().get("data");
+
+                Log.d("PHOTO","Size in KB before compression: " + bmp.getByteCount() / 1000);
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                Log.d("PHOTO","Size in KB after compression: " + byteArray.length / 1000);
+
+                AppLocale appLocale = AppLocale.getInstance();
+                Bitmap circularBitmap = ImageAdapter.getRoundedCornerBitmap(bmp, PIXELS);
+
+                appLocale.getUser().setImage(circularBitmap);
+
+                ContextController contextController = new ContextController(getApplicationContext());
+                contextController.updateUser(appLocale.getUser());
+                profilePic.setImageBitmap(circularBitmap);
+            }
+        }
     }
 
 
