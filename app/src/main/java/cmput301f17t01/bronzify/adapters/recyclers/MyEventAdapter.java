@@ -42,9 +42,8 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
             v.setOnClickListener(this);
             habitEventName = v.findViewById(R.id.habitEventRow);
             habitEventDate = v.findViewById(R.id.eventDate);
-
-
-
+            relativeLayout =(RelativeLayout) v.findViewById(R.id.event_row);
+            
         }
         @Override
         public void onClick(View v) {
