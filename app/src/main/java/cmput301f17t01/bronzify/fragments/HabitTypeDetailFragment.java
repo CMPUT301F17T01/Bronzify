@@ -72,7 +72,8 @@ public class HabitTypeDetailFragment extends Fragment {
         final Button btnFriday = rootView.findViewById(R.id.buttonFriday);
         final Button btnSaturday = rootView.findViewById(R.id.buttonSaturday);
         final Button btnSunday = rootView.findViewById(R.id.buttonSunday);
-
+        final Button btnEdit = rootView.findViewById(R.id.buttonEdit);
+        final Button btnDelete = rootView.findViewById(R.id.buttonDelete);
 
         etHabitName.setText(habitType.getName());
         etHabitName.setEnabled(false);
@@ -97,6 +98,8 @@ public class HabitTypeDetailFragment extends Fragment {
             }
             buttonArray[i].setEnabled(false);
         }
+
+        btnDelete.setEnabled(false);
 
         return rootView;
     }
