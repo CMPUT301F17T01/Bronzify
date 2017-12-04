@@ -151,6 +151,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
         events.clear();
         for(HabitType type: habitTypes){
+            type.checkEventEmpty();
             ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
             for(HabitEvent event: habitEvents){
                 Date eventDate = getZeroTimeDate(event.getGoalDate());
