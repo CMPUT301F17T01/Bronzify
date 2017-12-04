@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.adapters;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.util.Base64;
 
 import com.google.gson.Gson;
@@ -82,7 +83,8 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue;
             }
             if ("location".equals(fieldname)) {
-                continue; //TODO
+                event.setLocation(gson.fromJson(reader.nextString(), Location.class));
+                continue;
             }
             if ("habitType".equals(fieldname)) {
                 event.setHabitType(reader.nextString());
@@ -120,7 +122,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         }
         writer.name("location");
         try{
-            writer.value(event.getLocation().toString());
+            writer.value(gson.toJson(event.getLocation()));
         } catch (NullPointerException e) {
             writer.nullValue();
         }
