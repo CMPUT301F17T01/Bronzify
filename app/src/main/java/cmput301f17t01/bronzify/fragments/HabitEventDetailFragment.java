@@ -73,7 +73,7 @@ public class HabitEventDetailFragment extends Fragment {
         if(goalDate.compareTo(currentDate) == 0){
             btnDone.setVisibility(View.VISIBLE);
             btnNotDone.setVisibility(View.VISIBLE);
-        } else if (goalDate.compareTo(currentDate) < 0 && habitEvent.getCompletedDate() == null){
+        } else if (goalDate.compareTo(currentDate) < 0 && habitEvent.getCompleted() == null){
             habitType.incrementNumUncompleted(1);
             habitEvent.setCompleted(false);
             Toast.makeText(getActivity(), "Event has passed. Automatically setting as incomplete.", Toast.LENGTH_SHORT).show();
@@ -153,7 +153,6 @@ public class HabitEventDetailFragment extends Fragment {
         btnNotDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Todo: Set marked
                 habitType.incrementNumUncompleted(1);
                 habitEvent.setCompleted(false);
                 Toast.makeText(getActivity(), "Event marked as incomplete", Toast.LENGTH_SHORT).show();

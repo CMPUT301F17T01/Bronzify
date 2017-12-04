@@ -3,8 +3,6 @@ package cmput301f17t01.bronzify.models;
 import android.graphics.Bitmap;
 import android.location.Location;
 
-import com.google.android.gms.maps.GoogleMap;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,34 +11,28 @@ import java.util.Date;
  */
 
 public class HabitEvent {
-    private String userID;
     private Date goalDate; // Date for habit event to happen
-    private Date completedDate; // Why?
+    private String habitType;
     private String comment; // Max 20 Char
     private Boolean completed;
     private Bitmap image; // Change?
     private Location location; // Unsure of location type
-    private String habitType;
+    private String userID;
 
     // Constructor
     public HabitEvent(Date goalDate, String habitType){
-        try {
-            this.userID = AppLocale.getInstance().getUser().getUserID();
-        } catch (NullPointerException e) {
-        }
         this.goalDate = goalDate;
-        this.completedDate = null;
+        this.habitType = habitType;
         this.comment = ""; // Default comment is blank
-        this.completed = false;
+        this.completed = null;
         this.image = null;
         this.location = null;
-        this.habitType = habitType;
+        this.userID = AppLocale.getInstance().getUser().getUserID();
     }
 
     // Getters and Setters
-    // User
     /**
-     * Return user that created current habit type
+     * Return user that created current habit event
      *
      * @return User
      */
@@ -48,7 +40,15 @@ public class HabitEvent {
         return userID;
     }
 
-    // Goal Date
+    /**
+     * Set user that create current habit event
+     *
+     * @param userID username
+     */
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
     /**
      * Get goal date for habit event
      *
@@ -68,17 +68,7 @@ public class HabitEvent {
     }
 
     // Completed Date
-    /**
-     * Get completed date for habit event
-     * Used to sort in history
-     *
-     * @return Completion date
-     */
-    public Date getCompletedDate(){
-        return completedDate;
-    }
 
-    // Comment
     /**
      * Get habit comment
      *
@@ -97,7 +87,7 @@ public class HabitEvent {
         this.comment = comment;
     }
 
-    // Completed
+
     /**
      * See if habit event have been completed after goal date
      * true = completed
@@ -109,16 +99,6 @@ public class HabitEvent {
         return completed;
     }
 
-    /**
-     * Set completion as true
-     * Update completion date
-     *
-     */
-    public void markCompleted() {
-        this.completedDate = new Date();
-    }
-
-    // Image
     /**
      * Get image of habit event
      *
@@ -137,7 +117,6 @@ public class HabitEvent {
         this.image = image;
     }
 
-    // Location
     /**
      * Get location of habit event
      *
@@ -164,24 +143,7 @@ public class HabitEvent {
      */
     public String goalDateToString(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
-        String strGoalDate = simpleDateFormat.format(goalDate);
-        return strGoalDate;
-    }
-
-    /**
-     * Convert Completed Date to String
-     * Format: "Sun, Jan 01, 2017"
-     *
-     * @return String representation of date
-     */
-    public String completedDateToString(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
-        String strCompDate = simpleDateFormat.format(completedDate);
-        return strCompDate;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
+        return  simpleDateFormat.format(goalDate);
     }
 
     public String getHabitType() {
@@ -192,13 +154,8 @@ public class HabitEvent {
         this.habitType = habitType;
     }
 
-    public void setCompletedDate(Date completedDate) {
-        this.completedDate = completedDate;
-    }
-
     public void setCompleted(Boolean completed)
     {
-        markCompleted();
         this.completed = completed;
     }
 }

@@ -169,7 +169,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
                 if (dateDiff == 0) {
                     events.add(event);
                 } else if (dateDiff < 0) {
-                    if(event.getCompletedDate() == null){
+                    if(event.getCompleted() == null){
                         event.setCompleted(false);
                         type.incrementNumUncompleted(1);
                         ++totalIncompleted;
