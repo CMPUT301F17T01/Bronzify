@@ -333,20 +333,18 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                         e.printStackTrace();
                     }
 
+
                     //These two lines are how we save the changes to the user
                     ContextController contextController = new ContextController(getApplicationContext());
                     contextController.updateUser(currentUser);
 
                     /*ElasticSearch elastic = new ElasticSearch();
+
                     currentUser = elastic.update(currentUser);
                     AppLocale appLocale = AppLocale.getInstance();
 //                    appLocale.setContext(getApplicationContext());
                     appLocale.setUser(currentUser);*/
 //                    contextController.saveInFile(appLocale.getLocalUsers());
-
-                    // Fill Habit Event List Fragment
-                    // Need to change fillList() Code
-                    newHabit.fillList();
 
                     // Go back
                     finish();

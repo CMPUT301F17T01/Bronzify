@@ -1,5 +1,6 @@
 package cmput301f17t01.bronzify.models;
 
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -56,11 +57,6 @@ public class AppLocale {
         return ourInstance;
     }
 
-
-    private AppLocale() {
-    }
-
-
     /**
      * Gets the last user that was accessing the app locale
      *
@@ -80,8 +76,10 @@ public class AppLocale {
         return user;
     }
 
+
     public User getLocalUser(String userID) {
         Iterator<User> itr = localUsers.iterator();
+
         while (itr.hasNext()) {
             User next = itr.next();
             if (next.getUserID().equals(userID)) {
@@ -107,6 +105,7 @@ public class AppLocale {
         if (!localUsers.contains(newUser)) {
             localUsers.add(newUser);
         }
+
     }
 
     /**
@@ -123,6 +122,7 @@ public class AppLocale {
     public void logoutUser() {
         user = null;
     }
+
 
 
 //    private void loadFromFile() { //temporarily unimplemented
@@ -159,6 +159,7 @@ public class AppLocale {
 ////        }
 //
 //    }
+
 
     public ArrayList<HabitType> getSavedHabitTypes() {
         return savedHabitTypes;

@@ -15,15 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.adapters.HabitTypeViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.models.HabitType;
 
 /**
  * Created by owenm_000 on 11/1/2017.
@@ -36,6 +38,8 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     private TabLayout tabLayout;
     private String[] pageTitle = {"Details", "Events"};
 
+    private HabitType selectedHabit;
+
     /**
      * Called on the creation of the Habit Type Activity
      *
@@ -45,6 +49,9 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_type);
+
+        int pos = getIntent().getExtras().getInt("SELECTED_HABIT");
+        Toast.makeText(this, Integer.toString(pos), Toast.LENGTH_SHORT).show();
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -74,9 +81,8 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
 
         //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        HabitTypeViewPagerAdapter pagerAdapter = new HabitTypeViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
-
 
         //change Tab selection when swipe ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -113,6 +119,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
 
             }
         });
+
     }
 
     /**
@@ -121,7 +128,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
      */
     @Override
     public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -170,7 +177,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         finish();
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
