@@ -55,6 +55,11 @@
     <string name="repeat">Repeat</string>
     <string name="reason">Reason</string>
     <string name="set_location">Set Location</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="reset">Reset</string>
+    <string name="completion_rate">Completion Rate</string>
+    <string name="follow_request_name">Follow Request Name</string>
 
     <!--Days of the week-->
     <string name="sunday_abr">SUN</string>

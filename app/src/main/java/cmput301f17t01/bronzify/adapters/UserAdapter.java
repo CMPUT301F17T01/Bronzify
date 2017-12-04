@@ -7,25 +7,19 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by kdehaan on 01/12/17.
  */
-
-
 
 public class UserAdapter extends TypeAdapter<User> {
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
@@ -93,14 +87,20 @@ public class UserAdapter extends TypeAdapter<User> {
                 user.setFollowing(following);
                 continue;
             }
+            if ("followedBy".equals(fieldname)) {
+                ArrayList<String> followed = gsonType.fromJson(reader.nextString(),
+                        new TypeToken<ArrayList<String>>(){}.getType());
+                user.setFollowedBy(followed);
+                continue;
+            }
             if ("pendingFollowRequests".equals(fieldname)) {
                 ArrayList<String> pendingFollows = gsonType.fromJson(reader.nextString(),
                         new TypeToken<ArrayList<String>>(){}.getType());
                 user.setPendingFollowRequests(pendingFollows);
                 continue;
             }
-            if ("faithfulness".equals(fieldname)) {
-                //todo: implement
+            if ("score".equals(fieldname)) {
+                user.setScore(Double.valueOf(reader.nextString()));
             }
 
         }
@@ -126,6 +126,10 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.value(gsonType.toJson(user.getHabitTypes()));
         writer.name("following");
         writer.value(gsonType.toJson(user.getFollowing()));
+        writer.name("followedBy");
+        writer.value(gsonType.toJson(user.getFollowedBy()));
+        writer.name("score");
+        writer.value(user.getScore().toString());
         writer.name("pendingFollowRequests");
         writer.value(gsonType.toJson(user.getPendingFollowRequests()));
         writer.endObject();

@@ -12,7 +12,10 @@ import com.searchly.jestdroid.JestDroidClient;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import cmput301f17t01.bronzify.adapters.UserAdapter;
 import cmput301f17t01.bronzify.exceptions.ElasticException;
@@ -23,6 +26,9 @@ import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
+
 
 /**
  * Created by kdehaan on 10/11/17.
@@ -32,6 +38,8 @@ import io.searchbox.core.Index;
 
 public class ElasticSearch {
     private static JestDroidClient client;
+//    private static String serverString = "http://cmput301.softwareprocess.es:8080";
+    private static String serverString = "http://localhost:9200";
     private static String indexString = "cmput301f17t01_bronzify";
     private static String typeString = "test_user_v2";
     private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
@@ -78,6 +86,7 @@ public class ElasticSearch {
         remoteUser.setLastInfluenced(new Date());
         postUser(remoteUser);
         user.removePendingFollowRequest(otherUserID);
+        user.addFollowedBy(otherUserID);
         userUpdate(user);
     }
 
@@ -133,9 +142,24 @@ public class ElasticSearch {
     }
 
     public void deleteUser(String userID) {
+        AppLocale appLocale = AppLocale.getInstance();
+        appLocale.removeLocalUser(userID);
         ElasticSearch.DeleteUser deleteUserTask
                 = new ElasticSearch.DeleteUser();
         deleteUserTask.execute(userID);
+    }
+
+    public ArrayList<User> findHighScore() {
+        ArrayList<User> users = new ArrayList<>();
+        ElasticSearch.FindHighScore highScoreTask
+                = new ElasticSearch.FindHighScore();
+        highScoreTask.execute();
+        try {
+            users = highScoreTask.get();
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+        return users;
     }
 
 
@@ -221,11 +245,60 @@ public class ElasticSearch {
         }
     }
 
+    public static class FindHighScore extends AsyncTask<Void, Void, ArrayList<User>> {
+        @Override
+        protected ArrayList<User> doInBackground(Void... voids) {
+            verifySettings();
+            ArrayList<User> users = new ArrayList<User>();
+            /*
+              '{
+               "sort" : [
+                  {"score" : {"order" : "desc"}}
+               ]
+            }' */
+            String query =
+                    "{\n" +
+                    "    \"sort\": [\n" +
+                    "        {\"score\" : {\"order\" : \"desc\"}}\n" +
+                    "    ]\n" +
+                    "}";
+//            SearchSourceBuilder ssb = new SearchSourceBuilder()
+//                    .sort("score", SortOrder.DESC)
+//                    .size(20);
+            Search search = new Search.Builder(query)
+                    .addIndex(indexString)
+                    .addType(typeString)
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<String> strhits = result.getSourceAsStringList();
+                    Iterator<String> itr = strhits.iterator();
+                    while (itr.hasNext()) {
+                        User next = userGson.fromJson(itr.next(), User.class);
+                        users.add(next);
+                    }
+                    return users;
+
+                } else {
+                    throw new ElasticException();
+                }
+            } catch (ElasticException e) {
+                Log.i("Error", "Something went wrong when communicating with the server");
+//                foundUser = AppLocale.getInstance().getLocalUser(strings[0]);
+            } catch (IOException e) {
+//                foundUser = AppLocale.getInstance().getLocalUser(strings[0]);
+                Log.i("Error", "Could not connect to the server");
+            }
+            return users;
+        }
+    }
+
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig
                     //.Builder("localhost:9200");
-                    .Builder("http://cmput301.softwareprocess.es:8080");
+                    .Builder(serverString);
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();

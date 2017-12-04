@@ -39,9 +39,10 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
      */
     private RecyclerView recyclerView;
     private AppLocale appLocale = AppLocale.getInstance();
-    private List<HabitType> types;
-    private ElasticSearch es;
+    private List<HabitType> types = new ArrayList<>();
+    private ElasticSearch es = new ElasticSearch();
     final User user = AppLocale.getInstance().getUser();
+//    private ArrayList<User> topUsers = new ArrayList<>();
 
 
     @Override
@@ -57,7 +58,8 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         }
 
         getLeaderboard();
-        es = new ElasticSearch();
+
+//        topUsers = ; //This is an arraylist of users ordered by score
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -142,7 +144,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
 
     private void getLeaderboard(){
 
-        ArrayList<User> users = getUsers();
+        ArrayList<User> users = es.findHighScore();
         for(User user : users){
             types.addAll(user.getHabitTypes());
         }
@@ -151,11 +153,11 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         // BUT idk if i'm allowed to touch User model soooooooo.....
     }
 
-    private ArrayList<User> getUsers(){
-        // Here we would have a query on ES to return all users
-        // currently returning a filler array
-        ArrayList<User> allUsers = new ArrayList<User>();
-        allUsers.add(user);
-        return  allUsers;
-    }
+//    private ArrayList<User> getUsers(){
+//        // Here we would have a query on ES to return all users
+//        // currently returning a filler array
+//        ArrayList<User> allUsers = new ArrayList<User>();
+//        allUsers.add(user);
+//        return  allUsers;
+//    }
 }

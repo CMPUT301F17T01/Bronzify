@@ -16,13 +16,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-
-import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
-import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by kdehaan on 30/11/17.
  */
 

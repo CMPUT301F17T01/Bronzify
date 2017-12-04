@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.lang.reflect.Array;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -26,14 +23,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.activities.CreateNewHabitTypeActivity;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by jblazusi on 2017-11-01.
  */
 
@@ -55,9 +50,9 @@ public class HabitTypeDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.habit_type_tab_detail, container, false);
 
-        int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
+//        int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
         final User user = AppLocale.getInstance().getUser();
-        final HabitType habitType = user.getHabitTypes().get(pos);
+        final HabitType habitType = AppLocale.getInstance().getType();
 
         final EditText etHabitName = rootView.findViewById(R.id.textHabitName);
         final EditText etHabitReason = rootView.findViewById(R.id.textHabitReason);

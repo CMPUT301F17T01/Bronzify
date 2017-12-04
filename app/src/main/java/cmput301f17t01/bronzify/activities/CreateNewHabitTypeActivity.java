@@ -28,7 +28,6 @@ import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ContextController;
-import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
@@ -83,7 +82,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
         final Button btnClear = findViewById(R.id.buttonClear);
         final Button btnCreate = findViewById(R.id.buttonCreate);
 
-        /**
+        /*
          * Set date dialog listener
          *
          * Will change select date button's text based on selected date
@@ -104,7 +103,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
             }
         };
 
-        /**
+        /*
          * Select date button listener
          *
          * Opens a new select date dialog
