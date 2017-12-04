@@ -109,9 +109,9 @@ public class HabitTypeEventFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
-        final User user = AppLocale.getInstance().getUser();
-        final HabitType habitType = user.getHabitTypes().get(pos);
+//        int pos = getActivity().getIntent().getExtras().getInt("SELECTED_HABIT");
+//        final User user = AppLocale.getInstance().getUser();
+        final HabitType habitType = AppLocale.getInstance().getType();
         mDataset = habitType.getHabitEvents();
 
     }
