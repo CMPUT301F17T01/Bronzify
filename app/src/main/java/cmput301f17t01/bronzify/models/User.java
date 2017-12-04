@@ -1,6 +1,8 @@
 package cmput301f17t01.bronzify.models;
 
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.GoogleMap;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class User {
     private Date lastInfluenced;
     private GoogleMap location;
     private Double score;
+    private Bitmap image;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
 //    private ArrayList<String> habitTypes = new ArrayList<String>();
@@ -316,5 +319,13 @@ public class User {
         if (!followedBy.contains(otherUserID)){
             followedBy.add(otherUserID);
         }
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }
