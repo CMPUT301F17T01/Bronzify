@@ -77,7 +77,9 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
             } else {
                 holder.relativeLayout.setBackgroundColor(0xFFFF0000);
             }
-        } else {
+        }
+        else {
+            // default color
             holder.relativeLayout.setBackgroundColor(0xFFEEEEEE);
         }
     }
