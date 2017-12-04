@@ -87,19 +87,164 @@ public class HabitTypeDetailFragment extends Fragment {
         btnSelectDate.setText(strDate);
         btnSelectDate.setEnabled(false);
 
-        Button[] buttonArray = {btnSunday, btnMonday, btnTuesday, btnWednesday
+        final Button[] buttonArray = {btnSunday, btnMonday, btnTuesday, btnWednesday
                 , btnThursday, btnFriday, btnSaturday};
 
         Boolean[] dayOfWeeks = habitType.getDaysOfWeek();
 
         for (int i = 0; i < 7; ++i) {
-            if(dayOfWeeks[i]){
+            if (dayOfWeeks[i]) {
                 buttonArray[i].setBackgroundColor(getResources().getColor(R.color.Amber));
             }
             buttonArray[i].setEnabled(false);
         }
 
         btnDelete.setEnabled(false);
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (btnEdit.getText() == "Save") {
+                    btnEdit.setText("Edit");
+                    for(Button button: buttonArray){
+                        button.setEnabled(false);
+                    }
+                } else {
+                    btnEdit.setText("Save");
+                    for(Button button: buttonArray){
+                        button.setEnabled(true);
+                    }
+                }
+            }
+        });
+
+        // Day of Week Buttons ("Flip-Flop")
+        // Sunday
+        btnSunday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[0]) {
+                    // Active
+                    // Deactivate Button
+                    btnSunday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[0] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnSunday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[0] = true;
+                }
+            }
+        });
+
+        // Monday
+        btnMonday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[1]) {
+                    // Active
+                    // Deactivate Button
+                    btnMonday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[1] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnMonday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[1] = true;
+                }
+            }
+        });
+
+        // Tuesday
+        btnTuesday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[2]) {
+                    // Active
+                    // Deactivate Button
+                    btnTuesday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[2] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnTuesday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[2] = true;
+                }
+            }
+        });
+
+        // Wednesday
+        btnWednesday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[3]) {
+                    // Active
+                    // Deactivate Button
+                    btnWednesday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[3] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnWednesday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[3] = true;
+                }
+            }
+        });
+
+        // Thursday
+        btnThursday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[4]) {
+                    // Active
+                    // Deactivate Button
+                    btnThursday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[4] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnThursday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[4] = true;
+                }
+            }
+        });
+
+        // Friday
+        btnFriday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[5]) {
+                    // Active
+                    // Deactivate Button
+                    btnFriday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[5] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnFriday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[5] = true;
+                }
+            }
+        });
+
+        // Saturday
+        btnSaturday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dayOfWeeks[6]) {
+                    // Active
+                    // Deactivate Button
+                    btnSaturday.setBackgroundColor(getResources().getColor(R.color.lighterAmber));
+                    dayOfWeeks[6] = false;
+                } else {
+                    // Un-active
+                    // Activate Button
+                    btnSaturday.setBackgroundColor(getResources().getColor(R.color.Amber));
+                    dayOfWeeks[6] = true;
+                }
+            }
+        });
+
 
         return rootView;
     }
