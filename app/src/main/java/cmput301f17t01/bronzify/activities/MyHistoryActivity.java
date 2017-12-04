@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.HabitHistoryViewPagerAdapter;
@@ -74,6 +75,14 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         View hView =  navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
+
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
 
         //set viewpager adapter
         HabitHistoryViewPagerAdapter pagerAdapter = new HabitHistoryViewPagerAdapter(getSupportFragmentManager());

@@ -107,17 +107,25 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageViewNav = hView.findViewById(R.id.circleView);
+        if (appLocale.getUser().getImage() != null) {
+            circularImageViewNav.setImageBitmap(appLocale.getUser().getImage());
+        }
+
         TextView profileName = findViewById(R.id.profileName);
         profileName.setText(name);
-        Button picButton = findViewById(R.id.buttonpic);
         Button followButton = findViewById(R.id.followButton);
         Button deleteButton = findViewById(R.id.deleteButton);
         profilePic = findViewById(R.id.profileImage);
+        ImageView circularImageView =  findViewById(R.id.circleView);
         if (appLocale.getUser().getImage() != null) {
-            profilePic.setImageBitmap(appLocale.getUser().getImage());
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
         }
 
-        picButton.setOnClickListener(new View.OnClickListener() {
+        profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
