@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
@@ -332,9 +333,18 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                         e.printStackTrace();
                     }
 
-                    ElasticSearch elastic = new ElasticSearch();
+
+                    //These two lines are how we save the changes to the user
+                    ContextController contextController = new ContextController(getApplicationContext());
+                    contextController.updateUser(currentUser);
+
+                    /*ElasticSearch elastic = new ElasticSearch();
+
                     currentUser = elastic.update(currentUser);
-                    AppLocale.getInstance().setUser(currentUser);
+                    AppLocale appLocale = AppLocale.getInstance();
+//                    appLocale.setContext(getApplicationContext());
+                    appLocale.setUser(currentUser);*/
+//                    contextController.saveInFile(appLocale.getLocalUsers());
 
                     // Go back
                     finish();

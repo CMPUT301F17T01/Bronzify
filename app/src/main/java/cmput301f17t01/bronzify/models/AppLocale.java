@@ -1,7 +1,32 @@
 package cmput301f17t01.bronzify.models;
 
+
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import cmput301f17t01.bronzify.adapters.UserAdapter;
 
 
 /**
@@ -12,9 +37,14 @@ public class AppLocale {
     private static final AppLocale ourInstance = new AppLocale();
     private User lastUser;
     private User user;
-    private static final String FILENAME = "bronzify.sav";
+//    String path = Environment.getFiles().getAbsolutePath();
+//    private Context context = null;
+//    private static final String FILENAME = "bronzify.sav";
 
-    private ArrayList<User> savedUsers = new ArrayList<>();
+//    private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
+//            new UserAdapter()).create();
+
+    private ArrayList<User> localUsers = new ArrayList<>();
     private ArrayList<HabitType> savedHabitTypes = new ArrayList<>();
     private ArrayList<HabitEvent> savedHabitEvents = new ArrayList<>();
 
@@ -46,12 +76,13 @@ public class AppLocale {
         return user;
     }
 
-    public User getSavedUser(String userID) {
-        //loadFromFile();
-        Iterator<User> itr = savedUsers.iterator();
+
+    public User getLocalUser(String userID) {
+        Iterator<User> itr = localUsers.iterator();
+
         while (itr.hasNext()) {
             User next = itr.next();
-            if (next.getUserID() == userID) {
+            if (next.getUserID().equals(userID)) {
                 return next;
             }
         }
@@ -59,21 +90,22 @@ public class AppLocale {
     }
 
 
-    public void removeSavedUser(User deleteUser) {
-        Iterator<User> itr = savedUsers.iterator();
+    public void removeLocalUser(User deleteUser) {
+        Iterator<User> itr = localUsers.iterator();
         while (itr.hasNext()) {
             User next = itr.next();
-            if (next.getUserID() == deleteUser.getUserID()) {
-                savedUsers.remove(next);
+            if (next.getUserID().equals(deleteUser.getUserID())) {
+                localUsers.remove(next);
                 return;
             }
         }
     }
 
-    public void saveUser(User newUser) {
-        removeSavedUser(newUser);
-        savedUsers.add(newUser);
-        //saveInFile();
+    public void addLocalUser(User newUser) {
+        if (!localUsers.contains(newUser)) {
+            localUsers.add(newUser);
+        }
+
     }
 
     /**
@@ -82,10 +114,9 @@ public class AppLocale {
      * @param newUser
      */
     public void setUser(User newUser) {
-        removeSavedUser(newUser);
         this.user = newUser;
         this.lastUser = newUser;
-        saveUser(user);
+        addLocalUser(newUser);
     }
 
     public void logoutUser() {
@@ -93,40 +124,42 @@ public class AppLocale {
     }
 
 
-    /*private void loadFromFile() { //temporarily unimplemented
-        try {
-            Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            savedUsers = gson.fromJson(in, listType);
-            Log.i("user0", savedUsers.get(0).toString());
-        }
-        catch (FileNotFoundException e) {
-            savedUsers = new ArrayList<User>();
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    private void saveInFile() { //temporarily unimplemented
-        try {
-            FileOutputStream fos = Context.getApplicationContext.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
-            Gson gson = new Gson();
-            gson.toJson(savedUsers, writer);
-            writer.flush();
-            fos.close();
-            Log.i("Saved", "in file");
+//    private void loadFromFile() { //temporarily unimplemented
+////        try {
+////            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
+////            FileInputStream fis = context.openFileInput(FILENAME);
+////            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+////            savedUsers = userGson.fromJson(in, listType);
+////            Log.i("user0", savedUsers.get(0).toString());
+////
+////        } catch (FileNotFoundException e) {
+////            savedUsers = new ArrayList<User>();
+////        }
+//    }
+//
+//
+//    private void saveInFile() { //temporarily unimplemented
+////        try {
+////            FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+////            OutputStreamWriter writer = new OutputStreamWriter(fos);
+////            userGson.toJson(savedUsers, writer);
+////            writer.flush();
+////            fos.close();
+////            Log.i("Saved", "in file");
+////
+////        } catch (FileNotFoundException e) {
+////            Log.i("File Error", "File not found");
+////            e.printStackTrace();
+////        } catch (IOException e) {
+////            e.printStackTrace();
+////        } catch (NullPointerException e) {
+////            Log.i("Null context", "call appLocale.setContext(getApplicationContext()) first");
+////            e.printStackTrace();
+////        }
+//
+//    }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 
     public ArrayList<HabitType> getSavedHabitTypes() {
         return savedHabitTypes;
@@ -144,11 +177,19 @@ public class AppLocale {
         this.savedHabitEvents = savedHabitEvents;
     }
 
-    public ArrayList<User> getSavedUsers() {
-        return savedUsers;
+    public ArrayList<User> getLocalUsers() {
+        return localUsers;
     }
 
-    public void setSavedUsers(ArrayList<User> savedUsers) {
-        this.savedUsers = savedUsers;
+    public void setLocalUsers(ArrayList<User> localUsers) {
+        this.localUsers = localUsers;
     }
+
+//    public Context getContext() {
+//        return context;
+//    }
+//
+//    public void setContext(Context context) {
+//        this.context = context;
+//    }
 }
