@@ -38,6 +38,7 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
@@ -48,6 +49,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.text.InputType.TYPE_CLASS_TEXT;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -212,9 +214,26 @@ public class EspressoTesting {
      */
     @Test
     public void test4FollowUser() {
-        //Login
+        /*//Login with the first user
         onView(withId(R.id.enter_id)).perform(typeText("follow_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("follow_user_001")));
+        onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.register_button)).perform(click());
+        onView(withId(R.id.login_button)).perform(click());
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyProfile));
+
+        onView(withId(R.id.followButton)).perform(click());
+        onView(allOf(withClassName(endsWith("EditText")))).perform(typeText("followed_user_002"));
+        onView(withText("OK")).perform(click());
+
+        //Logout from the first users account
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));*/
+
+        /*//Login with the second user
+        onView(withId(R.id.enter_id)).perform(typeText("followed_user_002"));
+        onView(withId(R.id.enter_id)).check(matches(withText("followed_user_002")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
@@ -222,14 +241,12 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyProfile));
 
-        onView(withId(R.id.followButton)).perform(click());
-        onView(allOf(withClassName(endsWith("EditText")))).perform(typeText("noah"));
-        //onView(withText("")).perform(typeText("noah"));
-        onView(withText("OK")).perform(click());
-
-        //Logout
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+        //onData(allOf(withText("Tommy"), hasSibling(withText("Tommy")))).atPosition(0).perform(click());
+        //onData(allOf(withId(R.id.acceptFollow), hasSibling(withText("Tommy")))).atPosition(0).perform(click());
+        onData(allOf(withId(R.id.acceptFollow), hasSibling(withText("1")), hasSibling(withId(R.id.followReqRecycler)))).perform(click());
+        //onView(allOf(withText("Tommy"), hasSibling(withId(R.id.acceptFollow)))).perform(click());
+        //onData(withText("Tommy")).perform(click());
+        //onView(withId(R.id.habitTypeRow)).perform(click());*/
     }
 
     /**
