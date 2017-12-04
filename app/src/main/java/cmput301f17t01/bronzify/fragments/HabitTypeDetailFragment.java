@@ -265,6 +265,18 @@ public class HabitTypeDetailFragment extends Fragment {
             }
         });
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user.removeHabitType(habitType);
+
+                ContextController contextController = new ContextController(getActivity().getApplicationContext());
+                contextController.updateUser(user);
+
+                getActivity().finish();
+            }
+        });
+
         // Day of Week Buttons ("Flip-Flop")
         // Sunday
         btnSunday.setOnClickListener(new View.OnClickListener() {
