@@ -41,7 +41,7 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
         String name = appLocale.getUser().getUserID();
 
 
-        View viewPager = findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);

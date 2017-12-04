@@ -15,7 +15,6 @@ import java.util.Iterator;
 public class User {
 
     private String userID;
-
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
