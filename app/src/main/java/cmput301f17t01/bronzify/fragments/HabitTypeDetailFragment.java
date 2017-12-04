@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -73,6 +75,20 @@ public class HabitTypeDetailFragment extends Fragment {
         final Button btnDelete = rootView.findViewById(R.id.buttonDelete);
         final Button btnReset = rootView.findViewById(R.id.btnReset);
 
+        final ProgressBar proBar = rootView.findViewById(R.id.progressBar);
+
+        final TextView tvFraction = rootView.findViewById(R.id.labelFraction);
+        final TextView tvPercent = rootView.findViewById(R.id.labelPrecentage);
+
+        String fraction = Integer.toString(habitType.getNumCompleted()) + "/" + Integer.toString(habitType.getTotalEvents());
+        tvFraction.setText(fraction);
+
+        int completionRatio = habitType.getCompletionRatio();
+        proBar.setProgress(completionRatio);
+
+        String percentage = Integer.toString(completionRatio) + "%";
+        tvPercent.setText(percentage);
+
         etHabitName.setText(habitType.getName());
         etHabitName.setEnabled(false);
 
@@ -112,12 +128,16 @@ public class HabitTypeDetailFragment extends Fragment {
                     Boolean validDaysOfWeek = false;
 
                     // Check if all fields are valid
-                    if (newHabitName.equals("") || user.isHabitUsed(newHabitName)) {
+                    if (newHabitName.equals("")) {
                         validName = false;
                     }
                     if (newHabitReason.equals("")) {
                         validReason = false;
                     }
+                    if (user.isHabitUsed(newHabitName) && !(newHabitName.equals(habitType.getName()))) {
+                        validName = false;
+                    }
+
                     // Check if user has selected at least one day of the week
                     for (int i = 0; i < 7; ++i) {
                         if (daysOfWeek[i]) {
@@ -145,7 +165,7 @@ public class HabitTypeDetailFragment extends Fragment {
                             habitType.setDateToStart(dateToStart);
                         }
 
-                        // TODO: NEED TO UPDATE LIST OF EVENTS, NEED TO CHECK DUPLICATE HABIT NAME
+                        habitType.updateEvents();
 
                         // Update ES
                         ContextController contextController = new ContextController(getActivity().getApplicationContext());
