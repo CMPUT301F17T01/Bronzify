@@ -17,16 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.HabitHistoryViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
 
-// import android.support.design.widget.TabItem;
-
-/**
+/*
  * Created by noahkryz on 11/1/2017.
  */
 public class MyHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,6 +78,7 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         //set viewpager adapter
         HabitHistoryViewPagerAdapter pagerAdapter = new HabitHistoryViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
 
 
         //change Tab selection when swipe ViewPager

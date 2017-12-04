@@ -1,32 +1,9 @@
 package cmput301f17t01.bronzify.models;
 
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import cmput301f17t01.bronzify.adapters.UserAdapter;
 
 
 /**
@@ -37,6 +14,8 @@ public class AppLocale {
     private static final AppLocale ourInstance = new AppLocale();
     private User lastUser;
     private User user;
+    private HabitEvent event;
+    private HabitType type;
 //    String path = Environment.getFiles().getAbsolutePath();
 //    private Context context = null;
 //    private static final String FILENAME = "bronzify.sav";
@@ -51,7 +30,7 @@ public class AppLocale {
     /**
      * Gets the instances of the app locale
      *
-     * @return
+     * @return ourInstance
      */
     public static AppLocale getInstance() {
         return ourInstance;
@@ -60,7 +39,7 @@ public class AppLocale {
     /**
      * Gets the last user that was accessing the app locale
      *
-     * @return
+     * @return lastUser
      */
     public User getLastUser() {
         return lastUser;
@@ -70,7 +49,7 @@ public class AppLocale {
     /**
      * Method that retrieves the logged in user
      *
-     * @return
+     * @return user
      */
     public User getUser() {
         return user;
@@ -78,6 +57,9 @@ public class AppLocale {
 
 
     public User getLocalUser(String userID) {
+        if (localUsers == null) {
+            return null;
+        }
         Iterator<User> itr = localUsers.iterator();
 
         while (itr.hasNext()) {
@@ -101,6 +83,17 @@ public class AppLocale {
         }
     }
 
+    public void removeLocalUser(String userID) {
+        Iterator<User> itr = localUsers.iterator();
+        while (itr.hasNext()) {
+            User next = itr.next();
+            if (next.getUserID().equals(userID)) {
+                localUsers.remove(next);
+                return;
+            }
+        }
+    }
+
     public void addLocalUser(User newUser) {
         if (!localUsers.contains(newUser)) {
             localUsers.add(newUser);
@@ -111,7 +104,7 @@ public class AppLocale {
     /**
      * Method that sets a user as the logged in user
      *
-     * @param newUser
+     * newUser @param
      */
     public void setUser(User newUser) {
         this.user = newUser;
@@ -192,4 +185,20 @@ public class AppLocale {
 //    public void setContext(Context context) {
 //        this.context = context;
 //    }
+
+    public HabitEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(HabitEvent event) {
+        this.event = event;
+    }
+
+    public HabitType getType() {
+        return type;
+    }
+
+    public void setType(HabitType type) {
+        this.type = type;
+    }
 }

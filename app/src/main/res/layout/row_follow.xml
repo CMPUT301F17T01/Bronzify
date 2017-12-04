@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="ContentDescription"
-    android:orientation="vertical"
+    android:id="@+id/rowFollow"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/rowFollow">
+    android:layout_height="40dp"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
 
 
     <TextView
+        android:id="@+id/followReqName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="followReqName"
-        android:layout_marginStart="32dp"
-        android:id="@+id/followReqName"/>
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="26dp"
+        android:text="@string/follow_request_name" />
 
     <ImageButton
         android:id="@+id/acceptFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/followReqName"
-        android:layout_marginStart="16dp"
-        android:layout_toStartOf="@id/rejectFollow"
+        android:layout_alignTop="@+id/rejectFollow"
+        android:layout_marginEnd="33dp"
+        android:layout_toStartOf="@+id/rejectFollow"
         android:background="@drawable/ic_check_black_24dp" />
 
     <ImageButton
         android:id="@+id/rejectFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/followReqName"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="22dp"
         android:background="@drawable/ic_clear_black_24dp" />
 </RelativeLayout>

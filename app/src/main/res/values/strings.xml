@@ -5,15 +5,15 @@
 
     <string name="title_activity_home">Today</string>
     <string name="title_activity_my_habits">My Habits</string>
-    <!-- Habit Feed Missing -->
+    <string name="title_activity_my_feed">My Feed</string>
     <string name="title_activity_habit_history">Habit History</string>
     <string name="title_activity_my_map">Map</string>
     <string name="title_activity_follow_user">Followed Users</string>
     <string name="title_activity_my_profile">My Profile</string>
-
     <string name="title_activity_habit_type">Habit Type</string>
     <string name="title_activity_habit_due">Habit Due</string>
     <string name="title_activity_create_new_habit">Create New Habit</string>
+    <string name="title_activity_leader_board">Leaderboard</string>
 
     <string name="menu_my_home">My Home</string>
     <string name="menu_my_habits">My Habits</string>
@@ -22,6 +22,7 @@
     <string name="menu_my_map">My Map</string>
     <string name="menu_my_followers">My Followers</string>
     <string name="menu_my_profile">My Profile</string>
+    <string name="menu_leader_board">Leaderboard</string>
     <string name="menu_log_out">Log Out</string>
 
     <string name="action_settings">Settings</string>
@@ -54,6 +55,11 @@
     <string name="repeat">Repeat</string>
     <string name="reason">Reason</string>
     <string name="set_location">Set Location</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="reset">Reset</string>
+    <string name="completion_rate">Completion Rate</string>
+    <string name="follow_request_name">Follow Request Name</string>
 
     <!--Days of the week-->
     <string name="sunday_abr">SUN</string>

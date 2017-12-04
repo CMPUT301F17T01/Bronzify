@@ -32,6 +32,10 @@
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/menu_my_profile"/>
         <item
+            android:id="@+id/LeaderBoard"
+            android:icon="@drawable/ic_poll_black_24dp"
+            android:title="@string/menu_leader_board"/>
+        <item
             android:id="@+id/LogOut"
             android:icon="@drawable/ic_exit_to_app_black_24dp"
             android:title="@string/menu_log_out"/>

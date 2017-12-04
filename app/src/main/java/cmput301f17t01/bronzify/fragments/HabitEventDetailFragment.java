@@ -6,21 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.models.AppLocale;
@@ -28,7 +22,7 @@ import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by jblazusi on 2017-11-01.
  */
 
@@ -43,33 +37,14 @@ public class HabitEventDetailFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.habit_event_tab_detail, container, false);
 
         Intent intent = getActivity().getIntent();
-        String habitName = intent.getExtras().getString("HABIT_TYPE");
-        Date goalDate = new Date();
-        goalDate.setTime(intent.getLongExtra("GOAL_DATE", -1));
 
         final User user = AppLocale.getInstance().getUser();
         final ArrayList<HabitType> habitTypes = user.getHabitTypes();
+        habitEvent = AppLocale.getInstance().getEvent();
 
 
-        // Find better way to pass in habit event
-        Boolean found = false;
-        for (HabitType type : habitTypes) {
-            if (!type.getName().equals(habitName)) {
-                continue;
-            } else {
-                habitType = type;
-                for (HabitEvent event : type.getHabitEvents()) {
-                    if (event.getGoalDate().compareTo(goalDate) == 0) {
-                        habitEvent = event;
-                        found = true;
-                        break;
-                    }
-                }
-            }
-            if (found) {
-                break;
-            }
-        }
+//        Date goalDate = new Date();
+//        goalDate.setTime(intent.getLongExtra("GOAL_DATE", -1));
 
         final EditText etHabitName = rootView.findViewById(R.id.textHabitName);
         final EditText etHabitComment = rootView.findViewById(R.id.textHabitComment);

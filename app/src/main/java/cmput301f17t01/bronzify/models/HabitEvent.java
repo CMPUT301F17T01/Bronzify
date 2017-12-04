@@ -1,14 +1,14 @@
 package cmput301f17t01.bronzify.models;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
-/**
+/*
  * Created by noahkryzanowski on 2017-10-20.
  */
 
@@ -19,7 +19,7 @@ public class HabitEvent {
     private String comment; // Max 20 Char
     private Boolean completed;
     private Bitmap image; // Change?
-    private GoogleMap location; // Unsure of location type
+    private Location location; // Unsure of location type
     private String habitType;
 
     // Constructor
@@ -144,7 +144,7 @@ public class HabitEvent {
      *
      * @return Location
      */
-    public GoogleMap getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -153,7 +153,7 @@ public class HabitEvent {
      *
      * @param location Location of habit event
      */
-    public void setLocation(GoogleMap location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

@@ -1,12 +1,10 @@
 package cmput301f17t01.bronzify.models;
 
-import android.util.Log;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Created by noahkryzanowski on 2017-10-20.
@@ -259,6 +257,24 @@ public class HabitType {
     public void removeEvent(HabitEvent removedEvent) {
         if (habitEvents.contains(removedEvent)) {
             habitEvents.remove(removedEvent);
+        }
+    }
+
+    public HabitEvent getEvent(Date eventGoal) {
+        Iterator<HabitEvent> itr = habitEvents.iterator();
+        while (itr.hasNext()) {
+            HabitEvent next = itr.next();
+            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+                return next;
+            }
+        }
+        return null;
+    }
+
+    public void updateEvent(HabitEvent oldEvent, HabitEvent newEvent) {
+        if (habitEvents.contains(oldEvent)) {
+            habitEvents.remove(oldEvent);
+            habitEvents.add(newEvent);
         }
     }
 }
