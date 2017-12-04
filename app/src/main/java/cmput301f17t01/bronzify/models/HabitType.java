@@ -239,4 +239,10 @@ public class HabitType {
         habitEvents.clear();
         generateNewEvents(this.dateToStart);
     }
+
+    public void checkEventEmpty(){
+        if(habitEvents.isEmpty()){
+            generateNewEvents(new Date());
+        }
+    }
 }
