@@ -169,6 +169,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
                 if (dateDiff == 0) {
                     events.add(event);
                 } else if (dateDiff < 0) {
+                    // TODO: NEED A WAY TO CHECK IF THE EVENT HAS ALREADY BEEN MARKED
                     event.setCompleted(false);
                     type.incrementNumUncompleted(1);
                     ++totalIncompleted;

@@ -162,16 +162,22 @@ public class HabitEventDetailFragment extends Fragment {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Todo: Set marked
                 habitEvent.setCompleted(true);
                 habitType.incrementNumCompleted(1);
+                Toast.makeText(getActivity(), "Event marked as completed", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
 
         btnNotDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Todo: Set marked
                 habitEvent.setCompleted(false);
                 habitType.incrementNumUncompleted(1);
+                Toast.makeText(getActivity(), "Event marked as incomplete", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
 
