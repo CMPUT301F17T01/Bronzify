@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -22,7 +21,7 @@
             android:id="@+id/labelHabitName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Habit Name:" />
+            android:text="@string/habit_name_field" />
 
         <EditText
             android:id="@+id/textHabitName"
@@ -36,7 +35,7 @@
             android:id="@+id/labelHabitReason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reason:" />
+            android:text="@string/reason" />
 
         <EditText
             android:id="@+id/textHabitReason"
@@ -50,19 +49,19 @@
             android:id="@+id/labelHabitStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Starting Date:" />
+            android:text="@string/starting_date" />
 
         <Button
             android:id="@+id/buttonSelectDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select a Date" />
+            android:text="@string/select_a_date" />
 
         <TextView
             android:id="@+id/labelDayOfWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repeat:" />
+            android:text="@string/repeat" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,13 +151,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Create" />
+            android:text="@string/create" />
 
         <Button
             android:id="@+id/buttonClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Clear" />
+            android:text="@string/clear" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

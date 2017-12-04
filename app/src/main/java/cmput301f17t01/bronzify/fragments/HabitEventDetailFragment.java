@@ -24,10 +24,6 @@ public class HabitEventDetailFragment extends Fragment {
     private Button deleteButton;
     private EditText comment;
 
-    public void updateEvent(){
-        return;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -48,6 +48,11 @@
     <string name="event_completed">Event Completed</string>
     <string name="event_failed">Event Failed</string>
     <string name="goal_date">Goal Date</string>
+    <string name="habit_name_field">Habit Name</string>
+    <string name="starting_date">Starting Date</string>
+    <string name="select_a_date">Select a Date</string>
+    <string name="repeat">Repeat</string>
+    <string name="reason">Reason</string>
 
     <!--Days of the week-->
     <string name="sunday_abr">SUN</string>
