@@ -19,6 +19,7 @@
     </FrameLayout>
 
     <Button
+        android:id="@+id/set_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/set_location"

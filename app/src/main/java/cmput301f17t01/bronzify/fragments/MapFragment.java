@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -51,6 +52,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
 //            new HabitEventAdapter()).create();
     private HabitEvent event;
+    private Location currentLocation;
     MapView mMapView;
     View mView;
 
@@ -75,6 +77,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.habit_event_tab_map, container, false);
+
+        Button button = mView.findViewById(R.id.set_location);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                event.setLocation(currentLocation);
+                ContextController contextController = new ContextController(getActivity().getApplicationContext());
+                contextController.updateUser(AppLocale.getInstance().getUser());
+                Log.i("Location", "Set");
+            }
+        });
+
         return mView;
     }
 
@@ -90,7 +104,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
-                            Location currentLocation = (Location) task.getResult();
+                            currentLocation = (Location) task.getResult();
                             LatLng LatitudeLongitude = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                             moveCamera(LatitudeLongitude, DEFAULT_ZOOM);
                             BitmapDescriptor mapBitmap;
@@ -130,6 +144,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         mMapView = mView.findViewById(R.id.map);
         if (mMapView != null) {
