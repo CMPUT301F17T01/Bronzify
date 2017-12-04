@@ -67,10 +67,10 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         holder.habitEventDate.setText(habitEvent.goalDateToString());
         if (mContext instanceof MyHistoryActivity ){
             if(habitEvent.getCompleted()==Boolean.TRUE){
-                holder.relativeLayout.setBackgroundColor(0xFF00FF00);
+                holder.relativeLayout.setBackgroundColor(0xFF93CA3B);
             }
             else {
-                holder.relativeLayout.setBackgroundColor(0xFFFF0000);
+                holder.relativeLayout.setBackgroundColor(0xFFff0030);
             }
         }
         else {

@@ -2,16 +2,16 @@ package cmput301f17t01.bronzify.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.location.Location;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -19,7 +19,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -77,8 +76,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             mMap.addMarker(new MarkerOptions()
                                     .position(LatitudeLongitude)
                                     .title("Retrieve Habit Event Name and Replace")
-                                    .snippet("These are the Habit Event Comments")
-                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))); //Replace with picture?
+                                    .snippet("These are the Habit Event Comments")); //Replace with picture?
+                                    //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)))
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                         }
@@ -169,5 +168,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
+
+   /* public void drawMarker() {
+        Drawable circleDrawable = getResources().getDrawable(R.drawable.circle_shape);
+        BitmapDescriptor markerIcon = getMarkerIconFromDrawable(circleDrawable);
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(41.906991, 12.453360))
+                .title("My Marker")
+                .icon(markerIcon)
+        );
+    }
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }*/
 
 }
