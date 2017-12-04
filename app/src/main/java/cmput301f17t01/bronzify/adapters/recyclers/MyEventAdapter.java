@@ -43,7 +43,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
             habitEventName = v.findViewById(R.id.habitEventRow);
             habitEventDate = v.findViewById(R.id.eventDate);
             relativeLayout =(RelativeLayout) v.findViewById(R.id.event_row);
-            
+
         }
         @Override
         public void onClick(View v) {
@@ -67,12 +67,14 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         holder.habitEventDate.setText(habitEvent.goalDateToString());
         if (mContext instanceof MyHistoryActivity ){
             if(habitEvent.getCompleted()==Boolean.TRUE){
-                holder.relativeLayout.setBackgroundColor(0xFF0000);
+                holder.relativeLayout.setBackgroundColor(0xFF00FF00);
             }
             else {
-                holder.relativeLayout.setBackgroundColor(0x00FF00);
+                holder.relativeLayout.setBackgroundColor(0xFFFF0000);
             }
         }
+        else {
+            holder.relativeLayout.setBackgroundColor(0xFFEEEEEE);        }
     }
 
     @Override
