@@ -3,6 +3,7 @@ package cmput301f17t01.bronzify.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class HabitTypeEventFragment extends Fragment {
 
     protected RecyclerView mRecyclerView;
     protected ListAdapter mAdapter;
-    protected RecyclerView.LayoutManager mLayoutManager;
+    protected LinearLayoutManager mLayoutManager;
     protected ArrayList<String> mDataset;
 
     private Button editHabitType;
@@ -93,6 +94,8 @@ public class HabitTypeEventFragment extends Fragment {
                     .findFirstCompletelyVisibleItemPosition();
         }
         mRecyclerView.setLayoutManager(mLayoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLayoutManager.getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.scrollToPosition(scrollPosition);
 
         mAdapter = new ListAdapter(mDataset, new ListController("none"));
