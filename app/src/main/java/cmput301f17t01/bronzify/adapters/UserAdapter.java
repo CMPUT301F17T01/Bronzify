@@ -126,6 +126,8 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.value(gsonType.toJson(user.getHabitTypes()));
         writer.name("following");
         writer.value(gsonType.toJson(user.getFollowing()));
+//        writer.name("location");
+//        writer.value(gsonType.toJson(user.getLocation()));
         writer.name("pendingFollowRequests");
         writer.value(gsonType.toJson(user.getPendingFollowRequests()));
         writer.endObject();
