@@ -10,9 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.HabitHistoryViewPagerAdapter;
@@ -28,11 +31,12 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
 
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
-
+    private RecyclerView recyclerView;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private DrawerLayout drawer;
     private String[] pageTitle = {"Feed", "Map"};
+
 
     /**
      * Called on the creation of the Habit History Activity
@@ -101,11 +105,13 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
              *
              * @param tab
              */
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
+
 
     }
 
@@ -169,5 +175,10 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public View getTabView(int position){
+        View tab = LayoutInflater.from(MyHistoryActivity.this).inflate(R.layout.habit_history_tab_feed,null);
+        return tab;
     }
 }
