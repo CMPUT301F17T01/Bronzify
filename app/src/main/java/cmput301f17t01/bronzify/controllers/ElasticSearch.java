@@ -38,8 +38,8 @@ import io.searchbox.core.SearchResult;
 
 public class ElasticSearch {
     private static JestDroidClient client;
-//    private static String serverString = "http://cmput301.softwareprocess.es:8080";
-    private static String serverString = "http://localhost:9200";
+    private static String serverString = "http://cmput301.softwareprocess.es:8080";
+//    private static String serverString = "http://localhost:9200";
     private static String indexString = "cmput301f17t01_bronzify";
     private static String typeString = "test_user_v2";
     private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,

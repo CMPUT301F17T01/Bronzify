@@ -115,7 +115,6 @@ public class HabitEvent {
      *
      */
     public void markCompleted() {
-        this.completed = Boolean.TRUE;
         this.completedDate = new Date();
     }
 
@@ -197,7 +196,9 @@ public class HabitEvent {
         this.completedDate = completedDate;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(Boolean completed)
+    {
+        markCompleted();
         this.completed = completed;
     }
 }

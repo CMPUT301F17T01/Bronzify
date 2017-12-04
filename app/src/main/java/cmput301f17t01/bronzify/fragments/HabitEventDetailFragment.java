@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -36,15 +38,18 @@ public class HabitEventDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.habit_event_tab_detail, container, false);
 
-        Intent intent = getActivity().getIntent();
-
         final User user = AppLocale.getInstance().getUser();
         final ArrayList<HabitType> habitTypes = user.getHabitTypes();
         habitEvent = AppLocale.getInstance().getEvent();
 
+        for(HabitType habit: habitTypes){
+            if(habit.getName().equals(habitEvent.getHabitType())){
+                habitType = habit;
+            }
+        }
 
-//        Date goalDate = new Date();
-//        goalDate.setTime(intent.getLongExtra("GOAL_DATE", -1));
+        Date currentDate = getZeroTimeDate(new Date());
+        Date goalDate = getZeroTimeDate(habitEvent.getGoalDate());
 
         final EditText etHabitName = rootView.findViewById(R.id.textHabitName);
         final EditText etHabitComment = rootView.findViewById(R.id.textHabitComment);
@@ -64,14 +69,14 @@ public class HabitEventDetailFragment extends Fragment {
 
         btnEdit.setText("Edit");
 
-        Date currentDate = getZeroTimeDate(new Date());
+        // For complete and incomplete buttons
         if(goalDate.compareTo(currentDate) == 0){
             btnDone.setVisibility(View.VISIBLE);
             btnNotDone.setVisibility(View.VISIBLE);
-        } else if (goalDate.compareTo(currentDate) < 0){
+        } else if (goalDate.compareTo(currentDate) < 0 && habitEvent.getCompletedDate() == null){
             habitType.incrementNumUncompleted(1);
-            Toast.makeText(getActivity(), "Event has passed. Automatically setting as incomplete.", Toast.LENGTH_SHORT).show();
             habitEvent.setCompleted(false);
+            Toast.makeText(getActivity(), "Event has passed. Automatically setting as incomplete.", Toast.LENGTH_SHORT).show();
             getActivity().finish();
         }
 
@@ -128,6 +133,7 @@ public class HabitEventDetailFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 habitType.removeEvent(habitEvent);
+                                Toast.makeText(getActivity(), "Event deleted.", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
                             }})
                         .setNegativeButton("No", null).show();
@@ -137,9 +143,8 @@ public class HabitEventDetailFragment extends Fragment {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Todo: Set marked
-                habitEvent.setCompleted(true);
                 habitType.incrementNumCompleted(1);
+                habitEvent.setCompleted(true);
                 Toast.makeText(getActivity(), "Event marked as completed", Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             }
@@ -149,8 +154,8 @@ public class HabitEventDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Todo: Set marked
-                habitEvent.setCompleted(false);
                 habitType.incrementNumUncompleted(1);
+                habitEvent.setCompleted(false);
                 Toast.makeText(getActivity(), "Event marked as incomplete", Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             }
