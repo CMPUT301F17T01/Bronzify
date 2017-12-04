@@ -53,6 +53,7 @@
     <string name="select_a_date">Select a Date</string>
     <string name="repeat">Repeat</string>
     <string name="reason">Reason</string>
+    <string name="set_location">Set Location</string>
 
     <!--Days of the week-->
     <string name="sunday_abr">SUN</string>
