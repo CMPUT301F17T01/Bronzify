@@ -27,6 +27,7 @@ public class InstrumentedTest extends ActivityInstrumentationTestCase2<LoginActi
      * @throws Exception
      */
     public void setUp() throws Exception {
+        //super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -66,6 +67,7 @@ public class InstrumentedTest extends ActivityInstrumentationTestCase2<LoginActi
      */
     @Override
     public void tearDown() throws Exception{
+        //super.tearDown();
         solo.finishOpenedActivities();
     }
 }

@@ -1,18 +1,15 @@
 package cmput301f17t01.bronzify.adapters;
 
-/**
- * Created by Jacob on 2017-11-12.
- */
-
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import cmput301f17t01.bronzify.fragments.HabitEventDetailFragment;
-import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.fragments.MapFragment;
 import cmput301f17t01.bronzify.fragments.PictureFragment;
+
+/*
+ * Created by Jacob on 2017-11-12.
+ */
 
 public class HabitEventViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;

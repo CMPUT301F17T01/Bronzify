@@ -25,6 +25,7 @@ public class User {
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
 //    private ArrayList<String> habitTypes = new ArrayList<String>();
     private ArrayList<String> following = new ArrayList<String>();
+    private ArrayList<String> followedBy = new ArrayList<String>();
     private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
 
     /**
@@ -302,5 +303,19 @@ public class User {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public ArrayList<String> getFollowedBy() {
+        return followedBy;
+    }
+
+    public void setFollowedBy(ArrayList<String> followedBy) {
+        this.followedBy = followedBy;
+    }
+
+    public void addFollowedBy(String otherUserID) {
+        if (!followedBy.contains(otherUserID)){
+            followedBy.add(otherUserID);
+        }
     }
 }

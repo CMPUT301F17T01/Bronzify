@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp"
@@ -24,15 +24,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileImage"
         android:layout_centerHorizontal="true"
-        android:text="@string/login_user_id" />
+        android:text="@string/login_user_id"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/profileName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
         <FrameLayout
             android:id="@+id/sample_content_fragment"
             android:layout_weight="2"
@@ -45,7 +47,7 @@
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
@@ -57,31 +59,28 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="32dp"
-        android:layout_toEndOf="@+id/profileName"
+        android:layout_alignBaseline="@+id/FollowRequests"
+        android:layout_alignBottom="@+id/FollowRequests"
+        android:layout_alignEnd="@+id/deleteButton"
         android:text="@string/followButton" />
 
     <TextView
         android:id="@+id/FollowRequests"
-        android:textSize="18dp"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/followButton"
-        android:layout_toLeftOf="@id/followButton"
-        android:layout_marginRight="50dp"
-        android:text="@string/follow_request" />
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/profileName"
+        android:text="@string/follow_request"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/FollowRequests"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="32dp"
         android:id="@+id/followReqRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_marginBottom="32dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/followButton"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

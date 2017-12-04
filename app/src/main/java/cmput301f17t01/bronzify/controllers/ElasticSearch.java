@@ -86,6 +86,7 @@ public class ElasticSearch {
         remoteUser.setLastInfluenced(new Date());
         postUser(remoteUser);
         user.removePendingFollowRequest(otherUserID);
+        user.addFollowedBy(otherUserID);
         userUpdate(user);
     }
 
@@ -299,7 +300,6 @@ public class ElasticSearch {
                     //.Builder("localhost:9200");
                     .Builder(serverString);
             DroidClientConfig config = builder.build();
-
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config);
             client = (JestDroidClient) factory.getObject();

@@ -11,19 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 import java.util.Date;
-
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.ListAdapter;
 import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by jblazusi on 2017-11-01.
  */
 
@@ -79,7 +76,7 @@ public class HabitTypeEventFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.habit_type_tab_event, container, false);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.myTypeRecycler);
+        mRecyclerView = rootView.findViewById(R.id.myTypeRecycler);
         mRecyclerView.setHasFixedSize(true);
         MyEventAdapter adapter = new MyEventAdapter(getContext(),mDataset);
         mRecyclerView.setAdapter(adapter);

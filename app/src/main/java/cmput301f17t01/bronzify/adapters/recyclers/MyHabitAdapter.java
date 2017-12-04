@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.adapters.recyclers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -35,13 +37,13 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitTypeName;
         private TextView completion;
-        private ImageButton imageButton;
+        private ImageView imageView;
 
         private ViewHolder(View v) {
             super(v);
             habitTypeName = v.findViewById(R.id.habitTypeRow);
             completion = v.findViewById(R.id.typeCompletion);
-            imageButton = v.findViewById(R.id.typeArrow);
+            imageView = v.findViewById(R.id.typeArrow);
 
             v.setOnClickListener(this);
             //habitTypeName = v.findViewById(R.id.habitEventRow);

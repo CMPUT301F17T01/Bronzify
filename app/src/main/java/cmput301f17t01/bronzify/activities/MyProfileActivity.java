@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,15 +21,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.recyclers.FollowAdapter;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.controllers.ProfileController;
-import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
 
@@ -40,10 +38,11 @@ import cmput301f17t01.bronzify.models.User;
 public class MyProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView rv;
-    private List<User> userList;
+    private ArrayList<String> userList;
     private String name;
     private AppLocale appLocale;
     private ProfileController controller;
+    private User currentUser;
 
     /**
      * Called on the creation of My Profile Activity
@@ -61,12 +60,12 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        currentUser = AppLocale.getInstance().getUser();
 
-        RecyclerView rv = findViewById(R.id.recyclerView);
-        userList = new ArrayList<>();
+        rv = findViewById(R.id.recyclerView);
+        userList = new ArrayList<String>() ;
         AppLocale appLocale = AppLocale.getInstance();
         final ProfileController controller = new ProfileController();
-
         createTestList();
 
         rv = findViewById(R.id.followReqRecycler);
@@ -77,8 +76,7 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         rv.setAdapter(fa);
 
         name = appLocale.getUser().getUserID();
-
-        if (savedInstanceState == null) {
+        /*if (savedInstanceState == null) {
             Bundle bundle = new Bundle();
             bundle.putString("type", "pendingFollows");
 
@@ -87,13 +85,12 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
             fragment.setArguments(bundle);
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
-        }
+        }*/
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Username in NavBar
-        User currentUser = AppLocale.getInstance().getUser();
         View hView =  navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
@@ -227,28 +224,7 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
     private void createTestList(){
 
         // TODO: Substitute this with actually getting the follow req. user list from the DB
-
-
-        userList.add(new User("Tommy"));
-        userList.add(new User("Sally"));
-        userList.add(new User("Imran"));
-        userList.add(new User("Petr"));
-        userList.add(new User("1"));
-        userList.add(new User("2"));
-        userList.add(new User("3"));
-        userList.add(new User("4"));
-        userList.add(new User("6"));
-        userList.add(new User("Q"));
-        userList.add(new User("7"));
-        userList.add(new User("8"));
-        userList.add(new User("1"));
-        userList.add(new User("2"));
-        userList.add(new User("3"));
-        userList.add(new User("4"));
-        userList.add(new User("6"));
-        userList.add(new User("Q"));
-        userList.add(new User("7"));
-        userList.add(new User("8"));
+        userList = currentUser.getPendingFollowRequests();
 
 
     }

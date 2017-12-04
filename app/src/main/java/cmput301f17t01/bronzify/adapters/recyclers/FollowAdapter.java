@@ -14,7 +14,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.controllers.ListController;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
 
 /**
@@ -27,11 +29,11 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     // TODO: SHOULD THIS BE USERS LIST OR JUST STRINGS OF USERID'S?
     // THOUGHTS?
 
-    private List<User> entries;
+    private List<String> entries;
     private Context mContext;
     private static ListController controller;
 
-    public FollowAdapter(Context context, List<User> list){
+    public FollowAdapter(Context context, List<String> list ){
         entries = list;
         mContext = context;
     }
@@ -75,18 +77,17 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        User u = entries.get(position);
-        holder.followReqText.setText(u.getUserID());
+        final String u = entries.get(position);
+        holder.followReqText.setText(u);
 
         holder.rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the clicked item label
-                String userName = entries.get(position).getUserID();
                 entries.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,entries.size());
-                Toast.makeText(mContext,"Rejected : " + userName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"Rejected : " + u, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -94,13 +95,14 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 // Get the clicked item label
-                String userName = entries.get(position).getUserID();
+                String userName = entries.get(position);
                 // TODO: ADD THE USER TO THE FOLLOWERS LIST
                 entries.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,entries.size());
-
-                Toast.makeText(mContext,"Accepted : " + userName, Toast.LENGTH_SHORT).show();
+                User user = AppLocale.getInstance().getUser();
+                new ElasticSearch().acceptFollow(user,userName);
+                Toast.makeText(mContext,"Accepted : " + u, Toast.LENGTH_SHORT).show();
             }
         });
     }
