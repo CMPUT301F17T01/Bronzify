@@ -1,8 +1,5 @@
 package cmput301f17t01.bronzify.models;
 
-import android.util.Log;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;

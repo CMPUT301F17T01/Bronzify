@@ -3,58 +3,66 @@ package cmput301f17t01.bronzify.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
 /**
- * Created by owenm_000 on 11/1/2017.
+ * Created by jblazusi on 2017-12-02.
  */
-public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private RecyclerView recyclerView;
-    private AppLocale appLocale = AppLocale.getInstance();
-
-    private List<HabitType> types = new ArrayList<HabitType>();
+public class LeaderBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
-     * Called on the creation of the My Habits Activity
+     * Called on the creation of the My Home Activity
      *
      * @param savedInstanceState
      */
+    private RecyclerView recyclerView;
+    private AppLocale appLocale = AppLocale.getInstance();
+    private List<HabitType> types;
+    private ElasticSearch es;
+    final User user = AppLocale.getInstance().getUser();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_habits);
+        setContentView(R.layout.activity_leader_board);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            ListFragment fragment = new ListFragment();
+            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.commit();
+        }
+
+        getLeaderboard();
+        es = new ElasticSearch();
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -62,42 +70,12 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Username in NavBar
-        User currentUser = AppLocale.getInstance().getUser();
-        View hView =  navigationView.getHeaderView(0);
-        TextView usernameNav = hView.findViewById(R.id.userNameNav);
-        usernameNav.setText(currentUser.getUserID());
-
-        types = new ArrayList<HabitType>();
-        recyclerView = findViewById(R.id.myHabitRecycler);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        final MyHabitAdapter fa = new MyHabitAdapter(this,types);
-        recyclerView.setAdapter(fa);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                llm.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-
-        /*TextView test = (TextView) findViewById(R.id.habitTypeRow);
-        test.setText("TESTING"); */
-
-        FloatingActionButton fab = findViewById(R.id.createNewHabit);
-        fab.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(MyHabitsActivity.this, CreateNewHabitTypeActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        fillTypesList();
-        MyHabitAdapter myHabitAdapter = new MyHabitAdapter(this, types);
-        recyclerView.setAdapter(myHabitAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        MyHabitAdapter habitAdapter = new MyHabitAdapter(this,types);
+        recyclerView = findViewById(R.id.myLeaderboardRecycler);
+        recyclerView.setAdapter(habitAdapter);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     /**
@@ -132,7 +110,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      * @param item
      * @return
      */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -150,8 +127,8 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(!(id == R.id.MyHabits)) {
-            Activity currentActivity = MyHabitsActivity.this;
+        if(!(id == R.id.LeaderBoard)) {
+            Activity currentActivity = LeaderBoardActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
             finish();
@@ -163,13 +140,22 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
+    private void getLeaderboard(){
 
-    private void fillTypesList(){
-        User user = AppLocale.getInstance().getUser();
-        ArrayList<HabitType> habitTypes = user.getHabitTypes();
-        types.clear();
-        for(HabitType type: habitTypes){
-            types.add(type);
+        ArrayList<User> users = getUsers();
+        for(User user : users){
+            types.addAll(user.getHabitTypes());
         }
+        // TODO: FINISH THIS
+        // Easiest way would be to just add a completion rate to Users
+        // BUT idk if i'm allowed to touch User model soooooooo.....
+    }
+
+    private ArrayList<User> getUsers(){
+        // Here we would have a query on ES to return all users
+        // currently returning a filler array
+        ArrayList<User> allUsers = new ArrayList<User>();
+        allUsers.add(user);
+        return  allUsers;
     }
 }

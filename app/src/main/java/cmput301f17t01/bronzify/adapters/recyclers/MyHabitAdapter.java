@@ -14,6 +14,7 @@ import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitTypeActivity;
+import cmput301f17t01.bronzify.activities.LeaderBoardActivity;
 import cmput301f17t01.bronzify.models.HabitType;
 
 /**
@@ -29,7 +30,6 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         mContext = context;
         entries = list;
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitTypeName;
@@ -65,6 +65,12 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HabitType habitType = entries.get(position);
+        if(mContext instanceof LeaderBoardActivity){
+            holder.habitTypeName.setText( Integer.toString(1+position)+habitType.getName() );
+        }
+        else{
+            holder.habitTypeName.setText(habitType.getName());
+        }
         holder.habitTypeName.setText(habitType.getName());
         String completionString = Integer.toString(habitType.getCompletionRatio()) + "%";
         holder.completion.setText(completionString);
