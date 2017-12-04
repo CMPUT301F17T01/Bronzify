@@ -80,8 +80,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // TODO: user.getFollowedBy() isn't working
-
-         AppLocale appLocale = AppLocale.getInstance();
+        
         ArrayList<String> followers;
         followers = appLocale.getUser().getFollowedBy();
         
