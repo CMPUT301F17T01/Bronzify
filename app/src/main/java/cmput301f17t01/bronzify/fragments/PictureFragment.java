@@ -48,10 +48,12 @@ public class PictureFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.habit_event_tab_picture,
                 container, false);
+
         event = AppLocale.getInstance().getEvent();
-        button = (Button) rootView.findViewById(R.id.buttonpic);
-        imageView = (ImageView) rootView.findViewById(R.id.testing_pic);
-        circularImageView = (ImageView) rootView.findViewById(R.id.circleView);
+        button = rootView.findViewById(R.id.buttonpic);
+        imageView = rootView.findViewById(R.id.testing_pic);
+        circularImageView =  rootView.findViewById(R.id.circleView);
+
 
         if (event.getImage() != null) {
             circularImageView.setImageBitmap(event.getImage());

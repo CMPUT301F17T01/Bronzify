@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/menu_my_followers"
-        android:padding="20dp"
-        android:textSize="30sp"
-        android:layout_marginTop="100dp"
-        />
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/follow_recycler_view"
+        android:id="@+id/myLeaderboardRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
+    <FrameLayout
+        android:id="@+id/sample_content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2" />
 
 </RelativeLayout>

@@ -61,14 +61,14 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView rv = findViewById(R.id.recyclerView);
         userList = new ArrayList<>();
         AppLocale appLocale = AppLocale.getInstance();
         final ProfileController controller = new ProfileController();
 
         createTestList();
 
-        rv = (RecyclerView) findViewById(R.id.followReqRecycler);
+        rv = findViewById(R.id.followReqRecycler);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
@@ -90,6 +90,12 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView =  navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
 
         TextView profileName = findViewById(R.id.profileName);
         profileName.setText(name);

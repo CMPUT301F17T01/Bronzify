@@ -10,16 +10,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.HabitHistoryViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
-
-// import android.support.design.widget.TabItem;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by noahkryz on 11/1/2017.
@@ -28,11 +32,12 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
 
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
-
+    private RecyclerView recyclerView;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private DrawerLayout drawer;
     private String[] pageTitle = {"Feed", "Map"};
+
 
     /**
      * Called on the creation of the Habit History Activity
@@ -66,9 +71,16 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView =  navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
+
         //set viewpager adapter
         HabitHistoryViewPagerAdapter pagerAdapter = new HabitHistoryViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
 
 
         //change Tab selection when swipe ViewPager
@@ -101,11 +113,13 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
              *
              * @param tab
              */
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
+
 
     }
 
@@ -115,7 +129,7 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
      */
     @Override
     public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -169,5 +183,10 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public View getTabView(int position){
+        View tab = LayoutInflater.from(MyHistoryActivity.this).inflate(R.layout.habit_history_tab_feed,null);
+        return tab;
     }
 }

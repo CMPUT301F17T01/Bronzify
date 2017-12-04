@@ -9,12 +9,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,13 +62,23 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        types =(List) new ArrayList<HabitType>();
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView =  navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
+
+        types = new ArrayList<HabitType>();
         recyclerView = findViewById(R.id.myHabitRecycler);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
         final MyHabitAdapter fa = new MyHabitAdapter(this,types);
         recyclerView.setAdapter(fa);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                llm.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
 
         /*TextView test = (TextView) findViewById(R.id.habitTypeRow);
         test.setText("TESTING"); */

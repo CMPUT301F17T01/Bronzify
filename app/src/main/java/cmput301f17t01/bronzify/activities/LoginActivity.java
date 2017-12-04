@@ -1,19 +1,14 @@
 package cmput301f17t01.bronzify.activities;
 
 
-import android.content.Context;
 import android.content.Intent;
-
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.io.File;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ContextController;
@@ -37,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginButton = (Button) findViewById(R.id.login_button);
-        Button registerButton = (Button) findViewById(R.id.register_button);
-        final EditText enterId = (EditText) findViewById(R.id.enter_id);
-        final TextView loginInfo = (TextView) findViewById(R.id.login_info);
+        Button loginButton = findViewById(R.id.login_button);
+        Button registerButton = findViewById(R.id.register_button);
+        final EditText enterId = findViewById(R.id.enter_id);
+        final TextView loginInfo = findViewById(R.id.login_info);
 
         //LOGIN BUTTON
         loginButton.setOnClickListener(new View.OnClickListener() {

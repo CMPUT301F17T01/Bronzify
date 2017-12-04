@@ -229,9 +229,9 @@ public class User {
     /**
      * Removes a habit type
      */
-    public void removeHabitType(String habitTypeName) {
-        if (habitTypes.contains(habitTypeName)) {
-            habitTypes.remove(habitTypeName);
+    public void removeHabitType(HabitType deletedHabit) {
+        if(habitTypes.contains(deletedHabit)){
+            habitTypes.remove(deletedHabit);
         }
     } //TODO: test
 
@@ -283,5 +283,14 @@ public class User {
             }
         }
         return null;
+    }
+
+    public Boolean isHabitUsed(String newHabit){
+        for(HabitType habit: habitTypes){
+            if(habit.getName().equals(newHabit)){
+                return true;
+            }
+        }
+        return false;
     }
 }

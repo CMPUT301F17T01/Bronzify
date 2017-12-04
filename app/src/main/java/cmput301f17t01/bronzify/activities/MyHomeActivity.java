@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,6 +73,12 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView = navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
+
         recyclerView = findViewById(R.id.myEventRecycler);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -86,12 +94,11 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -105,7 +112,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -117,9 +124,9 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      * @return
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -133,7 +140,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(!(id == R.id.MyHome)) {
+        if (!(id == R.id.MyHome)) {
             Activity currentActivity = MyHomeActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
@@ -146,17 +153,18 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    private void fillEventList(){
+    private void fillEventList() {
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
         events.clear();
-        for(HabitType type: habitTypes){
+        for (HabitType type : habitTypes) {
+            type.checkEventEmpty();
             ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
-            for(HabitEvent event: habitEvents){
+            for (HabitEvent event : habitEvents) {
                 Date eventDate = getZeroTimeDate(event.getGoalDate());
                 Date currentDate = getZeroTimeDate(new Date());
                 int dateDiff = eventDate.compareTo(currentDate);
-                if(dateDiff == 0){
+                if (dateDiff == 0) {
                     events.add(event);
                 }
             }

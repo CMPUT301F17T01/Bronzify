@@ -14,6 +14,7 @@ import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitTypeActivity;
+import cmput301f17t01.bronzify.activities.LeaderBoardActivity;
 import cmput301f17t01.bronzify.models.HabitType;
 
 /**
@@ -30,7 +31,6 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         entries = list;
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitTypeName;
         private TextView completion;
@@ -38,9 +38,9 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
 
         private ViewHolder(View v) {
             super(v);
-            habitTypeName = (TextView) v.findViewById(R.id.habitTypeRow);
-            completion = (TextView) v.findViewById(R.id.typeCompletion);
-            imageButton = (ImageButton) v.findViewById(R.id.typeArrow);
+            habitTypeName = v.findViewById(R.id.habitTypeRow);
+            completion = v.findViewById(R.id.typeCompletion);
+            imageButton = v.findViewById(R.id.typeArrow);
 
             v.setOnClickListener(this);
             //habitTypeName = v.findViewById(R.id.habitEventRow);
@@ -65,6 +65,12 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HabitType habitType = entries.get(position);
+        if(mContext instanceof LeaderBoardActivity){
+            holder.habitTypeName.setText( Integer.toString(1+position)+habitType.getName() );
+        }
+        else{
+            holder.habitTypeName.setText(habitType.getName());
+        }
         holder.habitTypeName.setText(habitType.getName());
         String completionString = Integer.toString(habitType.getCompletionRatio()) + "%";
         holder.completion.setText(completionString);

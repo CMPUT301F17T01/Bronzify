@@ -4,15 +4,12 @@ package cmput301f17t01.bronzify.adapters;
  * Created by Jacob on 2017-11-12.
  */
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import cmput301f17t01.bronzify.fragments.HabitTypeDetailFragment;
-import cmput301f17t01.bronzify.fragments.ListFragment;
-import cmput301f17t01.bronzify.fragments.MapFragment;
-import cmput301f17t01.bronzify.fragments.PictureFragment;
+import cmput301f17t01.bronzify.fragments.HabitTypeEventFragment;
 
 public class HabitTypeViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;
@@ -39,11 +36,12 @@ public class HabitTypeViewPagerAdapter extends FragmentPagerAdapter {
             return new HabitTypeDetailFragment();
         }
         if (position == 1){
-            Bundle bundle = new Bundle();
-            bundle.putString("type", "habitTypes");
-            ListFragment fragment = new ListFragment();
-            fragment.setArguments(bundle);
-            return fragment;
+//            Bundle bundle = new Bundle();
+//            bundle.putString("type", "habitTypes");
+//            ListFragment fragment = new ListFragment();
+//            fragment.setArguments(bundle);
+//            return fragment;
+            return new HabitTypeEventFragment();
         }
         else {
             return null;
