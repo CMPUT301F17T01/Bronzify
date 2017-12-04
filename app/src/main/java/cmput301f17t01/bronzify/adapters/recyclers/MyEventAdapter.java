@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitEventActivity;
+import cmput301f17t01.bronzify.adapters.HabitEventAdapter;
 import cmput301f17t01.bronzify.models.HabitEvent;
 
 /**
@@ -44,7 +48,10 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         public void onClick(View v) {
             int pos = this.getAdapterPosition(); // Position of Habit Type clicked
             Intent intent = new Intent(mContext, HabitEventActivity.class);
-            intent.putExtra("SELECTED_HABIT", pos); // Get should work since position should always be same
+            Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
+                    new HabitEventAdapter()).create();
+            String event = gsonEvent.toJson(entries.get(pos));
+            intent.putExtra("SELECTED_HABIT", event); // Get should work since position should always be same
             mContext.startActivity(intent);
         }
     }

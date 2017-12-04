@@ -1,6 +1,8 @@
 package cmput301f17t01.bronzify.models;
 
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
+    private GoogleMap location;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
 //    private ArrayList<String> habitTypes = new ArrayList<String>();
@@ -233,5 +236,13 @@ public class User {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public GoogleMap getLocation() {
+        return location;
+    }
+
+    public void setLocation(GoogleMap location) {
+        this.location = location;
     }
 }

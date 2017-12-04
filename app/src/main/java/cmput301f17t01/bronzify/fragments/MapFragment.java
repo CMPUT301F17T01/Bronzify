@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,15 +25,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.HabitEventAdapter;
+import cmput301f17t01.bronzify.controllers.ContextController;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitEvent;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-
+    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
+            new HabitEventAdapter()).create();
+    private HabitEvent event;
     MapView mMapView;
     View mView;
 
@@ -49,11 +59,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String eventJson;
+        if (savedInstanceState == null) {
+            Bundle extras = getActivity().getIntent().getExtras();
+            if(extras == null) {
+                eventJson= null;
+            } else {
+                eventJson= extras.getString("SELECTED_HABIT");
+            }
+        } else {
+            eventJson = (String) savedInstanceState.getSerializable("SELECTED_HABIT");
+        }
+        event = gsonEvent.fromJson(eventJson, HabitEvent.class);
         getLocationPermission();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         mView = inflater.inflate(R.layout.habit_event_tab_map, container, false);
         return mView;
     }
@@ -65,7 +88,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         try {
             if (mLocationPermissionsGranted) {
-
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
@@ -79,6 +101,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     .title("Retrieve Habit Event Name and Replace")
                                     .snippet("These are the Habit Event Comments")
                                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))); //Replace with picture?
+                            User user = AppLocale.getInstance().getUser();
+                            String lString = new Gson().toJson(currentLocation);
+                            user.setLocation(mMap);
+//
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                         }
