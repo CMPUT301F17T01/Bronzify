@@ -87,6 +87,12 @@ public class UserAdapter extends TypeAdapter<User> {
                 user.setFollowing(following);
                 continue;
             }
+            if ("followedBy".equals(fieldname)) {
+                ArrayList<String> followed = gsonType.fromJson(reader.nextString(),
+                        new TypeToken<ArrayList<String>>(){}.getType());
+                user.setFollowedBy(followed);
+                continue;
+            }
             if ("pendingFollowRequests".equals(fieldname)) {
                 ArrayList<String> pendingFollows = gsonType.fromJson(reader.nextString(),
                         new TypeToken<ArrayList<String>>(){}.getType());
@@ -120,6 +126,8 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.value(gsonType.toJson(user.getHabitTypes()));
         writer.name("following");
         writer.value(gsonType.toJson(user.getFollowing()));
+        writer.name("followedBy");
+        writer.value(gsonType.toJson(user.getFollowedBy()));
         writer.name("score");
         writer.value(user.getScore().toString());
         writer.name("pendingFollowRequests");
