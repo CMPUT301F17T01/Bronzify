@@ -11,6 +11,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.ThrowOnExtraProperties;
 
@@ -35,15 +37,22 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.text.InputType.TYPE_CLASS_TEXT;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
 /**
@@ -86,12 +95,13 @@ public class EspressoTesting {
         onView(withId(R.id.register_button)).perform(click());
     }*/
 
-    @Test
     /**
      * This test case will create a new habit type, with the name Running. It will
      * log in and log out, and ensure that the data entered is correct
      *
      */
+    /*
+    @Test
     public void test1CreateNewHabitType() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
@@ -124,7 +134,7 @@ public class EspressoTesting {
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
-    }
+    }*/
 
     /**
      * This test case will edit the habit type that was created in test1. It will change the name
@@ -132,6 +142,7 @@ public class EspressoTesting {
      * days every week.
      *
      */
+    /*
     @Test
     public void test2EditHabitType() {
         //Login
@@ -162,14 +173,15 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
 
-    }
+    }*/
 
-    @Test
     /**
      * This test case will delete the habit type that was created in test2. The habit event skating
      * will no longer exist after it has been run.
      *
      */
+    /*
+    @Test
     public void test3DeleteHabitType() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
@@ -191,31 +203,43 @@ public class EspressoTesting {
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
-    }
+    }*/
 
-    @Test
     /**
      * This test case will log in as "follow_user_001" and will follow the user "test_user_001".
      * Then "test_user_001" will log into their account to accept the follow request.
      *
      */
+    @Test
     public void test4FollowUser() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("follow_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("follow_user_001")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.register_button)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
 
-        //
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyProfile));
+
+        onView(withId(R.id.followButton)).perform(click());
+        onView(allOf(withClassName(endsWith("EditText")))).perform(typeText("noah"));
+        //onView(withText("")).perform(typeText("noah"));
+        onView(withText("OK")).perform(click());
+
+        //Logout
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
     }
 
-    @Test
     /**
      * This test case will add two new events to the user "test_user_002" and demonstrate that
      * all the events that will occur today will display on the MyHome tab. The first event will
      * not be completed and the second event will be completed.
      *
      */
+    /*
+    @Test
     public void test5Today() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_002"));
@@ -266,13 +290,18 @@ public class EspressoTesting {
         //Click on picture and potentially take a picture?
         //Click on EVENT COMPLETED for Swimming
         //
-    }
 
-    @Test
+        //Logout
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+    }*/
+
     /**
      * This test case will show all of the past events that the user has had, completed or not.
      *
      */
+    /*
+    @Test
     public void test6HabitHistory() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
@@ -282,6 +311,5 @@ public class EspressoTesting {
 
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
-
-    }
+    }*/
 }
