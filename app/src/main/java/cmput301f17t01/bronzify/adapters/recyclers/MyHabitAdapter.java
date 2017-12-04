@@ -38,9 +38,9 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
 
         private ViewHolder(View v) {
             super(v);
-            habitTypeName = (TextView) v.findViewById(R.id.habitTypeRow);
-            completion = (TextView) v.findViewById(R.id.typeCompletion);
-            imageButton = (ImageButton) v.findViewById(R.id.typeArrow);
+            habitTypeName = v.findViewById(R.id.habitTypeRow);
+            completion = v.findViewById(R.id.typeCompletion);
+            imageButton = v.findViewById(R.id.typeArrow);
 
             v.setOnClickListener(this);
             //habitTypeName = v.findViewById(R.id.habitEventRow);
