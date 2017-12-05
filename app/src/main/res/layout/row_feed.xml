@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="32dp"
         android:textSize="20sp"
-        android:id="@+id/userRowName"/>
+        android:id="@+id/feedRowUserName"/>
 
     <TextView
         android:id="@+id/feedTypeCompletion"
@@ -26,10 +26,20 @@
         android:textStyle="bold"
         android:textSize="20sp" />
 
+    <TextView
+    android:id="@+id/feedRowTypeName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignLeft="@+id/feedTypeCompletion"
+    android:layout_alignStart="@+id/userRowName"
+    android:layout_marginBottom="34dp"
+    android:textSize="20sp" />
+
 
     <ImageView
 
-        android:id="@+id/userRowProfileImage"
+        android:id="@+id/feedRowProfileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

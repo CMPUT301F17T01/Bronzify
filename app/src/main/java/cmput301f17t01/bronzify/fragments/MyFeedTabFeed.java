@@ -6,6 +6,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,19 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
-import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
+import cmput301f17t01.bronzify.adapters.recyclers.MyFeedAdapter;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
-import cmput301f17t01.bronzify.models.User;
 
 ;
 
@@ -38,21 +36,21 @@ public class MyFeedTabFeed extends Fragment implements SearchView.OnQueryTextLis
 
     private static final String TAG = "MyFeedTabFeed";
     private List<HabitType> types  = new ArrayList<HabitType>();
-    private MyHabitAdapter adapter;
-    public MyFeedTabFeed() {
-            fillHabitList();
-        }
+    private MyFeedAdapter adapter;
+    public MyFeedTabFeed() {fillTypesList();}
 
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            View rootView = inflater.inflate(R.layout.habit_history_tab_feed, container, false);
-            RecyclerView rv = rootView.findViewById(R.id.myHistoryRecycler);
+            View rootView = inflater.inflate(R.layout.my_feed_tab_feed, container, false);
+            RecyclerView rv = rootView.findViewById(R.id.myFeedRecycler);
             rv.setHasFixedSize(true);
+            fillTypesList();
             setHasOptionsMenu(true);
-            adapter = new MyEventAdapter(getContext(),events);
+            Log.d(TAG,types.toString());
+            adapter = new MyFeedAdapter(getContext(),types);
             rv.setAdapter(adapter);
             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
             rv.setLayoutManager(llm);
@@ -64,13 +62,13 @@ public class MyFeedTabFeed extends Fragment implements SearchView.OnQueryTextLis
             return rootView;
         }
     private void fillTypesList(){
-        ArrayList<String> following = AppLocale.getInstance().getUser().getFollowing();
 
-        ArrayList<HabitType> habitTypes = user.getHabitTypes();
-        types.clear();
-        for(HabitType type: habitTypes){
-            types.add(type);
+        ArrayList<String> following = AppLocale.getInstance().getUser().getFollowing();
+        ElasticSearch es = new ElasticSearch();
+        for(String user :following){
+            types.addAll(es.getUser(user).getHabitTypes());
         }
+        types.addAll(es.getUser("s").getHabitTypes());
     }
 
     // Set time to 00:00:00
@@ -108,11 +106,11 @@ public class MyFeedTabFeed extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
-        ArrayList<HabitEvent> hes = new ArrayList<HabitEvent>();
-        for (HabitEvent event : events){
-            String eventName = event.getHabitType().toLowerCase();
-            if(eventName.contains(s)){
-                hes.add(event);
+        ArrayList<HabitType> hes = new ArrayList<HabitType>();
+        for (HabitType type : types){
+            String typeName = type.getName().toLowerCase();
+            if(typeName.contains(s)){
+                hes.add(type);
             }
         }
 
