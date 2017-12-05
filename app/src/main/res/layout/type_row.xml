@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="ContentDescription"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#EEEEEE"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="150dp"
-    android:background="#EEEEEE">
+    tools:ignore="ContentDescription">
 
     <TextView
+        android:id="@+id/habitTypeRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/typeArrow"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:textSize="20sp"
-        android:id="@+id/habitTypeRow"/>
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/typeCompletion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/habitTypeRow"
-        android:layout_marginBottom="34dp"
-        android:textStyle="bold"
-        android:textSize="20sp" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/typeArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/ic_media_play" />
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/ic_media_play"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

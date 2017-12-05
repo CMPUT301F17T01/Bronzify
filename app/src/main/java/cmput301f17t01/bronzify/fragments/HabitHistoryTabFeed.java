@@ -68,10 +68,13 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
         for(HabitType type: habitTypes){
             ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
             for(HabitEvent event: habitEvents){
-                Date eventDate = getZeroTimeDate(event.getGoalDate());
-                Date currentDate = getZeroTimeDate(new Date());
-                int dateDiff = eventDate.compareTo(currentDate);
-                if(dateDiff < 0){
+//                Date eventDate = getZeroTimeDate(event.getGoalDate());
+//                Date currentDate = getZeroTimeDate(new Date());
+//                int dateDiff = eventDate.compareTo(currentDate);
+//                if(dateDiff < 0){
+//                    events.add(event);
+//                }
+                if(event.getCompleted() != null){
                     events.add(event);
                 }
             }
