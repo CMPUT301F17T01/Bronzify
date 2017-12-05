@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.models;
 
 
 import android.graphics.Bitmap;
+import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -20,7 +21,8 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
-    private GoogleMap location;
+    private Location location;
+
     private Double score;
     private Bitmap image;
 
@@ -235,7 +237,7 @@ public class User {
         if(habitTypes.contains(deletedHabit)){
             habitTypes.remove(deletedHabit);
         }
-    } //TODO: test
+    }
 
     /**
      * Sets the current date as the date created
@@ -246,50 +248,24 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
+
     /**
-     * Returns the current location for Google maps
+     * Returns the current location
      *
      * @return
      */
-    public GoogleMap getLocation() {
+    public Location getLocation() {
         return location;
     }
-
     /**
      * Sets the current location as the location, with Google Maps
      *
      * @param location
      */
-    public void setLocation(GoogleMap location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
-//    public void updateEvent(HabitEvent event) {
-//        HabitType type = getType(event.getHabitType());
-//        HabitEvent oldEvent = type.getEvent(event.getGoalDate());
-//        type.updateEvent(oldEvent, event);
-//        updateType(type);
-//    }
-
-//    public void updateType(HabitType type) {
-//        HabitType oldType = getType(type.getName());
-//        if (habitTypes.contains(oldType)) {
-//            habitTypes.remove(oldType);
-//            habitTypes.add(type);
-//        }
-//    }
-
-//    public HabitEvent getEvent(Date eventGoal, String typeName) {
-//        HabitType type = getType(typeName);
-//        Iterator<HabitEvent> itr = type.getHabitEvents().iterator();
-//        while (itr.hasNext()) {
-//            HabitEvent next = itr.next();
-//            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
-//                return next;
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      * Gets the Type and returns the type name
@@ -297,6 +273,7 @@ public class User {
      * @param typeName
      * @return
      */
+
     public HabitType getType(String typeName) {
         Iterator<HabitType> itr = habitTypes.iterator();
         while (itr.hasNext()) {

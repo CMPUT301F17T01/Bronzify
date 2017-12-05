@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.MyFeedViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
@@ -31,6 +33,8 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
     private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private String[] pageTitle = {"Feed", "Map"};
 
     public MyFeedActivity() {
     }
@@ -43,7 +47,7 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habit_history);
+        setContentView(R.layout.activity_my_feed);
         String name = appLocale.getUser().getUserID();
 
 
@@ -56,6 +60,10 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        tabLayout = findViewById(R.id.tab_layout);
+        for (int i = 0; i < 2; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
+        }
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -66,6 +74,8 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
+
+
         // Picture in NavBar
         ImageView userPicNav = hView.findViewById(R.id.userPicNav);
         userPicNav.setImageBitmap(currentUser.getImage());
@@ -73,6 +83,48 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
         if (appLocale.getUser().getImage() != null) {
             circularImageView.setImageBitmap(appLocale.getUser().getImage());
         }
+
+        MyFeedViewPagerAdapter pagerAdapter = new MyFeedViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+
+
+        //change Tab selection when swipe ViewPager
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //change ViewPager page when tab selected
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            /**
+             * Changes the viewPager when the tab is selected.
+             *
+             * @param tab
+             */
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            /**
+             * Called when the tab is unselected
+             *
+             * @param tab
+             */
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            /**
+             * Called when the tab is reselected
+             *
+             * @param tab
+             */
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 

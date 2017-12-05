@@ -6,6 +6,7 @@ import android.location.Location;
 import android.util.Base64;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
@@ -26,7 +27,8 @@ import cmput301f17t01.bronzify.models.HabitEvent;
 
 public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
-    Gson gson = new Gson();
+    private final Gson gsonLoc = new GsonBuilder().registerTypeAdapter(Location.class,
+            new LocationAdapter()).create();
 
     /**
      * Reads the habit event with a Json reader
@@ -63,23 +65,28 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue;
 
             }
-            if ("completedDate".equals(fieldname)) {
-                DateFormat format =
-                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
-                try {
-                    Date date = format.parse(reader.nextString());
-                    event.setCompletedDate(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                continue;
-            }
+//            if ("completedDate".equals(fieldname)) {
+//                DateFormat format =
+//                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+//                try {
+//                    Date date = format.parse(reader.nextString());
+//                    event.setCompletedDate(date);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                continue;
+//            }
             if ("comment".equals(fieldname)) {
                 event.setComment(reader.nextString());
                 continue;
             }
             if ("completed".equals(fieldname)) {
-                event.setCompleted(Boolean.valueOf(reader.nextString()));
+                try{
+                    event.setCompleted(Boolean.valueOf(reader.nextString()));
+                } catch (NullPointerException e){
+                    event.setCompleted(null);
+                }
+
                 continue;
             }
             if ("image".equals(fieldname)) {
@@ -87,7 +94,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue;
             }
             if ("location".equals(fieldname)) {
-                event.setLocation(gson.fromJson(reader.nextString(), Location.class));
+                event.setLocation(gsonLoc.fromJson(reader.nextString(), Location.class));
                 continue;
             }
             if ("habitType".equals(fieldname)) {
@@ -116,16 +123,20 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.value(event.getUserID());
         writer.name("goalDate");
         writer.value(df.format(event.getGoalDate()));
-        writer.name("completedDate");
-        try {
-            writer.value(df.format(event.getCompletedDate()));
-        } catch (NullPointerException e) {
-            writer.nullValue();
-        }
+//        writer.name("completedDate");
+//        try {
+//            writer.value(df.format(event.getCompletedDate()));
+//        } catch (NullPointerException e) {
+//            writer.nullValue();
+//        }
         writer.name("comment");
         writer.value(event.getComment());
         writer.name("completed");
-        writer.value(event.getCompleted().toString());
+        try{
+            writer.value(event.getCompleted().toString());
+        } catch (NullPointerException e) {
+            writer.nullValue();
+        }
         writer.name("image");
         try{
             writer.value(getStringFromBitmap(event.getImage()));
@@ -134,7 +145,7 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         }
         writer.name("location");
         try{
-            writer.value(gson.toJson(event.getLocation()));
+            writer.value(gsonLoc.toJson(event.getLocation()));
         } catch (NullPointerException e) {
             writer.nullValue();
         }

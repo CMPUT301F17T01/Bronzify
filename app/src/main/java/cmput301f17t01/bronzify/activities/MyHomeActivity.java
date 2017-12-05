@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -75,7 +76,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         // Username in NavBar
-        User currentUser = AppLocale.getInstance().getUser();
+        User currentUser = appLocale.getUser();
         View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
@@ -172,6 +173,9 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
     private void fillEventList() {
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
+
+        int totalSetIncomplete = 0;
+
         events.clear();
         for (HabitType type : habitTypes) {
             type.checkEventEmpty();
@@ -180,10 +184,19 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
                 Date eventDate = getZeroTimeDate(event.getGoalDate());
                 Date currentDate = getZeroTimeDate(new Date());
                 int dateDiff = eventDate.compareTo(currentDate);
-                if (dateDiff == 0) {
+                if (dateDiff == 0 && event.getCompleted() == null) {
                     events.add(event);
+                } else if (dateDiff < 0 && event.getCompleted() == null){
+                    ++totalSetIncomplete;
+                    type.incrementNumUncompleted(1);
+                    event.setCompleted(false);
                 }
             }
+        }
+
+        if(totalSetIncomplete > 0){
+            String toastString = Integer.toString(totalSetIncomplete) + " events have been automatically set as incomplete.";
+            Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show();
         }
     }
 

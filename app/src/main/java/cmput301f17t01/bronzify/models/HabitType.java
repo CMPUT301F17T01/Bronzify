@@ -39,7 +39,7 @@ public class HabitType {
     }
 
     // Generate MAX_DAYS_AHEAD worth of habit events
-    private void generateNewEvents(Date date) {
+    public void generateNewEvents(Date date) {
         Calendar calendar = Calendar.getInstance();
 
         for (int i = 0; i < MAX_DAYS_AHEAD; ++i) {
@@ -263,9 +263,9 @@ public class HabitType {
      */
     public int getCompletionRatio() {
         if (numUncompleted == 0 && numCompleted == 0) {
-            return 100;
+            return 0;
         }
-        return numCompleted / (numCompleted + numUncompleted);
+        return (int) ((float) numCompleted / ((float) numCompleted + (float) numUncompleted) * 100);
     }
 
     /**

@@ -6,6 +6,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,11 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
+import cmput301f17t01.bronzify.adapters.recyclers.MyFeedAdapter;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.models.AppLocale;
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
-import cmput301f17t01.bronzify.models.User;
 
 ;
 
@@ -32,36 +32,25 @@ import cmput301f17t01.bronzify.models.User;
  * Created by omcleod on 2017-12-03.
  */
 
-public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryTextListener {
+public class MyFeedTabFeed extends Fragment implements SearchView.OnQueryTextListener {
 
-    private static final String TAG = "HabitHistoryTabFeed";
-    private List<HabitEvent> events = new ArrayList<HabitEvent>();
-    private MyEventAdapter adapter;
-    public HabitHistoryTabFeed() {
-            fillEventList();
-        }
-
-
-        @Override
-        /**
-         * Called on the creation of a habit history tab fragment
-         *
-         */
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-        }
+    private static final String TAG = "MyFeedTabFeed";
+    private List<HabitType> types  = new ArrayList<HabitType>();
+    private MyFeedAdapter adapter;
+    public MyFeedTabFeed() {fillTypesList();}
 
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            View rootView = inflater.inflate(R.layout.habit_history_tab_feed, container, false);
-            RecyclerView rv = rootView.findViewById(R.id.myHistoryRecycler);
+            View rootView = inflater.inflate(R.layout.my_feed_tab_feed, container, false);
+            RecyclerView rv = rootView.findViewById(R.id.myFeedRecycler);
             rv.setHasFixedSize(true);
+            fillTypesList();
             setHasOptionsMenu(true);
-            adapter = new MyEventAdapter(getContext(),events);
+            Log.d(TAG,types.toString());
+            adapter = new MyFeedAdapter(getContext(),types);
             rv.setAdapter(adapter);
             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
             rv.setLayoutManager(llm);
@@ -72,37 +61,17 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
 
             return rootView;
         }
+    private void fillTypesList(){
 
-    /**
-     * Populates the event list depending on what the user selected for repeatability
-     *
-     */
-    private void fillEventList(){
-        User user = AppLocale.getInstance().getUser();
-        ArrayList<HabitType> habitTypes = user.getHabitTypes();
-        events.clear();
-        for(HabitType type: habitTypes){
-            ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
-            for(HabitEvent event: habitEvents){
-//                Date eventDate = getZeroTimeDate(event.getGoalDate());
-//                Date currentDate = getZeroTimeDate(new Date());
-//                int dateDiff = eventDate.compareTo(currentDate);
-//                if(dateDiff < 0){
-//                    events.add(event);
-//                }
-                if(event.getCompleted() != null){
-                    events.add(event);
-                }
-            }
+        ArrayList<String> following = AppLocale.getInstance().getUser().getFollowing();
+        ElasticSearch es = new ElasticSearch();
+        for(String user :following){
+            types.addAll(es.getUser(user).getHabitTypes());
         }
+        types.addAll(es.getUser("s").getHabitTypes());
     }
 
-    /**
-     * Gets the zeroth time stamp to set the time to 00:00:00
-     *
-     * @param date
-     * @return
-     */
+    // Set time to 00:00:00
     public static Date getZeroTimeDate(Date date) {
         Date res = date;
         Calendar calendar = Calendar.getInstance();
@@ -137,11 +106,11 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
-        ArrayList<HabitEvent> hes = new ArrayList<HabitEvent>();
-        for (HabitEvent event : events){
-            String eventName = event.getHabitType().toLowerCase();
-            if(eventName.contains(s)){
-                hes.add(event);
+        ArrayList<HabitType> hes = new ArrayList<HabitType>();
+        for (HabitType type : types){
+            String typeName = type.getName().toLowerCase();
+            if(typeName.contains(s)){
+                hes.add(type);
             }
         }
 

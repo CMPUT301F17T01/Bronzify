@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import junit.framework.TestCase;
 import org.junit.Test;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import cmput301f17t01.bronzify.adapters.HabitEventAdapter;
 import cmput301f17t01.bronzify.models.AppLocale;
@@ -17,7 +19,7 @@ import cmput301f17t01.bronzify.models.User;
 public class HabitEventTest extends TestCase {
     Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
 //    private HabitType type = new HabitType("name" , "reason", new Date(), daysOfWeek);
-
+    HabitEvent event = new HabitEvent(new Date(), "typename");
 
 
 
@@ -31,7 +33,7 @@ public class HabitEventTest extends TestCase {
 
     @Test
     public void testJson() {
-        HabitEvent event = new HabitEvent(new Date(), "typename");
+
         event.markCompleted();
         event.setComment("nice comment");
         Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
@@ -48,6 +50,31 @@ public class HabitEventTest extends TestCase {
         assertEquals(event.getLocation(), event2.getLocation());
         assertEquals(event.getHabitType(), event2.getHabitType());
 
+    }
+
+    public void testMarkCompleted() {
+        assertFalse(event.getCompleted());
+        event.markCompleted();
+        assertTrue(event.getCompleted());
+        assertTrue(event.getCompletedDate().getTime() - new Date().getTime() < 10);
+    }
+
+    public void testCompletedDateToString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        Date now = new Date();
+
+        String strCompDate = simpleDateFormat.format(now);
+        event.setCompletedDate(now);
+        assertEquals(strCompDate, event.completedDateToString());
+    }
+
+    public void testGoalDateToString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        Date now = new Date();
+
+        String strCompDate = simpleDateFormat.format(now);
+        event.setGoalDate(now);
+        assertEquals(strCompDate, event.goalDateToString());
     }
 
 

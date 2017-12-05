@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.HabitEventViewPagerAdapter;
+import cmput301f17t01.bronzify.adapters.MapViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 
 import cmput301f17t01.bronzify.models.HabitEvent;
@@ -45,6 +48,11 @@ public class MyMapActivity extends AppCompatActivity implements NavigationView.O
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        //set viewpager adapter
+        MapViewPagerAdapter pagerAdapter = new MapViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
