@@ -83,6 +83,10 @@ public class HabitTypeDetailFragment extends Fragment {
         String percentage = Integer.toString(completionRatio) + "%";
         tvPercent.setText(percentage);
 
+        if (!habitType.getUserID().equals(user.getUserID())){
+            btnEdit.setVisibility(View.GONE);
+        }
+
         etHabitName.setText(habitType.getName());
         etHabitName.setEnabled(false);
 

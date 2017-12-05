@@ -77,6 +77,10 @@ public class HabitEventDetailFragment extends Fragment {
         tvMarked.setVisibility(View.VISIBLE);
         etMarked.setVisibility(View.VISIBLE);
 
+        if (!habitType.getUserID().equals(user.getUserID())){
+            btnEdit.setVisibility(View.GONE);
+        }
+
         Date currentDate  = getZeroTimeDate(new Date());
         if(habitEvent.getCompleted() == null){
             if(goalDate.compareTo(currentDate) == 0){
