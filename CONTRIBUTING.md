@@ -1,0 +1,1 @@
+Contributing members are expected to maintain an upstanding position in the Bronzify community. Sexual content, individual slander or attack, or lack of respect for users and contributors will not be tolerated.
