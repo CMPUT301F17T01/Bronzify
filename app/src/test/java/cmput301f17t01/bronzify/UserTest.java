@@ -1,5 +1,8 @@
 package cmput301f17t01.bronzify;
 
+import android.location.Location;
+
+import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import junit.framework.TestCase;
@@ -22,13 +25,13 @@ public class UserTest extends TestCase {
     private User user = new User("userID");
 
     Boolean[] daysOfWeek = {false, true, false, true, false, false, false,};
-    HabitType habitType;
+    HabitType habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
 
     @Test
     public void testSetup() {
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.setUser(user);
-        habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
+//        habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
     }
 
     @Test
@@ -46,6 +49,7 @@ public class UserTest extends TestCase {
         following.add("best person");
         following.add("someone else");
         user0.setFollowing(following);
+        user0.setScore(0.9);
 
         Gson gsonUser = new GsonBuilder().registerTypeAdapter(User.class,
                 new UserAdapter()).create();
@@ -240,6 +244,50 @@ public class UserTest extends TestCase {
         assertNotSame(date, user.getLastUpdated());
         user.setLastUpdated(date);
         assertEquals(date, user.getLastUpdated());
+    }
+
+    @Test
+    public void testRemoveHabitType() {
+        try {
+            user.addHabitType(habitType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertTrue(user.getHabitTypes().contains(habitType));
+        user.removeHabitType(habitType);
+        assertFalse(user.getHabitTypes().contains(habitType));
+    }
+
+
+
+    @Test
+    public void testGetType() {
+        habitType.setName("wow");
+        try {
+            user.addHabitType(habitType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HabitType dupType = user.getType(habitType.getName());
+        assertEquals(habitType, dupType);
+    }
+
+    @Test
+    public void testIsHabitUsed() {
+        assertFalse(user.isHabitUsed(habitType.getName()));
+        try {
+            user.addHabitType(habitType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertTrue(user.isHabitUsed(habitType.getName()));
+    }
+
+    @Test
+    public void testAddFollowedBy() {
+        assertFalse(user.getFollowedBy().contains("billy"));
+        user.addFollowedBy("billy");
+        assertTrue(user.getFollowedBy().contains("billy"));
     }
 
 

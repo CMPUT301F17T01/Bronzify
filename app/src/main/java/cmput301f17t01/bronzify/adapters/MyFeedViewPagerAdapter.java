@@ -9,9 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
+import cmput301f17t01.bronzify.fragments.MyFeedTabFeed;
 
-public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
+public class MyFeedViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;
 
     /**
@@ -19,7 +19,7 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
      *
      * @param fm
      */
-    public HabitHistoryViewPagerAdapter(FragmentManager fm) {
+    public MyFeedViewPagerAdapter(FragmentManager fm) {
         super(fm);
         this.fm = fm;
     }
@@ -35,13 +35,13 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             Bundle bundle = new Bundle();
             bundle.putString("type", "habitTypes");
-            HabitHistoryTabFeed fragment = new HabitHistoryTabFeed();
+            MyFeedTabFeed fragment = new MyFeedTabFeed();
             fragment.setArguments(bundle);
             return fragment;
         } else if (position == 1){
             Bundle bundle = new Bundle();
             bundle.putString("type", "habitTypes");
-            HabitHistoryTabFeed fragment = new HabitHistoryTabFeed();
+            MyFeedTabFeed fragment = new MyFeedTabFeed();
             fragment.setArguments(bundle);
             return fragment;
         } else {

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.HabitHistoryViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -27,7 +28,7 @@ import cmput301f17t01.bronzify.models.User;
 /*
  * Created by noahkryz on 11/1/2017.
  */
-public class MyHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MyHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private String name;
     private AppLocale appLocale = AppLocale.getInstance();
@@ -196,4 +197,5 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         View tab = LayoutInflater.from(MyHistoryActivity.this).inflate(R.layout.habit_history_tab_feed,null);
         return tab;
     }
+
 }

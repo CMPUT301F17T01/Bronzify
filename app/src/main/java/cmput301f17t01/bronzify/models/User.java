@@ -22,6 +22,7 @@ public class User {
     private Date lastUpdated;
     private Date lastInfluenced;
     private Location location;
+
     private Double score;
     private Bitmap image;
 
@@ -239,7 +240,7 @@ public class User {
         if(habitTypes.contains(deletedHabit)){
             habitTypes.remove(deletedHabit);
         }
-    } //TODO: test
+    }
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
@@ -279,6 +280,7 @@ public class User {
 //        }
 //        return null;
 //    }
+
 
     public HabitType getType(String typeName) {
         Iterator<HabitType> itr = habitTypes.iterator();
