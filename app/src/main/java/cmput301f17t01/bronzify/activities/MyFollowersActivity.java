@@ -8,15 +8,22 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.recyclers.MyFollowersAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
@@ -28,6 +35,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
     private EditText searchBar;
     private Button searchID;
     private Button searchName;
+    private RecyclerView recyclerView;
 
     /**
      * On creation of the MyFollowersActivity
@@ -37,7 +45,7 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_follow_user);
+        setContentView(R.layout.activity_my_followers);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,6 +64,30 @@ public class MyFollowersActivity extends AppCompatActivity implements Navigation
         usernameNav.setText(currentUser.getUserID());
 
 
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        AppLocale appLocale = AppLocale.getInstance();
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        recyclerView = findViewById(R.id.myFollowerRecycler);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        // TODO: user.getFollowedBy() isn't working
+        
+        ArrayList<String> followers;
+        followers = appLocale.getUser().getFollowedBy();
+        
+
+
+        MyFollowersAdapter followersAdapter = new MyFollowersAdapter(this,followers);
+        recyclerView.setAdapter(followersAdapter);
     }
 
     /**

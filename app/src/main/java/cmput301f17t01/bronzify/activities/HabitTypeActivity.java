@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cmput301f17t01.bronzify.adapters.HabitTypeViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
@@ -79,6 +80,15 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         View hView =  navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
+
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        AppLocale appLocale = AppLocale.getInstance();
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
 
         //set viewpager adapter
         HabitTypeViewPagerAdapter pagerAdapter = new HabitTypeViewPagerAdapter(getSupportFragmentManager());

@@ -17,6 +17,13 @@
         android:contentDescription="@string/menu_my_profile"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleView"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp" />
 
     <TextView
         android:id="@+id/profileName"
