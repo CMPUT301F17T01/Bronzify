@@ -26,22 +26,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ContextController;
+import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
-//    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
-//            new HabitEventAdapter()).create();
-    private HabitEvent event;
+public class MyMapFragment extends Fragment implements OnMapReadyCallback {
+    private User user;
     private Location currentLocation;
     MapView mMapView;
     View mView;
@@ -53,6 +55,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final float DEFAULT_ZOOM = 15f;
 
+    private static final int DISTANCE = 5000;
+
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
 
@@ -60,25 +64,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLocationPermission();
-        event = AppLocale.getInstance().getEvent();
+        user = AppLocale.getInstance().getUser();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.habit_event_tab_map, container, false);
-
-        Button button = mView.findViewById(R.id.set_location);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                event.setLocation(currentLocation);
-                ContextController contextController = new ContextController(getActivity().getApplicationContext());
-                contextController.updateUser(AppLocale.getInstance().getUser());
-                Log.i("Location", "Set");
-            }
-        });
-
         return mView;
     }
 
@@ -98,18 +90,62 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             LatLng LatitudeLongitude = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                             moveCamera(LatitudeLongitude, DEFAULT_ZOOM);
                             BitmapDescriptor mapBitmap;
-                            if (event.getImage() != null) {
-                                 mapBitmap = BitmapDescriptorFactory.fromBitmap(event.getImage());
-                            } else {
-                                mapBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
+
+                            ElasticSearch elastic = new ElasticSearch();
+                            ArrayList<User> users = new ArrayList<>();
+                            users.add(user);
+                            ArrayList<String> following = user.getFollowing();
+                            Iterator<String> strItr = following.iterator();
+                            while (strItr.hasNext()) {
+                                String next = strItr.next();
+                                User foundUser = elastic.getUser(next);
+                                if (foundUser != null) {
+                                    users.add(foundUser);
+                                }
+                            }
+                            ArrayList<HabitEvent> nearbyEvents = new ArrayList<>();
+                            Iterator<User> userItr = users.iterator();
+                            while (userItr.hasNext()) {
+                                User nextUser = userItr.next();
+                                Iterator<HabitType> typeItr = nextUser.getHabitTypes().iterator();
+                                while (typeItr.hasNext()) {
+                                    HabitType nextType = typeItr.next();
+                                    Iterator<HabitEvent> eventItr = nextType.getHabitEvents().iterator();
+                                    while (eventItr.hasNext()) {
+                                        HabitEvent nextEvent = eventItr.next();
+                                        if (nextEvent.getLocation() != null) {
+                                            if (currentLocation.distanceTo(nextEvent.getLocation()) < DISTANCE) {
+                                                nearbyEvents.add(nextEvent);
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
 
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(LatitudeLongitude)
-                                    .title(event.getHabitType())
-                                    .snippet(event.getComment())
-                                    .icon(mapBitmap)); 
+                            Iterator<HabitEvent> markEvItr = nearbyEvents.iterator();
+                            while (markEvItr.hasNext()) {
+                                HabitEvent nextMark = markEvItr.next();
+                                if (nextMark.getImage() != null) {
+                                    mapBitmap = BitmapDescriptorFactory.fromBitmap(nextMark.getImage());
+                                } else {
+                                    mapBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
+                                }
+                                mMap.addMarker(new MarkerOptions()
+                                        .position(LatitudeLongitude)
+                                        .title(nextMark.getHabitType())
+                                        .snippet(nextMark.getComment())
+                                        .icon(mapBitmap));
+                            }
+
+//
+//                            mMap.addMarker(new MarkerOptions()
+//                                    .position(LatitudeLongitude)
+//                                    .title(event.getHabitType())
+//                                    .snippet(event.getComment())
+//                                    .icon(mapBitmap));
                             User user = AppLocale.getInstance().getUser();
+                            user.setLocation(currentLocation);
 //
 
                         } else {

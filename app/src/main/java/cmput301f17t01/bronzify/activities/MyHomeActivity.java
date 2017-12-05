@@ -76,7 +76,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         // Username in NavBar
-        User currentUser = AppLocale.getInstance().getUser();
+        User currentUser = appLocale.getUser();
         View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());

@@ -21,6 +21,8 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
+    private Location location;
+
     private Double score;
     private Bitmap image;
 
@@ -243,6 +245,41 @@ public class User {
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+//    public void updateEvent(HabitEvent event) {
+//        HabitType type = getType(event.getHabitType());
+//        HabitEvent oldEvent = type.getEvent(event.getGoalDate());
+//        type.updateEvent(oldEvent, event);
+//        updateType(type);
+//    }
+
+//    public void updateType(HabitType type) {
+//        HabitType oldType = getType(type.getName());
+//        if (habitTypes.contains(oldType)) {
+//            habitTypes.remove(oldType);
+//            habitTypes.add(type);
+//        }
+//    }
+
+//    public HabitEvent getEvent(Date eventGoal, String typeName) {
+//        HabitType type = getType(typeName);
+//        Iterator<HabitEvent> itr = type.getHabitEvents().iterator();
+//        while (itr.hasNext()) {
+//            HabitEvent next = itr.next();
+//            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+//                return next;
+//            }
+//        }
+//        return null;
+//    }
 
 
     public HabitType getType(String typeName) {

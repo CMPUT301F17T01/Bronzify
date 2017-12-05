@@ -27,6 +27,7 @@ import cmput301f17t01.bronzify.models.User;
 
 public class ContextController {
     private Context context;
+    ElasticSearch elastic = new ElasticSearch();
     private Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
             new UserAdapter()).create();
 
@@ -37,11 +38,17 @@ public class ContextController {
     }
 
     public void updateUser(User currentUser) {
-        ElasticSearch elastic = new ElasticSearch();
+
         currentUser = elastic.update(currentUser);
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.setUser(currentUser);
         saveInFile(appLocale.getLocalUsers());
+    }
+    public void updateUserFollowing(User currentUser) {
+        User otherUser = elastic.getUser(currentUser.getUserID());
+        currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
+        currentUser.setFollowing(otherUser.getFollowing());
+        currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
     }
 
     public void saveUser(User user) {
