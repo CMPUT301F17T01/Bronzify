@@ -59,7 +59,7 @@ public class MyMapActivity extends AppCompatActivity implements NavigationView.O
         ImageView userPicNav = hView.findViewById(R.id.userPicNav);
         userPicNav.setImageBitmap(currentUser.getImage());
         ImageView circularImageView = hView.findViewById(R.id.circleView);
-        AppLocale appLocale = new AppLocale();
+        AppLocale appLocale = AppLocale.getInstance();
         if (appLocale.getUser().getImage() != null) {
             circularImageView.setImageBitmap(appLocale.getUser().getImage());
         }
