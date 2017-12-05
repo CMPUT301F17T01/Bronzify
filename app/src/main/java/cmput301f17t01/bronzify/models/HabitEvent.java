@@ -14,6 +14,7 @@ public class HabitEvent {
     private String habitType;
     private String comment; // Max 20 Char
     private Date goalDate; // Date for habit event to happen
+    private Date completedDate;
     private Boolean completed;
     private Bitmap image;
     private Location location;
@@ -44,9 +45,6 @@ public class HabitEvent {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 
     // Goal Date
     /**
@@ -169,7 +167,6 @@ public class HabitEvent {
      */
     public void setUserID(String userID) {
         this.userID = userID;
-        return simpleDateFormat.format(goalDate);
     }
 
     /**
