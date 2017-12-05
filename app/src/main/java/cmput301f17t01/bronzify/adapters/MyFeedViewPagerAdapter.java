@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import cmput301f17t01.bronzify.fragments.MyFeedTabFeed;
+import cmput301f17t01.bronzify.fragments.MyHistoryMapTab;
 
 public class MyFeedViewPagerAdapter extends FragmentPagerAdapter {
     private final FragmentManager fm;
@@ -41,7 +42,7 @@ public class MyFeedViewPagerAdapter extends FragmentPagerAdapter {
         } else if (position == 1) {
             Bundle bundle = new Bundle();
             bundle.putString("type", "habitTypes");
-            MyFeedTabFeed fragment = new MyFeedTabFeed();
+            MyHistoryMapTab fragment = new MyHistoryMapTab();
             fragment.setArguments(bundle);
             return fragment;
         } else {

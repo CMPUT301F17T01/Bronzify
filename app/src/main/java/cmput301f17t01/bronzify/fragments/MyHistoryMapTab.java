@@ -28,11 +28,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
 /**
@@ -63,6 +66,7 @@ public class MyHistoryMapTab extends Fragment implements OnMapReadyCallback,Sear
         super.onCreate(savedInstanceState);
         getLocationPermission();
         user = AppLocale.getInstance().getUser();
+        fillEventList();
     }
 
     @Override
@@ -139,6 +143,7 @@ public class MyHistoryMapTab extends Fragment implements OnMapReadyCallback,Sear
 
         mMapView = mView.findViewById(R.id.map);
         if (mMapView != null) {
+            fillEventList();
             mMapView.onCreate(null);
             mMapView.onResume();
             mMapView.getMapAsync(this);
@@ -247,5 +252,39 @@ public class MyHistoryMapTab extends Fragment implements OnMapReadyCallback,Sear
         drawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }*/
+   private void fillEventList() {
+       User user = AppLocale.getInstance().getUser();
+       ArrayList<HabitType> habitTypes = user.getHabitTypes();
+       events.clear();
+       for (HabitType type : habitTypes) {
+           ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
+           for (HabitEvent event : habitEvents) {
+               Date eventDate = getZeroTimeDate(event.getGoalDate());
+               Date currentDate = getZeroTimeDate(new Date());
+               int dateDiff = eventDate.compareTo(currentDate);
+               if (dateDiff <= 0) {
+                   events.add(event);
+               }
+           }
+       }
+   }
 
+    /**
+     * Gets the zeroth time stamp to set the time to 00:00:00
+     *
+     * @param date
+     * @return
+     */
+    public static Date getZeroTimeDate(Date date) {
+        Date res = date;
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
+    }
 }
