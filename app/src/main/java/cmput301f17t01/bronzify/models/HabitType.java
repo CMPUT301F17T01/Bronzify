@@ -220,22 +220,47 @@ public class HabitType {
         this.numUncompleted = changeValue;
     }
 
+    /**
+     * Sets the users ID
+     *
+     * @param userID
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * Sets the habit events
+     *
+     * @param habitEvents
+     */
     public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
         this.habitEvents = habitEvents;
     }
 
+    /**
+     * Sets the number of completed Habit Events (used for leader boards)
+     *
+     * @param numCompleted
+     */
     public void setNumCompleted(int numCompleted) {
         this.numCompleted = numCompleted;
     }
 
+    /**
+     * Sets the number of uncompleted Habit Events (used for leader boards)
+     *
+     * @param numUncompleted
+     */
     public void setNumUncompleted(int numUncompleted) {
         this.numUncompleted = numUncompleted;
     }
 
+    /**
+     * Returns the completion ratio, to be used in the leader boards and the Habit Types
+     *
+     * @return
+     */
     public int getCompletionRatio() {
         if (numUncompleted == 0 && numCompleted == 0) {
             return 100;
@@ -243,23 +268,42 @@ public class HabitType {
         return numCompleted / (numCompleted + numUncompleted);
     }
 
+    /**
+     * Generates a months worth of new events
+     *
+     */
     public void updateEvents() {
         habitEvents.clear();
         generateNewEvents(this.dateToStart);
     }
 
+    /**
+     * Checks whether or not the habit type has no more events, and adds more to it if needed
+     *
+     */
     public void checkEventEmpty() {
         if (habitEvents.isEmpty()) {
             generateNewEvents(new Date());
         }
     }
 
+    /**
+     * Removes habit events from the habit type
+     *
+     * @param removedEvent
+     */
     public void removeEvent(HabitEvent removedEvent) {
         if (habitEvents.contains(removedEvent)) {
             habitEvents.remove(removedEvent);
         }
     }
 
+    /**
+     * Gets the habit events, if they are in the future
+     *
+     * @param eventGoal
+     * @return
+     */
     public HabitEvent getEvent(Date eventGoal) {
         Iterator<HabitEvent> itr = habitEvents.iterator();
         while (itr.hasNext()) {
@@ -271,6 +315,12 @@ public class HabitType {
         return null;
     }
 
+    /**
+     * Updates the habit events
+     *
+     * @param oldEvent
+     * @param newEvent
+     */
     public void updateEvent(HabitEvent oldEvent, HabitEvent newEvent) {
         if (habitEvents.contains(oldEvent)) {
             habitEvents.remove(oldEvent);

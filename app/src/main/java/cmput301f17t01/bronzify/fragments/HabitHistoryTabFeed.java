@@ -37,6 +37,10 @@ public class HabitHistoryTabFeed extends Fragment {
         }
 
         @Override
+        /**
+         * Called on the creation of a habit history tab fragment
+         *
+         */
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
@@ -61,6 +65,11 @@ public class HabitHistoryTabFeed extends Fragment {
 
             return rootView;
         }
+
+    /**
+     * Populates the event list depending on what the user selected for repeatability
+     *
+     */
     private void fillEventList(){
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
@@ -78,7 +87,12 @@ public class HabitHistoryTabFeed extends Fragment {
         }
     }
 
-    // Set time to 00:00:00
+    /**
+     * Gets the zeroth time stamp to set the time to 00:00:00
+     *
+     * @param date
+     * @return
+     */
     public static Date getZeroTimeDate(Date date) {
         Date res = date;
         Calendar calendar = Calendar.getInstance();

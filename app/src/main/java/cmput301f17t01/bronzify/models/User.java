@@ -165,8 +165,6 @@ public class User {
         this.lastInfluenced = new Date();
     }
 
-
-
     /**
      * Method that returns the userID of the logged in user
      *
@@ -212,7 +210,6 @@ public class User {
         this.lastUpdated = lastUpdated;
     }
 
-
     /**
      * Method that returns a list of HabitTypes
      *
@@ -240,14 +237,29 @@ public class User {
         }
     } //TODO: test
 
+    /**
+     * Sets the current date as the date created
+     *
+     * @param dateCreated
+     */
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
+    /**
+     * Returns the current location for Google maps
+     *
+     * @return
+     */
     public GoogleMap getLocation() {
         return location;
     }
 
+    /**
+     * Sets the current location as the location, with Google Maps
+     *
+     * @param location
+     */
     public void setLocation(GoogleMap location) {
         this.location = location;
     }
@@ -279,6 +291,12 @@ public class User {
 //        return null;
 //    }
 
+    /**
+     * Gets the Type and returns the type name
+     *
+     * @param typeName
+     * @return
+     */
     public HabitType getType(String typeName) {
         Iterator<HabitType> itr = habitTypes.iterator();
         while (itr.hasNext()) {
@@ -289,6 +307,13 @@ public class User {
         }
         return null;
     }
+
+    /**
+     * Checks if the habit is used or not
+     *
+     * @param newHabit
+     * @return
+     */
     public Boolean isHabitUsed(String newHabit){
         for(HabitType habit: habitTypes){
             if(habit.getName().equals(newHabit)){
@@ -297,32 +322,68 @@ public class User {
         }
         return false;
     }
+
+    /**
+     * Gets the score for the users, to rank them in the leader boards
+     *
+     * @return
+     */
     public Double getScore() {
         return score;
     }
 
+    /**
+     * Sets a score to each user, to be used for the leader boards
+     *
+     * @param score
+     */
     public void setScore(Double score) {
         this.score = score;
     }
 
+    /**
+     * Returns an array list of all the users who are following a user
+     *
+     * @return
+     */
     public ArrayList<String> getFollowedBy() {
         return followedBy;
     }
 
+    /**
+     * Sets an array list to the list of all users who are following them
+     *
+     * @param followedBy
+     */
     public void setFollowedBy(ArrayList<String> followedBy) {
         this.followedBy = followedBy;
     }
 
+    /**
+     * Adds a new user to the list of people that are following the user
+     *
+     * @param otherUserID
+     */
     public void addFollowedBy(String otherUserID) {
         if (!followedBy.contains(otherUserID)){
             followedBy.add(otherUserID);
         }
     }
 
+    /**
+     * Returns the bitmap of the image
+     *
+     * @return
+     */
     public Bitmap getImage() {
         return image;
     }
 
+    /**
+     * Sets the image to a bitmap
+     *
+     * @param image
+     */
     public void setImage(Bitmap image) {
         this.image = image;
     }

@@ -57,11 +57,11 @@ public class HabitTypeEventFragment extends Fragment {
         this.time = time;
     }
 
-    public void deleteHabit(HabitType habit){
-        return;
-    }
-
     @Override
+    /**
+     * Called on the creation of a habit type event fragment
+     *
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Initialize dataset, this data would usually come from a local content provider or

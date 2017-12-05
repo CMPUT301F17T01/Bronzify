@@ -181,22 +181,47 @@ public class HabitEvent {
         return strCompDate;
     }
 
+    /**
+     * Sets the user ID
+     *
+     * @param userID
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * Returns the habit type
+     *
+     * @return
+     */
     public String getHabitType() {
         return habitType;
     }
 
+    /**
+     * Sets the habit type
+     *
+     * @param habitType
+     */
     public void setHabitType(String habitType) {
         this.habitType = habitType;
     }
 
+    /**
+     * Sets the date that the habit was completed
+     *
+     * @param completedDate
+     */
     public void setCompletedDate(Date completedDate) {
         this.completedDate = completedDate;
     }
 
+    /**
+     * Sets the habit event as completed
+     *
+     * @param completed
+     */
     public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
