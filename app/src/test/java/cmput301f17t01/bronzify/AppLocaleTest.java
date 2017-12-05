@@ -37,30 +37,30 @@ public class AppLocaleTest extends TestCase {
     }
 
     @Test
-    public void testGetSavedUser() {
+    public void testGetLocalUser() {
         ArrayList<User> users = new ArrayList<>();
         users.add(user);
-        appLocale.setSavedUsers(users);
-        User newUser = appLocale.getSavedUser("user");
+        appLocale.setLocalUsers(users);
+        User newUser = appLocale.getLocalUser("user");
         assertEquals(user, newUser);
     }
 
     @Test
-    public void testRemoveSavedUser() {
+    public void testRemoveLocalUser() {
         ArrayList<User> users = new ArrayList<>();
         users.add(user);
-        appLocale.setSavedUsers(users);
-        assertTrue(appLocale.getSavedUsers().contains(user));
-        appLocale.removeSavedUser(user);
-        assertFalse(appLocale.getSavedUsers().contains(user));
+        appLocale.setLocalUsers(users);
+        assertTrue(appLocale.getLocalUsers().contains(user));
+        appLocale.removeLocalUser(user);
+        assertFalse(appLocale.getLocalUsers().contains(user));
     }
 
     @Test
     public void testSaveUser() {
         User newUser = new User("newUser");
-        assertFalse(appLocale.getSavedUsers().contains(newUser));
-        appLocale.saveUser(newUser);
-        assertTrue(appLocale.getSavedUsers().contains(newUser));
+        assertFalse(appLocale.getLocalUsers().contains(newUser));
+        appLocale.addLocalUser(newUser);
+        assertTrue(appLocale.getLocalUsers().contains(newUser));
         assertNotSame(newUser, appLocale.getUser());
 
     }
@@ -68,9 +68,9 @@ public class AppLocaleTest extends TestCase {
     @Test
     public void testSetUser() {
         User newUser = new User("newUser");
-        assertFalse(appLocale.getSavedUsers().contains(newUser));
+        assertFalse(appLocale.getLocalUsers().contains(newUser));
         appLocale.setUser(newUser);
-        assertTrue(appLocale.getSavedUsers().contains(newUser));
+        assertTrue(appLocale.getLocalUsers().contains(newUser));
         assertEquals(newUser, appLocale.getUser());
 
     }
@@ -85,34 +85,25 @@ public class AppLocaleTest extends TestCase {
         assertEquals(user, appLocale.getLastUser());
     }
 
-    @Test
-    public void testLoadFromFile() {
-        //TODO: implement when method is implemented
-    }
 
     @Test
-    public void testSaveInFile() {
-        //TODO: implement when method is implemented
-    }
-
-    @Test
-    public void testGetSavedUsers() {
+    public void testGetLocalUsers() {
         User newUser = new User("newUser");
         ArrayList<User> users = new ArrayList<>();
         users.add(user);
         users.add(newUser);
-        appLocale.setSavedUsers(users);
-        assertTrue(appLocale.getSavedUsers().contains(user));
-        assertTrue(appLocale.getSavedUsers().contains(newUser));
+        appLocale.setLocalUsers(users);
+        assertTrue(appLocale.getLocalUsers().contains(user));
+        assertTrue(appLocale.getLocalUsers().contains(newUser));
     }
 
     @Test
-    public void testSetSavedUsers() {
+    public void testSetLocalUsers() {
         ArrayList<User> users = new ArrayList<>();
         users.add(user);
-        assertFalse(appLocale.getSavedUsers().contains(user));
-        appLocale.setSavedUsers(users);
-        assertTrue(appLocale.getSavedUsers().contains(user));
+        assertFalse(appLocale.getLocalUsers().contains(user));
+        appLocale.setLocalUsers(users);
+        assertTrue(appLocale.getLocalUsers().contains(user));
     }
 
 

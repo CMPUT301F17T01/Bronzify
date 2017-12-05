@@ -39,7 +39,7 @@ public class HabitType {
     }
 
     // Generate MAX_DAYS_AHEAD worth of habit events
-    private void generateNewEvents(Date date) {
+    public void generateNewEvents(Date date) {
         Calendar calendar = Calendar.getInstance();
 
         for (int i = 0; i < MAX_DAYS_AHEAD; ++i) {
