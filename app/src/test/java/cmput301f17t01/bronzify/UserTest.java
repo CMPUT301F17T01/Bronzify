@@ -22,13 +22,13 @@ public class UserTest extends TestCase {
     private User user = new User("userID");
 
     Boolean[] daysOfWeek = {false, true, false, true, false, false, false,};
-    HabitType habitType;
+    HabitType habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
 
     @Test
     public void testSetup() {
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.setUser(user);
-        habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
+//        habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
     }
 
     @Test
