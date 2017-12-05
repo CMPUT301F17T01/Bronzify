@@ -15,3 +15,7 @@ A simple and intuitive Android application that can help start good (or bad) hab
 * Project Part 3: Monday, Oct. 23 (Done)
 * Project Part 4: Thursday, Nov. 13 (Done)
 * Project Part 5: Monday, Dec. 4 (Done)
+
+## Demo Video
+
+[!(https://img.youtube.com/vi/B4FyDgozH3E/0.jpg)](https://youtu.be/B4FyDgozH3E)
