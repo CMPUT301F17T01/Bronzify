@@ -10,21 +10,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
+import java.util.ArrayList;
 import java.util.List;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.HabitEventActivity;
-
-import cmput301f17t01.bronzify.adapters.HabitEventAdapter;
-
 import cmput301f17t01.bronzify.activities.MyHistoryActivity;
-
 import cmput301f17t01.bronzify.models.AppLocale;
-
 import cmput301f17t01.bronzify.models.HabitEvent;
 
 /*
@@ -101,5 +93,12 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     public int getItemCount() {
         Log.d("RV", "Item size [" + entries.size() + "]");
         return entries.size();
+    }
+
+    public void setFilter(ArrayList<HabitEvent> newEvents){
+        entries = new ArrayList<HabitEvent>();
+        entries.addAll(newEvents);
+        notifyDataSetChanged();
+
     }
 }

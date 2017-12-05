@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
+import cmput301f17t01.bronzify.adapters.recyclers.MyHabitAdapter;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
@@ -32,13 +34,13 @@ import cmput301f17t01.bronzify.models.User;
  * Created by omcleod on 2017-12-03.
  */
 
-public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryTextListener {
+public class MyFeedTabFeed extends Fragment implements SearchView.OnQueryTextListener {
 
-    private static final String TAG = "HabitHistoryTabFeed";
-    private List<HabitEvent> events = new ArrayList<HabitEvent>();
-    private MyEventAdapter adapter;
-    public HabitHistoryTabFeed() {
-            fillEventList();
+    private static final String TAG = "MyFeedTabFeed";
+    private List<HabitType> types  = new ArrayList<HabitType>();
+    private MyHabitAdapter adapter;
+    public MyFeedTabFeed() {
+            fillHabitList();
         }
 
 
@@ -61,20 +63,13 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
 
             return rootView;
         }
-    private void fillEventList(){
-        User user = AppLocale.getInstance().getUser();
+    private void fillTypesList(){
+        ArrayList<String> following = AppLocale.getInstance().getUser().getFollowing();
+
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
-        events.clear();
+        types.clear();
         for(HabitType type: habitTypes){
-            ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
-            for(HabitEvent event: habitEvents){
-                Date eventDate = getZeroTimeDate(event.getGoalDate());
-                Date currentDate = getZeroTimeDate(new Date());
-                int dateDiff = eventDate.compareTo(currentDate);
-                if(dateDiff < 0){
-                    events.add(event);
-                }
-            }
+            types.add(type);
         }
     }
 
