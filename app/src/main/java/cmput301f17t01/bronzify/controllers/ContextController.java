@@ -47,6 +47,8 @@ public class ContextController {
     public void updateUserFollowing(User currentUser) {
         User otherUser = elastic.getUser(currentUser.getUserID());
         currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
+        currentUser.setFollowing(otherUser.getFollowing());
+        currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
     }
 
     public void saveUser(User user) {
