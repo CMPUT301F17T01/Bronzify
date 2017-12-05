@@ -10,7 +10,6 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,13 +34,12 @@ import io.searchbox.core.SearchResult;
  */
 
 
-
 public class ElasticSearch {
     private static JestDroidClient client;
-    private static String serverString = "http://cmput301.softwareprocess.es:8080";
-//    private static String serverString = "http://localhost:9200";
-    private static String indexString = "cmput301f17t01_bronzify";
-    private static String typeString = "test_user_v3";
+    private static final String serverString = "http://cmput301.softwareprocess.es:8080";
+    //    private static String serverString = "http://localhost:9200";
+    private static final String indexString = "cmput301f17t01_bronzify";
+    private static final String typeString = "test_user_v3";
     private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
             new UserAdapter()).create();
 
@@ -73,7 +71,7 @@ public class ElasticSearch {
      * @param otherUserID
      */
     public void requestFollow(User user, String otherUserID) {
-        if (user.getFollowing().contains(otherUserID)){
+        if (user.getFollowing().contains(otherUserID)) {
             Log.i("Error", "already following");
             return;
         }
@@ -112,7 +110,7 @@ public class ElasticSearch {
      *
      * @param user
      */
-    public void userUpdate(User user) {
+    private void userUpdate(User user) {
         ElasticSearch elastic = new ElasticSearch();
         User newestUser = elastic.update(user);
 
@@ -215,7 +213,6 @@ public class ElasticSearch {
     /**
      * This async is used to make sure that the user is posted to the elastic search server
      * while preventing sync issues
-     *
      */
     public static class PostUser extends AsyncTask<User, Void, Void> {
         @Override
@@ -245,9 +242,8 @@ public class ElasticSearch {
     }
 
     /**
-     This async is used to make sure that the user is retrieved from the elastic search server
+     * This async is used to make sure that the user is retrieved from the elastic search server
      * while preventing sync issues
-     *
      */
     public static class GetUser extends AsyncTask<String, Void, User> {
         @Override
@@ -285,9 +281,8 @@ public class ElasticSearch {
     /**
      * This async is used to make sure that the user is deleted from the elastic search server
      * while preventing sync issues
-     *
      */
-    public static class DeleteUser extends  AsyncTask<String, Void, Void> {
+    public static class DeleteUser extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... strings) {
             verifySettings();
@@ -312,7 +307,6 @@ public class ElasticSearch {
     /**
      * This async is used to find the high scores from the elastic search server
      * while preventing sync issues
-     *
      */
     public static class FindHighScore extends AsyncTask<Void, Void, ArrayList<User>> {
         @Override
@@ -327,10 +321,10 @@ public class ElasticSearch {
             }' */
             String query =
                     "{\n" +
-                    "    \"sort\": [\n" +
-                    "        {\"score\" : {\"order\" : \"desc\"}}\n" +
-                    "    ]\n" +
-                    "}";
+                            "    \"sort\": [\n" +
+                            "        {\"score\" : {\"order\" : \"desc\"}}\n" +
+                            "    ]\n" +
+                            "}";
 //            SearchSourceBuilder ssb = new SearchSourceBuilder()
 //                    .sort("score", SortOrder.DESC)
 //                    .size(20);
@@ -363,7 +357,7 @@ public class ElasticSearch {
         }
     }
 
-    public static void verifySettings() {
+    private static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig
                     //.Builder("localhost:9200");

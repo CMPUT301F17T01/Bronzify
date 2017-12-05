@@ -15,8 +15,8 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class AppLocaleTest extends TestCase {
-    AppLocale appLocale = AppLocale.getInstance();
-    User user = new User("user");
+    final AppLocale appLocale = AppLocale.getInstance();
+    final User user = new User("user");
 
     @Test
     public void testSetUp() {

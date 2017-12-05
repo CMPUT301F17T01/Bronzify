@@ -8,5 +8,6 @@ import android.view.View;
 
 interface ClickListener {
     void onItemClick(int position, View v);
+
     void onItemLongClick(int position, View v);
 }

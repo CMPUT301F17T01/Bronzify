@@ -22,7 +22,7 @@ import cmput301f17t01.bronzify.models.HabitType;
 
 public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.ViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private List<HabitType> entries;
 
     public MyFeedAdapter(Context context, List<HabitType> list) {
@@ -30,11 +30,11 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.ViewHolder
         entries = list;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView userRowName;
-        private TextView typeRowName;
-        private TextView typeCompletion;
-        private ImageView userProfile;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView userRowName;
+        private final TextView typeRowName;
+        private final TextView typeCompletion;
+        private final ImageView userProfile;
 
         private ViewHolder(View v, Context innerContext) {
             super(v);
@@ -69,7 +69,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.ViewHolder
         return entries.size();
     }
 
-    public void setFilter(ArrayList<HabitType> newEvents){
+    public void setFilter(ArrayList<HabitType> newEvents) {
         entries = new ArrayList<HabitType>();
         entries.addAll(newEvents);
         notifyDataSetChanged();

@@ -17,11 +17,11 @@ import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.User;
 
 public class LoginActivity extends AppCompatActivity {
-    private LoginController controller = new LoginController();
+    private final LoginController controller = new LoginController();
 
     /**
-     *
      * Called on the creation of the Login Activity
+     *
      * @param savedInstanceState
      */
     @Override

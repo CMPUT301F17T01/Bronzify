@@ -41,9 +41,9 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
      * @param savedInstanceState
      */
     private RecyclerView recyclerView;
-    private AppLocale appLocale = AppLocale.getInstance();
-    private List<HabitType> types = new ArrayList<>();
-    private ElasticSearch es = new ElasticSearch();
+    private final AppLocale appLocale = AppLocale.getInstance();
+    private final List<HabitType> types = new ArrayList<>();
+    private final ElasticSearch es = new ElasticSearch();
     final User user = AppLocale.getInstance().getUser();
 //    private ArrayList<User> topUsers = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
 
         // Username in NavBar
         User currentUser = AppLocale.getInstance().getUser();
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
@@ -90,7 +90,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        MyHabitAdapter habitAdapter = new MyHabitAdapter(this,types);
+        MyHabitAdapter habitAdapter = new MyHabitAdapter(this, types);
         recyclerView = findViewById(R.id.myLeaderboardRecycler);
         recyclerView.setAdapter(habitAdapter);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -99,12 +99,11 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -118,7 +117,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -130,9 +129,9 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
      * @return
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -146,7 +145,7 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(!(id == R.id.LeaderBoard)) {
+        if (!(id == R.id.LeaderBoard)) {
             Activity currentActivity = LeaderBoardActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
@@ -159,10 +158,10 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         return true;
     }
 
-    private void getLeaderboard(){
+    private void getLeaderboard() {
 
         ArrayList<User> users = es.findHighScore();
-        for(User user : users){
+        for (User user : users) {
             types.addAll(user.getHabitTypes());
         }
         // TODO: FINISH THIS

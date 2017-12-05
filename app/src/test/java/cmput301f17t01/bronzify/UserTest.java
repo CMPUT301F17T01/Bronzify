@@ -21,11 +21,11 @@ import cmput301f17t01.bronzify.models.User;
 
 public class UserTest extends TestCase {
 
-    Date created = new Date();
-    private User user = new User("userID");
+    final Date created = new Date();
+    private final User user = new User("userID");
 
-    Boolean[] daysOfWeek = {false, true, false, true, false, false, false,};
-    HabitType habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
+    final Boolean[] daysOfWeek = {false, true, false, true, false, false, false,};
+    final HabitType habitType = new HabitType("name" , "reason", new Date(), daysOfWeek);
 
     @Test
     public void testSetup() {

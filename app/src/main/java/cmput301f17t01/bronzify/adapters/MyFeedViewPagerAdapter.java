@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import cmput301f17t01.bronzify.fragments.MyFeedTabFeed;
 
 public class MyFeedViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager
@@ -38,7 +38,7 @@ public class MyFeedViewPagerAdapter extends FragmentPagerAdapter {
             MyFeedTabFeed fragment = new MyFeedTabFeed();
             fragment.setArguments(bundle);
             return fragment;
-        } else if (position == 1){
+        } else if (position == 1) {
             Bundle bundle = new Bundle();
             bundle.putString("type", "habitTypes");
             MyFeedTabFeed fragment = new MyFeedTabFeed();

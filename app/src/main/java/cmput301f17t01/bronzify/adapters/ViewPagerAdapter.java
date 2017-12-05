@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
 import cmput301f17t01.bronzify.fragments.ListFragment;
 
 /*
@@ -11,7 +12,7 @@ import cmput301f17t01.bronzify.fragments.ListFragment;
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager

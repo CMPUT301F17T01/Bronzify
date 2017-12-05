@@ -2,7 +2,6 @@ package cmput301f17t01.bronzify.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.models.AppLocale;
@@ -43,8 +43,8 @@ public class HabitEventDetailFragment extends Fragment {
 
         habitEvent = AppLocale.getInstance().getEvent();
 
-        for(HabitType habit: habitTypes){
-            if(habit.getName().equals(habitEvent.getHabitType())){
+        for (HabitType habit : habitTypes) {
+            if (habit.getName().equals(habitEvent.getHabitType())) {
                 habitType = habit;
                 break;
             }
@@ -77,23 +77,23 @@ public class HabitEventDetailFragment extends Fragment {
         tvMarked.setVisibility(View.VISIBLE);
         etMarked.setVisibility(View.VISIBLE);
 
-        if (!habitType.getUserID().equals(user.getUserID())){
+        if (!habitType.getUserID().equals(user.getUserID())) {
             btnEdit.setVisibility(View.GONE);
         }
 
-        Date currentDate  = getZeroTimeDate(new Date());
-        if(habitEvent.getCompleted() == null){
-            if(goalDate.compareTo(currentDate) == 0){
+        Date currentDate = getZeroTimeDate(new Date());
+        if (habitEvent.getCompleted() == null) {
+            if (goalDate.compareTo(currentDate) == 0) {
                 btnDone.setVisibility(View.VISIBLE);
                 btnNotDone.setVisibility(View.VISIBLE);
-            } else if (goalDate.compareTo(currentDate) < 0){
-                habitType.incrementNumUncompleted(1);
+            } else if (goalDate.compareTo(currentDate) < 0) {
+                habitType.incrementNumUncompleted();
                 Toast.makeText(getActivity(), "Event has passed. Automatically setting as incomplete.", Toast.LENGTH_SHORT).show();
                 habitEvent.setCompleted(false);
                 ContextController contextController = new ContextController(getActivity().getApplicationContext());
                 contextController.updateUser(user);
             }
-        } else if (habitEvent.getCompleted()){
+        } else if (habitEvent.getCompleted()) {
             etMarked.setText("Completed");
         } else {
             etMarked.setText("Incomplete");
@@ -153,7 +153,8 @@ public class HabitEventDetailFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 habitType.removeEvent(habitEvent);
                                 getActivity().finish();
-                            }})
+                            }
+                        })
                         .setNegativeButton("No", null).show();
             }
         });
@@ -161,7 +162,7 @@ public class HabitEventDetailFragment extends Fragment {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                habitType.incrementNumCompleted(1);
+                habitType.incrementNumCompleted();
                 habitEvent.setCompleted(true);
                 Toast.makeText(getActivity(), "Activity set as completed", Toast.LENGTH_SHORT).show();
                 etMarked.setText("Completed");
@@ -175,7 +176,7 @@ public class HabitEventDetailFragment extends Fragment {
         btnNotDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                habitType.incrementNumUncompleted(1);
+                habitType.incrementNumUncompleted();
                 habitEvent.setCompleted(false);
                 Toast.makeText(getActivity(), "Activity set as incomplete", Toast.LENGTH_SHORT).show();
                 etMarked.setText("Incompleted");
@@ -189,14 +190,8 @@ public class HabitEventDetailFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
     // Set time to 00:00:00
-    public static Date getZeroTimeDate(Date date) {
+    private static Date getZeroTimeDate(Date date) {
         Date res = date;
         Calendar calendar = Calendar.getInstance();
 

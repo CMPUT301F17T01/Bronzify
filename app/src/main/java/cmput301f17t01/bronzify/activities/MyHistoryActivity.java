@@ -28,15 +28,15 @@ import cmput301f17t01.bronzify.models.User;
 /*
  * Created by noahkryz on 11/1/2017.
  */
-public class MyHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class MyHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String name;
-    private AppLocale appLocale = AppLocale.getInstance();
+    private final AppLocale appLocale = AppLocale.getInstance();
     private RecyclerView recyclerView;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private DrawerLayout drawer;
-    private String[] pageTitle = {"Feed", "Map"};
+    private final String[] pageTitle = {"Feed", "Map"};
 
 
     /**
@@ -73,7 +73,7 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
 
         // Username in NavBar
         User currentUser = AppLocale.getInstance().getUser();
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
@@ -88,7 +88,6 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         //set viewpager adapter
         HabitHistoryViewPagerAdapter pagerAdapter = new HabitHistoryViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
-
 
 
         //change Tab selection when swipe ViewPager
@@ -133,12 +132,11 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -152,7 +150,7 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -164,9 +162,9 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
      * @return
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -180,7 +178,7 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(!(id == R.id.MyHistory)) {
+        if (!(id == R.id.MyHistory)) {
             Activity currentActivity = MyHistoryActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
@@ -193,8 +191,8 @@ public class MyHistoryActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
-    public View getTabView(int position){
-        View tab = LayoutInflater.from(MyHistoryActivity.this).inflate(R.layout.habit_history_tab_feed,null);
+    public View getTabView(int position) {
+        View tab = LayoutInflater.from(MyHistoryActivity.this).inflate(R.layout.habit_history_tab_feed, null);
         return tab;
     }
 

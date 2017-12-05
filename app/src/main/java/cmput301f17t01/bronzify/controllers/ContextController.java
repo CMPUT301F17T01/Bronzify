@@ -26,9 +26,9 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class ContextController {
-    private Context context;
-    ElasticSearch elastic = new ElasticSearch();
-    private Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
+    private final Context context;
+    private final ElasticSearch elastic = new ElasticSearch();
+    private final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
             new UserAdapter()).create();
 
     private static final String FILENAME = "bronzify.sav";
@@ -56,6 +56,7 @@ public class ContextController {
         appLocale.setUser(currentUser);
         saveInFile(appLocale.getLocalUsers());
     }
+
     public void updateUserFollowing(User currentUser) {
         User otherUser = elastic.getUser(currentUser.getUserID());
         currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
@@ -82,11 +83,12 @@ public class ContextController {
      */
     public ArrayList<User> loadFromFile() {
         try {
-            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<User>>() {
+            }.getType();
             FileInputStream fis = context.openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Log.i("Loaded", "from file");
-            ArrayList<User> usersArray =  userGson.fromJson(in, listType);
+            ArrayList<User> usersArray = userGson.fromJson(in, listType);
             if (usersArray == null) {
                 return new ArrayList<>();
             } else {
@@ -123,7 +125,6 @@ public class ContextController {
         }
 
     }
-
 
 
 }

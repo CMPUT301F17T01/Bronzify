@@ -12,7 +12,7 @@ import cmput301f17t01.bronzify.fragments.HabitTypeDetailFragment;
 import cmput301f17t01.bronzify.fragments.HabitTypeEventFragment;
 
 public class HabitTypeViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager
@@ -35,15 +35,14 @@ public class HabitTypeViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new HabitTypeDetailFragment();
         }
-        if (position == 1){
+        if (position == 1) {
 //            Bundle bundle = new Bundle();
 //            bundle.putString("type", "habitTypes");
 //            ListFragment fragment = new ListFragment();
 //            fragment.setArguments(bundle);
 //            return fragment;
             return new HabitTypeEventFragment();
-        }
-        else {
+        } else {
             return null;
         }
     }

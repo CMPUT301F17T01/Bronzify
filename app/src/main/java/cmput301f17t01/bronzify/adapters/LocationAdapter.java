@@ -3,7 +3,6 @@ package cmput301f17t01.bronzify.adapters;
 import android.location.Location;
 
 import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
@@ -15,7 +14,7 @@ import java.io.IOException;
  * Created by kdehaan on 04/12/17.
  */
 
-public class LocationAdapter extends TypeAdapter<Location> {
+class LocationAdapter extends TypeAdapter<Location> {
 
     public Location read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
@@ -50,6 +49,7 @@ public class LocationAdapter extends TypeAdapter<Location> {
 
         return loc;
     }
+
     public void write(JsonWriter writer, Location loc) throws IOException {
         if (loc == null) {
             writer.nullValue();

@@ -190,10 +190,9 @@ public class HabitType {
     /**
      * Increment number of completed habit events by changeValue
      *
-     * @param changeValue Amount to increment number of completed habit event by
      */
-    public void incrementNumCompleted(int changeValue) {
-        this.numCompleted += changeValue;
+    public void incrementNumCompleted() {
+        this.numCompleted += 1;
     }
 
     // Number of Uncompleted Habit Events
@@ -214,10 +213,9 @@ public class HabitType {
     /**
      * Increment number of uncompleted habit event by changeValue
      *
-     * @param changeValue Amount to increment number of uncompleted habit events by
      */
-    public void incrementNumUncompleted(int changeValue) {
-        this.numUncompleted = changeValue;
+    public void incrementNumUncompleted() {
+        this.numUncompleted = 1;
     }
 
     /**
@@ -270,7 +268,6 @@ public class HabitType {
 
     /**
      * Generates a months worth of new events
-     *
      */
     public void updateEvents() {
         habitEvents.clear();
@@ -279,7 +276,6 @@ public class HabitType {
 
     /**
      * Checks whether or not the habit type has no more events, and adds more to it if needed
-     *
      */
     public void checkEventEmpty() {
         if (habitEvents.isEmpty()) {

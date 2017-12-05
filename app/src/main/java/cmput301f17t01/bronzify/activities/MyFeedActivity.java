@@ -31,10 +31,10 @@ import cmput301f17t01.bronzify.models.User;
 public class MyFeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String name;
-    private AppLocale appLocale = AppLocale.getInstance();
+    private final AppLocale appLocale = AppLocale.getInstance();
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private String[] pageTitle = {"Feed", "Map"};
+    private final String[] pageTitle = {"Feed", "Map"};
 
     public MyFeedActivity() {
     }
@@ -70,10 +70,9 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
 
         // Username in NavBar
         User currentUser = AppLocale.getInstance().getUser();
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
-
 
 
         // Picture in NavBar
@@ -86,7 +85,6 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
 
         MyFeedViewPagerAdapter pagerAdapter = new MyFeedViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
-
 
 
         //change Tab selection when swipe ViewPager
@@ -137,7 +135,7 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(!(id == R.id.MyFeed)) {
+        if (!(id == R.id.MyFeed)) {
             Activity currentActivity = MyFeedActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
@@ -157,7 +155,7 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -169,9 +167,9 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
      * @return
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -179,12 +177,11 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();

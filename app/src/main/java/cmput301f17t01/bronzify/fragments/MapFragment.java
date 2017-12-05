@@ -26,7 +26,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.gson.Gson;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ContextController;
@@ -42,8 +41,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private HabitEvent event;
     private Location currentLocation;
-    MapView mMapView;
-    View mView;
+    private MapView mMapView;
+    private View mView;
 
     private static final String TAG = "MapActivity";
 
@@ -97,8 +96,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             LatLng LatitudeLongitude = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                             moveCamera(LatitudeLongitude, DEFAULT_ZOOM);
                             BitmapDescriptor mapBitmap;
+
                             if (event.getImage() != null) {
-                                 mapBitmap = BitmapDescriptorFactory.fromBitmap(event.getImage());
+                                mapBitmap = BitmapDescriptorFactory.fromBitmap(event.getImage());
                             } else {
                                 mapBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
                             }
@@ -107,7 +107,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     .position(LatitudeLongitude)
                                     .title(event.getHabitType())
                                     .snippet(event.getComment())
-                                    .icon(mapBitmap)); 
+                                    .icon(mapBitmap));
                             User user = AppLocale.getInstance().getUser();
 //
 
@@ -176,7 +176,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     /**
      * Asks the user for permissions to access the location of their device
-     *
      */
     private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,

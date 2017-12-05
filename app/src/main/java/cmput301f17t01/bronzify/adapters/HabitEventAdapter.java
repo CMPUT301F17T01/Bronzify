@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 import cmput301f17t01.bronzify.models.HabitEvent;
 
 /*
@@ -26,7 +27,7 @@ import cmput301f17t01.bronzify.models.HabitEvent;
  */
 
 public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
-    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+    private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
     private final Gson gsonLoc = new GsonBuilder().registerTypeAdapter(Location.class,
             new LocationAdapter()).create();
 
@@ -81,9 +82,9 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
                 continue;
             }
             if ("completed".equals(fieldname)) {
-                try{
+                try {
                     event.setCompleted(Boolean.valueOf(reader.nextString()));
-                } catch (NullPointerException e){
+                } catch (NullPointerException e) {
                     event.setCompleted(null);
                 }
 
@@ -132,19 +133,19 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.name("comment");
         writer.value(event.getComment());
         writer.name("completed");
-        try{
+        try {
             writer.value(event.getCompleted().toString());
         } catch (NullPointerException e) {
             writer.nullValue();
         }
         writer.name("image");
-        try{
+        try {
             writer.value(getStringFromBitmap(event.getImage()));
         } catch (NullPointerException e) {
             writer.nullValue();
         }
         writer.name("location");
-        try{
+        try {
             writer.value(gsonLoc.toJson(event.getLocation()));
         } catch (NullPointerException e) {
             writer.nullValue();

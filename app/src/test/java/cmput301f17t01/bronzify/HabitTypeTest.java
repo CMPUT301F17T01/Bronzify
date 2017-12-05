@@ -21,7 +21,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class HabitTypeTest extends TestCase {
-    Boolean[] daysOfWeek = {false, true, false, false, true, false, false,};
+    final Boolean[] daysOfWeek = {false, true, false, false, true, false, false,};
 
     @Test
     public void testSetUp() {

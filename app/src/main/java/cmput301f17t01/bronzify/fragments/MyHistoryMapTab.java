@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -30,18 +31,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by jblazusi on 2017-11-01.
  */
 
-public class MyMapFragment extends Fragment implements OnMapReadyCallback {
+public class MyHistoryMapTab extends Fragment implements OnMapReadyCallback,SearchView.OnQueryTextListener {
     private User user;
+    private ArrayList<HabitEvent> events;
     private Location currentLocation;
     private MapView mMapView;
     private View mView;
@@ -89,39 +89,8 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
                             moveCamera(LatitudeLongitude);
                             BitmapDescriptor mapBitmap;
 
-                            ElasticSearch elastic = new ElasticSearch();
-                            ArrayList<User> users = new ArrayList<>();
-                            users.add(user);
-                            ArrayList<String> following = user.getFollowing();
-                            Iterator<String> strItr = following.iterator();
-                            while (strItr.hasNext()) {
-                                String next = strItr.next();
-                                User foundUser = elastic.getUser(next);
-                                if (foundUser != null) {
-                                    users.add(foundUser);
-                                }
-                            }
-                            ArrayList<HabitEvent> nearbyEvents = new ArrayList<>();
-                            Iterator<User> userItr = users.iterator();
-                            while (userItr.hasNext()) {
-                                User nextUser = userItr.next();
-                                Iterator<HabitType> typeItr = nextUser.getHabitTypes().iterator();
-                                while (typeItr.hasNext()) {
-                                    HabitType nextType = typeItr.next();
-                                    Iterator<HabitEvent> eventItr = nextType.getHabitEvents().iterator();
-                                    while (eventItr.hasNext()) {
-                                        HabitEvent nextEvent = eventItr.next();
-                                        if (nextEvent.getLocation() != null) {
-                                            if (currentLocation.distanceTo(nextEvent.getLocation()) < DISTANCE) {
-                                                nearbyEvents.add(nextEvent);
-                                            }
-                                        }
-                                    }
-                                }
 
-                            }
-
-                            Iterator<HabitEvent> markEvItr = nearbyEvents.iterator();
+                            Iterator<HabitEvent> markEvItr = events.iterator();
                             while (markEvItr.hasNext()) {
                                 HabitEvent nextMark = markEvItr.next();
                                 if (nextMark.getImage() != null) {
@@ -195,7 +164,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void moveCamera(LatLng latLng) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, MyMapFragment.DEFAULT_ZOOM));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, MyHistoryMapTab.DEFAULT_ZOOM));
     }
 
     private void getLocationPermission() {
@@ -236,6 +205,27 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s = s.toLowerCase();
+        ArrayList<HabitEvent> hes = new ArrayList<HabitEvent>();
+        for (HabitEvent event : events) {
+            String eventName = event.getHabitType().toLowerCase();
+            if (eventName.contains(s)) {
+                hes.add(event);
+            }
+        }
+
+        events = hes;
+
+        return true;
     }
 
    /* public void drawMarker() {

@@ -11,14 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
 import java.util.ArrayList;
 import java.util.Date;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
-import cmput301f17t01.bronzify.models.User;
 
 /*
  * Created by jblazusi on 2017-11-01.
@@ -35,12 +36,12 @@ public class HabitTypeEventFragment extends Fragment {
         LINEAR_LAYOUT_MANAGER
     }
 
-    protected LayoutManagerType mCurrentLayoutManagerType;
+    private LayoutManagerType mCurrentLayoutManagerType;
 
-    protected RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected ArrayList<HabitEvent> mDataset;
+    private ArrayList<HabitEvent> mDataset;
     protected AppLocale appLocale;
     private Button editHabitType;
     private Button deleteHabitType;
@@ -82,7 +83,7 @@ public class HabitTypeEventFragment extends Fragment {
 
         mRecyclerView = rootView.findViewById(R.id.myTypeRecycler);
         mRecyclerView.setHasFixedSize(true);
-        MyEventAdapter adapter = new MyEventAdapter(getContext(),mDataset);
+        MyEventAdapter adapter = new MyEventAdapter(getContext(), mDataset);
         mRecyclerView.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
@@ -90,12 +91,6 @@ public class HabitTypeEventFragment extends Fragment {
                 llm.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         return rootView;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override

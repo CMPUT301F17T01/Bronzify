@@ -1,12 +1,9 @@
 package cmput301f17t01.bronzify.adapters;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cmput301f17t01.bronzify.fragments.ListFragment;
-import cmput301f17t01.bronzify.fragments.MapFragment;
 import cmput301f17t01.bronzify.fragments.MyMapFragment;
 
 /*
@@ -14,7 +11,7 @@ import cmput301f17t01.bronzify.fragments.MyMapFragment;
  */
 
 public class MapViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager
