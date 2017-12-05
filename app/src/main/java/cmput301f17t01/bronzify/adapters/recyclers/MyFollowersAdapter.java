@@ -15,7 +15,7 @@ import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.controllers.ElasticSearch;
 import cmput301f17t01.bronzify.models.User;
 
-/*
+/**
  * Created by owenm_000 on 11/22/2017.
  */
 
@@ -24,6 +24,12 @@ public class MyFollowersAdapter extends RecyclerView.Adapter<MyFollowersAdapter.
     private Context mContext;
     private List<String> entries;
 
+    /**
+     * This is the followers adapter that takes in a context and a list of habit events
+     *
+     * @param context
+     * @param list
+     */
     public MyFollowersAdapter(Context context, List<String> list) {
         mContext = context;
         entries = list;
@@ -60,6 +66,11 @@ public class MyFollowersAdapter extends RecyclerView.Adapter<MyFollowersAdapter.
         holder.userProfile.setImageBitmap(userAcc.getImage());
     }
 
+    /**
+     * Returns the count of followers in the follow list
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         Log.d("RV", "Item size [" + entries.size() + "]");

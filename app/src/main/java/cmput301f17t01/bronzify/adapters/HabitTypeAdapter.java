@@ -29,7 +29,7 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
             new HabitEventAdapter()).create();
 
     /**
-     * Reads the habit event with a Json reader
+     * Reads the habit type with a Json reader
      *
      * @param reader
      * @return
@@ -95,6 +95,14 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
 
         return type;
     }
+
+    /**
+     * Write to the habit type with a Json writer
+     *
+     * @param writer
+     * @param type
+     * @throws IOException
+     */
     public void write(JsonWriter writer, HabitType type) throws IOException {
         if (type == null) {
             writer.nullValue();
@@ -120,6 +128,12 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
         writer.endObject();
     }
 
+    /**
+     * Returns the boolean array converting from the string
+     *
+     * @param string
+     * @return
+     */
     private Boolean[] boolArrayFromString(String string) {
         String[] strings = string.replace("[", "").replace("]", "").split(", ");
         Boolean[] array = new Boolean[strings.length];

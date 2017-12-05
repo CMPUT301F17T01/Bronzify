@@ -84,16 +84,6 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         rv.setAdapter(fa);
 
         name = appLocale.getUser().getUserID();
-        /*if (savedInstanceState == null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("type", "pendingFollows");
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            ListFragment fragment = new ListFragment();
-            fragment.setArguments(bundle);
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-        }*/
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -250,6 +240,13 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
+    /**
+     * This is used to compress the photo and set it into a circle
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
@@ -278,13 +275,12 @@ public class MyProfileActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
-
+    /**
+     * Creates a list of follow requests for each user in My Profile activity
+     *
+     */
     private void createTestList(){
-
-        // TODO: Substitute this with actually getting the follow req. user list from the DB
         userList = currentUser.getPendingFollowRequests();
-
-
     }
 
 }

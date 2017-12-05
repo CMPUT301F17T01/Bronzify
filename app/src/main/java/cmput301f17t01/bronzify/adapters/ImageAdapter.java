@@ -16,6 +16,13 @@ import android.graphics.RectF;
 
 public class ImageAdapter {
 
+    /**
+     * This image adapter gets the circular image bitmap
+     *
+     * @param bitmap
+     * @param pixels
+     * @return
+     */
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);

@@ -36,6 +36,12 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     private Context mContext;
     private List<HabitEvent> entries;
 
+    /**
+     * This is the event adapter that takes in a context and a list of habit events
+     *
+     * @param context
+     * @param list
+     */
     public MyEventAdapter(Context context, List<HabitEvent> list) {
         mContext = context;
         entries = list;
@@ -46,7 +52,12 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         private TextView habitEventDate;
         private RelativeLayout relativeLayout;
 
-
+        /**
+         * This is the view holder for the recycler
+         *
+         * @param v
+         * @param innerContext
+         */
         private ViewHolder(View v, Context innerContext) {
             super(v);
             v.setOnClickListener(this);
@@ -97,6 +108,11 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         }
     }
 
+    /**
+     * Returns the count of items in the events list
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         Log.d("RV", "Item size [" + entries.size() + "]");

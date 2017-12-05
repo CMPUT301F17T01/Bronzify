@@ -92,6 +92,10 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
+    /**
+     * This resumes the home activity
+     *
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -161,6 +165,10 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
+    /**
+     * This populates the event list in the home activity
+     *
+     */
     private void fillEventList() {
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
@@ -179,7 +187,12 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
         }
     }
 
-    // Set time to 00:00:00
+    /**
+     * This sets the time to 00:00:00
+     *
+     * @param date
+     * @return
+     */
     public static Date getZeroTimeDate(Date date) {
         Date res = date;
         Calendar calendar = Calendar.getInstance();

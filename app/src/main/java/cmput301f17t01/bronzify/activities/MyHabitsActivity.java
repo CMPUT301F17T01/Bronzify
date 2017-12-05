@@ -44,7 +44,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      *
      * @param savedInstanceState
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +100,10 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
+    /**
+     * This resumes the habits activity
+     *
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -172,7 +175,10 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
-
+    /**
+     * This populates the list of habit types
+     *
+     */
     private void fillTypesList(){
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
