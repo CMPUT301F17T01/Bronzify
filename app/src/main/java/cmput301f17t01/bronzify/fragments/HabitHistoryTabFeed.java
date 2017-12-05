@@ -43,6 +43,17 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
 
 
         @Override
+        /**
+         * Called on the creation of a habit history tab fragment
+         *
+         */
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+        }
+
+
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
@@ -61,6 +72,11 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
 
             return rootView;
         }
+
+    /**
+     * Populates the event list depending on what the user selected for repeatability
+     *
+     */
     private void fillEventList(){
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
@@ -81,7 +97,12 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
         }
     }
 
-    // Set time to 00:00:00
+    /**
+     * Gets the zeroth time stamp to set the time to 00:00:00
+     *
+     * @param date
+     * @return
+     */
     public static Date getZeroTimeDate(Date date) {
         Date res = date;
         Calendar calendar = Calendar.getInstance();

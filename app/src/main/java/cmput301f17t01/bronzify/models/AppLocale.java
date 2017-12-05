@@ -16,16 +16,8 @@ public class AppLocale {
     private User user;
     private HabitEvent event;
     private HabitType type;
-//    String path = Environment.getFiles().getAbsolutePath();
-//    private Context context = null;
-//    private static final String FILENAME = "bronzify.sav";
-
-//    private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
-//            new UserAdapter()).create();
 
     private ArrayList<User> localUsers = new ArrayList<>();
-    private ArrayList<HabitType> savedHabitTypes = new ArrayList<>();
-    private ArrayList<HabitEvent> savedHabitEvents = new ArrayList<>();
 
     /**
      * Gets the instances of the app locale
@@ -55,7 +47,12 @@ public class AppLocale {
         return user;
     }
 
-
+    /**
+     * Gets the local user, this is used for offline capabilities
+     *
+     * @param userID
+     * @return
+     */
     public User getLocalUser(String userID) {
         if (localUsers == null) {
             return null;
@@ -71,7 +68,11 @@ public class AppLocale {
         return null;
     }
 
-
+    /**
+     * Deletes the local user based on the user
+     *
+     * @param deleteUser
+     */
     public void removeLocalUser(User deleteUser) {
         Iterator<User> itr = localUsers.iterator();
         while (itr.hasNext()) {
@@ -83,6 +84,11 @@ public class AppLocale {
         }
     }
 
+    /**
+     * Deletes the local user based on their userID in a string format
+     *
+     * @param userID
+     */
     public void removeLocalUser(String userID) {
         Iterator<User> itr = localUsers.iterator();
         while (itr.hasNext()) {
@@ -94,6 +100,11 @@ public class AppLocale {
         }
     }
 
+    /**
+     * Adds a new local user if there already isn't one
+     *
+     * @param newUser
+     */
     public void addLocalUser(User newUser) {
         if (!localUsers.contains(newUser)) {
             localUsers.add(newUser);
@@ -112,92 +123,64 @@ public class AppLocale {
         addLocalUser(newUser);
     }
 
+    /**
+     * Logs out the user by setting the current user to null
+     *
+     */
     public void logoutUser() {
         user = null;
     }
 
-
-
-//    private void loadFromFile() { //temporarily unimplemented
-////        try {
-////            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-////            FileInputStream fis = context.openFileInput(FILENAME);
-////            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-////            savedUsers = userGson.fromJson(in, listType);
-////            Log.i("user0", savedUsers.get(0).toString());
-////
-////        } catch (FileNotFoundException e) {
-////            savedUsers = new ArrayList<User>();
-////        }
-//    }
-//
-//
-//    private void saveInFile() { //temporarily unimplemented
-////        try {
-////            FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-////            OutputStreamWriter writer = new OutputStreamWriter(fos);
-////            userGson.toJson(savedUsers, writer);
-////            writer.flush();
-////            fos.close();
-////            Log.i("Saved", "in file");
-////
-////        } catch (FileNotFoundException e) {
-////            Log.i("File Error", "File not found");
-////            e.printStackTrace();
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        } catch (NullPointerException e) {
-////            Log.i("Null context", "call appLocale.setContext(getApplicationContext()) first");
-////            e.printStackTrace();
-////        }
-//
-//    }
-
-
-    public ArrayList<HabitType> getSavedHabitTypes() {
-        return savedHabitTypes;
-    }
-
-    public void setSavedHabitTypes(ArrayList<HabitType> savedHabitTypes) {
-        this.savedHabitTypes = savedHabitTypes;
-    }
-
-    public ArrayList<HabitEvent> getSavedHabitEvents() {
-        return savedHabitEvents;
-    }
-
-    public void setSavedHabitEvents(ArrayList<HabitEvent> savedHabitEvents) {
-        this.savedHabitEvents = savedHabitEvents;
-    }
-
+    /**
+     * Returns an array list of local users
+     *
+     * @return
+     */
     public ArrayList<User> getLocalUsers() {
         return localUsers;
     }
 
+    /**
+     * Sets the local users to an array list of local users
+     *
+     * @param localUsers
+     */
     public void setLocalUsers(ArrayList<User> localUsers) {
         this.localUsers = localUsers;
     }
 
-//    public Context getContext() {
-//        return context;
-//    }
-//
-//    public void setContext(Context context) {
-//        this.context = context;
-//    }
-
+    /**
+     * Returns the habit event
+     *
+     * @return
+     */
     public HabitEvent getEvent() {
         return event;
     }
 
+    /**
+     * Sets the habit events
+     *
+     * @param event
+     */
     public void setEvent(HabitEvent event) {
         this.event = event;
     }
 
+    /**
+     * Returns the habit type
+     *
+     * @return
+     */
     public HabitType getType() {
         return type;
     }
 
+    /**
+     * Sets the habit type
+     *
+     * @param type
+     */
     public void setType(HabitType type) {
         this.type = type;
     }

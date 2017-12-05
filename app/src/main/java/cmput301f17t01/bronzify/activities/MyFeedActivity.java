@@ -39,6 +39,11 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
     public MyFeedActivity() {
     }
 
+    /**
+     * Called on the creation of the My Feed Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +128,12 @@ public class MyFeedActivity extends AppCompatActivity implements NavigationView.
 
     }
 
+    /**
+     * Opens up the navigation bar
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();

@@ -38,6 +38,7 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
@@ -48,6 +49,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.text.InputType.TYPE_CLASS_TEXT;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -74,33 +76,34 @@ public class EspressoTesting {
      * It can easily be run to create the users in a single step.
      *
      */
-    /*@Test
+    @Test
     public void test0CreateUsers() {
         //Create user "test_user_001"
         onView(withId(R.id.enter_id)).perform(typeText("test_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("test_user_001")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
+        onView(withId(R.id.enter_id)).perform(clearText());
 
         //Create user "follow_user_001"
         onView(withId(R.id.enter_id)).perform(typeText("follow_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("follow_user_001")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
+        onView(withId(R.id.enter_id)).perform(clearText());
 
         //Create user "follow_user_002"
         onView(withId(R.id.enter_id)).perform(typeText("follow_user_002"));
         onView(withId(R.id.enter_id)).check(matches(withText("follow_user_002")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
-    }*/
+    }
 
     /**
      * This test case will create a new habit type, with the name Running. It will
      * log in and log out, and ensure that the data entered is correct
      *
      */
-    /*
     @Test
     public void test1CreateNewHabitType() {
         //Login
@@ -134,7 +137,7 @@ public class EspressoTesting {
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
-    }*/
+    }
 
     /**
      * This test case will edit the habit type that was created in test1. It will change the name
@@ -142,7 +145,6 @@ public class EspressoTesting {
      * days every week.
      *
      */
-    /*
     @Test
     public void test2EditHabitType() {
         //Login
@@ -161,8 +163,12 @@ public class EspressoTesting {
         //Edit the parameters of the habit
         onView(withId(R.id.buttonEdit)).perform(click());
 
-        onView(allOf(withText("Running"))).perform(click());
-        onView(allOf(withText("Running"))).perform(replaceText("Skating"));
+        //onData(withId(R.id.textHabitName)).atPosition(0).perform(click());
+        onView(withId(R.id.textHabitName)).perform(replaceText("Skating"));
+
+        //onView(withText("Running")).perform(click());
+        //onView(withText("Running")).perform(replaceText("Skating"));
+
         onView(withId(R.id.buttonEdit)).perform(closeSoftKeyboard());
 
         onView(withId(R.id.buttonWednesday)).perform(click());
@@ -172,15 +178,13 @@ public class EspressoTesting {
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
-
-    }*/
+    }
 
     /**
      * This test case will delete the habit type that was created in test2. The habit event skating
      * will no longer exist after it has been run.
      *
      */
-    /*
     @Test
     public void test3DeleteHabitType() {
         //Login
@@ -203,7 +207,7 @@ public class EspressoTesting {
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
-    }*/
+    }
 
     /**
      * This test case will log in as "follow_user_001" and will follow the user "test_user_001".
@@ -212,9 +216,28 @@ public class EspressoTesting {
      */
     @Test
     public void test4FollowUser() {
-        //Login
+        //Login with the first user
         onView(withId(R.id.enter_id)).perform(typeText("follow_user_001"));
         onView(withId(R.id.enter_id)).check(matches(withText("follow_user_001")));
+        onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.register_button)).perform(click());
+        onView(withId(R.id.login_button)).perform(click());
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyProfile));
+
+        onView(withId(R.id.followButton)).perform(click());
+        onView(allOf(withClassName(endsWith("EditText")))).perform(typeText("followed_user_002"));
+        onView(withText("OK")).perform(click());
+
+        //Logout from the first users account
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+
+        //Login with the second user
+        //onView(withId(R.id.enter_id)).perform(typeText("followed_user_002"));
+        //onView(withId(R.id.enter_id)).check(matches(withText("followed_user_002")));
+        onView(withId(R.id.enter_id)).perform(typeText("followed_user_002"));
+        onView(withId(R.id.enter_id)).check(matches(withText("followed_user_002")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
         onView(withId(R.id.register_button)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
@@ -222,14 +245,12 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyProfile));
 
-        onView(withId(R.id.followButton)).perform(click());
-        onView(allOf(withClassName(endsWith("EditText")))).perform(typeText("noah"));
-        //onView(withText("")).perform(typeText("noah"));
-        onView(withText("OK")).perform(click());
-
-        //Logout
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+        //onData(allOf(withText("Tommy"), hasSibling(withText("Tommy")))).atPosition(0).perform(click());
+        //onData(allOf(withId(R.id.acceptFollow), hasSibling(withText("Tommy")))).atPosition(0).perform(click());
+        //onData(allOf(withId(R.id.acceptFollow), hasSibling(withText("1")), hasSibling(withId(R.id.followReqRecycler)))).perform(click());
+        onView(withId(R.id.acceptFollow)).perform(click());
+        //onData(withText("Tommy")).perform(click());
+        //onView(withId(R.id.habitTypeRow)).perform(click());
     }
 
     /**
@@ -238,15 +259,14 @@ public class EspressoTesting {
      * not be completed and the second event will be completed.
      *
      */
-    /*
     @Test
     public void test5Today() {
         //Login
         onView(withId(R.id.enter_id)).perform(typeText("test_user_002"));
         onView(withId(R.id.enter_id)).check(matches(withText("test_user_002")));
         onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.register_button)).perform(click());
         onView(withId(R.id.login_button)).perform(click());
-
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
 
@@ -282,25 +302,15 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHome));
 
-        //Click on the correct habit in the list
-        onView(withId(R.id.habitTypeRow)).check(matches(withText(containsString("Rowing"))));
-        onView(withId(R.id.habitTypeRow)).perform(click());
-
-        //Click on EVENT FAILED for Rowing
-        //Click on picture and potentially take a picture?
-        //Click on EVENT COMPLETED for Swimming
-        //
-
         //Logout
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
-    }*/
+    }
 
     /**
      * This test case will show all of the past events that the user has had, completed or not.
      *
      */
-    /*
     @Test
     public void test6HabitHistory() {
         //Login
@@ -310,6 +320,37 @@ public class EspressoTesting {
         onView(withId(R.id.login_button)).perform(click());
 
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHabits));
-    }*/
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHistory));
+
+        //Logout
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+    }
+
+    /**
+     * This test case will add and delete a user, validating that the user account is
+     * successfully deleted.
+     *
+     */
+    @Test
+    public void test7AddDeleteUser() {
+        //Login
+        onView(withId(R.id.enter_id)).perform(typeText("test_user_003"));
+        onView(withId(R.id.enter_id)).check(matches(withText("test_user_003")));
+        onView(withId(R.id.register_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.register_button)).perform(click());
+        onView(withId(R.id.login_button)).perform(click());
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyProfile));
+
+        onView(withId(R.id.deleteButton)).perform(click());
+        onView(withText("OK")).perform(click());
+
+        onView(withId(R.id.enter_id)).perform(typeText("test_user_003"));
+        onView(withId(R.id.enter_id)).check(matches(withText("test_user_003")));
+        onView(withId(R.id.login_button)).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        onView(withClassName(endsWith("TextView"))).check(matches(withText("Invalid User ID")));
+    }
 }

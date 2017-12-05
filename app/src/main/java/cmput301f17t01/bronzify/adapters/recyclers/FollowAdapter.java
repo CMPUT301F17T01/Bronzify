@@ -33,6 +33,12 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     private Context mContext;
     private static ListController controller;
 
+    /**
+     * This is the follow adapter that takes in a context and a list of strings
+     *
+     * @param context
+     * @param list
+     */
     public FollowAdapter(Context context, List<String> list ){
         entries = list;
         mContext = context;
@@ -67,6 +73,13 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
         }
     }
 
+    /**
+     * Called on the creation of the view holder
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public FollowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.row_follow,parent,false);
@@ -107,6 +120,11 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
         });
     }
 
+    /**
+     * Returns the count of items in the follow list
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         Log.d("RV", "Item size ["+entries.size()+"]");

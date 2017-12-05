@@ -32,6 +32,13 @@ public class UserAdapter extends TypeAdapter<User> {
     private final Gson gsonType = new GsonBuilder().registerTypeAdapter(HabitType.class,
             new HabitTypeAdapter()).create();
 
+    /**
+     * Reads the user with a Json reader
+     *
+     * @param reader
+     * @return
+     * @throws IOException
+     */
     public User read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
             reader.nextNull();
@@ -117,6 +124,14 @@ public class UserAdapter extends TypeAdapter<User> {
 
         return user;
     }
+
+    /**
+     * Writes the user with a Json reader
+     *
+     * @param writer
+     * @param user
+     * @throws IOException
+     */
     public void write(JsonWriter writer, User user) throws IOException {
         if (user == null) {
             writer.nullValue();
@@ -149,6 +164,13 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.value(gsonType.toJson(user.getPendingFollowRequests()));
         writer.endObject();
     }
+
+    /**
+     * Returns the string converting from the bitmap
+     *
+     * @param bitmapPicture
+     * @return
+     */
     private String getStringFromBitmap(Bitmap bitmapPicture) {
         final int COMPRESSION_QUALITY = 100;
         String encodedImage;
@@ -160,6 +182,12 @@ public class UserAdapter extends TypeAdapter<User> {
         return encodedImage;
     }
 
+    /**
+     * Returns the bitmap converting from the string
+     *
+     * @param stringPicture
+     * @return
+     */
     private Bitmap getBitmapFromString(String stringPicture) {
         byte[] decodedString = Base64.decode(stringPicture, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

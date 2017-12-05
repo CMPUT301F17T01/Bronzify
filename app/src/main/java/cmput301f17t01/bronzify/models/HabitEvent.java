@@ -100,10 +100,6 @@ public class HabitEvent {
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
-
     // Image
     /**
      * Get image of habit event
@@ -150,14 +146,66 @@ public class HabitEvent {
      */
     public String goalDateToString(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        String strGoalDate = simpleDateFormat.format(goalDate);
+        return strGoalDate;
+    }
+
+    /**
+     * Convert Completed Date to String
+     * Format: "Sun, Jan 01, 2017"
+     *
+     * @return String representation of date
+     */
+    public String completedDateToString(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        String strCompDate = simpleDateFormat.format(completedDate);
+        return strCompDate;
+    }
+
+    /**
+     * Sets the user ID
+     *
+     * @param userID
+     */
+    public void setUserID(String userID) {
+        this.userID = userID;
         return simpleDateFormat.format(goalDate);
     }
 
+    /**
+     * Returns the habit type
+     *
+     * @return
+     */
     public String getHabitType() {
         return habitType;
     }
 
+    /**
+     * Sets the habit type
+     *
+     * @param habitType
+     */
     public void setHabitType(String habitType) {
         this.habitType = habitType;
     }
+
+    /**
+     * Sets the date that the habit was completed
+     *
+     * @param completedDate
+     */
+    public void setCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    /**
+     * Sets the habit event as completed
+     *
+     * @param completed
+     */
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
 }
