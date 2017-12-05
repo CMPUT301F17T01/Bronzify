@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (result != null) {
                     Log.i("User", "Found");
                     controller.loginUser(result);
+                    contextController.updateUserFollowing(result);
                     contextController.saveUser(result);
                     loginInfo.setVisibility(View.VISIBLE);
                     loginInfo.setText("Login Successful");
