@@ -123,8 +123,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     .snippet(event.getComment())
                                     .icon(mapBitmap)); 
                             User user = AppLocale.getInstance().getUser();
-                            String lString = new Gson().toJson(currentLocation);
-                            user.setLocation(mMap);
+                            user.setLocation(currentLocation);
 //
 
                         } else {

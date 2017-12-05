@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.models;
 
 
 import android.graphics.Bitmap;
+import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -20,7 +21,7 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
-    private GoogleMap location;
+    private Location location;
     private Double score;
     private Bitmap image;
 
@@ -244,11 +245,11 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
-    public GoogleMap getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(GoogleMap location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
