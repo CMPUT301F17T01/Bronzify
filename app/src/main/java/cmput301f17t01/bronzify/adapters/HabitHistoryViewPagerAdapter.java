@@ -9,7 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
+import cmput301f17t01.bronzify.fragments.MapFragment;
 
 public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;
@@ -33,17 +35,9 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            Bundle bundle = new Bundle();
-            bundle.putString("type", "habitTypes");
-            HabitHistoryTabFeed fragment = new HabitHistoryTabFeed();
-            fragment.setArguments(bundle);
-            return fragment;
+            return new HabitHistoryTabFeed();
         } else if (position == 1){
-            Bundle bundle = new Bundle();
-            bundle.putString("type", "habitTypes");
-            HabitHistoryTabFeed fragment = new HabitHistoryTabFeed();
-            fragment.setArguments(bundle);
-            return fragment;
+            return new MapFragment();
         } else {
             return null;
         }
