@@ -1,14 +1,10 @@
 package cmput301f17t01.bronzify.models;
 
-import android.util.Log;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-
-import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.User;
+import java.util.Iterator;
 
 /**
  * Created by noahkryzanowski on 2017-10-20.
@@ -17,7 +13,7 @@ import cmput301f17t01.bronzify.models.User;
 public class HabitType {
     private static final int MAX_DAYS_AHEAD = 31;
 
-    private User user;
+    private String userID;
     private String name;
     private String reason;
     private Date dateToStart;
@@ -29,13 +25,17 @@ public class HabitType {
 
     // Constructor
     public HabitType(String name, String reason, Date dateToStart, Boolean[] daysOfWeek) {
-        user = AppLocale.getInstance().getUser();
+        try {
+            userID = AppLocale.getInstance().getUser().getUserID();
+        } catch (NullPointerException e) {
+        }
         this.name = name;
         this.reason = reason;
         this.dateToStart = dateToStart;
         this.daysOfWeek = daysOfWeek;
         this.numCompleted = 0;
         this.numUncompleted = 0;
+        generateNewEvents(dateToStart);
     }
 
     // Generate MAX_DAYS_AHEAD worth of habit events
@@ -51,8 +51,8 @@ public class HabitType {
 
             // If day of week is a repeat day of week
             // Create a new habit event
-            if(daysOfWeek[dayOfWeek]){
-                HabitEvent newHabitEvent = new HabitEvent(date);
+            if (daysOfWeek[dayOfWeek]) {
+                HabitEvent newHabitEvent = new HabitEvent(date, name);
                 habitEvents.add(newHabitEvent);
             }
 
@@ -62,26 +62,20 @@ public class HabitType {
         }
     }
 
-    // Fill up List Fragment with all Habit Events
-    public void fillList(){
-        for(HabitEvent habitEvent: habitEvents){
-            // TODO: NEED CODE TO FILL HABIT EVENT LIST FRAGMENT
-            Log.d("Test", name + " - " + habitEvent.goalDateToString());
-        }
-    }
-
     // Setters and Getters
     // User
+
     /**
      * Return user that created current habit type
      *
      * @return User
      */
-    public User getUser() {
-        return user;
+    public String getUserID() {
+        return userID;
     }
 
     // Habit Name
+
     /**
      * Get habit type name
      *
@@ -101,6 +95,7 @@ public class HabitType {
     }
 
     // Habit Reason
+
     /**
      * Get habit type reason
      *
@@ -120,6 +115,7 @@ public class HabitType {
     }
 
     // Date to Start
+
     /**
      * Get date to start habit events
      *
@@ -139,6 +135,7 @@ public class HabitType {
     }
 
     // Days of Week to Repeat
+
     /**
      * Get days of week to repeat
      * Represented as an array of integers
@@ -149,7 +146,7 @@ public class HabitType {
      * Index: 4 = Thursday
      * Index: 5 = Friday
      * Index: 6 = Saturday
-     *
+     * <p>
      * Value: false = Don't repeat
      * Value: true = Repeat
      *
@@ -165,10 +162,11 @@ public class HabitType {
      * @param daysOfWeek New days of week to repeat
      */
     public void setDaysOfWeek(Boolean[] daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
+        this.daysOfWeek = Arrays.copyOf(daysOfWeek, daysOfWeek.length);
     }
 
     // List of Habit Events
+
     /**
      * Get the whole list of habit events
      *
@@ -179,6 +177,7 @@ public class HabitType {
     }
 
     // Number of Completed Habit Events
+
     /**
      * Get number of completed habit events
      *
@@ -191,13 +190,13 @@ public class HabitType {
     /**
      * Increment number of completed habit events by changeValue
      *
-     * @param changeValue Amount to increment number of completed habit event by
      */
-    public void incrementNumCompleted(int changeValue) {
-        this.numCompleted += changeValue;
+    public void incrementNumCompleted() {
+        this.numCompleted += 1;
     }
 
     // Number of Uncompleted Habit Events
+
     /**
      * Get number of uncompleted habit events
      *
@@ -207,12 +206,121 @@ public class HabitType {
         return numUncompleted;
     }
 
+    public int getTotalEvents() {
+        return (numCompleted + numUncompleted);
+    }
+
     /**
      * Increment number of uncompleted habit event by changeValue
      *
-     * @param changeValue Amount to increment number of uncompleted habit events by
      */
-    public void incrementNumUncompleted(int changeValue) {
-        this.numUncompleted = changeValue;
+    public void incrementNumUncompleted() {
+        this.numUncompleted = 1;
+    }
+
+    /**
+     * Sets the users ID
+     *
+     * @param userID
+     */
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    /**
+     * Sets the habit events
+     *
+     * @param habitEvents
+     */
+    public void setHabitEvents(ArrayList<HabitEvent> habitEvents) {
+        this.habitEvents = habitEvents;
+    }
+
+    /**
+     * Sets the number of completed Habit Events (used for leader boards)
+     *
+     * @param numCompleted
+     */
+    public void setNumCompleted(int numCompleted) {
+        this.numCompleted = numCompleted;
+    }
+
+    /**
+     * Sets the number of uncompleted Habit Events (used for leader boards)
+     *
+     * @param numUncompleted
+     */
+    public void setNumUncompleted(int numUncompleted) {
+        this.numUncompleted = numUncompleted;
+    }
+
+    /**
+     * Returns the completion ratio, to be used in the leader boards and the Habit Types
+     *
+     * @return
+     */
+    public int getCompletionRatio() {
+        if (numUncompleted == 0 && numCompleted == 0) {
+            return 0;
+        }
+        return (int) ((float) numCompleted / ((float) numCompleted + (float) numUncompleted) * 100);
+    }
+
+    /**
+     * Generates a months worth of new events
+     */
+    public void updateEvents() {
+        habitEvents.clear();
+        generateNewEvents(this.dateToStart);
+    }
+
+    /**
+     * Checks whether or not the habit type has no more events, and adds more to it if needed
+     */
+    public void checkEventEmpty() {
+        if (habitEvents.isEmpty()) {
+            generateNewEvents(new Date());
+        }
+    }
+
+    /**
+     * Removes habit events from the habit type
+     *
+     * @param removedEvent
+     */
+    public void removeEvent(HabitEvent removedEvent) {
+        if (habitEvents.contains(removedEvent)) {
+            habitEvents.remove(removedEvent);
+        }
+    }
+
+    /**
+     * Gets the habit events, if they are in the future
+     *
+     * @param eventGoal
+     * @return
+     */
+    public HabitEvent getEvent(Date eventGoal) {
+        Iterator<HabitEvent> itr = habitEvents.iterator();
+        while (itr.hasNext()) {
+            HabitEvent next = itr.next();
+            if (next.getGoalDate().getTime() - eventGoal.getTime() < 1000) {
+                return next;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Updates the habit events
+     *
+     * @param oldEvent
+     * @param newEvent
+     */
+    public void updateEvent(HabitEvent oldEvent, HabitEvent newEvent) {
+        if (habitEvents.contains(oldEvent)) {
+            habitEvents.remove(oldEvent);
+            habitEvents.add(newEvent);
+        }
     }
 }

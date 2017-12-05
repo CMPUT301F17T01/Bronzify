@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/linearLayout">
 
@@ -22,7 +22,7 @@
             android:id="@+id/labelHabitName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Habit Name:" />
+            android:text="@string/habit_name_field" />
 
         <EditText
             android:id="@+id/textHabitName"
@@ -36,7 +36,7 @@
             android:id="@+id/labelHabitReason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reason:" />
+            android:text="@string/reason" />
 
         <EditText
             android:id="@+id/textHabitReason"
@@ -50,19 +50,19 @@
             android:id="@+id/labelHabitStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Starting Date:" />
+            android:text="@string/starting_date" />
 
         <Button
             android:id="@+id/buttonSelectDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select a Date" />
+            android:text="@string/select_a_date" />
 
         <TextView
             android:id="@+id/labelDayOfWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repeat:" />
+            android:text="@string/repeat" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="Sun"
+                android:text="@string/sunday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="MON"
+                android:text="@string/monday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="TUES"
+                android:text="@string/tuesday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="WED"
+                android:text="@string/wedndesday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="THUR"
+                android:text="@string/thursday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="FRI"
+                android:text="@string/friday_abr"
                 android:textSize="10sp" />
 
             <Button
@@ -129,9 +129,48 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="SAT"
+                android:text="@string/saturday_abr"
                 android:textSize="10sp" />
 
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/labelProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/completion_rate" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:progress="100"
+            tools:layout_editor_absoluteX="108dp"
+            tools:layout_editor_absoluteY="357dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/labelFraction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0/0" />
+
+            <TextView
+                android:id="@+id/labelPrecentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="100%"
+                android:textAlignment="textEnd" />
         </LinearLayout>
 
     </LinearLayout>
@@ -148,17 +187,27 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/buttonCreate"
+            android:id="@+id/buttonEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Create" />
+            android:text="@string/edit" />
 
         <Button
-            android:id="@+id/buttonClear"
+            android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Clear" />
+            android:text="@string/delete"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset"
+            android:visibility="gone" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

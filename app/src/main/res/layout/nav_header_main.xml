@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    tools:ignore="ContentDescription"
     android:layout_height="192dp"
     android:gravity="bottom"
     android:padding="16dp"
@@ -9,20 +11,29 @@
     android:background="@color/Amber"
     android:weightSum="1">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:layout_marginLeft="10dp"
-        android:scaleType="centerCrop"
-        android:layout_weight="0.72"/>
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/userPicNav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/userNameNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Replace this"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textAppearance="@color/black"/>
 
 </LinearLayout>

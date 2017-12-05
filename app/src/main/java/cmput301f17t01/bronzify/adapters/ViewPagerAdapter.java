@@ -1,25 +1,18 @@
 package cmput301f17t01.bronzify.adapters;
 
-/**
- * Created by Jacob on 2017-11-12.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 
-import cmput301f17t01.bronzify.R;
-import cmput301f17t01.bronzify.fragments.HabitEventDetailFragment;
-import cmput301f17t01.bronzify.fragments.HabitTypeDetailFragment;
-import cmput301f17t01.bronzify.fragments.HabitTypeEventFragment;
 import cmput301f17t01.bronzify.fragments.ListFragment;
-import cmput301f17t01.bronzify.fragments.MapFragment;
-import cmput301f17t01.bronzify.fragments.PictureFragment;
+
+/*
+ * Created by Jacob on 2017-11-12.
+ */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager
@@ -46,7 +39,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             fragment.setArguments(bundle);
             return fragment;
         } else {
-            return new MapFragment();
+            return null;
         }
     }
 
@@ -57,6 +50,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return 2;
+        return 1;
     }
 }

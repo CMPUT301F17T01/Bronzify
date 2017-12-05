@@ -9,14 +9,21 @@
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp"
         android:contentDescription="@string/menu_my_profile"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleView"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp" />
 
     <TextView
         android:id="@+id/profileName"
@@ -24,43 +31,63 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileImage"
         android:layout_centerHorizontal="true"
-        android:text="@string/login_user_id" />
-
-    <Button
-        android:id="@+id/followButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/followButton" />
+        android:text="@string/login_user_id"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/profileName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
         <FrameLayout
             android:id="@+id/sample_content_fragment"
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="0px" >
-
         </FrameLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/deleteButton"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/profileName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/account_delete"
         tools:text="@string/account_delete" />
 
+    <Button
+        android:id="@+id/followButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/FollowRequests"
+        android:layout_alignBottom="@+id/FollowRequests"
+        android:layout_alignEnd="@+id/deleteButton"
+        android:text="@string/followButton" />
+
+    <TextView
+        android:id="@+id/FollowRequests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/profileName"
+        android:text="@string/follow_request"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/followReqRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/followButton"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

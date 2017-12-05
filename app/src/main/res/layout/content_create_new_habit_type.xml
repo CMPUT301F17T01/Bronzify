@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/createNewHabitRL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +22,7 @@
             android:id="@+id/labelHabitName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Habit Name:" />
+            android:text="@string/habit_name_field" />
 
         <EditText
             android:id="@+id/textHabitName"
@@ -37,7 +36,7 @@
             android:id="@+id/labelHabitReason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reason:" />
+            android:text="@string/reason" />
 
         <EditText
             android:id="@+id/textHabitReason"
@@ -51,19 +50,19 @@
             android:id="@+id/labelHabitStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Starting Date:" />
+            android:text="@string/starting_date" />
 
         <Button
             android:id="@+id/buttonSelectDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select a Date" />
+            android:text="@string/select_a_date" />
 
         <TextView
             android:id="@+id/labelDayOfWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repeat:" />
+            android:text="@string/repeat" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,8 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="Sun"
-                android:textSize="10sp" />
+                android:text="@string/sunday_abr"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonMonday"
@@ -85,8 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="MON"
-                android:textSize="10sp" />
+                android:text="@string/monday_abr"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonTuesday"
@@ -94,8 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="TUES"
-                android:textSize="10sp" />
+                android:text="@string/tuesday_abr"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonWednesday"
@@ -103,8 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="WED"
-                android:textSize="10sp" />
+                android:text="@string/wedndesday_abr"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonThursday"
@@ -112,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="THUR"
-                android:textSize="10sp" />
+                android:text="@string/thursday_abr"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonFriday"
@@ -121,8 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="FRI"
-                android:textSize="10sp" />
+                android:text="@string/friday_abr"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonSaturday"
@@ -130,8 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/lighterAmber"
-                android:text="SAT"
-                android:textSize="10sp" />
+                android:text="@string/saturday_abr"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -149,18 +148,19 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/buttonCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Create" />
-
-        <Button
             android:id="@+id/buttonClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Clear" />
+            android:text="@string/clear" />
+
+        <Button
+            android:id="@+id/buttonCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/create" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

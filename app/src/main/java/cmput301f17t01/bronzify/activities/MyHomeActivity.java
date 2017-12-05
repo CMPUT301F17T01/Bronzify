@@ -1,6 +1,7 @@
 package cmput301f17t01.bronzify.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,18 +10,39 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.recyclers.MyEventAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitEvent;
+import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 /**
  * Created by owenm_000 on 11/1/2017.
  */
 public class MyHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView recyclerView;
+    private final AppLocale appLocale = AppLocale.getInstance();
+
+    private final List<HabitEvent> events = new ArrayList<HabitEvent>();
 
     /**
      * Called on the creation of the My Home Activity
@@ -29,6 +51,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Context context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_home);
 
@@ -39,25 +62,55 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
             transaction.commit();
         }
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Username in NavBar
+        User currentUser = appLocale.getUser();
+        View hView = navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
+
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
+        recyclerView = findViewById(R.id.myEventRecycler);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    /**
+     * This resumes the home activity
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillEventList();
+        MyEventAdapter myEventAdapter = new MyEventAdapter(this, events);
+        recyclerView.setAdapter(myEventAdapter);
     }
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -71,7 +124,7 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -83,9 +136,9 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      * @return
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -99,14 +152,68 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Activity currentActivity = MyHomeActivity.this;
-        Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
-        startActivity(newActivity);
-        finish();
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        if (!(id == R.id.MyHome)) {
+            Activity currentActivity = MyHomeActivity.this;
+            Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
+            startActivity(newActivity);
+            finish();
+            overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * This populates the event list in the home activity
+     */
+    private void fillEventList() {
+        User user = AppLocale.getInstance().getUser();
+        ArrayList<HabitType> habitTypes = user.getHabitTypes();
+
+        int totalSetIncomplete = 0;
+
+        events.clear();
+        for (HabitType type : habitTypes) {
+            type.checkEventEmpty();
+            ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
+            for (HabitEvent event : habitEvents) {
+                Date eventDate = getZeroTimeDate(event.getGoalDate());
+                Date currentDate = getZeroTimeDate(new Date());
+                int dateDiff = eventDate.compareTo(currentDate);
+                if (dateDiff == 0 && event.getCompleted() == null) {
+                    events.add(event);
+                } else if (dateDiff < 0 && event.getCompleted() == null) {
+                    ++totalSetIncomplete;
+                    type.incrementNumUncompleted();
+                    event.setCompleted(false);
+                }
+            }
+        }
+
+        if (totalSetIncomplete > 0) {
+            String toastString = Integer.toString(totalSetIncomplete) + " events have been automatically set as incomplete.";
+            Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * This sets the time to 00:00:00
+     *
+     * @param date
+     * @return
+     */
+    public static Date getZeroTimeDate(Date date) {
+        Date res = date;
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
     }
 }

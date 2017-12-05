@@ -1,8 +1,8 @@
 package cmput301f17t01.bronzify.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
@@ -14,18 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-
-import cmput301f17t01.bronzify.adapters.ViewPagerAdapter;
+import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.adapters.HabitTypeViewPagerAdapter;
 import cmput301f17t01.bronzify.controllers.NavigationController;
 import cmput301f17t01.bronzify.fragments.ListFragment;
-import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.models.AppLocale;
+import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
-/**
+/*
  * Created by owenm_000 on 11/1/2017.
  */
 
@@ -34,7 +35,9 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
     private ViewPager viewPager;
     private DrawerLayout drawer;
     private TabLayout tabLayout;
-    private String[] pageTitle = {"Details", "Events"};
+    private final String[] pageTitle = {"Details", "Events"};
+
+    private HabitType selectedHabit;
 
     /**
      * Called on the creation of the Habit Type Activity
@@ -73,10 +76,24 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
 
-        //set viewpager adapter
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView = navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
 
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        AppLocale appLocale = AppLocale.getInstance();
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
+
+        //set viewpager adapter
+        HabitTypeViewPagerAdapter pagerAdapter = new HabitTypeViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
 
         //change Tab selection when swipe ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -113,16 +130,16 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
 
             }
         });
+
     }
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -136,7 +153,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -148,9 +165,9 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
      * @return
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -170,7 +187,7 @@ public class HabitTypeActivity extends AppCompatActivity implements NavigationVi
         finish();
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -8,8 +8,8 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class LoginController implements Controller {
-    AppLocale appLocale = AppLocale.getInstance();
-    ElasticSearch elastic = new ElasticSearch();
+    private final AppLocale appLocale = AppLocale.getInstance();
+    private final ElasticSearch elastic = new ElasticSearch();
 
     /**
      * Checks if the user is logged in or not
@@ -18,11 +18,11 @@ public class LoginController implements Controller {
      * @return
      */
     public User checkLogin(String userID) {
-        User user = elastic.getUser(userID);
-        if (user != null) {
-            appLocale.saveUser(user);
-        }
-        return user;
+//        User user =
+//        if (user != null) {
+//            appLocale.saveUser(user);
+//        }
+        return elastic.getUserLocalFirst(userID);
     }
 
     /**

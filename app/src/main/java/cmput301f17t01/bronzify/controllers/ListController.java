@@ -12,8 +12,8 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class ListController implements Controller {
-    private AppLocale appLocale = AppLocale.getInstance();
-    private String type;
+    private final AppLocale appLocale = AppLocale.getInstance();
+    private final String type;
 
     public ListController(String type) {
         this.type = type;

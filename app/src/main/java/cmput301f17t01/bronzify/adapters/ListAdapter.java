@@ -20,7 +20,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private static ListController controller;
     static private ArrayList<?> entries;
 
+    public ListAdapter() {
+    }
+
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
+
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
@@ -39,7 +43,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
                 }
             });
-            textView = (TextView) v.findViewById(R.id.textView);
+            textView = v.findViewById(R.id.textView);
         }
 
         public TextView getTextView() {
@@ -55,7 +59,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
      */
     public ListAdapter(ArrayList<?> dataSet, ListController controller) {
         entries = dataSet;
-        this.controller = controller;
+        ListAdapter.controller = controller;
     }
 
     /**
@@ -69,7 +73,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.text_row_item, viewGroup, false);
+                .inflate(R.layout.row_item, viewGroup, false);
 
         return new ViewHolder(v);
     }

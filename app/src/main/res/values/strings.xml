@@ -5,15 +5,15 @@
 
     <string name="title_activity_home">Today</string>
     <string name="title_activity_my_habits">My Habits</string>
-    <!-- Habit Feed Missing -->
+    <string name="title_activity_my_feed">My Feed</string>
     <string name="title_activity_habit_history">Habit History</string>
     <string name="title_activity_my_map">Map</string>
-    <string name="title_activity_follow_user">Followed Users</string>
+    <string name="title_activity_follow_user">Followed By</string>
     <string name="title_activity_my_profile">My Profile</string>
-
     <string name="title_activity_habit_type">Habit Type</string>
     <string name="title_activity_habit_due">Habit Due</string>
     <string name="title_activity_create_new_habit">Create New Habit</string>
+    <string name="title_activity_leader_board">Leaderboard</string>
 
     <string name="menu_my_home">My Home</string>
     <string name="menu_my_habits">My Habits</string>
@@ -22,6 +22,7 @@
     <string name="menu_my_map">My Map</string>
     <string name="menu_my_followers">My Followers</string>
     <string name="menu_my_profile">My Profile</string>
+    <string name="menu_leader_board">Leaderboard</string>
     <string name="menu_log_out">Log Out</string>
 
     <string name="action_settings">Settings</string>
@@ -39,4 +40,34 @@
     <string name="account_delete">Delete Account</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="clear">Clear</string>
+    <string name="create">Create</string>
+    <string name="follow_request">Follow Requests</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="event_name_field">Event Name</string>
+    <string name="event_comment_field">Event Comment</string>
+    <string name="event_completed">Event Completed</string>
+    <string name="event_failed">Event Failed</string>
+    <string name="goal_date">Goal Date</string>
+    <string name="habit_name_field">Habit Name</string>
+    <string name="starting_date">Starting Date</string>
+    <string name="select_a_date">Select a Date</string>
+    <string name="repeat">Repeat</string>
+    <string name="reason">Reason</string>
+    <string name="set_location">Set Location</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="reset">Reset</string>
+    <string name="completion_rate">Completion Rate</string>
+    <string name="follow_request_name">Follow Request Name</string>
+
+    <!--Days of the week-->
+    <string name="sunday_abr">SUN</string>
+    <string name="monday_abr">MON</string>
+    <string name="tuesday_abr">TUES</string>
+    <string name="wedndesday_abr">WED</string>
+    <string name="thursday_abr">THURS</string>
+    <string name="friday_abr">FRI</string>
+    <string name="saturday_abr">SAT</string>
+
 </resources>

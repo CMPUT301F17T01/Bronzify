@@ -1,8 +1,12 @@
 package cmput301f17t01.bronzify.models;
 
 
+import android.graphics.Bitmap;
+import android.location.Location;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 
 /**
@@ -12,13 +16,18 @@ import java.util.Date;
 public class User {
 
     private String userID;
-
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
+    private Location location;
+
+    private Double score;
+    private Bitmap image;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
+    //    private ArrayList<String> habitTypes = new ArrayList<String>();
     private ArrayList<String> following = new ArrayList<String>();
+    private ArrayList<String> followedBy = new ArrayList<String>();
     private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
 
     /**
@@ -31,6 +40,7 @@ public class User {
         this.dateCreated = new Date();
         this.lastInfluenced = new Date();
         this.lastUpdated = new Date();
+        this.score = 0.0;
     }
 
     /**
@@ -43,16 +53,19 @@ public class User {
     }
 
 
-
     /**
      * Add a habit type
-     * 
+     *
      * @param habitType
      * @return
      */
-    public void addHabitType(HabitType habitType) {
-        habitTypes.add(habitType);
-        this.lastUpdated = new Date();
+    public void addHabitType(HabitType habitType) throws Exception {
+        if (getType(habitType.getName()) == null) {
+            habitTypes.add(habitType);
+            this.lastUpdated = new Date();
+        } else {
+            throw new Exception("Habit type exists");
+        }
     }
 
 
@@ -91,7 +104,8 @@ public class User {
      */
     public void addFollowing(String userID) {
         following.add(userID);
-    }
+        setLastInfluenced(new Date());
+    } //TODO: investigate passing the user directly
 
     /**
      * Removes a follower
@@ -109,8 +123,16 @@ public class User {
      */
     public void setFollowing(ArrayList<String> following) {
         this.following = following;
-        this.lastInfluenced = new Date();
 
+    }
+
+    /**
+     * Sets the pending follow requests to a list (for offline capabilities)
+     *
+     * @param pendingFollowRequests
+     */
+    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
+        this.pendingFollowRequests = pendingFollowRequests;
     }
 
     /**
@@ -128,7 +150,7 @@ public class User {
      * @param userID
      */
     public void removePendingFollowRequest(String userID) {
-        pendingFollowRequests.remove(userID); 
+        pendingFollowRequests.remove(userID);
         this.lastInfluenced = new Date();
     }
 
@@ -141,16 +163,6 @@ public class User {
         pendingFollowRequests.add(userID);
         this.lastInfluenced = new Date();
     }
-
-    /**
-     * Sets the pending follow requests to a list (for offline capabilities)
-     *
-     * @param pendingFollowRequests
-     */
-    public void setPendingFollowRequests(ArrayList<String> pendingFollowRequests) {
-        this.pendingFollowRequests = pendingFollowRequests;
-    }
-
 
     /**
      * Method that returns the userID of the logged in user
@@ -197,7 +209,6 @@ public class User {
         this.lastUpdated = lastUpdated;
     }
 
-
     /**
      * Method that returns a list of HabitTypes
      *
@@ -214,7 +225,151 @@ public class User {
      */
     public void setHabitTypes(ArrayList<HabitType> habitTypes) {
         this.habitTypes = habitTypes;
-        this.lastUpdated = new Date();
     }
 
+    /**
+     * Removes a habit type
+     */
+    public void removeHabitType(HabitType deletedHabit) {
+        if (habitTypes.contains(deletedHabit)) {
+            habitTypes.remove(deletedHabit);
+        }
+    }
+
+    /**
+     * Sets the current date as the date created
+     *
+     * @param dateCreated
+     */
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+
+    /**
+     * Returns the current location
+     *
+     * @return
+     */
+    public Location getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets the current location as the location, with Google Maps
+     *
+     * @param location
+     */
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+
+    /**
+     * Gets the Type and returns the type name
+     *
+     * @param typeName
+     * @return
+     */
+
+    public HabitType getType(String typeName) {
+        Iterator<HabitType> itr = habitTypes.iterator();
+        while (itr.hasNext()) {
+            HabitType next = itr.next();
+            if (next.getName().equals(typeName)) {
+                return next;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if the habit is used or not
+     *
+     * @param newHabit
+     * @return
+     */
+    public Boolean isHabitUsed(String newHabit) {
+        for (HabitType habit : habitTypes) {
+            if (habit.getName().equals(newHabit)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the score for the users, to rank them in the leader boards
+     *
+     * @return
+     */
+    public double getScore() {
+        int score = 0;
+        if (this.getHabitTypes().size() == 0) {
+            return 0;
+        } else {
+            for (HabitType type : this.getHabitTypes()) {
+                score = score + type.getCompletionRatio();
+            }
+            score = score / this.getHabitTypes().size();
+        }
+        return score;
+    }
+
+
+    /**
+     * Sets a score to each user, to be used for the leader boards
+     *
+     * @param score
+     */
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    /**
+     * Returns an array list of all the users who are following a user
+     *
+     * @return
+     */
+    public ArrayList<String> getFollowedBy() {
+        return followedBy;
+    }
+
+    /**
+     * Sets an array list to the list of all users who are following them
+     *
+     * @param followedBy
+     */
+    public void setFollowedBy(ArrayList<String> followedBy) {
+        this.followedBy = followedBy;
+    }
+
+    /**
+     * Adds a new user to the list of people that are following the user
+     *
+     * @param otherUserID
+     */
+    public void addFollowedBy(String otherUserID) {
+        if (!followedBy.contains(otherUserID)) {
+            followedBy.add(otherUserID);
+        }
+    }
+
+    /**
+     * Returns the bitmap of the image
+     *
+     * @return
+     */
+    public Bitmap getImage() {
+        return image;
+    }
+
+    /**
+     * Sets the image to a bitmap
+     *
+     * @param image
+     */
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
 }

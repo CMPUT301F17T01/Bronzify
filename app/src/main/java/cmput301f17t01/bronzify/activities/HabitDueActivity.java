@@ -1,11 +1,11 @@
 package cmput301f17t01.bronzify.activities;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.widget.Button;
 
-import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.models.HabitEvent;
 
 /**
  * Created by jblazusi on 2017-11-01.

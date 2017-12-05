@@ -5,12 +5,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -26,17 +28,20 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import cmput301f17t01.bronzify.R;
+import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.controllers.NavigationController;
+import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitType;
+import cmput301f17t01.bronzify.models.User;
 
 public class CreateNewHabitTypeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Date date;
-    private Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
+    private final Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
 
     /**
      * Called on the creation of Create New Habit Type Activity
-     *
+     * <p>
      * TODO: Rename to "..Activity"?
      *
      * @param savedInstanceState
@@ -56,6 +61,21 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Username in NavBar
+        User currentUser = AppLocale.getInstance().getUser();
+        View hView = navigationView.getHeaderView(0);
+        TextView usernameNav = hView.findViewById(R.id.userNameNav);
+        usernameNav.setText(currentUser.getUserID());
+
+        // Picture in NavBar
+        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+        userPicNav.setImageBitmap(currentUser.getImage());
+        ImageView circularImageView = hView.findViewById(R.id.circleView);
+        AppLocale appLocale = AppLocale.getInstance();
+        if (appLocale.getUser().getImage() != null) {
+            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        }
+
         // EditText in Activity
         final EditText etHabitName = findViewById(R.id.textHabitName);
         final EditText etHabitReason = findViewById(R.id.textHabitReason);
@@ -72,7 +92,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
         final Button btnClear = findViewById(R.id.buttonClear);
         final Button btnCreate = findViewById(R.id.buttonCreate);
 
-        /**
+        /*
          * Set date dialog listener
          *
          * Will change select date button's text based on selected date
@@ -93,7 +113,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
             }
         };
 
-        /**
+        /*
          * Select date button listener
          *
          * Opens a new select date dialog
@@ -303,7 +323,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                 if (habitReason.equals("")) {
                     validReason = false;
                 }
-                if (date == null){
+                if (date == null) {
                     validDate = false;
                 }
 
@@ -319,16 +339,31 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                 // Only if all fields are filled in
                 if (validName && validReason && validDate && validDaysOfWeek) {
                     HabitType newHabit = new HabitType(habitName, habitReason, date, daysOfWeek);
-                    newHabit.generateNewEvents(newHabit.getDateToStart());
 
                     // Add new habit type to logged in user
-//                    User currentUser = AppLocale.getInstance().getUser();
-//                    currentUser.addHabitType(newHabit);
-//                    AppLocale.getInstance().setUser(currentUser);
+                    User currentUser = AppLocale.getInstance().getUser();
+                    try {
+                        currentUser.addHabitType(newHabit);
+                    } catch (Exception e) {
+                        //todo: type already exists
+                        e.printStackTrace();
+                    }
 
-                    // Fill Habit Event List Fragment
-                    // Need to change fillList() Code
-                    newHabit.fillList();
+
+                    //These two lines are how we save the changes to the user
+                    ContextController contextController = new ContextController(getApplicationContext());
+                    contextController.updateUser(currentUser);
+
+                    /*ElasticSearch elastic = new ElasticSearch();
+
+                    currentUser = elastic.update(currentUser);
+                    AppLocale appLocale = AppLocale.getInstance();
+//                    appLocale.setContext(getApplicationContext());
+                    appLocale.setUser(currentUser);*/
+//                    contextController.saveInFile(appLocale.getLocalUsers());
+
+                    // Go back
+                    finish();
                 } else {
                     // Missing a field
                     Toast.makeText(CreateNewHabitTypeActivity.this, "Cannot create habit, make sure all fields are filled in.", Toast.LENGTH_SHORT).show();
@@ -340,7 +375,6 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
 
     /**
      * Called when the back button is pressed on the phone
-     *
      */
     @Override
     public void onBackPressed() {
