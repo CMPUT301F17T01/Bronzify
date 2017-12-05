@@ -302,18 +302,9 @@ public class EspressoTesting {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.MyHome));
 
-        //Click on the correct habit in the list
-        onView(withId(R.id.habitTypeRow)).check(matches(withText(containsString("Rowing"))));
-        onView(withId(R.id.habitTypeRow)).perform(click());
-
-        //Click on EVENT FAILED for Rowing
-        //Click on picture and potentially take a picture?
-        //Click on EVENT COMPLETED for Swimming
-        //
-
         //Logout
-        //onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        //onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.LogOut));
     }
 
     /**
