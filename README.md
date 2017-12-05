@@ -18,4 +18,4 @@ A simple and intuitive Android application that can help start good (or bad) hab
 
 ## Demo Video
 
-[![See our demo video here!](https://img.youtube.com/vi/B4FyDgozH3EE/0.jpg)](https://www.youtube.com/watch?v=B4FyDgozH3E)
+[![See our demo video here!](https://img.youtube.com/vi/66qJiSfxOpc/0.jpg)](https://www.youtube.com/watch?v=66qJiSfxOpc&feature=youtu.be&ab_channel=KenLi)
