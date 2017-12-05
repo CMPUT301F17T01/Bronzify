@@ -144,7 +144,7 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.name("followedBy");
         writer.value(gsonType.toJson(user.getFollowedBy()));
         writer.name("score");
-        writer.value(user.getScore().toString());
+        writer.value(String.valueOf(user.getScore()));
         writer.name("pendingFollowRequests");
         writer.value(gsonType.toJson(user.getPendingFollowRequests()));
         writer.endObject();

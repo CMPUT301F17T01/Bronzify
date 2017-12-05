@@ -2,9 +2,6 @@ package cmput301f17t01.bronzify.models;
 
 
 import android.graphics.Bitmap;
-import android.location.Location;
-
-import com.google.android.gms.maps.GoogleMap;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -263,7 +260,17 @@ public class User {
         }
         return false;
     }
-    public Double getScore() {
+    public double getScore() {
+        int score = 0;
+        if(this.getHabitTypes().size()==0){
+            return 0;
+        }
+        else{
+            for(HabitType type : this.getHabitTypes() ){
+                score= score + type.getCompletionRatio();
+            }
+            score = score/this.getHabitTypes().size();
+        }
         return score;
     }
 

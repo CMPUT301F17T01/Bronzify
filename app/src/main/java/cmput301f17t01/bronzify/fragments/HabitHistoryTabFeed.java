@@ -16,6 +16,7 @@ import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
             RecyclerView rv = rootView.findViewById(R.id.myHistoryRecycler);
             rv.setHasFixedSize(true);
             setHasOptionsMenu(true);
+
+            Collections.sort(events);
             adapter = new MyEventAdapter(getContext(),events);
             rv.setAdapter(adapter);
             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -68,13 +71,10 @@ public class HabitHistoryTabFeed extends Fragment implements SearchView.OnQueryT
         for(HabitType type: habitTypes){
             ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
             for(HabitEvent event: habitEvents){
-//                Date eventDate = getZeroTimeDate(event.getGoalDate());
-//                Date currentDate = getZeroTimeDate(new Date());
-//                int dateDiff = eventDate.compareTo(currentDate);
-//                if(dateDiff < 0){
-//                    events.add(event);
-//                }
-                if(event.getCompleted() != null){
+                Date eventDate = getZeroTimeDate(event.getGoalDate());
+                Date currentDate = getZeroTimeDate(new Date());
+                int dateDiff = eventDate.compareTo(currentDate);
+                if(dateDiff <= 0){
                     events.add(event);
                 }
             }

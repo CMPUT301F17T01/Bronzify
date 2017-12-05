@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.models;
 
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
  * Created by noahkryzanowski on 2017-10-20.
  */
 
-public class HabitEvent {
+public class HabitEvent implements Comparable{
     private String habitType;
     private String comment; // Max 20 Char
     private Date goalDate; // Date for habit event to happen
@@ -159,5 +160,14 @@ public class HabitEvent {
 
     public void setHabitType(String habitType) {
         this.habitType = habitType;
+    }
+
+    public int compareTo(HabitEvent another) {
+        return another.getGoalDate().compareTo(goalDate);
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return ((HabitEvent)o).getGoalDate().compareTo(goalDate);
     }
 }
