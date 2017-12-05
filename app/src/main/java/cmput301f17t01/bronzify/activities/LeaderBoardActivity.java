@@ -79,14 +79,15 @@ public class LeaderBoardActivity extends AppCompatActivity implements Navigation
         User currentUser = AppLocale.getInstance().getUser();
         View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
-        usernameNav.setText(currentUser.getUserID());
-
-        // Picture in NavBar
-        ImageView userPicNav = hView.findViewById(R.id.userPicNav);
-        userPicNav.setImageBitmap(currentUser.getImage());
         ImageView circularImageView = hView.findViewById(R.id.circleView);
-        if (appLocale.getUser().getImage() != null) {
-            circularImageView.setImageBitmap(appLocale.getUser().getImage());
+        if (currentUser != null) {
+            usernameNav.setText(currentUser.getUserID());
+            // Picture in NavBar
+            ImageView userPicNav = hView.findViewById(R.id.userPicNav);
+            userPicNav.setImageBitmap(currentUser.getImage());
+            if (appLocale.getUser().getImage() != null) {
+                circularImageView.setImageBitmap(appLocale.getUser().getImage());
+            }
         }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

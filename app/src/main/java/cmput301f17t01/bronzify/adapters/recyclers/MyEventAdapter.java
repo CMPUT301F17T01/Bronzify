@@ -41,9 +41,9 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView habitEventName;
-        private final TextView habitEventDate;
-        private RelativeLayout relativeLayout;
+
+        private TextView habitEventName;
+        private TextView habitEventDate;
 
         private final ConstraintLayout constraintLayout;
 
