@@ -7,11 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.ListAdapter;
 import cmput301f17t01.bronzify.controllers.ListController;
-
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 
@@ -33,12 +34,12 @@ public class ListFragment extends Fragment {
         LINEAR_LAYOUT_MANAGER
     }
 
-    protected LayoutManagerType mCurrentLayoutManagerType;
+    private LayoutManagerType mCurrentLayoutManagerType;
 
-    protected RecyclerView mRecyclerView;
-    protected ListAdapter mAdapter;
-    protected RecyclerView.LayoutManager mLayoutManager;
-    protected ArrayList<?> mDataset = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private ListAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<?> mDataset = new ArrayList<>();
 
     /**
      * Called on the creation of a new list fragment

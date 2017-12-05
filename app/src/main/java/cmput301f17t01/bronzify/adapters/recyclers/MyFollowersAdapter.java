@@ -21,8 +21,8 @@ import cmput301f17t01.bronzify.models.User;
 
 public class MyFollowersAdapter extends RecyclerView.Adapter<MyFollowersAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<String> entries;
+    private final Context mContext;
+    private final List<String> entries;
 
     /**
      * This is the followers adapter that takes in a context and a list of habit events
@@ -35,10 +35,10 @@ public class MyFollowersAdapter extends RecyclerView.Adapter<MyFollowersAdapter.
         entries = list;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView userRowName;
-        private TextView userScore;
-        private ImageView userProfile;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView userRowName;
+        private final TextView userScore;
+        private final ImageView userProfile;
 
         private ViewHolder(View v, Context innerContext) {
             super(v);

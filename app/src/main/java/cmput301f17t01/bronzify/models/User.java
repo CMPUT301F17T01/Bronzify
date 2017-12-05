@@ -25,7 +25,7 @@ public class User {
     private Bitmap image;
 
     private ArrayList<HabitType> habitTypes = new ArrayList<HabitType>();
-//    private ArrayList<String> habitTypes = new ArrayList<String>();
+    //    private ArrayList<String> habitTypes = new ArrayList<String>();
     private ArrayList<String> following = new ArrayList<String>();
     private ArrayList<String> followedBy = new ArrayList<String>();
     private ArrayList<String> pendingFollowRequests = new ArrayList<String>();
@@ -53,10 +53,9 @@ public class User {
     }
 
 
-
     /**
      * Add a habit type
-     * 
+     *
      * @param habitType
      * @return
      */
@@ -151,7 +150,7 @@ public class User {
      * @param userID
      */
     public void removePendingFollowRequest(String userID) {
-        pendingFollowRequests.remove(userID); 
+        pendingFollowRequests.remove(userID);
         this.lastInfluenced = new Date();
     }
 
@@ -232,7 +231,7 @@ public class User {
      * Removes a habit type
      */
     public void removeHabitType(HabitType deletedHabit) {
-        if(habitTypes.contains(deletedHabit)){
+        if (habitTypes.contains(deletedHabit)) {
             habitTypes.remove(deletedHabit);
         }
     }
@@ -255,6 +254,7 @@ public class User {
     public Location getLocation() {
         return location;
     }
+
     /**
      * Sets the current location as the location, with Google Maps
      *
@@ -289,9 +289,9 @@ public class User {
      * @param newHabit
      * @return
      */
-    public Boolean isHabitUsed(String newHabit){
-        for(HabitType habit: habitTypes){
-            if(habit.getName().equals(newHabit)){
+    public Boolean isHabitUsed(String newHabit) {
+        for (HabitType habit : habitTypes) {
+            if (habit.getName().equals(newHabit)) {
                 return true;
             }
         }
@@ -307,8 +307,7 @@ public class User {
         int score = 0;
         if (this.getHabitTypes().size() == 0) {
             return 0;
-        }
-        else {
+        } else {
             for (HabitType type : this.getHabitTypes()) {
                 score = score + type.getCompletionRatio();
             }
@@ -351,7 +350,7 @@ public class User {
      * @param otherUserID
      */
     public void addFollowedBy(String otherUserID) {
-        if (!followedBy.contains(otherUserID)){
+        if (!followedBy.contains(otherUserID)) {
             followedBy.add(otherUserID);
         }
     }

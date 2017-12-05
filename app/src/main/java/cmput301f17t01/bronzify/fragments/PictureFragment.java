@@ -1,25 +1,25 @@
 package cmput301f17t01.bronzify.fragments;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import java.io.ByteArrayOutputStream;
+
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.adapters.ImageAdapter;
 import cmput301f17t01.bronzify.controllers.ContextController;
 import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
-import cmput301f17t01.bronzify.models.User;
 
 
 /**
@@ -33,10 +33,10 @@ public class PictureFragment extends Fragment {
 
     private HabitEvent event;
 
-    Button button;
-    ImageView imageView;
+    private Button button;
+    private ImageView imageView;
 
-    ImageView circularImageView;
+    private ImageView circularImageView;
 
     public PictureFragment() {
         //CONSTRUCTOR
@@ -60,7 +60,7 @@ public class PictureFragment extends Fragment {
         event = AppLocale.getInstance().getEvent();
         button = rootView.findViewById(R.id.buttonpic);
         imageView = rootView.findViewById(R.id.testing_pic);
-        circularImageView =  rootView.findViewById(R.id.circleView);
+        circularImageView = rootView.findViewById(R.id.circleView);
 
 
         if (event.getImage() != null) {
@@ -96,14 +96,14 @@ public class PictureFragment extends Fragment {
 
                 Bitmap bmp = (Bitmap) data.getExtras().get("data");
 
-                Log.d("PHOTO","Size in KB before compression: " + bmp.getByteCount() / 1000);
+                Log.d("PHOTO", "Size in KB before compression: " + bmp.getByteCount() / 1000);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
                 bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
 
-                Log.d("PHOTO","Size in KB after compression: " + byteArray.length / 1000);
+                Log.d("PHOTO", "Size in KB after compression: " + byteArray.length / 1000);
 
                 Bitmap circularBitmap = ImageAdapter.getRoundedCornerBitmap(bmp, PIXELS);
                 event.setImage(circularBitmap);

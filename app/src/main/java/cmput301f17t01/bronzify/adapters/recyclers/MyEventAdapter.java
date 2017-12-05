@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import cmput301f17t01.bronzify.models.HabitEvent;
 
 public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private List<HabitEvent> entries;
 
     /**
@@ -40,10 +41,11 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private TextView habitEventName;
         private TextView habitEventDate;
 
-        private ConstraintLayout constraintLayout;
+        private final ConstraintLayout constraintLayout;
 
         /**
          * This is the view holder for the recycler
@@ -86,8 +88,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
             } else {
                 holder.constraintLayout.setBackgroundColor(0xFFFF0000);
             }
-        }
-        else {
+        } else {
             // default color
             holder.constraintLayout.setBackgroundColor(0xFFEEEEEE);
         }
@@ -104,7 +105,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         return entries.size();
     }
 
-    public void setFilter(ArrayList<HabitEvent> newEvents){
+    public void setFilter(ArrayList<HabitEvent> newEvents) {
         entries = new ArrayList<HabitEvent>();
         entries.addAll(newEvents);
         notifyDataSetChanged();

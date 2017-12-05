@@ -5,11 +5,11 @@ import android.content.Intent;
 
 import cmput301f17t01.bronzify.R;
 import cmput301f17t01.bronzify.activities.LeaderBoardActivity;
-import cmput301f17t01.bronzify.activities.MyFollowersActivity;
-import cmput301f17t01.bronzify.activities.MyFeedActivity;
-import cmput301f17t01.bronzify.activities.MyHistoryActivity;
 import cmput301f17t01.bronzify.activities.LoginActivity;
+import cmput301f17t01.bronzify.activities.MyFeedActivity;
+import cmput301f17t01.bronzify.activities.MyFollowersActivity;
 import cmput301f17t01.bronzify.activities.MyHabitsActivity;
+import cmput301f17t01.bronzify.activities.MyHistoryActivity;
 import cmput301f17t01.bronzify.activities.MyHomeActivity;
 import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.activities.MyProfileActivity;

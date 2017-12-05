@@ -29,8 +29,8 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     // TODO: SHOULD THIS BE USERS LIST OR JUST STRINGS OF USERID'S?
     // THOUGHTS?
 
-    private List<String> entries;
-    private Context mContext;
+    private final List<String> entries;
+    private final Context mContext;
     private static ListController controller;
 
     /**
@@ -39,16 +39,16 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
      * @param context
      * @param list
      */
-    public FollowAdapter(Context context, List<String> list ){
+    public FollowAdapter(Context context, List<String> list) {
         entries = list;
         mContext = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView followReqText;
-        public ImageButton acceptButton;
-        public ImageButton rejectButton;
-        public RelativeLayout followRow;
+        public final TextView followReqText;
+        public final ImageButton acceptButton;
+        public final ImageButton rejectButton;
+        public final RelativeLayout followRow;
 
         public ViewHolder(View v) {
             super(v);
@@ -68,6 +68,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
             followRow = v.findViewById(R.id.rowFollow);    //Gotta add these in your xml, they are absent
 
         }
+
         public TextView getTextView() {
             return followReqText;
         }
@@ -82,7 +83,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
      */
     @Override
     public FollowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.row_follow,parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.row_follow, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -99,8 +100,8 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
                 // Get the clicked item label
                 entries.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position,entries.size());
-                Toast.makeText(mContext,"Rejected : " + u, Toast.LENGTH_SHORT).show();
+                notifyItemRangeChanged(position, entries.size());
+                Toast.makeText(mContext, "Rejected : " + u, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -112,10 +113,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
                 // TODO: ADD THE USER TO THE FOLLOWERS LIST
                 entries.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position,entries.size());
+                notifyItemRangeChanged(position, entries.size());
                 User user = AppLocale.getInstance().getUser();
-                new ElasticSearch().acceptFollow(user,userName);
-                Toast.makeText(mContext,"Accepted : " + u, Toast.LENGTH_SHORT).show();
+                new ElasticSearch().acceptFollow(user, userName);
+                Toast.makeText(mContext, "Accepted : " + u, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -127,7 +128,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        Log.d("RV", "Item size ["+entries.size()+"]");
+        Log.d("RV", "Item size [" + entries.size() + "]");
         return entries.size();
     }
 }

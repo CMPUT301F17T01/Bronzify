@@ -2,15 +2,13 @@ package cmput301f17t01.bronzify.adapters.recyclers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -26,8 +24,8 @@ import cmput301f17t01.bronzify.models.HabitType;
 
 public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<HabitType> entries;
+    private final Context mContext;
+    private final List<HabitType> entries;
 
     /**
      * This is the habit adapter that takes in a context and a list of habit events
@@ -41,9 +39,9 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView habitTypeName;
-        private TextView completion;
-        private ImageView imageView;
+        private final TextView habitTypeName;
+        private final TextView completion;
+        private final ImageView imageView;
 
         private ViewHolder(View v) {
             super(v);
@@ -75,10 +73,9 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HabitType habitType = entries.get(position);
-        if(mContext instanceof LeaderBoardActivity){
-            holder.habitTypeName.setText( Integer.toString(1+position)+habitType.getName() );
-        }
-        else{
+        if (mContext instanceof LeaderBoardActivity) {
+            holder.habitTypeName.setText(Integer.toString(1 + position) + habitType.getName());
+        } else {
             holder.habitTypeName.setText(habitType.getName());
         }
         holder.habitTypeName.setText(habitType.getName());

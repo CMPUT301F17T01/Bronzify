@@ -8,8 +8,8 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class LoginController implements Controller {
-    AppLocale appLocale = AppLocale.getInstance();
-    ElasticSearch elastic = new ElasticSearch();
+    private final AppLocale appLocale = AppLocale.getInstance();
+    private final ElasticSearch elastic = new ElasticSearch();
 
     /**
      * Checks if the user is logged in or not

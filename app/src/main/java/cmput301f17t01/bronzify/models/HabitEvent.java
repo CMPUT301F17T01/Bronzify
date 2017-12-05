@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by noahkryzanowski on 2017-10-20.
  */
 
-public class HabitEvent implements Comparable{
+public class HabitEvent implements Comparable {
     private String habitType;
     private String comment; // Max 20 Char
     private Date goalDate; // Date for habit event to happen
@@ -22,7 +22,7 @@ public class HabitEvent implements Comparable{
     private String userID;
 
     // Constructor
-    public HabitEvent(Date goalDate, String habitType){
+    public HabitEvent(Date goalDate, String habitType) {
         this.habitType = habitType;
         this.comment = ""; // Default comment is blank
         this.goalDate = goalDate;
@@ -37,6 +37,7 @@ public class HabitEvent implements Comparable{
 
     // Getters and Setters
     // User
+
     /**
      * Return user that created current habit type
      *
@@ -48,6 +49,7 @@ public class HabitEvent implements Comparable{
 
 
     // Goal Date
+
     /**
      * Get goal date for habit event
      *
@@ -69,6 +71,7 @@ public class HabitEvent implements Comparable{
     // Completed Date
 
     // Comment
+
     /**
      * Get habit comment
      *
@@ -88,6 +91,7 @@ public class HabitEvent implements Comparable{
     }
 
     // Completed
+
     /**
      * See if habit event have been completed after goal date
      * true = completed
@@ -100,6 +104,7 @@ public class HabitEvent implements Comparable{
     }
 
     // Image
+
     /**
      * Get image of habit event
      *
@@ -119,6 +124,7 @@ public class HabitEvent implements Comparable{
     }
 
     // Location
+
     /**
      * Get location of habit event
      *
@@ -143,7 +149,7 @@ public class HabitEvent implements Comparable{
      *
      * @return String representation of date
      */
-    public String goalDateToString(){
+    public String goalDateToString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
         String strGoalDate = simpleDateFormat.format(goalDate);
         return strGoalDate;
@@ -155,7 +161,7 @@ public class HabitEvent implements Comparable{
      *
      * @return String representation of date
      */
-    public String completedDateToString(){
+    public String completedDateToString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
         String strCompDate = simpleDateFormat.format(completedDate);
         return strCompDate;
@@ -190,8 +196,9 @@ public class HabitEvent implements Comparable{
 
     @Override
     public int compareTo(@NonNull Object o) {
-        return ((HabitEvent)o).getGoalDate().compareTo(goalDate);
+        return ((HabitEvent) o).getGoalDate().compareTo(goalDate);
     }
+
     /**
      * Sets the date that the habit was completed
      *

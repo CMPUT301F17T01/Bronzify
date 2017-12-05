@@ -19,7 +19,7 @@ import cmput301f17t01.bronzify.models.User;
 public class HabitEventTest extends TestCase {
     Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
 //    private HabitType type = new HabitType("name" , "reason", new Date(), daysOfWeek);
-    HabitEvent event = new HabitEvent(new Date(), "typename");
+final HabitEvent event = new HabitEvent(new Date(), "typename");
 
 
 

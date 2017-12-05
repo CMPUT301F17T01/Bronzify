@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
 import cmput301f17t01.bronzify.models.HabitType;
 import cmput301f17t01.bronzify.models.User;
 
@@ -28,7 +29,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class UserAdapter extends TypeAdapter<User> {
-    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+    private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
     private final Gson gsonType = new GsonBuilder().registerTypeAdapter(HabitType.class,
             new HabitTypeAdapter()).create();
 
@@ -90,25 +91,29 @@ public class UserAdapter extends TypeAdapter<User> {
             }
             if ("habitTypes".equals(fieldname)) {
                 ArrayList<HabitType> types = gsonType.fromJson(reader.nextString(),
-                        new TypeToken<ArrayList<HabitType>>(){}.getType());
+                        new TypeToken<ArrayList<HabitType>>() {
+                        }.getType());
                 user.setHabitTypes(types);
                 continue;
             }
             if ("following".equals(fieldname)) {
                 ArrayList<String> following = gsonType.fromJson(reader.nextString(),
-                        new TypeToken<ArrayList<String>>(){}.getType());
+                        new TypeToken<ArrayList<String>>() {
+                        }.getType());
                 user.setFollowing(following);
                 continue;
             }
             if ("followedBy".equals(fieldname)) {
                 ArrayList<String> followed = gsonType.fromJson(reader.nextString(),
-                        new TypeToken<ArrayList<String>>(){}.getType());
+                        new TypeToken<ArrayList<String>>() {
+                        }.getType());
                 user.setFollowedBy(followed);
                 continue;
             }
             if ("pendingFollowRequests".equals(fieldname)) {
                 ArrayList<String> pendingFollows = gsonType.fromJson(reader.nextString(),
-                        new TypeToken<ArrayList<String>>(){}.getType());
+                        new TypeToken<ArrayList<String>>() {
+                        }.getType());
                 user.setPendingFollowRequests(pendingFollows);
                 continue;
             }
@@ -141,7 +146,7 @@ public class UserAdapter extends TypeAdapter<User> {
         writer.name("userID");
         writer.value(user.getUserID());
         writer.name("image");
-        try{
+        try {
             writer.value(getStringFromBitmap(user.getImage()));
         } catch (NullPointerException e) {
             writer.nullValue();

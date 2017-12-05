@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-
 /**
  * Created by kdehaan on 11/11/17.
  */
@@ -114,7 +113,7 @@ public class AppLocale {
 
     /**
      * Method that sets a user as the logged in user
-     *
+     * <p>
      * newUser @param
      */
     public void setUser(User newUser) {
@@ -125,7 +124,6 @@ public class AppLocale {
 
     /**
      * Logs out the user by setting the current user to null
-     *
      */
     public void logoutUser() {
         user = null;

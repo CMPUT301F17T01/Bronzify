@@ -35,7 +35,7 @@ import cmput301f17t01.bronzify.models.User;
 public class MyHabitsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private AppLocale appLocale = AppLocale.getInstance();
+    private final AppLocale appLocale = AppLocale.getInstance();
 
     private List<HabitType> types = new ArrayList<HabitType>();
 
@@ -64,7 +64,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
 
         // Username in NavBar
         User currentUser = AppLocale.getInstance().getUser();
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
@@ -81,7 +81,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        final MyHabitAdapter fa = new MyHabitAdapter(this,types);
+        final MyHabitAdapter fa = new MyHabitAdapter(this, types);
         recyclerView.setAdapter(fa);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 llm.getOrientation());
@@ -92,8 +92,8 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
         test.setText("TESTING"); */
 
         FloatingActionButton fab = findViewById(R.id.createNewHabit);
-        fab.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent intent = new Intent(MyHabitsActivity.this, CreateNewHabitTypeActivity.class);
                 startActivity(intent);
             }
@@ -102,7 +102,6 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
 
     /**
      * This resumes the habits activity
-     *
      */
     @Override
     protected void onResume() {
@@ -114,12 +113,11 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
 
     /**
      * Called when the back button is pressed
-     *
      */
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -133,7 +131,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer, menu);
         return true;
     }
@@ -146,9 +144,9 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      */
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -162,7 +160,7 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
      */
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(!(id == R.id.MyHabits)) {
+        if (!(id == R.id.MyHabits)) {
             Activity currentActivity = MyHabitsActivity.this;
             Intent newActivity = NavigationController.navigationSelect(id, currentActivity);
             startActivity(newActivity);
@@ -177,13 +175,12 @@ public class MyHabitsActivity extends AppCompatActivity implements NavigationVie
 
     /**
      * This populates the list of habit types
-     *
      */
-    private void fillTypesList(){
+    private void fillTypesList() {
         User user = AppLocale.getInstance().getUser();
         ArrayList<HabitType> habitTypes = user.getHabitTypes();
         types.clear();
-        for(HabitType type: habitTypes){
+        for (HabitType type : habitTypes) {
             types.add(type);
         }
     }

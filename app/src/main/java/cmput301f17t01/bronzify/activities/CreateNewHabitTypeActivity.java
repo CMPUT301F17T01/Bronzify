@@ -5,12 +5,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,11 +37,11 @@ import cmput301f17t01.bronzify.models.User;
 public class CreateNewHabitTypeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Date date;
-    private Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
+    private final Boolean[] daysOfWeek = {false, false, false, false, false, false, false,};
 
     /**
      * Called on the creation of Create New Habit Type Activity
-     *
+     * <p>
      * TODO: Rename to "..Activity"?
      *
      * @param savedInstanceState
@@ -63,7 +63,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
 
         // Username in NavBar
         User currentUser = AppLocale.getInstance().getUser();
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
         TextView usernameNav = hView.findViewById(R.id.userNameNav);
         usernameNav.setText(currentUser.getUserID());
 
@@ -323,7 +323,7 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
                 if (habitReason.equals("")) {
                     validReason = false;
                 }
-                if (date == null){
+                if (date == null) {
                     validDate = false;
                 }
 
@@ -375,7 +375,6 @@ public class CreateNewHabitTypeActivity extends AppCompatActivity implements Nav
 
     /**
      * Called when the back button is pressed on the phone
-     *
      */
     @Override
     public void onBackPressed() {

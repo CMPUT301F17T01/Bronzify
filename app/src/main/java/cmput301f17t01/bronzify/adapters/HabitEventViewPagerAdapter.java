@@ -3,6 +3,7 @@ package cmput301f17t01.bronzify.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
 import cmput301f17t01.bronzify.fragments.HabitEventDetailFragment;
 import cmput301f17t01.bronzify.fragments.MapFragment;
 import cmput301f17t01.bronzify.fragments.PictureFragment;
@@ -12,7 +13,7 @@ import cmput301f17t01.bronzify.fragments.PictureFragment;
  */
 
 public class HabitEventViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager
@@ -34,9 +35,9 @@ public class HabitEventViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new HabitEventDetailFragment();
-        } else if (position == 1){
+        } else if (position == 1) {
             return new MapFragment();
-        } else if (position == 2){
+        } else if (position == 2) {
             return new PictureFragment();
         } else {
             return null;

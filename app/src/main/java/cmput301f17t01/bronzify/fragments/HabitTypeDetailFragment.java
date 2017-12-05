@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -83,7 +84,7 @@ public class HabitTypeDetailFragment extends Fragment {
         String percentage = Integer.toString(completionRatio) + "%";
         tvPercent.setText(percentage);
 
-        if (!habitType.getUserID().equals(user.getUserID())){
+        if (!habitType.getUserID().equals(user.getUserID())) {
             btnEdit.setVisibility(View.GONE);
         }
 
@@ -410,14 +411,4 @@ public class HabitTypeDetailFragment extends Fragment {
         return rootView;
     }
 
-    /**
-     * Called when the view is created.
-     *
-     * @param view
-     * @param savedInstanceState
-     */
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 }

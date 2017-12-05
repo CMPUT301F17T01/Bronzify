@@ -24,6 +24,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
+
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
@@ -58,7 +59,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
      */
     public ListAdapter(ArrayList<?> dataSet, ListController controller) {
         entries = dataSet;
-        this.controller = controller;
+        ListAdapter.controller = controller;
     }
 
     /**

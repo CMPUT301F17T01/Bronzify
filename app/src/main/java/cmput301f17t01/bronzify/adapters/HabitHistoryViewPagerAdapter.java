@@ -4,17 +4,16 @@ package cmput301f17t01.bronzify.adapters;
  * Created by Jacob on 2017-11-12.
  */
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cmput301f17t01.bronzify.activities.MyMapActivity;
 import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
 import cmput301f17t01.bronzify.fragments.MapFragment;
+import cmput301f17t01.bronzify.fragments.MyHistoryMapTab;
 
 public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager fm;
+    private final FragmentManager fm;
 
     /**
      * Creates the fragment manager
@@ -36,8 +35,8 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new HabitHistoryTabFeed();
-        } else if (position == 1){
-            return new MapFragment();
+        } else if (position == 1) {
+            return new MyHistoryMapTab();
         } else {
             return null;
         }

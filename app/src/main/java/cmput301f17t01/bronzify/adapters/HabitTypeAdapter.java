@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
+
 import cmput301f17t01.bronzify.models.HabitEvent;
 import cmput301f17t01.bronzify.models.HabitType;
 
@@ -24,7 +25,7 @@ import cmput301f17t01.bronzify.models.HabitType;
  */
 
 public class HabitTypeAdapter extends TypeAdapter<HabitType> {
-    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
+    private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
     private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
             new HabitEventAdapter()).create();
 
@@ -78,7 +79,8 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
             }
             if ("habitEvents".equals(fieldname)) {
                 ArrayList<HabitEvent> events = gsonEvent.fromJson(reader.nextString(),
-                        new TypeToken<ArrayList<HabitEvent>>(){}.getType());
+                        new TypeToken<ArrayList<HabitEvent>>() {
+                        }.getType());
                 type.setHabitEvents(events);
                 continue;
             }

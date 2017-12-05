@@ -9,12 +9,11 @@ import cmput301f17t01.bronzify.models.AppLocale;
  */
 
 public class ProfileController implements Controller {
-    ElasticSearch elastic = new ElasticSearch();
-    AppLocale appLocale = AppLocale.getInstance();
+    private final ElasticSearch elastic = new ElasticSearch();
+    private final AppLocale appLocale = AppLocale.getInstance();
 
     /**
      * Deletes the account of a user, when a button is clicked
-     *
      */
     public void deleteAccount() {
         elastic.deleteUser(appLocale.getUser().getUserID());

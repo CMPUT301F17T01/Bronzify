@@ -40,9 +40,9 @@ import cmput301f17t01.bronzify.models.User;
 public class MyHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private AppLocale appLocale = AppLocale.getInstance();
+    private final AppLocale appLocale = AppLocale.getInstance();
 
-    private List<HabitEvent> events = new ArrayList<HabitEvent>();
+    private final List<HabitEvent> events = new ArrayList<HabitEvent>();
 
     /**
      * Called on the creation of the My Home Activity
@@ -95,7 +95,6 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
     /**
      * This resumes the home activity
-     *
      */
     @Override
     protected void onResume() {
@@ -168,7 +167,6 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
 
     /**
      * This populates the event list in the home activity
-     *
      */
     private void fillEventList() {
         User user = AppLocale.getInstance().getUser();
@@ -186,15 +184,15 @@ public class MyHomeActivity extends AppCompatActivity implements NavigationView.
                 int dateDiff = eventDate.compareTo(currentDate);
                 if (dateDiff == 0 && event.getCompleted() == null) {
                     events.add(event);
-                } else if (dateDiff < 0 && event.getCompleted() == null){
+                } else if (dateDiff < 0 && event.getCompleted() == null) {
                     ++totalSetIncomplete;
-                    type.incrementNumUncompleted(1);
+                    type.incrementNumUncompleted();
                     event.setCompleted(false);
                 }
             }
         }
 
-        if(totalSetIncomplete > 0){
+        if (totalSetIncomplete > 0) {
             String toastString = Integer.toString(totalSetIncomplete) + " events have been automatically set as incomplete.";
             Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show();
         }
