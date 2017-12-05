@@ -39,14 +39,18 @@ import io.searchbox.core.SearchResult;
 public class ElasticSearch {
     private static JestDroidClient client;
     private static String serverString = "http://cmput301.softwareprocess.es:8080";
- //   private static String serverString = "http://localhost:9200";
+//    private static String serverString = "http://localhost:9200";
     private static String indexString = "cmput301f17t01_bronzify";
-    private static String typeString = "test_user_v2";
+    private static String typeString = "test_user_v3";
     private static final Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
             new UserAdapter()).create();
 
-
-
+    /**
+     * Updates the user from the elastic search server
+     *
+     * @param user
+     * @return
+     */
     public User update(User user) {
         User remoteUser = getUser(user.getUserID());
         if (remoteUser == null) { //elasticsearch error
@@ -61,6 +65,13 @@ public class ElasticSearch {
         }
     }
 
+    /**
+     * Sends a follow request between two users, and error checks to ensure that you
+     * cannot follow a person more than once, and that the user exists
+     *
+     * @param user
+     * @param otherUserID
+     */
     public void requestFollow(User user, String otherUserID) {
         if (user.getFollowing().contains(otherUserID)){
             Log.i("Error", "already following");
@@ -80,6 +91,12 @@ public class ElasticSearch {
         postUser(remoteUser);
     }
 
+    /**
+     * Used to accept a follow request from another user
+     *
+     * @param user
+     * @param otherUserID
+     */
     public void acceptFollow(User user, String otherUserID) {
         User remoteUser = getUser(otherUserID);
         remoteUser.addFollowing(user.getUserID());
@@ -90,6 +107,11 @@ public class ElasticSearch {
         userUpdate(user);
     }
 
+    /**
+     * Used to update the user that is in the elastic search server
+     *
+     * @param user
+     */
     public void userUpdate(User user) {
         ElasticSearch elastic = new ElasticSearch();
         User newestUser = elastic.update(user);
@@ -101,12 +123,23 @@ public class ElasticSearch {
         AppLocale.getInstance().setUser(user);
     }
 
+    /**
+     * Posts a user task on the elastic search server
+     *
+     * @param user
+     */
     public void postUser(User user) {
         ElasticSearch.PostUser addUserTask
                 = new ElasticSearch.PostUser();
         addUserTask.execute(user);
     }
 
+    /**
+     * Gets the user data from the local user before going to the elastic search server
+     *
+     * @param userID
+     * @return
+     */
     public User getUserLocalFirst(String userID) {
         User foundUser = AppLocale.getInstance().getLocalUser(userID);
         if (foundUser == null) {
@@ -123,6 +156,12 @@ public class ElasticSearch {
         return foundUser;
     }
 
+    /**
+     * Retrieves the user based on their user ID from the elastic search server
+     *
+     * @param userID
+     * @return
+     */
     public User getUser(String userID) {
         User foundUser;
         ElasticSearch.GetUser getUserTask
@@ -141,6 +180,11 @@ public class ElasticSearch {
         return foundUser;
     }
 
+    /**
+     * Deletes a user based on their user ID from the elastic search server
+     *
+     * @param userID
+     */
     public void deleteUser(String userID) {
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.removeLocalUser(userID);
@@ -149,6 +193,12 @@ public class ElasticSearch {
         deleteUserTask.execute(userID);
     }
 
+    /**
+     * Finds the high scores of the users in the elastic search server based on their
+     * completion rate of events
+     *
+     * @return
+     */
     public ArrayList<User> findHighScore() {
         ArrayList<User> users = new ArrayList<>();
         ElasticSearch.FindHighScore highScoreTask
@@ -162,7 +212,11 @@ public class ElasticSearch {
         return users;
     }
 
-
+    /**
+     * This async is used to make sure that the user is posted to the elastic search server
+     * while preventing sync issues
+     *
+     */
     public static class PostUser extends AsyncTask<User, Void, Void> {
         @Override
         protected Void doInBackground(User... users) {
@@ -190,6 +244,11 @@ public class ElasticSearch {
         }
     }
 
+    /**
+     This async is used to make sure that the user is retrieved from the elastic search server
+     * while preventing sync issues
+     *
+     */
     public static class GetUser extends AsyncTask<String, Void, User> {
         @Override
         protected User doInBackground(String... strings) {
@@ -223,6 +282,11 @@ public class ElasticSearch {
         }
     }
 
+    /**
+     * This async is used to make sure that the user is deleted from the elastic search server
+     * while preventing sync issues
+     *
+     */
     public static class DeleteUser extends  AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... strings) {
@@ -245,6 +309,11 @@ public class ElasticSearch {
         }
     }
 
+    /**
+     * This async is used to find the high scores from the elastic search server
+     * while preventing sync issues
+     *
+     */
     public static class FindHighScore extends AsyncTask<Void, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(Void... voids) {

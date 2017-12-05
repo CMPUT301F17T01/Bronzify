@@ -16,7 +16,7 @@ import cmput301f17t01.bronzify.models.AppLocale;
 import cmput301f17t01.bronzify.models.HabitEvent;
 
 
-/*
+/**
  * Created by jblazusi on 2017-11-01.
  */
 

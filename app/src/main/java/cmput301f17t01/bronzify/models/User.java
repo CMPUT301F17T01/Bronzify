@@ -2,6 +2,7 @@ package cmput301f17t01.bronzify.models;
 
 
 import android.graphics.Bitmap;
+import android.location.Location;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,8 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
     private Date lastInfluenced;
+    private Location location;
+
     private Double score;
     private Bitmap image;
 
@@ -162,8 +165,6 @@ public class User {
         this.lastInfluenced = new Date();
     }
 
-
-
     /**
      * Method that returns the userID of the logged in user
      *
@@ -209,7 +210,6 @@ public class User {
         this.lastUpdated = lastUpdated;
     }
 
-
     /**
      * Method that returns a list of HabitTypes
      *
@@ -237,10 +237,40 @@ public class User {
         }
     }
 
+    /**
+     * Sets the current date as the date created
+     *
+     * @param dateCreated
+     */
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
+
+    /**
+     * Returns the current location
+     *
+     * @return
+     */
+    public Location getLocation() {
+        return location;
+    }
+    /**
+     * Sets the current location as the location, with Google Maps
+     *
+     * @param location
+     */
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+
+    /**
+     * Gets the Type and returns the type name
+     *
+     * @param typeName
+     * @return
+     */
 
     public HabitType getType(String typeName) {
         Iterator<HabitType> itr = habitTypes.iterator();
@@ -252,6 +282,13 @@ public class User {
         }
         return null;
     }
+
+    /**
+     * Checks if the habit is used or not
+     *
+     * @param newHabit
+     * @return
+     */
     public Boolean isHabitUsed(String newHabit){
         for(HabitType habit: habitTypes){
             if(habit.getName().equals(newHabit)){
@@ -260,42 +297,79 @@ public class User {
         }
         return false;
     }
+
+    /**
+     * Gets the score for the users, to rank them in the leader boards
+     *
+     * @return
+     */
     public double getScore() {
         int score = 0;
-        if(this.getHabitTypes().size()==0){
+        if (this.getHabitTypes().size() == 0) {
             return 0;
         }
-        else{
-            for(HabitType type : this.getHabitTypes() ){
-                score= score + type.getCompletionRatio();
+        else {
+            for (HabitType type : this.getHabitTypes()) {
+                score = score + type.getCompletionRatio();
             }
-            score = score/this.getHabitTypes().size();
+            score = score / this.getHabitTypes().size();
         }
         return score;
     }
 
+
+    /**
+     * Sets a score to each user, to be used for the leader boards
+     *
+     * @param score
+     */
     public void setScore(Double score) {
         this.score = score;
     }
 
+    /**
+     * Returns an array list of all the users who are following a user
+     *
+     * @return
+     */
     public ArrayList<String> getFollowedBy() {
         return followedBy;
     }
 
+    /**
+     * Sets an array list to the list of all users who are following them
+     *
+     * @param followedBy
+     */
     public void setFollowedBy(ArrayList<String> followedBy) {
         this.followedBy = followedBy;
     }
 
+    /**
+     * Adds a new user to the list of people that are following the user
+     *
+     * @param otherUserID
+     */
     public void addFollowedBy(String otherUserID) {
         if (!followedBy.contains(otherUserID)){
             followedBy.add(otherUserID);
         }
     }
 
+    /**
+     * Returns the bitmap of the image
+     *
+     * @return
+     */
     public Bitmap getImage() {
         return image;
     }
 
+    /**
+     * Sets the image to a bitmap
+     *
+     * @param image
+     */
     public void setImage(Bitmap image) {
         this.image = image;
     }

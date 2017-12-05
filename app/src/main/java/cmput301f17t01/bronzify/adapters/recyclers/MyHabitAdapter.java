@@ -29,6 +29,12 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
     private Context mContext;
     private List<HabitType> entries;
 
+    /**
+     * This is the habit adapter that takes in a context and a list of habit events
+     *
+     * @param context
+     * @param list
+     */
     public MyHabitAdapter(Context context, List<HabitType> list) {
         mContext = context;
         entries = list;
@@ -80,6 +86,11 @@ public class MyHabitAdapter extends RecyclerView.Adapter<MyHabitAdapter.ViewHold
         holder.completion.setText(completionString);
     }
 
+    /**
+     * Returns the count of items in the habits list
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         Log.d("RV", "Item size [" + entries.size() + "]");

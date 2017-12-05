@@ -27,30 +27,59 @@ import cmput301f17t01.bronzify.models.User;
 
 public class ContextController {
     private Context context;
+    ElasticSearch elastic = new ElasticSearch();
     private Gson userGson = new GsonBuilder().registerTypeAdapter(User.class,
             new UserAdapter()).create();
 
     private static final String FILENAME = "bronzify.sav";
 
+    /**
+     * Controls which context we are in
+     *
+     * @param context
+     */
     public ContextController(Context context) {
         this.context = context;
     }
 
+    /**
+     * Updates which user is being saved as the local user, for offline capabilities. It will
+     * save it in the file so that the user is able to log in if they are not connected
+     * to the server
+     *
+     * @param currentUser
+     */
     public void updateUser(User currentUser) {
-        ElasticSearch elastic = new ElasticSearch();
+
         currentUser = elastic.update(currentUser);
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.setUser(currentUser);
         saveInFile(appLocale.getLocalUsers());
     }
+    public void updateUserFollowing(User currentUser) {
+        User otherUser = elastic.getUser(currentUser.getUserID());
+        currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
+        currentUser.setFollowing(otherUser.getFollowing());
+        currentUser.setPendingFollowRequests(otherUser.getPendingFollowRequests());
+    }
 
+    /**
+     * This saves the user in the app local, for offline capabilities
+     *
+     * @param user
+     */
     public void saveUser(User user) {
         AppLocale appLocale = AppLocale.getInstance();
         appLocale.addLocalUser(user);
         saveInFile(appLocale.getLocalUsers());
     }
 
-
+    /**
+     * Loads in the users from file and sends them to elastic search. Used to transfer from
+     * the device to the elastic search server
+     *
+     * @return
+     */
     public ArrayList<User> loadFromFile() {
         try {
             Type listType = new TypeToken<ArrayList<User>>(){}.getType();
@@ -69,7 +98,11 @@ public class ContextController {
         }
     }
 
-
+    /**
+     * Saves the users into the file on the local device
+     *
+     * @param savedUsers
+     */
     public void saveInFile(ArrayList<User> savedUsers) {
         try {
             FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);

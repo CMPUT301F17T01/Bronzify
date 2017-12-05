@@ -15,6 +15,7 @@ public class HabitEvent implements Comparable{
     private String habitType;
     private String comment; // Max 20 Char
     private Date goalDate; // Date for habit event to happen
+    private Date completedDate;
     private Boolean completed;
     private Bitmap image;
     private Location location;
@@ -45,9 +46,6 @@ public class HabitEvent implements Comparable{
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 
     // Goal Date
     /**
@@ -101,10 +99,6 @@ public class HabitEvent implements Comparable{
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
-
     // Image
     /**
      * Get image of habit event
@@ -151,23 +145,68 @@ public class HabitEvent implements Comparable{
      */
     public String goalDateToString(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
-        return simpleDateFormat.format(goalDate);
+        String strGoalDate = simpleDateFormat.format(goalDate);
+        return strGoalDate;
     }
 
+    /**
+     * Convert Completed Date to String
+     * Format: "Sun, Jan 01, 2017"
+     *
+     * @return String representation of date
+     */
+    public String completedDateToString(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        String strCompDate = simpleDateFormat.format(completedDate);
+        return strCompDate;
+    }
+
+    /**
+     * Sets the user ID
+     *
+     * @param userID
+     */
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    /**
+     * Returns the habit type
+     *
+     * @return
+     */
     public String getHabitType() {
         return habitType;
     }
 
+    /**
+     * Sets the habit type
+     *
+     * @param habitType
+     */
     public void setHabitType(String habitType) {
         this.habitType = habitType;
-    }
-
-    public int compareTo(HabitEvent another) {
-        return another.getGoalDate().compareTo(goalDate);
     }
 
     @Override
     public int compareTo(@NonNull Object o) {
         return ((HabitEvent)o).getGoalDate().compareTo(goalDate);
+    }
+    /**
+     * Sets the date that the habit was completed
+     *
+     * @param completedDate
+     */
+    public void setCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    /**
+     * Sets the habit event as completed
+     *
+     * @param completed
+     */
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

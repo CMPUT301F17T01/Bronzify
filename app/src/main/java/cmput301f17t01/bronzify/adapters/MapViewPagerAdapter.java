@@ -1,19 +1,19 @@
 package cmput301f17t01.bronzify.adapters;
 
-/**
- * Created by Jacob on 2017-11-12.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cmput301f17t01.bronzify.activities.MyMapActivity;
-import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
+import cmput301f17t01.bronzify.fragments.ListFragment;
 import cmput301f17t01.bronzify.fragments.MapFragment;
+import cmput301f17t01.bronzify.fragments.MyMapFragment;
 
-public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
+/*
+ * Created by Jacob on 2017-11-12.
+ */
+
+public class MapViewPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager fm;
 
     /**
@@ -21,7 +21,7 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
      *
      * @param fm
      */
-    public HabitHistoryViewPagerAdapter(FragmentManager fm) {
+    public MapViewPagerAdapter(FragmentManager fm) {
         super(fm);
         this.fm = fm;
     }
@@ -35,9 +35,7 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new HabitHistoryTabFeed();
-        } else if (position == 1){
-            return new MapFragment();
+            return new MyMapFragment();
         } else {
             return null;
         }
@@ -50,7 +48,6 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return 2;
+        return 1;
     }
-
 }

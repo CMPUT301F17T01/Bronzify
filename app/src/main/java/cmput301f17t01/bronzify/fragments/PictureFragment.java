@@ -42,6 +42,14 @@ public class PictureFragment extends Fragment {
         //CONSTRUCTOR
     }
 
+    /**
+     * Called on the creation of the view
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +81,14 @@ public class PictureFragment extends Fragment {
 
     }
 
+    /**
+     * Used to get the picture working, to save it locally, compress it
+     * and then convert it to a circular image.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {

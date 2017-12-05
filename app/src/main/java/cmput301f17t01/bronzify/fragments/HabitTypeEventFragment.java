@@ -57,11 +57,11 @@ public class HabitTypeEventFragment extends Fragment {
         this.time = time;
     }
 
-    public void deleteHabit(HabitType habit){
-        return;
-    }
-
     @Override
+    /**
+     * Called on the creation of a habit type event fragment
+     *
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Initialize dataset, this data would usually come from a local content provider or
@@ -71,6 +71,10 @@ public class HabitTypeEventFragment extends Fragment {
 
     @Nullable
     @Override
+    /**
+     * Called on the creation of the view
+     *
+     */
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.habit_type_tab_event, container, false);
 
