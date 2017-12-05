@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import cmput301f17t01.bronzify.fragments.HabitHistoryTabFeed;
 import cmput301f17t01.bronzify.fragments.MapFragment;
+import cmput301f17t01.bronzify.fragments.MyHistoryMapTab;
 
 public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
     private final FragmentManager fm;
@@ -35,7 +36,7 @@ public class HabitHistoryViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new HabitHistoryTabFeed();
         } else if (position == 1) {
-            return new MapFragment();
+            return new MyHistoryMapTab();
         } else {
             return null;
         }

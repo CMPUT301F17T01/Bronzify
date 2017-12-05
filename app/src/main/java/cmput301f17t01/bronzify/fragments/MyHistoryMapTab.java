@@ -255,7 +255,7 @@ public class MyHistoryMapTab extends Fragment implements OnMapReadyCallback,Sear
    private void fillEventList() {
        User user = AppLocale.getInstance().getUser();
        ArrayList<HabitType> habitTypes = user.getHabitTypes();
-       events.clear();
+       events = new ArrayList<HabitEvent>();
        for (HabitType type : habitTypes) {
            ArrayList<HabitEvent> habitEvents = type.getHabitEvents();
            for (HabitEvent event : habitEvents) {
