@@ -28,6 +28,13 @@ public class HabitTypeAdapter extends TypeAdapter<HabitType> {
     private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
             new HabitEventAdapter()).create();
 
+    /**
+     * Reads the habit event with a Json reader
+     *
+     * @param reader
+     * @return
+     * @throws IOException
+     */
     public HabitType read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
             reader.nextNull();

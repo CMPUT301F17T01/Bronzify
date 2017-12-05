@@ -28,6 +28,13 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
     Gson gson = new Gson();
 
+    /**
+     * Reads the habit event with a Json reader
+     *
+     * @param reader
+     * @return
+     * @throws IOException
+     */
     public HabitEvent read(JsonReader reader) throws IOException {
         if (reader.peek() == JsonToken.NULL) {
             reader.nextNull();
@@ -91,6 +98,14 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
 
         return event;
     }
+
+    /**
+     * Write to the habit event with a Json writer
+     *
+     * @param writer
+     * @param event
+     * @throws IOException
+     */
     public void write(JsonWriter writer, HabitEvent event) throws IOException {
         if (event == null) {
             writer.nullValue();
@@ -128,6 +143,12 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         writer.endObject();
     }
 
+    /**
+     * Returns the string converting from the bitmap
+     *
+     * @param bitmapPicture
+     * @return
+     */
     private String getStringFromBitmap(Bitmap bitmapPicture) {
         final int COMPRESSION_QUALITY = 100;
         String encodedImage;
@@ -139,6 +160,12 @@ public class HabitEventAdapter extends TypeAdapter<HabitEvent> {
         return encodedImage;
     }
 
+    /**
+     * Returns the bitmap converting from the string
+     *
+     * @param stringPicture
+     * @return
+     */
     private Bitmap getBitmapFromString(String stringPicture) {
         byte[] decodedString = Base64.decode(stringPicture, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

@@ -49,8 +49,7 @@ import cmput301f17t01.bronzify.models.User;
  */
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-//    private final Gson gsonEvent = new GsonBuilder().registerTypeAdapter(HabitEvent.class,
-//            new HabitEventAdapter()).create();
+
     private HabitEvent event;
     private Location currentLocation;
     MapView mMapView;
@@ -157,6 +156,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    /**
+     * Called when the map is ready, meaning permissions were granted
+     *
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -175,10 +179,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    /**
+     * Moves the camera to focus on the map
+     *
+     * @param latLng
+     * @param zoom
+     */
     private void moveCamera(LatLng latLng, float zoom) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
+    /**
+     * Asks the user for permissions to access the location of their device
+     *
+     */
     private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -200,6 +214,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    /**
+     * Checks if the permission was granted for location
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionsGranted = false;
@@ -218,25 +239,4 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
-
-   /* public void drawMarker() {
-        Drawable circleDrawable = getResources().getDrawable(R.drawable.circle_shape);
-        BitmapDescriptor markerIcon = getMarkerIconFromDrawable(circleDrawable);
-
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(41.906991, 12.453360))
-                .title("My Marker")
-                .icon(markerIcon)
-        );
-    }
-
-    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
-        Canvas canvas = new Canvas();
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        canvas.setBitmap(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        drawable.draw(canvas);
-        return BitmapDescriptorFactory.fromBitmap(bitmap);
-    }*/
-
 }

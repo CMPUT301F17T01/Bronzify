@@ -71,6 +71,10 @@ public class HabitTypeEventFragment extends Fragment {
 
     @Nullable
     @Override
+    /**
+     * Called on the creation of the view
+     *
+     */
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.habit_type_tab_event, container, false);
 
