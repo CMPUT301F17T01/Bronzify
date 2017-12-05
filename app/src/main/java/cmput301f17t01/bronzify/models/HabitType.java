@@ -240,7 +240,7 @@ public class HabitType {
         if (numUncompleted == 0 && numCompleted == 0) {
             return 100;
         }
-        return numCompleted / (numCompleted + numUncompleted);
+        return (int) ((float) numCompleted / ((float) numCompleted + (float) numUncompleted) * 100);
     }
 
     public void updateEvents() {

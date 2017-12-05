@@ -195,6 +195,7 @@ public class HabitTypeDetailFragment extends Fragment {
                     }
                     btnDelete.setEnabled(true);
                     btnReset.setEnabled(true);
+
                     btnDelete.setVisibility(View.VISIBLE);
                     btnReset.setVisibility(View.VISIBLE);
                 }
